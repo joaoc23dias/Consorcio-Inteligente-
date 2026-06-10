@@ -1,5 +1,5 @@
 'use client';
-
+import BenefitsSection from './components/BenefitsSection';
 import { useState } from 'react';
 import { Menu, X, ChevronDown, CheckCircle, ArrowRight, Play } from 'lucide-react';
 
