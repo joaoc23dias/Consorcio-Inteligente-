@@ -1,13 +1,14 @@
 export const metadata = {
-  title: "Gaia Group | Consórcio Inteligente",
-  description: "Método SPA - Transformando consórcio em alavancagem patrimonial",
+    title: "Gaia Group | Consórcio Inteligente",
+    description: "Método SPA - Transformando consórcio em alavancagem patrimonial",
 };
 
 export default function RootLayout({ children }) {
-  return (
-    <html lang="pt-BR">
-            <body className="bg-black text-white"></body>
-      {children}
-    </html>
-  );
-}
+    return (
+          <html lang="pt-BR">
+                <body className="bg-black text-white">
+                  {children}
+                </body>body>
+          </html>html>
+        );
+}</html>
