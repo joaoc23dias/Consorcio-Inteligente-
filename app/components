@@ -1,9 +1,0 @@
-/app
-  /components
-    HeroSection.jsx  (NOVO)
-    BenefitsSection.jsx  (NOVO - GRANDE)
-    ValueStackingSection.jsx  (NOVO)
-    OtherSections.jsx  (mantém FAQ, etc)
-  page.jsx  (simplificado)
-  layout.jsx
-  globals.css
