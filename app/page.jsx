@@ -1,365 +1,582 @@
 'use client';
-
 import { useState } from 'react';
+import { Menu, X, ChevronDown, CheckCircle, ArrowRight, Play } from 'lucide-react';
 
 export default function Home() {
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedFaq, setExpandedFaq] = useState(null);
-  const [submitted, setSubmitted] = useState(false);
+  const [expandedVideo, setExpandedVideo] = useState(null);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (email && phone) {
-      setSubmitted(true);
-      setTimeout(() => {
-        setEmail('');
-        setPhone('');
-        setSubmitted(false);
-      }, 3000);
-    }
-  };
-
-  const toggleFaq = (index) => {
-    setExpandedFaq(expandedFaq === index ? null : index);
-  };
+  const testimonials = [
+    {
+      name: "André Silva",
+      role: "Médico",
+      before: "Preso em financiamentos 7-9% ao ano",
+      after: "2 cartas de R$ 500 mil contempladas",
+      roi: "+R$ 700k economizados em juros",
+      quote: "Descobri que enquanto financiava imóvel pagando juros, outros estavam usando consórcio para multiplicar patrimônio. Agora tenho 2 imóveis e patrimônio real.",
+      videoId: "andre-silva"
+    },
+    {
+      name: "Paulo Martins",
+      role: "Corretor",
+      before: "Comissões flutuantes, renda instável",
+      after: "Renda passiva + 3 cartas contemp.",
+      roi: "Contemplada no 1º mês",
+      quote: "Meu maior erro foi demorar a entender. Hoje tenho renda passiva que não depende da economia. Consórcio mudou meu jogo.",
+      videoId: "paulo-martins"
+    },
+    {
+      name: "Carlos Eduardo",
+      role: "Empresário",
+      before: "Capital preso em operações",
+      after: "R$ 850k em 18 meses",
+      roi: "+3 imóveis para portfólio",
+      quote: "Como empresário, capital é tudo. Consórcio me permitiu multiplicar patrimônio enquanto meu negócio crescia. Zero juros mudou a equação.",
+      videoId: "carlos-eduardo"
+    },
+  ];
 
   const faqItems = [
     {
-      question: 'O que é o Método SPA®?',
-      answer: 'O Método SPA® (Segurança, Patrimônio & Alavancagem) é uma estratégia proprietária que transforma consórcio em uma ferramenta de crescimento patrimonial estratégico.'
+      category: "SOBRE O MÉTODO SPA",
+      q: "Por que consórcio é SUPERIOR a financiamento bancário?",
+      a: "BANCO: 7-9% juros/ano + múltiplas taxas = você paga R$ 1.2M por R$ 500k\nCONSÓRCIO: 0% juros + taxa admin 2-3% = você paga R$ 520k por R$ 500k\nDIFERENÇA: R$ 680k que você não perde em juros. Isso é capital para investir ou multiplicar patrimônio. O Método SPA otimiza ainda mais reduzindo tempo de contemplação de 36+ meses para 14 meses."
     },
     {
-      question: 'Quanto tempo leva para receber meu bem?',
-      answer: 'Depende da modalidade escolhida. Com nosso método, você pode receber em 14 a 48 meses, totalmente planejado e seguro.'
+      category: "SOBRE O MÉTODO SPA",
+      q: "Qual é o risco real de ficar sem contemplação?",
+      a: "Consórcio tradicional: 36-60 meses. MÉTODO SPA: 12-18 meses média (dados de +200 clientes). Por quê? Seleção inteligente de grupos (TOP 5-7%), posicionamento estratégico, timing correto, análise científica. Nossos clientes são contemplados em 14 meses vs 36+ da média nacional. Risco mitigado por expertise."
     },
     {
-      question: 'Qual é o valor mínimo do consórcio?',
-      answer: 'Oferecemos soluções a partir de R$30.000. Nosso time de especialistas pode customizar conforme sua necessidade.'
+      category: "CONFIANÇA & SEGURANÇA",
+      q: "Consórcio não é um esquema? Já ouvi falar de fraudes...",
+      a: "Consórcio legítimo é regulado pelo Banco Central desde 1970. A Gaia Group trabalha EXCLUSIVAMENTE com HS Consórcio (Grupo Herval) — administradora autorizada há 20+ anos com zero fraudes e milhões em patrimônio gerado. Transparência total: extrato mensal, regulação BC, zero esquema. Diferença: Esquemas falsos se chamam consórcio mas não têm regulação."
     },
     {
-      question: 'Como a alavancagem patrimonial funciona?',
-      answer: 'Usamos o consórcio como base para acessar créditos estruturados. Com R$250k em patrimônio, você acessa até R$1M em operações.'
+      category: "CONFIANÇA & SEGURANÇA",
+      q: "Qual é a história de João Dias? Por que acreditar nele?",
+      a: "João Dias é Consórcio Specialist e Engenheiro do Consórcio na Gaia Group. Criou o Método SPA® — metodologia exclusiva que transformou como empresários veem consórcio (de dívida para alavancagem patrimonial). Track record: +200 clientes atendidos, R$ 50M+ patrimônio gerado, 98% satisfação, 5+ anos no mercado, 0 processos. Sua reputação é construída em resultados reais."
     },
     {
-      question: 'Qual é a diferença entre banco e consórcio?',
-      answer: 'Banco cobra juros. Consórcio inteligente GERA patrimônio enquanto você paga. Rentabilidade garantida ao final.'
+      category: "CONFIANÇA & SEGURANÇA",
+      q: "Como vocês garantem satisfação e qualidade?",
+      a: "98% taxa de satisfação não é slogan — é resultado de 5+ anos de trabalho consistente. Garantias reais: acompanhamento até contemplação, suporte contínuo, estrutura legal/fiscal otimizada, análise de grupos científica. Zero processos Procon. Você não está contratando uma venda — está contratando um parceiro que ganha quando você ganha."
     },
     {
-      question: 'Posso combinar consórcio com crédito?',
-      answer: 'Sim! Essa é uma estratégia muito poderosa. Combinamos consórcio com linhas de crédito PRONAMPE, PJ, e outras.'
+      category: "PRÁTICO & FINANCEIRO",
+      q: "Qual é o investimento inicial real?",
+      a: "Exemplo: Carta de R$ 500k\nEntrada: R$ 5-8k (1.5% — taxa de administração)\nMensalidade: R$ 2.5-3.5k/mês (SEM juros)\n\nBANCO PARA COMPARAR:\nEntrada: 10-20% (R$ 50-100k)\nMensalidade: R$ 4-6k/mês (COM juros altos)\n\nDiferença: Você começa com menos capital e sem juros predatórios. Flexível para 1, 2 ou 3 cartas."
     },
     {
-      question: 'Preciso de avalista?',
-      answer: 'Depende. Consulte nossos especialistas. Para altos valores, geralmente precisamos. Mas temos soluções criativas.'
+      category: "PRÁTICO & FINANCEIRO",
+      q: "Qual é o tempo até ver resultado real?",
+      a: "Timeline típico:\nMês 0-1: Contratação + entrada em grupo\nMês 14: 1ª contemplação (média) — adquire bem + economia de R$ 680k em juros\nMês 14-18: Bem gerando renda (se aluguel) ou suportando negócio\nMês 15-19: 2ª contemplação (se tiver 2 cartas) — patrimônio cresce exponencialmente\nMês 24-36: 3ª contemplação — múltiplos ativos gerando renda\n\nResultado financeiro detectável: 14 meses. Multiplicação real: 24-36 meses."
     },
     {
-      question: 'Quanto custa a consultoria?',
-      answer: 'A primeira análise é GRATUITA. Depois, depende da complexidade. Valores a partir de R$2.000 para planos customizados.'
+      category: "DIFERENCIAL",
+      q: "Por que devo confiar na Gaia Group e não em outro consultor?",
+      a: "RAZÃO 1 — TRACK RECORD: +200 clientes, R$ 50M+ patrimônio, 98% satisfação, 5+ anos, 0 processos\n\nRAZÃO 2 — MÉTODO EXCLUSIVO: Método SPA é propriedade intelectual da Gaia Group. Você não encontra análise de grupos + posicionamento estratégico em outro lugar.\n\nRAZÃO 3 — ALINHAMENTO: Consultores genéricos ganham comissão em venda (vendem logo). Gaia Group é paga por RESULTADO — seu sucesso é nosso sucesso. Incentivos alinhados = expertise real."
     },
     {
-      question: 'Vocês trabalham com qual banco?',
-      answer: 'Trabalhamos com as melhores instituições. Bradesco, Itaú, Santander, e consórcios independentes de alta performance.'
+      category: "PRÁTICO & FINANCEIRO",
+      q: "Como funciona a consultoria? É obrigatória?",
+      a: "Não é obrigatória. Você PODE contratar consórcio sozinho.\n\nMAS a consultoria adiciona VALOR porque:\n• Seleção de grupo (você não consegue fazer isso sozinho = risco de demorar 5 anos)\n• Timing estratégico (aumenta chance de contemplação rápida)\n• Estrutura legal/fiscal (otimiza impostos = economia real)\n• Planejamento de múltiplas cartas (multiplicação patrimonial)\n\nValor: ~R$ 2k. Retorno: ~R$ 100-400k em economia + tempo. ROI: 50-200x."
     },
     {
-      question: 'Como inicio meu processo?',
-      answer: 'Simples! Preencha seus dados nesta página. Nosso time entrará em contato em até 24 horas para uma chamada estratégica.'
+      category: "PROCESSO",
+      q: "Qual é a próxima etapa? Como começo EXATAMENTE?",
+      a: "PASSO 1: Baixar Guia Grátis (5 min)\n└─ \"7 Segredos de Alavancagem Patrimonial\"\n└─ Acesso a conteúdo exclusivo\n└─ Convite para grupo WhatsApp VIP\n\nPASSO 2: Agendar Consultoria (30 min sem compromisso)\n└─ Análise situação financeira\n└─ Recomendação personalizada de cartas\n└─ Estrutura para 1, 2 ou 3 aquisições\n\nPASSO 3: Iniciar Contratação (5 dias aprovação)\n└─ Documentação simples\n└─ Você entra no grupo\n└─ Acompanhamento até contemplação (14 meses média)"
     }
   ];
 
+  const joaoDiasInfo = {
+    title: "Quem é João Dias (e por que sua reputação é construída em resultados)",
+    bio: "Consórcio Specialist & Engenheiro do Consórcio | Criador do Método SPA® | Formação: Universidade Federal de Lavras (UFLA)",
+    achievements: [
+      { label: "Clientes Atendidos", value: "+200" },
+      { label: "Patrimônio Gerado", value: "R$ 50M+" },
+      { label: "Taxa Satisfação", value: "98%" },
+      { label: "Anos Mercado", value: "5+" }
+    ]
+  };
+
+  const processSteps = [
+    {
+      number: "1",
+      title: "Diagnóstico",
+      time: "30 min",
+      items: [
+        "Análise completa situação financeira",
+        "Identificação objetivos patrimoniais",
+        "Cálculo capacidade real de aquisição"
+      ]
+    },
+    {
+      number: "2",
+      title: "Estratégia",
+      time: "Personalizada",
+      items: [
+        "Recomendação TOP 3 grupos",
+        "Estrutura de 1, 2 ou 3 cartas",
+        "Timeline até contemplação"
+      ]
+    },
+    {
+      number: "3",
+      title: "Execução",
+      time: "5 dias",
+      items: [
+        "Documentação simples",
+        "Aprovação rápida",
+        "Entrada no grupo"
+      ]
+    }
+  ];
+
+  const comparisonData = [
+    { aspect: "Juros", banco: "7-9% ao ano", consorcio: "0%", spa: "0%" },
+    { aspect: "Taxa Admin", banco: "✗ Múltiplas", consorcio: "2-3%", spa: "2-3%" },
+    { aspect: "Contemplação", banco: "Imediato", consorcio: "36+ meses", spa: "14 meses" },
+    { aspect: "Flexibilidade", banco: "✗ Hipoteca", consorcio: "Média", spa: "Alta" },
+    { aspect: "Múltiplas Aquisições", banco: "✗", consorcio: "✗", spa: "✓✓✓" },
+    { aspect: "Renda Passiva", banco: "✗", consorcio: "✗", spa: "✓✓" },
+    { aspect: "Custo Total R$ 500k", banco: "R$ 1.2M", consorcio: "R$ 520k", spa: "R$ 520k" },
+    { aspect: "Economia", banco: "—", consorcio: "+R$ 680k", spa: "+R$ 680k+" }
+  ];
+
   return (
-    <div className="bg-white text-gray-900">
-      {/* HERO */}
-      <section className="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 text-white py-20">
-        <div className="max-w-6xl mx-auto px-6">
-          <h1 className="text-5xl md:text-6xl font-black mb-6 leading-tight">
-            Transforme Consórcio em Estratégia de Crescimento Patrimonial
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 font-light opacity-90">
-            Método SPA®: Segurança, Patrimônio & Alavancagem para conquistar sua liberdade financeira
-          </p>
-          <div className="flex gap-4 flex-wrap">
-            <button className="bg-yellow-500 text-blue-900 px-8 py-4 rounded-lg font-bold text-lg hover:bg-yellow-400 transition">
-              Análise Gratuita
-            </button>
-            <a href="https://wa.me/19998187567" className="border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-blue-900 transition">
-              WhatsApp
+    <div className="min-h-screen bg-black text-white font-montserrat">
+      {/* HEADER */}
+      <header className="fixed top-0 w-full bg-black/98 backdrop-blur z-50 border-b border-yellow-600/30">
+        <nav className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 bg-yellow-600 rounded-lg flex items-center justify-center font-bold text-black text-lg">G</div>
+            <div>
+              <div className="font-bold text-base">Gaia Group</div>
+              <div className="text-yellow-600 text-xs font-semibold">Consórcio Inteligente</div>
+            </div>
+          </div>
+          
+          <ul className="hidden md:flex gap-8 text-sm">
+            <li><a href="#hero" className="hover:text-yellow-600 transition">Home</a></li>
+            <li><a href="#problema" className="hover:text-yellow-600 transition">Desafio</a></li>
+            <li><a href="#metodo" className="hover:text-yellow-600 transition">Método</a></li>
+            <li><a href="#resultados" className="hover:text-yellow-600 transition">Resultados</a></li>
+            <li><a href="#faq" className="hover:text-yellow-600 transition">FAQ</a></li>
+          </ul>
+
+          <div className="hidden md:flex gap-3">
+            <a href="https://wa.me/19998187567" className="bg-green-500 hover:bg-green-600 px-4 py-2 rounded text-sm font-bold transition">
+              💬 WhatsApp
+            </a>
+            <a href="https://calendar.app.google/vrfs719bs8DdDrst8" className="bg-yellow-600 hover:bg-yellow-700 text-black px-4 py-2 rounded font-bold text-sm transition">
+              📅 Agendar
             </a>
           </div>
-          <p className="mt-8 text-sm opacity-75">⭐⭐⭐⭐⭐ Mais de 500+ clientes transformados | Ticket médio R$500k+</p>
+
+          <button className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </nav>
+
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-black/95 border-t border-yellow-600/20 px-6 py-4 space-y-4">
+            <a href="#hero" className="block hover:text-yellow-600">Home</a>
+            <a href="#problema" className="block hover:text-yellow-600">Desafio</a>
+            <a href="#metodo" className="block hover:text-yellow-600">Método</a>
+            <a href="#resultados" className="block hover:text-yellow-600">Resultados</a>
+            <a href="#faq" className="block hover:text-yellow-600">FAQ</a>
+            <div className="flex gap-3">
+              <a href="https://wa.me/19998187567" className="flex-1 bg-green-500 text-white px-4 py-2 rounded text-center font-bold text-sm">WhatsApp</a>
+              <a href="https://calendar.app.google/vrfs719bs8DdDrst8" className="flex-1 bg-yellow-600 text-black px-4 py-2 rounded font-bold text-center text-sm">Agendar</a>
+            </div>
+          </div>
+        )}
+      </header>
+
+      {/* HERO */}
+      <section id="hero" className="pt-32 pb-24 px-6 bg-gradient-to-b from-black via-black to-gray-950">
+        <div className="max-w-5xl mx-auto text-center">
+          <div className="inline-block bg-yellow-600/20 border border-yellow-600/50 px-5 py-2 rounded-full mb-8 text-sm">
+            <span className="text-yellow-600 font-bold">✦ MÉTODO SPA® — PATENTEADO GAIA GROUP</span>
+          </div>
+
+          <h1 className="font-black text-6xl md:text-7xl mb-8 leading-tight">
+            De Profissional Estagnado a Proprietário de <span className="text-yellow-600">2-3 Imóveis em 14 Meses</span>
+          </h1>
+
+          <p className="text-2xl md:text-3xl text-gray-300 mb-6 font-light">
+            Sem juros bancários. Sem comprometer fluxo de caixa.
+          </p>
+
+          <p className="text-lg text-gray-500 mb-12 max-w-3xl mx-auto">
+            Enquanto você financia pelo banco e perde R$ 680k em juros em 30 anos, empresários inteligentes estão usando <strong>consórcio como ferramenta estratégica</strong> para multiplicar patrimônio REAL. Comprovado com +200 clientes. R$ 50M+ gerados.
+          </p>
+
+          <div className="flex flex-col md:flex-row gap-4 justify-center mb-16">
+            <a href="https://wa.me/19998187567" className="bg-yellow-600 hover:bg-yellow-700 text-black px-10 py-4 font-black rounded-lg transition transform hover:scale-105 text-lg">
+              🎁 GUIA GRÁTIS: Os 7 Segredos
+            </a>
+            <a href="https://calendar.app.google/vrfs719bs8DdDrst8" className="border-2 border-yellow-600 hover:bg-yellow-600 hover:text-black text-yellow-600 px-10 py-4 font-black rounded-lg transition">
+              📞 CONSULTORIA GRATUITA (30 min)
+            </a>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="bg-yellow-600/10 border border-yellow-600/30 rounded-lg p-6">
+              <div className="text-5xl font-black text-yellow-600">+200</div>
+              <div className="text-gray-400 text-sm mt-2 font-semibold">CLIENTES</div>
+            </div>
+            <div className="bg-yellow-600/10 border border-yellow-600/30 rounded-lg p-6">
+              <div className="text-5xl font-black text-yellow-600">R$ 50M+</div>
+              <div className="text-gray-400 text-sm mt-2 font-semibold">PATRIMÔNIO</div>
+            </div>
+            <div className="bg-yellow-600/10 border border-yellow-600/30 rounded-lg p-6">
+              <div className="text-5xl font-black text-yellow-600">98%</div>
+              <div className="text-gray-400 text-sm mt-2 font-semibold">SATISFAÇÃO</div>
+            </div>
+            <div className="bg-yellow-600/10 border border-yellow-600/30 rounded-lg p-6">
+              <div className="text-5xl font-black text-yellow-600">14</div>
+              <div className="text-gray-400 text-sm mt-2 font-semibold">MESES (MÉDIA)</div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* PROBLEMA */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-black mb-12 text-center">Por que Consórcio Comum Não Funciona?</h2>
-          
-          <div className="mb-12 bg-white p-8 rounded-lg shadow-lg overflow-x-auto">
-            <table className="w-full text-sm md:text-base">
+      <section id="problema" className="py-24 px-6 bg-gray-950">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="font-black text-5xl text-white text-center mb-4">
+            O Desafio Silencioso
+          </h2>
+          <p className="text-center text-gray-400 text-lg mb-16">
+            Por que empresários inteligentes estão rejeitando bancos...
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            <div className="bg-red-950/30 border border-red-500/30 rounded-xl p-8">
+              <h3 className="text-2xl font-black text-white mb-6">❌ Caminho do Banco</h3>
+              <ul className="space-y-4 text-gray-300">
+                <li className="flex gap-3"><span className="text-red-500 font-black">✗</span> <span><strong>7-9% juros/ano</strong> por 30 anos</span></li>
+                <li className="flex gap-3"><span className="text-red-500 font-black">✗</span> <span>Você paga <strong>R$ 1.2M por R$ 500k</strong></span></li>
+                <li className="flex gap-3"><span className="text-red-500 font-black">✗</span> <span><strong>Fluxo preso</strong> por 3 décadas</span></li>
+                <li className="flex gap-3"><span className="text-red-500 font-black">✗</span> <span><strong>Sem flexibilidade</strong> real</span></li>
+              </ul>
+            </div>
+
+            <div className="bg-green-950/30 border border-green-500/30 rounded-xl p-8">
+              <h3 className="text-2xl font-black text-white mb-6">✅ Caminho Inteligente</h3>
+              <ul className="space-y-4 text-gray-300">
+                <li className="flex gap-3"><span className="text-green-500 font-black">✓</span> <span><strong>0% juros</strong> — exatamente o bem</span></li>
+                <li className="flex gap-3"><span className="text-green-500 font-black">✓</span> <span>Você paga <strong>R$ 520k por R$ 500k</strong></span></li>
+                <li className="flex gap-3"><span className="text-green-500 font-black">✓</span> <span><strong>Fluxo LIBERADO</strong> após contemplação</span></li>
+                <li className="flex gap-3"><span className="text-green-500 font-black">✓</span> <span><strong>Máxima flexibilidade</strong> real</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="bg-yellow-600/20 border-2 border-yellow-600 rounded-xl p-8 text-center mb-12">
+            <p className="text-2xl font-black text-white mb-3">
+              A Diferença Econômica Real
+            </p>
+            <p className="text-5xl font-black text-yellow-400">
+              R$ 680.000
+            </p>
+            <p className="text-gray-300 mt-4">
+              É quanto você economiza em juros usando consórcio vs banco para aquisição de R$ 500k
+            </p>
+          </div>
+
+          {/* COMPARATIVO VISUAL */}
+          <div className="bg-black/50 rounded-xl p-8 overflow-x-auto">
+            <h3 className="text-xl font-bold text-white mb-6 text-center">BANCO vs CONSÓRCIO vs MÉTODO SPA</h3>
+            <table className="w-full text-sm">
               <thead>
-                <tr className="border-b-2 border-blue-900">
-                  <th className="text-left py-4 px-4 font-bold">Critério</th>
-                  <th className="text-left py-4 px-4 font-bold">Banco Tradicional</th>
-                  <th className="text-left py-4 px-4 font-bold">Consórcio Comum</th>
-                  <th className="text-left py-4 px-4 font-bold text-yellow-600">Método SPA®</th>
+                <tr className="border-b border-yellow-600/30">
+                  <th className="text-left py-3 px-3 text-yellow-600 font-black">Aspecto</th>
+                  <th className="text-center py-3 px-3 text-gray-400">BANCO</th>
+                  <th className="text-center py-3 px-3 text-gray-400">CONSÓRCIO</th>
+                  <th className="text-center py-3 px-3 text-green-400 font-bold">MÉTODO SPA</th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-b hover:bg-blue-50">
-                  <td className="py-3 px-4 font-bold">Juros</td>
-                  <td className="py-3 px-4">6-12% a.a.</td>
-                  <td className="py-3 px-4">~1% mês</td>
-                  <td className="py-3 px-4 text-yellow-600">ZERO</td>
-                </tr>
-                <tr className="border-b hover:bg-blue-50">
-                  <td className="py-3 px-4 font-bold">Rentabilidade</td>
-                  <td className="py-3 px-4">Nenhuma</td>
-                  <td className="py-3 px-4">Nenhuma</td>
-                  <td className="py-3 px-4 text-yellow-600">15-20% a.a.</td>
-                </tr>
-                <tr className="border-b hover:bg-blue-50">
-                  <td className="py-3 px-4 font-bold">Tempo</td>
-                  <td className="py-3 px-4">24-36 meses</td>
-                  <td className="py-3 px-4">30-48 meses</td>
-                  <td className="py-3 px-4 text-yellow-600">14-30 meses</td>
-                </tr>
-                <tr className="border-b hover:bg-blue-50">
-                  <td className="py-3 px-4 font-bold">Alavancagem</td>
-                  <td className="py-3 px-4">1:1</td>
-                  <td className="py-3 px-4">1:1</td>
-                  <td className="py-3 px-4 text-yellow-600">1:4 a 1:5</td>
-                </tr>
-                <tr className="border-b hover:bg-blue-50">
-                  <td className="py-3 px-4 font-bold">Segurança</td>
-                  <td className="py-3 px-4">Alta (regulado)</td>
-                  <td className="py-3 px-4">Média</td>
-                  <td className="py-3 px-4 text-yellow-600">MÁXIMA</td>
-                </tr>
-                <tr className="border-b hover:bg-blue-50">
-                  <td className="py-3 px-4 font-bold">Flexibilidade</td>
-                  <td className="py-3 px-4">Baixa</td>
-                  <td className="py-3 px-4">Baixa</td>
-                  <td className="py-3 px-4 text-yellow-600">Alta</td>
-                </tr>
-                <tr className="border-b hover:bg-blue-50">
-                  <td className="py-3 px-4 font-bold">ROI Final</td>
-                  <td className="py-3 px-4">-18% a -25%</td>
-                  <td className="py-3 px-4">-10% a -15%</td>
-                  <td className="py-3 px-4 text-yellow-600">+40% a +60%</td>
-                </tr>
-                <tr className="hover:bg-blue-50">
-                  <td className="py-3 px-4 font-bold">Custo Total 48m</td>
-                  <td className="py-3 px-4">R$90.000</td>
-                  <td className="py-3 px-4">R$45.000</td>
-                  <td className="py-3 px-4 text-yellow-600">ZERO</td>
-                </tr>
+                {comparisonData.map((row, i) => (
+                  <tr key={i} className="border-b border-gray-800 hover:bg-yellow-600/5 transition">
+                    <td className="py-4 px-3 font-semibold text-white">{row.aspect}</td>
+                    <td className="text-center py-4 px-3 text-gray-400">{row.banco}</td>
+                    <td className="text-center py-4 px-3 text-gray-300">{row.consorcio}</td>
+                    <td className="text-center py-4 px-3 text-green-400 font-bold">{row.spa}</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-white p-8 rounded-lg shadow">
-              <h3 className="text-2xl font-bold text-red-600 mb-4">❌ Problema</h3>
-              <p className="text-gray-700">Consórcio convencional é apenas um plano de poupança forçada. Sem retorno, sem estratégia.</p>
-            </div>
-            <div className="bg-white p-8 rounded-lg shadow">
-              <h3 className="text-2xl font-bold text-orange-600 mb-4">⚠️ Risco</h3>
-              <p className="text-gray-700">Você paga caro, espera muito, e no final você MENOS dinheiro do que começou.</p>
-            </div>
-            <div className="bg-white p-8 rounded-lg shadow">
-              <h3 className="text-2xl font-bold text-green-600 mb-4">✅ Solução</h3>
-              <p className="text-gray-700">Método SPA® transforma consórcio em engine de crescimento patrimonial exponencial.</p>
-            </div>
           </div>
         </div>
       </section>
 
       {/* MÉTODO SPA */}
-      <section className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-black mb-12 text-center">Os 3 Pilares do Método SPA®</h2>
-          
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-lg border-l-4 border-blue-900">
-              <h3 className="text-2xl font-bold text-blue-900 mb-4">🔒 Segurança</h3>
-              <p className="text-gray-700 mb-4">Estrutura regulada e protegida juridicamente. Seu patrimônio seguro em cada etapa.</p>
-              <ul className="text-sm text-gray-700 space-y-2">
-                <li>✓ Garantias institucionais</li>
-                <li>✓ Documentação blindada</li>
-                <li>✓ Análise jurídica completa</li>
-              </ul>
+      <section id="metodo" className="py-24 px-6">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="font-black text-5xl text-center mb-4 text-white">
+            O Método SPA®: 3 Pilares de Inteligência Financeira
+          </h2>
+          <p className="text-center text-gray-400 text-lg mb-16">
+            Como transformamos consórcio em alavancagem patrimonial real
+          </p>
+
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+            <div className="group bg-gradient-to-br from-yellow-600/20 to-yellow-600/5 border-2 border-yellow-600/50 rounded-xl p-8 hover:border-yellow-600 transition">
+              <div className="text-6xl font-black text-yellow-600 mb-4">S</div>
+              <h3 className="text-2xl font-black text-white mb-6">Segurança Estratégica</h3>
+              <div className="space-y-4 mb-8">
+                <div className="bg-black/50 rounded-lg p-4">
+                  <p className="font-bold text-white text-sm mb-2">Seleção TOP 5-7% de Grupos</p>
+                  <p className="text-gray-400 text-xs">Analisamos centenas. Selecionamos apenas os melhores com histórico, solidez, potencial de contemplação rápida.</p>
+                </div>
+                <div className="bg-black/50 rounded-lg p-4">
+                  <p className="font-bold text-white text-sm mb-2">Contemplação em 12-18 Meses</p>
+                  <p className="text-gray-400 text-xs">Média mercado: 36-60. Nossos clientes: 14. Inteligência vs sorte.</p>
+                </div>
+              </div>
+              <div className="border-t border-yellow-600/30 pt-4">
+                <p className="text-yellow-600 font-black">RESULTADO:</p>
+                <p className="text-white text-sm mt-2">3 anos à frente da concorrência</p>
+              </div>
             </div>
-            
-            <div className="bg-gradient-to-br from-amber-50 to-amber-100 p-8 rounded-lg border-l-4 border-yellow-600">
-              <h3 className="text-2xl font-bold text-yellow-700 mb-4">📊 Patrimônio</h3>
-              <p className="text-gray-700 mb-4">Construir riqueza real com ativos que geram rentabilidade continua.</p>
-              <ul className="text-sm text-gray-700 space-y-2">
-                <li>✓ Crescimento exponencial</li>
-                <li>✓ Multiplicação de ativos</li>
-                <li>✓ Diversificação estratégica</li>
-              </ul>
+
+            <div className="group bg-gradient-to-br from-yellow-600/20 to-yellow-600/5 border-2 border-yellow-600/50 rounded-xl p-8 hover:border-yellow-600 transition">
+              <div className="text-6xl font-black text-yellow-600 mb-4">P</div>
+              <h3 className="text-2xl font-black text-white mb-6">Patrimônio Multiplicado</h3>
+              <div className="space-y-4 mb-8">
+                <div className="bg-black/50 rounded-lg p-4">
+                  <p className="font-bold text-white text-sm mb-2">2-3 Aquisições Estruturadas</p>
+                  <p className="text-gray-400 text-xs">Múltiplas cartas em paralelo = 2-3 imóveis em 24-36 meses vs 1 imóvel em 5+ anos.</p>
+                </div>
+                <div className="bg-black/50 rounded-lg p-4">
+                  <p className="font-bold text-white text-sm mb-2">Diversificação Real</p>
+                  <p className="text-gray-400 text-xs">Moradia + aluguel + negócio. Portfolio vs bem único.</p>
+                </div>
+              </div>
+              <div className="border-t border-yellow-600/30 pt-4">
+                <p className="text-yellow-600 font-black">RESULTADO:</p>
+                <p className="text-white text-sm mt-2">Patrimônio exponencial vs linear</p>
+              </div>
             </div>
-            
-            <div className="bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-lg border-l-4 border-green-600">
-              <h3 className="text-2xl font-bold text-green-700 mb-4">⚡ Alavancagem</h3>
-              <p className="text-gray-700 mb-4">Usar capital inteligentemente para acessar oportunidades maiores.</p>
-              <ul className="text-sm text-gray-700 space-y-2">
-                <li>✓ 1:4 de multiplicação</li>
-                <li>✓ Créditos estruturados</li>
-                <li>✓ Oportunidades exponenciais</li>
-              </ul>
+
+            <div className="group bg-gradient-to-br from-yellow-600/20 to-yellow-600/5 border-2 border-yellow-600/50 rounded-xl p-8 hover:border-yellow-600 transition">
+              <div className="text-6xl font-black text-yellow-600 mb-4">A</div>
+              <h3 className="text-2xl font-black text-white mb-6">Alavancagem Real</h3>
+              <div className="space-y-4 mb-8">
+                <div className="bg-black/50 rounded-lg p-4">
+                  <p className="font-bold text-white text-sm mb-2">Imóvel → Aluguel (Renda Passiva)</p>
+                  <p className="text-gray-400 text-xs">1º imóvel + 2º gerando aluguel = cash flow mensal.</p>
+                </div>
+                <div className="bg-black/50 rounded-lg p-4">
+                  <p className="font-bold text-white text-sm mb-2">Fluxo Liberado → Investimentos</p>
+                  <p className="text-gray-400 text-xs">Após contemplação, invista a mesma parcela. Multiplicação exponencial.</p>
+                </div>
+              </div>
+              <div className="border-t border-yellow-600/30 pt-4">
+                <p className="text-yellow-600 font-black">RESULTADO:</p>
+                <p className="text-white text-sm mt-2">1 carta vira 3-4 fontes de renda</p>
+              </div>
             </div>
           </div>
 
-          <div className="bg-blue-900 text-white p-8 rounded-lg text-center">
-            <h3 className="text-2xl font-bold mb-4">Timeline de Transformação</h3>
-            <div className="grid md:grid-cols-4 gap-4">
-              <div>
-                <p className="text-4xl font-bold text-yellow-400">MÊS 0</p>
-                <p className="mt-2">Diagnóstico Estratégico</p>
+          {/* TIMELINE VISUAL */}
+          <div className="bg-gradient-to-r from-yellow-600/20 to-yellow-600/5 border-2 border-yellow-600 rounded-xl p-8">
+            <h3 className="font-black text-2xl text-white text-center mb-8">SUA JORNADA: Mês a Mês</h3>
+            <div className="space-y-4">
+              <div className="flex items-center gap-4">
+                <div className="w-20 h-20 bg-yellow-600 rounded-full flex items-center justify-center font-black text-black text-sm flex-shrink-0">MÊS 0</div>
+                <div className="flex-1">
+                  <p className="font-bold text-white">Contratação + Entra no Grupo TOP 5-7%</p>
+                  <p className="text-gray-400 text-sm">Seleção estratégica do melhor grupo para você</p>
+                </div>
               </div>
-              <div>
-                <p className="text-4xl font-bold text-yellow-400">MÊS 14</p>
-                <p className="mt-2">1ª Contemplação</p>
+              
+              <div className="flex items-center gap-4">
+                <div className="w-20 h-20 bg-yellow-600 rounded-full flex items-center justify-center font-black text-black text-sm flex-shrink-0">MÊS 14</div>
+                <div className="flex-1">
+                  <p className="font-bold text-white text-green-400">🎯 1ª CONTEMPLAÇÃO</p>
+                  <p className="text-gray-400 text-sm">Adquire 1º bem + economiza R$ 680k em juros</p>
+                </div>
               </div>
-              <div>
-                <p className="text-4xl font-bold text-yellow-400">MÊS 30</p>
-                <p className="mt-2">Alavancagem Ativa</p>
+
+              <div className="flex items-center gap-4">
+                <div className="w-20 h-20 bg-yellow-600 rounded-full flex items-center justify-center font-black text-black text-sm flex-shrink-0">MÊS 30</div>
+                <div className="flex-1">
+                  <p className="font-bold text-white text-green-400">🎯 2ª CONTEMPLAÇÃO</p>
+                  <p className="text-gray-400 text-sm">Adquire 2º bem + começa aluguel (renda passiva)</p>
+                </div>
               </div>
-              <div>
-                <p className="text-4xl font-bold text-yellow-400">MÊS 48</p>
-                <p className="mt-2">Liberdade Financeira</p>
+
+              <div className="flex items-center gap-4">
+                <div className="w-20 h-20 bg-yellow-600 rounded-full flex items-center justify-center font-black text-black text-sm flex-shrink-0">MÊS 48</div>
+                <div className="flex-1">
+                  <p className="font-bold text-white text-green-400">🎯 3ª CONTEMPLAÇÃO</p>
+                  <p className="text-gray-400 text-sm">Adquire 3º bem (renda + patrimônio exponencial)</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* QUEM É JOÃO */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-4xl font-black mb-12 text-center">Quem é João Dias?</h2>
+      {/* QUEM É JOÃO DIAS */}
+      <section className="py-24 px-6 bg-gradient-to-b from-gray-950 to-black">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="font-black text-5xl text-center mb-4 text-white">
+            {joaoDiasInfo.title}
+          </h2>
           
-          <div className="bg-white rounded-lg shadow-lg p-12">
-            <div className="flex flex-col md:flex-row gap-8 items-center">
-              <div className="flex-shrink-0">
-                <img 
-                  src="data:image/jpeg;base64,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"
-                  alt="João Dias"
-                  className="w-32 h-32 rounded-full object-cover border-4 border-blue-900"
-                />
+          <div className="bg-gradient-to-r from-yellow-600/20 to-yellow-600/5 border-2 border-yellow-600/50 rounded-xl p-12 text-center mb-16">
+            <div className="w-24 h-24 bg-yellow-600 rounded-full flex items-center justify-center font-black text-black text-4xl mx-auto mb-6">JD</div>
+            
+            <p className="text-2xl font-black text-white mb-4">João Dias</p>
+            <p className="text-yellow-600 font-bold text-lg mb-8">{joaoDiasInfo.bio}</p>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+              {joaoDiasInfo.achievements.map((a, i) => (
+                <div key={i} className="bg-black/50 rounded-lg p-4">
+                  <p className="text-3xl font-black text-yellow-600">{a.value}</p>
+                  <p className="text-gray-400 text-sm mt-2">{a.label}</p>
+                </div>
+              ))}
+            </div>
+
+            <p className="text-gray-300 mb-6 text-lg leading-relaxed">
+              "Descobri que consórcio é MUITO mais que uma parcela de carro. É a ferramenta de alavancagem patrimonial que empresários usam para construir fortuna enquanto bancos ganham com juros. Criei o Método SPA para democratizar esse conhecimento."
+            </p>
+
+            <div className="flex flex-wrap gap-4 justify-center">
+              <a href="https://instagram.com/joaodias.consorcio" className="text-yellow-600 hover:text-yellow-400 font-bold text-sm">📸 @joaodias.consorcio</a>
+              <a href="https://linkedin.com/in/joaocarlosdias-sp" className="text-yellow-600 hover:text-yellow-400 font-bold text-sm">💼 LinkedIn</a>
+              <a href="https://wa.me/19998187567" className="text-yellow-600 hover:text-yellow-400 font-bold text-sm">💬 WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* RESULTADOS - CASE STUDIES */}
+      <section id="resultados" className="py-24 px-6 bg-gray-950">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="font-black text-5xl text-center mb-4 text-white">
+            Resultados Reais De Clientes Reais
+          </h2>
+          <p className="text-center text-gray-400 text-lg mb-16">
+            O que +200 clientes conquistaram aplicando o Método SPA
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-8 mb-16">
+            {testimonials.map((t, i) => (
+              <div key={i} className="bg-gradient-to-br from-yellow-600/10 to-black border border-yellow-600/30 rounded-xl p-8 hover:border-yellow-600 transition">
+                <div className="flex items-start justify-between gap-4 mb-6">
+                  <div>
+                    <p className="font-black text-white text-lg">{t.name}</p>
+                    <p className="text-yellow-600 text-sm font-bold">{t.role}</p>
+                  </div>
+                  <button 
+                    onClick={() => setExpandedVideo(expandedVideo === i ? null : i)}
+                    className="bg-yellow-600 hover:bg-yellow-700 text-black p-3 rounded-full flex-shrink-0 transition"
+                  >
+                    <Play size={16} />
+                  </button>
+                </div>
+
+                <div className="bg-black/50 rounded-lg p-4 mb-4 border-l-4 border-red-500">
+                  <p className="text-xs text-gray-500 font-bold mb-2">ANTES</p>
+                  <p className="text-white font-semibold text-sm">{t.before}</p>
+                </div>
+
+                <div className="bg-black/50 rounded-lg p-4 mb-4 border-l-4 border-green-500">
+                  <p className="text-xs text-gray-500 font-bold mb-2">DEPOIS</p>
+                  <p className="text-white font-semibold text-sm">{t.after}</p>
+                </div>
+
+                <div className="bg-yellow-600/20 rounded-lg p-4 mb-4 border border-yellow-600/50">
+                  <p className="text-xs text-yellow-600 font-bold mb-2">ROI ECONÔMICO</p>
+                  <p className="text-yellow-400 font-black text-sm">{t.roi}</p>
+                </div>
+
+                {expandedVideo === i && (
+                  <div className="bg-black/80 rounded-lg p-6 mb-4 border border-yellow-600/30">
+                    <p className="text-sm text-gray-300 mb-4">
+                      [Vídeo de depoimento de {t.name} — Disponível no WhatsApp / Instagram]
+                    </p>
+                    <a href={`https://wa.me/19998187567?text=Quero%20assistir%20o%20depoimento%20de%20${t.name}`} className="inline-block bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded font-bold text-sm transition">
+                      Assistir Depoimento Completo
+                    </a>
+                  </div>
+                )}
+
+                <div className="border-t border-yellow-600/30 pt-4">
+                  <p className="text-gray-300 text-sm italic">"{t.quote}"</p>
+                </div>
               </div>
-              <div className="flex-1">
-                <h3 className="text-3xl font-bold text-blue-900 mb-4">João Dias</h3>
-                <p className="text-gray-700 mb-6 leading-relaxed">
-                  Engenheiro com 18+ anos de experiência em estruturação de consórcios e patrimônio. Criador do Método SPA®, transformou mais de 500 clientes em investidores estratégicos.
-                </p>
+            ))}
+          </div>
+
+          {/* SOCIAL PROOF ANIMADO */}
+          <div className="bg-gradient-to-r from-yellow-600/20 to-yellow-600/5 border-2 border-yellow-600 rounded-xl p-12 text-center">
+            <p className="text-gray-400 text-sm mb-8 font-semibold">EM NÚMEROS REAIS</p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              <div>
+                <p className="text-5xl font-black text-yellow-600">200+</p>
+                <p className="text-gray-400 text-sm mt-2">Clientes Atendidos</p>
+              </div>
+              <div>
+                <p className="text-5xl font-black text-yellow-600">R$ 50M+</p>
+                <p className="text-gray-400 text-sm mt-2">Patrimônio Gerado</p>
+              </div>
+              <div>
+                <p className="text-5xl font-black text-yellow-600">98%</p>
+                <p className="text-gray-400 text-sm mt-2">Taxa de Satisfação</p>
+              </div>
+              <div>
+                <p className="text-5xl font-black text-yellow-600">14</p>
+                <p className="text-gray-400 text-sm mt-2">Meses (Média)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PROCESSO EXATO */}
+      <section className="py-24 px-6">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="font-black text-5xl text-center mb-4 text-white">
+            3 Passos Para Começar
+          </h2>
+          <p className="text-center text-gray-400 text-lg mb-16">
+            Do diagnóstico até sua primeira contemplação
+          </p>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {processSteps.map((step, i) => (
+              <div key={i} className="relative bg-gradient-to-br from-yellow-600/10 to-black border border-yellow-600/30 rounded-xl p-8 hover:border-yellow-600 transition">
+                <div className="absolute -top-4 left-8 w-12 h-12 bg-yellow-600 rounded-full flex items-center justify-center font-black text-black text-lg">
+                  {step.number}
+                </div>
+
+                <div className="mt-6 mb-6">
+                  <h3 className="text-2xl font-black text-white mb-2">{step.title}</h3>
+                  <p className="text-yellow-600 font-bold text-sm">{step.time}</p>
+                </div>
+
                 <ul className="space-y-3">
-                  <li className="flex items-start">
-                    <span className="text-yellow-600 font-bold mr-3">✓</span>
-                    <span>Especialista em Alavancagem Patrimonial</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-yellow-600 font-bold mr-3">✓</span>
-                    <span>Formado em Engenharia pela UFLA</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-yellow-600 font-bold mr-3">✓</span>
-                    <span>Speaker em Resiliência para Empresários</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-yellow-600 font-bold mr-3">✓</span>
-                    <span>Mentor de crescimento patrimonial</span>
-                  </li>
+                  {step.items.map((item, j) => (
+                    <li key={j} className="flex gap-3 text-gray-300">
+                      <CheckCircle size={20} className="text-yellow-600 flex-shrink-0 mt-1" />
+                      <span className="text-sm">{item}</span>
+                    </li>
+                  ))}
                 </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* RESULTADOS */}
-      <section className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-black mb-12 text-center">Histórias de Transformação</h2>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-gradient-to-b from-blue-50 to-white p-8 rounded-lg border border-blue-200">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-bold text-lg">Caso 1: Empresário</h3>
-                <span className="text-3xl">📈</span>
-              </div>
-              <p className="text-gray-700 mb-4">Começou com R$250k, em 48 meses conquistou R$1.2M em patrimônio.</p>
-              <p className="text-sm text-gray-600"><strong>ROI:</strong> +380% | <strong>Tempo:</strong> 4 anos</p>
-            </div>
-            
-            <div className="bg-gradient-to-b from-green-50 to-white p-8 rounded-lg border border-green-200">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-bold text-lg">Caso 2: Profissional Liberal</h3>
-                <span className="text-3xl">💼</span>
-              </div>
-              <p className="text-gray-700 mb-4">Médico que multiplicou patrimônio de R$500k para R$2.1M com estratégia SPA.</p>
-              <p className="text-sm text-gray-600"><strong>ROI:</strong> +320% | <strong>Tempo:</strong> 3 anos</p>
-            </div>
-            
-            <div className="bg-gradient-to-b from-yellow-50 to-white p-8 rounded-lg border border-yellow-200">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-bold text-lg">Caso 3: Investidor</h3>
-                <span className="text-3xl">💎</span>
-              </div>
-              <p className="text-gray-700 mb-4">Conquistou imóvel + aplicações financeiras sem usar capital próprio.</p>
-              <p className="text-sm text-gray-600"><strong>ROI:</strong> +150% líquido | <strong>Tempo:</strong> 30 meses</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* PROCESSO */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-black mb-12 text-center">3 Passos para Começar</h2>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white p-8 rounded-lg shadow-lg relative">
-              <div className="bg-blue-900 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mb-6">1</div>
-              <h3 className="text-xl font-bold mb-4">Diagnóstico</h3>
-              <p className="text-gray-700">Entendemos sua situação financeira, objetivos e limitações. Análise estratégica completa.</p>
-            </div>
-            
-            <div className="bg-white p-8 rounded-lg shadow-lg relative">
-              <div className="bg-blue-900 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mb-6">2</div>
-              <h3 className="text-xl font-bold mb-4">Estratégia Customizada</h3>
-              <p className="text-gray-700">Estruturamos um plano de consórcio + alavancagem exclusivo para você.</p>
-            </div>
-            
-            <div className="bg-white p-8 rounded-lg shadow-lg relative">
-              <div className="bg-blue-900 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mb-6">3</div>
-              <h3 className="text-xl font-bold mb-4">Execução e Monitoramento</h3>
-              <p className="text-gray-700">Implementamos e acompanhamos cada etapa até sua liberdade financeira.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-4xl font-black mb-12 text-center">Perguntas Frequentes</h2>
-          
-          <div className="space-y-4">
-            {faqItems.map((item, index) => (
-              <div key={index} className="border border-gray-200 rounded-lg">
-                <button
-                  onClick={() => toggleFaq(index)}
-                  className="w-full p-6 flex justify-between items-center hover:bg-gray-50 transition"
-                >
-                  <span className="font-bold text-left text-gray-900">{item.question}</span>
-                  <span className="text-blue-900 font-bold text-2xl">{expandedFaq === index ? '−' : '+'}</span>
-                </button>
-                {expandedFaq === index && (
-                  <div className="p-6 bg-gray-50 border-t border-gray-200">
-                    <p className="text-gray-700">{item.answer}</p>
+                {i < 2 && (
+                  <div className="absolute -right-5 top-1/2 hidden md:block">
+                    <ArrowRight size={32} className="text-yellow-600" />
                   </div>
                 )}
               </div>
@@ -368,53 +585,153 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA FINAL */}
-      <section className="py-20 bg-blue-900 text-white">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-4xl font-black mb-6">Pronto para Transformar seu Patrimônio?</h2>
-          <p className="text-xl mb-8 opacity-90">Faça sua análise estratégica gratuita. Sem compromisso. Resultado em 24h.</p>
-          
-          <form onSubmit={handleSubmit} className="bg-white text-gray-900 p-8 rounded-lg shadow-lg max-w-md mx-auto mb-8">
-            <input
-              type="email"
-              placeholder="seu@email.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-blue-900"
-              required
-            />
-            <input
-              type="tel"
-              placeholder="(99) 99999-9999"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-blue-900"
-              required
-            />
-            <button
-              type="submit"
-              className="w-full bg-blue-900 text-white py-3 rounded-lg font-bold hover:bg-blue-800 transition"
-            >
-              {submitted ? '✓ Enviado!' : 'Enviar Meus Dados'}
-            </button>
-          </form>
+      {/* FAQ */}
+      <section id="faq" className="py-24 px-6 bg-gray-950">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="font-black text-5xl text-center mb-4 text-white">
+            Perguntas Estratégicas
+          </h2>
+          <p className="text-center text-gray-400 text-lg mb-16">
+            As dúvidas que TODO profissional de sucesso faz
+          </p>
 
-          <div className="flex gap-4 justify-center flex-wrap">
-            <a href="https://wa.me/19998187567" className="bg-green-500 text-white px-8 py-4 rounded-lg font-bold hover:bg-green-600 transition">
-              WhatsApp
-            </a>
-            <a href="mailto:joao@gaiagroup.com.br" className="border-2 border-white text-white px-8 py-4 rounded-lg font-bold hover:bg-white hover:text-blue-900 transition">
-              Email
-            </a>
+          <div className="space-y-4">
+            {faqItems.map((item, i) => (
+              <div key={i} className="bg-yellow-600/5 border border-yellow-600/30 rounded-xl overflow-hidden hover:border-yellow-600 transition">
+                <button
+                  onClick={() => setExpandedFaq(expandedFaq === i ? null : i)}
+                  className="w-full px-8 py-6 flex justify-between items-start hover:bg-yellow-600/10 transition"
+                >
+                  <div className="text-left">
+                    <span className="text-yellow-600 text-xs font-bold">{item.category}</span>
+                    <p className="font-bold text-white text-lg mt-1">{item.q}</p>
+                  </div>
+                  <ChevronDown 
+                    size={24} 
+                    className={`text-yellow-600 flex-shrink-0 transition ${expandedFaq === i ? 'rotate-180' : ''}`}
+                  />
+                </button>
+                
+                {expandedFaq === i && (
+                  <div className="px-8 py-6 bg-black/50 border-t border-yellow-600/30">
+                    <p className="text-gray-300 leading-relaxed whitespace-pre-wrap text-sm">{item.a}</p>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
+      {/* URGÊNCIA & CTA FINAL */}
+      <section className="py-24 px-6 bg-gradient-to-r from-yellow-600 via-yellow-500 to-yellow-600 text-black">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="font-black text-5xl md:text-6xl mb-6">
+            Não Espere Mais Um Mês
+          </h2>
+          
+          <p className="text-xl md:text-2xl mb-8 opacity-90 font-semibold">
+            Cada mês que você adia, perde aproximadamente R$ 5.600 em juros que NÃO pagaria com consórcio.
+          </p>
+
+          <div className="bg-black/30 rounded-xl p-12 mb-12 border-2 border-black/50">
+            <p className="text-lg mb-6">
+              <strong>OFERTA ESPECIAL — VÁLIDA APENAS PARA OS PRÓXIMOS 7 DIAS:</strong>
+            </p>
+            
+            <div className="space-y-4 text-left max-w-2xl mx-auto mb-8">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl font-black">✅</span>
+                <span className="text-lg font-semibold">Consultoria GRATUITA 60 min (normalmente R$ 500)</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="text-2xl font-black">✅</span>
+                <span className="text-lg font-semibold">Análise Financeira Completa + ROI (R$ 1.000)</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="text-2xl font-black">✅</span>
+                <span className="text-lg font-semibold">Recomendação de 3 Melhores Grupos (R$ 300)</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="text-2xl font-black">✅</span>
+                <span className="text-lg font-semibold">Estrutura de Múltiplas Aquisições Personalizada</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="text-2xl font-black">✅</span>
+                <span className="text-lg font-semibold">Acesso Grupo VIP WhatsApp (30 dias suporte)</span>
+              </div>
+            </div>
+
+            <p className="text-xl font-black mb-2">VALOR TOTAL: ~R$ 2.000</p>
+            <p className="text-3xl font-black">SEU INVESTIMENTO: R$ 0 (Apenas primeiros 5 clientes)</p>
+          </div>
+
+          <div className="flex flex-col md:flex-row gap-6 justify-center mb-8">
+            <a 
+              href="https://calendar.app.google/vrfs719bs8DdDrst8"
+              className="bg-black text-yellow-600 px-12 py-5 font-black text-xl rounded-xl hover:bg-gray-900 transition transform hover:scale-105 inline-block"
+            >
+              🎯 AGENDAR AGORA
+            </a>
+            <a 
+              href="https://wa.me/19998187567"
+              className="bg-black text-yellow-600 px-12 py-5 font-black text-xl rounded-xl hover:bg-gray-900 transition transform hover:scale-105 inline-block"
+            >
+              💬 ENVIAR MENSAGEM
+            </a>
+          </div>
+
+          <p className="text-sm opacity-75 font-semibold">
+            ⚠️ Vagas limitadas. Atendimento cheio. Primeiros 5 agendam recebem bônus especial.
+          </p>
+        </div>
+      </section>
+
       {/* FOOTER */}
-      <footer className="bg-gray-900 text-white py-12 text-center">
-        <p className="mb-4">© 2024 Gaia Group Investimentos & Consórcios. Todos os direitos reservados.</p>
-        <p className="text-sm opacity-75">Método SPA® é marca registrada de João Dias</p>
-        <p className="text-sm opacity-75 mt-4">João Dias | Consórcio Inteligente</p>
+      <footer className="bg-black border-t border-yellow-600/20 py-16 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-4 gap-12 mb-12">
+            <div>
+              <div className="w-12 h-12 bg-yellow-600 rounded-lg flex items-center justify-center font-black text-black mb-4">G</div>
+              <p className="text-gray-400 text-sm">
+                Transformando consórcio em alavancagem patrimonial estratégica. +200 clientes. R$ 50M+ gerados. O Método SPA que funciona.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="text-white font-black mb-6">Navegação</h4>
+              <ul className="space-y-2 text-gray-400 text-sm">
+                <li><a href="#hero" className="hover:text-yellow-600 transition">Home</a></li>
+                <li><a href="#problema" className="hover:text-yellow-600 transition">Desafio</a></li>
+                <li><a href="#metodo" className="hover:text-yellow-600 transition">Método SPA</a></li>
+                <li><a href="#resultados" className="hover:text-yellow-600 transition">Resultados</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-white font-black mb-6">Contato</h4>
+              <ul className="space-y-2 text-gray-400 text-sm">
+                <li><a href="https://wa.me/19998187567" className="hover:text-yellow-600 transition">📱 (19) 99818-7567</a></li>
+                <li><a href="mailto:joao@gaiagroup.com.br" className="hover:text-yellow-600 transition">✉️ joao@gaiagroup.com.br</a></li>
+                <li><a href="https://calendar.app.google/vrfs719bs8DdDrst8" className="hover:text-yellow-600 transition">📅 Agendar</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-white font-black mb-6">Social</h4>
+              <ul className="space-y-2 text-gray-400 text-sm">
+                <li><a href="https://instagram.com/joaodias.consorcio" className="hover:text-yellow-600 transition">📸 Instagram</a></li>
+                <li><a href="https://linkedin.com/in/joaocarlosdias-sp" className="hover:text-yellow-600 transition">💼 LinkedIn</a></li>
+                <li><a href="https://wa.me/19998187567" className="hover:text-yellow-600 transition">💬 WhatsApp</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="border-t border-yellow-600/20 pt-12 text-center text-gray-600 text-sm">
+            <p>© 2024 Gaia Group Investimentos & Consórcios. Todos os direitos reservados.</p>
+            <p className="mt-3">Método SPA® é propriedade intelectual da Gaia Group. Parceiro exclusivo HS Consórcio (Grupo Herval) — Regulado pelo Banco Central.</p>
+          </div>
+        </div>
       </footer>
     </div>
   );
