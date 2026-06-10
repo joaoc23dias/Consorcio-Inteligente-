@@ -1,3 +1,5 @@
+'use client';
+
 import { TrendingUp, Zap, Target, Heart, Lock, Users } from 'lucide-react';
 
 const benefits = [
