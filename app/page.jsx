@@ -59,7 +59,6 @@ h            <div className="bg-white p-8 rounded-lg shadow-lg">
               <p className="text-gray-700 mb-4">1 carta de R$ 1 milhão</p>
             </div>
           </div>
-        </div>
       </section>
 
       <section id="faq" className="py-20">
