@@ -1,4 +1,7 @@
 'use client';
+import HeroSection from './components/HeroSection';
+import BenefitsSection from './components/BenefitsSection';
+import ValueStackingSection from './components/ValueStackingSection';
 import { useState } from 'react';
 import { Menu, X, ChevronDown, CheckCircle, ArrowRight, Play } from 'lucide-react';
 
