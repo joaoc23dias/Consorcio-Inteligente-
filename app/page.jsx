@@ -432,7 +432,7 @@ export default function Home() {
           </h2>
           
           <div className="bg-gradient-to-r from-yellow-600/20 to-yellow-600/5 border-2 border-yellow-600/50 rounded-xl p-12 text-center mb-16">
-            <div className="w-24 h-24 bg-yellow-600 rounded-full flex items-center justify-center font-black text-black text-4xl mx-auto mb-6">JD</div>
+            <img src="https://drive.google.com/uc?export=view&id=1woGAGbkbIDZ9halQ9CRWUE_m0EWA0DSt" alt="João Dias" className="w-24 h-24 rounded-full object-cover mx-auto mb-6" />
             
             <p className="text-2xl font-black text-white mb-4">João Dias</p>
             <p className="text-yellow-600 font-bold text-lg mb-8">{joaoDiasInfo.bio}</p>
