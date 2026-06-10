@@ -9,6 +9,6 @@ export default function RootLayout({ children }) {
                 <body className="bg-black text-white">
                   {children}
                 </body>
-          </html>>
+          </html>
         );
 }
