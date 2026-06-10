@@ -78,7 +78,7 @@ h            <div className="bg-white p-8 rounded-lg shadow-lg">
                   </div>
                 )}
               </div>
-            ))}
+            )
           </div>
         </div>
       </section>
