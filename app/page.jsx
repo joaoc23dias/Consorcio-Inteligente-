@@ -180,6 +180,7 @@ export default function Home() {
 
       {/* HERO SECTION - NOVO COMPONENTE */}
       <HeroSection />
+              <BenefitsSection />
 
       {/* SEÇÃO DESAFIO */}
       <section id="problema" className="bg-gradient-to-b from-black to-gray-950 text-white py-20 px-6">
