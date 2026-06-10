@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { Menu, X, ChevronDown, ArrowRight } from 'lucide-react';
 import HeroSection from './components/HeroSection';
-import BenefitsSection from './components/BenefitsSection';
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedFaq, setExpandedFaq] = useState(null);
@@ -41,12 +40,10 @@ export default function Home() {
       </header>
 
       <HeroSection />
-      <BenefitsSection />
       <section id="testimonials" className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-12">Depoimentos de Consorciados Satisfeitos</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white p-8 rounded-lg shadow-lg">
+h            <div className="bg-white p-8 rounded-lg shadow-lg">
               <h3 className="font-bold text-lg mb-2">André Silva</h3>
               <p className="text-gray-600 text-sm mb-4">CEO da Empresa X</p>
               <p className="text-gray-700 mb-4">2 cartas de R$ 500 mil contempladas</p>
