@@ -4,8 +4,6 @@ import { useState } from 'react';
 import { Menu, X, ChevronDown, ArrowRight } from 'lucide-react';
 import HeroSection from './components/HeroSection';
 import BenefitsSection from './components/BenefitsSection';
-import ValueStackingSection from './components/ValueStackingSection';
-
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedFaq, setExpandedFaq] = useState(null);
