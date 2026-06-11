@@ -5,6 +5,8 @@ import SixArchetypesSection from './components/SixArchetypesSection';
 import SocialProofSection from './components/SocialProofSection';
 import FAQSection from './components/FAQSection';
 import CTASection from './components/CTASection';
+import UrgencySection from './components/UrgencySection';
+import GuaranteeSection from './components/GuaranteeSection';
 
 export default function Home() {
     return (
@@ -60,6 +62,12 @@ export default function Home() {
 
               {/* FASE 4: Call-to-Action Final */}
               <CTASection />
+
+              {/* FASE 5: Seção de Urgência e Escassez */}
+              <UrgencySection />
+
+              {/* FASE 6: Seção de Garantia */}
+              <GuaranteeSection />
           </main>main>
         );
 }</main>
