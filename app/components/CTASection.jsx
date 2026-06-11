@@ -1,160 +1,148 @@
-'use client';
+'use client'
 
-import { useState } from 'react';
+import { useState } from 'react'
 
 export default function CTASection() {
-    const [formData, setFormData] = useState({
-          name: '',
-          email: '',
-          phone: '',
-          message: ''
-    });
-    const [submitted, setSubmitted] = useState(false);
+      const [formData, setFormData] = useState({
+              name: '',
+              email: '',
+              phone: '',
+              message: ''
+      })
+
+  const [submitted, setSubmitted] = useState(false)
 
   const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({
-                ...prev,
-                [name]: value
-        }));
-  };
+          const { name, value } = e.target
+          setFormData(prev => ({ ...prev, [name]: value }))
+  }
 
   const handleSubmit = (e) => {
-        e.preventDefault();
-        // Aqui você pode adicionar integração com serviço de email
-        console.log('Form submitted:', formData);
-        setSubmitted(true);
-        setTimeout(() => {
-                setFormData({ name: '', email: '', phone: '', message: '' });
-                setSubmitted(false);
-        }, 3000);
-  };
+          e.preventDefault()
+          setSubmitted(true)
+          setFormData({ name: '', email: '', phone: '', message: '' })
+          setTimeout(() => setSubmitted(false), 5000)
+  }
 
   return (
-        <section className="py-20 px-4 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-              <div className="max-w-4xl mx-auto">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                        {/* Coluna Esquerda - Mensagem */}
-                                <div className="flex flex-col justify-center">
-                                            <h2 className="text-4xl font-bold mb-6">Pronto para Transformar Sua Vida Financeira?</h2>h2>
-                                            <p className="text-xl text-blue-100 mb-6">
-                                                          Milhares de pessoas já estão gerando renda passiva através do Método SPA. Sua vez é AGORA!
-                                            </p>p>
-                                            
-                                            <div className="space-y-4">
-                                                          <div className="flex items-center">
-                                                                          <span className="text-2xl mr-3">✓</span>span>
-                                                                          <span>Consulta gratuita com especialistas</span>span>
-                                                          </div>div>
-                                                          <div className="flex items-center">
-                                                                          <span className="text-2xl mr-3">✓</span>span>
-                                                                          <span>Análise personalizada do seu cenário financeiro</span>span>
-                                                          </div>div>
-                                                          <div className="flex items-center">
-                                                                          <span className="text-2xl mr-3">✓</span>span>
-                                                                          <span>Mapa de ação para conquistar 3 imóveis</span>span>
-                                                          </div>div>
-                                                          <div className="flex items-center">
-                                                                          <span className="text-2xl mr-3">✓</span>span>
-                                                                          <span>Acesso ao método SPA completo</span>span>
-                                                          </div>div>
+          <section className="py-24 px-4 bg-black">
+                <div className="max-w-6xl mx-auto">
+                        <div className="grid md:grid-cols-2 gap-12 items-center">
+                            {/* Left Column - Benefits */}
+                                  <div>
+                                              <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 font-serif">
+                                                            Pronto para Multiplicar Seus Imóveis?
+                                              </h2>h2>
+                                              <p className="text-lg text-gray-300 mb-8 leading-relaxed">
+                                                            Comece agora e tenha acesso ao treinamento completo do Método SPA, análise gratuita de imagens, e suporte de nossos especialistas.
+                                              </p>p>
+                                              <ul className="space-y-4 mb-8">
+                                                            <li className="flex items-start gap-4">
+                                                                            <div className="w-8 h-8 rounded-full bg-yellow-500 flex items-center justify-center flex-shrink-0 mt-1">
+                                                                                              <span className="text-black font-bold text-sm">✓</span>span>
+                                                                            </div>div>
+                                                                            <div>
+                                                                                              <h4 className="text-white font-bold mb-1">Treinamento Completo</h4>h4>
+                                                                                              <p className="text-gray-400">Acesso à plataforma de cursos com todos os passos do método</p>p>
+                                                                            </div>div>
+                                                            </li>li>
+                                                            <li className="flex items-start gap-4">
+                                                                            <div className="w-8 h-8 rounded-full bg-yellow-500 flex items-center justify-center flex-shrink-0 mt-1">
+                                                                                              <span className="text-black font-bold text-sm">✓</span>span>
+                                                                            </div>div>
+                                                                            <div>
+                                                                                              <h4 className="text-white font-bold mb-1">Análise de Imóveis</h4>h4>
+                                                                                              <p className="text-gray-400">Consultoria especializada para escolher as melhores propriedades</p>p>
+                                                                            </div>div>
+                                                            </li>li>
+                                                            <li className="flex items-start gap-4">
+                                                                            <div className="w-8 h-8 rounded-full bg-yellow-500 flex items-center justify-center flex-shrink-0 mt-1">
+                                                                                              <span className="text-black font-bold text-sm">✓</span>span>
+                                                                            </div>div>
+                                                                            <div>
+                                                                                              <h4 className="text-white font-bold mb-1">Suporte Dedicado</h4>h4>
+                                                                                              <p className="text-gray-400">Acesso direto ao time de especialistas para dúvidas e orientação</p>p>
+                                                                            </div>div>
+                                                            </li>li>
+                                              </ul>ul>
+                                  </div>div>
+                        
+                            {/* Right Column - Form */}
+                                  <div className="bg-gradient-to-b from-gray-900 to-gray-950 rounded-lg p-10 border border-gray-700">
+                                              <h3 className="text-2xl font-bold text-white mb-6">Solicite sua Consulta</h3>h3>
+                                              
+                                      {submitted ? (
+                            <div className="bg-green-900 border border-green-700 rounded-lg p-6 text-center">
+                                            <p className="text-green-300 font-semibold mb-2">Obrigado pelo seu interesse!</p>p>
+                                            <p className="text-gray-300">Entraremos em contato em breve.</p>p>
+                            </div>div>
+                          ) : (
+                            <form onSubmit={handleSubmit} className="space-y-4">
+                                            <div>
+                                                              <label className="block text-sm font-medium text-gray-300 mb-2">Nome Completo</label>label>
+                                                              <input
+                                                                                      type="text"
+                                                                                      name="name"
+                                                                                      value={formData.name}
+                                                                                      onChange={handleChange}
+                                                                                      required
+                                                                                      className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-500 transition-colors"
+                                                                                      placeholder="João Silva"
+                                                                                    />
                                             </div>div>
-                                </div>div>
-                      
-                        {/* Coluna Direita - Formulário */}
-                                <div className="bg-white text-gray-800 p-8 rounded-lg shadow-2xl">
-                                            <h3 className="text-2xl font-bold text-blue-600 mb-6">Peça Sua Consulta Gratuita</h3>h3>
-                                            
-                                  {!submitted ? (
-                        <form onSubmit={handleSubmit} className="space-y-4">
-                                        <div>
-                                                          <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                                                              Nome Completo
-                                                          </label>label>
-                                                          <input
-                                                                                type="text"
-                                                                                name="name"
-                                                                                value={formData.name}
-                                                                                onChange={handleChange}
-                                                                                placeholder="Seu nome..."
-                                                                                required
-                                                                                className="w-full px-4 py-3 border-2 border-blue-200 rounded-lg focus:outline-none focus:border-blue-600 transition"
-                                                                              />
-                                        </div>div>
-                        
-                                        <div>
-                                                          <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                                                              Email
-                                                          </label>label>
-                                                          <input
-                                                                                type="email"
-                                                                                name="email"
-                                                                                value={formData.email}
-                                                                                onChange={handleChange}
-                                                                                placeholder="seu@email.com"
-                                                                                required
-                                                                                className="w-full px-4 py-3 border-2 border-blue-200 rounded-lg focus:outline-none focus:border-blue-600 transition"
-                                                                              />
-                                        </div>div>
-                        
-                                        <div>
-                                                          <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                                                              WhatsApp
-                                                          </label>label>
-                                                          <input
-                                                                                type="tel"
-                                                                                name="phone"
-                                                                                value={formData.phone}
-                                                                                onChange={handleChange}
-                                                                                placeholder="(11) 9xxxx-xxxx"
-                                                                                required
-                                                                                className="w-full px-4 py-3 border-2 border-blue-200 rounded-lg focus:outline-none focus:border-blue-600 transition"
-                                                                              />
-                                        </div>div>
-                        
-                                        <div>
-                                                          <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                                                              Mensagem (Opcional)
-                                                          </label>label>
-                                                          <textarea
-                                                                                name="message"
-                                                                                value={formData.message}
-                                                                                onChange={handleChange}
-                                                                                placeholder="Conte um pouco sobre seus objetivos..."
-                                                                                rows="3"
-                                                                                className="w-full px-4 py-3 border-2 border-blue-200 rounded-lg focus:outline-none focus:border-blue-600 transition"
-                                                                              />
-                                        </div>div>
-                        
-                                        <button
-                                                            type="submit"
-                                                            className="w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white font-bold py-3 rounded-lg hover:shadow-lg transition-shadow"
-                                                          >
-                                                          Solicitar Consulta Gratuita 🚀
-                                        </button>button>
-                        
-                                        <p className="text-xs text-gray-600 text-center">
-                                                          Responderemos em até 2 horas. Suas informações são 100% seguras.
-                                        </p>p>
-                        </form>form>
-                      ) : (
-                        <div className="text-center py-8">
-                                        <div className="text-5xl mb-4">🎉</div>div>
-                                        <h4 className="text-xl font-bold text-blue-600 mb-2">Obrigado {formData.name}!</h4>h4>
-                                        <p className="text-gray-700">Recebemos seu contato. Em breve um especialista entrará em contato!</p>p>
+                            
+                                            <div>
+                                                              <label className="block text-sm font-medium text-gray-300 mb-2">Email</label>label>
+                                                              <input
+                                                                                      type="email"
+                                                                                      name="email"
+                                                                                      value={formData.email}
+                                                                                      onChange={handleChange}
+                                                                                      required
+                                                                                      className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-500 transition-colors"
+                                                                                      placeholder="seu@email.com"
+                                                                                    />
+                                            </div>div>
+                            
+                                            <div>
+                                                              <label className="block text-sm font-medium text-gray-300 mb-2">Telefone</label>label>
+                                                              <input
+                                                                                      type="tel"
+                                                                                      name="phone"
+                                                                                      value={formData.phone}
+                                                                                      onChange={handleChange}
+                                                                                      required
+                                                                                      className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-500 transition-colors"
+                                                                                      placeholder="(11) 99999-9999"
+                                                                                    />
+                                            </div>div>
+                            
+                                            <div>
+                                                              <label className="block text-sm font-medium text-gray-300 mb-2">Mensagem (Opcional)</label>label>
+                                                              <textarea
+                                                                                      name="message"
+                                                                                      value={formData.message}
+                                                                                      onChange={handleChange}
+                                                                                      className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-500 transition-colors resize-none h-20"
+                                                                                      placeholder="Conte um pouco sobre seu interesse..."
+                                                                                    />
+                                            </div>div>
+                            
+                                            <button
+                                                                  type="submit"
+                                                                  className="w-full py-3 px-6 bg-yellow-500 hover:bg-yellow-400 text-black font-bold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/50 mt-6"
+                                                                >
+                                                              Enviar Consulta
+                                            </button>button>
+                            
+                                            <p className="text-xs text-gray-500 text-center mt-4">
+                                                              Responderemos em até 24 horas
+                                            </p>p>
+                            </form>form>
+                                              )}
+                                  </div>div>
                         </div>div>
-                                            )}
-                                </div>div>
-                      </div>div>
-              
-                {/* Rodapé com Garantia */}
-                      <div className="mt-12 text-center border-t-2 border-blue-400 pt-8">
-                                <p className="text-lg">
-                                            <span className="font-bold">💯 Garantia de Satisfação 100%</span>span><br/>
-                                            Se não ficar satisfeito com a consultoria em 7 dias, devolvemos 100% do valor.
-                                </p>p>
-                      </div>div>
-              </div>div>
-        </section>section>
-      );
+                </div>div>
+          </section>section>
+        )
 }</section>
