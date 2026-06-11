@@ -1,3 +1,8 @@
+'use client';
+
+import SixBenefitsSection from './components/SixBenefitsSection';
+import SixArchetypesSection from './components/SixArchetypesSection';
+
 export default function Home() {
             return (
                           <main className="min-h-screen bg-white">
@@ -27,7 +32,14 @@ export default function Home() {
                                                               </div>
                                                   </div>
                                         </div>
-                                </section>section>
-                          </main>main>
+                                </section>
+
+                        {/* Fase 2: Secao de 6 Beneficios */}
+                  <SixBenefitsSection />
+
+            {/* Fase 3: Secao de 6 Arquetipos */}
+                  <SixArchetypesSection />
+                          </main>
                         );
-}</main>
+}<;
+            }
