@@ -2,6 +2,9 @@
 
 import SixBenefitsSection from './components/SixBenefitsSection';
 import SixArchetypesSection from './components/SixArchetypesSection';
+import SocialProofSection from './components/SocialProofSection';
+import FAQSection from './components/FAQSection';
+import CTASection from './components/CTASection';
 
 export default function Home() {
     return (
@@ -48,6 +51,15 @@ export default function Home() {
           
             {/* FASE 3: Seção de 6 Arquétipos */}
                 <SixArchetypesSection />
+
+              {/* FASE 4: Seção de Prova Social */}
+              <SocialProofSection />
+
+              {/* FASE 4: Seção de FAQ */}
+              <FAQSection />
+
+              {/* FASE 4: Call-to-Action Final */}
+              <CTASection />
           </main>main>
         );
 }</main>
