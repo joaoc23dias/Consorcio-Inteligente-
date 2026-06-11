@@ -1,4 +1,4 @@
-h'use client';
+''use client';
 
 import { useState } from 'react';
 import { Menu, X, ChevronDown, ArrowRight } from 'lucide-react';
