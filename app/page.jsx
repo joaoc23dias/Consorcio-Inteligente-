@@ -43,7 +43,7 @@ export default function Home() {
       <section id="testimonials" className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-12">Depoimentos de Consorciados Satisfeitos</h2>
-              <div className="grid md:grid-cols-3 gap-8"></div>
+              <div className="grid md:grid-cols-3 gap-8"></div
             <div className="bg-white p-8 rounded-lg shadow-lg">
               <h3 className="font-bold text-lg mb-2">André Silva</h3>
               <p className="text-gray-600 text-sm mb-4">CEO da Empresa X</p>
@@ -64,8 +64,7 @@ export default function Home() {
 
       <section id="faq" className="py-20">
         <div className="max-w-4xl mx-auto px-4">
-        </div>section>
-          <h2 className="text-4xl font-bold text-center mb-12">Perguntas Frequentes</h2>
+        </div>section>h          <h2 className="text-4xl font-bold text-center mb-12">Perguntas Frequentes</h2>
           <div className="space-y-4">
             {faqs.map((faq) => (
               <div key={faq.id} className="border border-gray-300 rounded-lg">
