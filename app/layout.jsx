@@ -1,29 +1,12 @@
-'use client';
-
 export const metadata = {
-  title: 'Gaia Group | Consórcio Inteligente',
-  description: 'Método SPA - Transformando consórcio em alavancagem patrimonial',
-};
-export const metadata = {
-    title: 'Gaia Group | Consórcio Inteligente',
-    description: 'Método SPA - Transformando consórcio em alavancagem patrimonial',
+    title: 'Consórcio Inteligente',
+    description: 'Transforme sua vida financeira com o Método SPA',
 };
 
 export default function RootLayout({ children }) {
     return (
           <html lang="pt-BR">
-                <body className="bg-white">
-                  {children}
-                </body>body>
+                <body className="bg-white">{children}</body>body>
           </html>html>
         );
 }</html>
-export default function RootLayout({ children }) {
-  return (
-    <html lang="pt-BR">
-      <body className="bg-black text-white">
-        {children}
-      </body>
-    </html>
-  );
-}
