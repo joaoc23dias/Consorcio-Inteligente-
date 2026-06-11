@@ -1,123 +1,115 @@
-'use client';
+'use client'
+
+import { useState, useEffect } from 'react'
 
 export default function UrgencySection() {
-    const spotsLeft = 8;
-    const totalSpots = 50;
-    const bonuses = [
-      {
-              title: 'Bônus 1: Planilha de Análise de Imóveis',
-              description: 'Ferramenta exclusiva para calcular ROI e selecionarImóveis com melhor potencial de aluguel',
-              value: 'R$ 497'
-      },
-      {
-              title: 'Bônus 2: Cronograma de 36 Meses',
-              description: 'Mapa passo-a-passo de como conquistar 3 imóveis em tempo recorde',
-              value: 'R$ 297'
-      },
-      {
-              title: 'Bônus 3: Acesso ao Grupo VIP do Discord',
-              description: 'Comunidade exclusiva com 200+ membros que já aplicam o Método SPA',
-              value: 'R$ 197'
-      },
-      {
-              title: 'Bônus 4: Suporte de 30 Dias',
-              description: 'Acesso direto a especialistas para tirar dúvidas sobre sua jornada',
-              value: 'R$ 697'
-      }
-        ];
+      const [timeLeft, setTimeLeft] = useState(48 * 3600)
 
-  const percentFilled = ((totalSpots - spotsLeft) / totalSpots) * 100;
+  useEffect(() => {
+          const timer = setInterval(() => {
+                    setTimeLeft(prev => (prev > 0 ? prev - 1 : 0))
+          }, 1000)
+          return () => clearInterval(timer)
+  }, [])
+
+  const spotsRemaining = 8
+      const totalSpots = 50
+      const progressPercent = ((totalSpots - spotsRemaining) / totalSpots) * 100
+
+  const hours = Math.floor(timeLeft / 3600)
+      const minutes = Math.floor((timeLeft % 3600) / 60)
+      const seconds = timeLeft % 60
+
+  const bonuses = [
+      { title: 'Planilha de Análise de Imóveis', value: 'R$ 497' },
+      { title: 'Cronograma de 36 Meses', value: 'R$ 297' },
+      { title: 'Guia de Financiamento', value: 'R$ 197' },
+      { title: 'Consultoria 1x1 (valor de mercado)', value: 'R$ 1.997' }
+        ]
 
   return (
-        <section className="py-20 px-4 bg-gradient-to-r from-orange-500 to-red-600 text-white">
-              <div className="max-w-6xl mx-auto">
-                {/* Headline de Urgência */}
-                      <div className="text-center mb-12">
-                                <h2 className="text-4xl font-bold mb-4">
-                                            ⏰ Apenas {spotsLeft} Vagas Restantes - Oferta Termina em 48 Horas!
-                                </h2>h2>
-                                <p className="text-xl text-orange-100">
-                                  {totalSpots - spotsLeft} de {totalSpots} consultores já conquistaram seus 3 imóveis. Você será o próximo?
-                                </p>p>
-                      </div>div>
-              
-                {/* Barra de Progresso */}
-                      <div className="mb-12 max-w-2xl mx-auto">
-                                <div className="bg-orange-900 rounded-full h-8 overflow-hidden border-2 border-white">
-                                            <div
-                                                            className="bg-gradient-to-r from-yellow-300 to-white h-full transition-all duration-500"
-                                                            style={{ width: `${percentFilled}%` }}
-                                                          />
-                                </div>div>
-                                <p className="text-center text-orange-100 mt-2">
-                                  {percentFilled.toFixed(0)}% das vagas preenchidas
-                                </p>p>
-                      </div>div>
-              
-                {/* Grid de Bônus */}
-                      <div className="mb-12">
-                                <h3 className="text-3xl font-bold text-center mb-8">
-                                            BÔNUS EXCLUSIVOS (por tempo limitado!)
-                                </h3>h3>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                  {bonuses.map((bonus, index) => (
-                        <div
-                                          key={index}
-                                          className="bg-white bg-opacity-10 backdrop-blur-sm p-6 rounded-lg border-2 border-white border-opacity-30 hover:border-white hover:border-opacity-100 transition-all"
-                                        >
-                                        <div className="flex items-start justify-between mb-3">
-                                                          <h4 className="text-xl font-bold flex-1">{bonus.title}</h4>h4>
-                                                          <span className="text-lg font-bold whitespace-nowrap ml-3">{bonus.value}</span>span>
-                                        </div>div>
-                                        <p className="text-orange-100">{bonus.description}</p>p>
+          <section className="py-24 px-4 bg-black">
+                <div className="max-w-5xl mx-auto">
+                    {/* Main Heading */}
+                        <div className="text-center mb-16">
+                                  <div className="inline-block bg-red-900 bg-opacity-50 border border-red-700 px-4 py-2 rounded-lg mb-4">
+                                              <p className="text-red-300 font-bold text-sm">APENAS {spotsRemaining} VAGAS RESTANTES</p>p>
+                                  </div>div>
+                                  <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 font-serif">
+                                              Este Oferta Encerra em Breve
+                                  </h2>h2>
+                                  <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+                                              Ga ranta seu lugar no programa antes que as vagas acabem
+                                  </p>p>
                         </div>div>
-                      ))}
-                                </div>div>
-                                <p className="text-center text-orange-100 mt-6 text-lg">
-                                            🎁 <span className="font-bold">Valor Total dos Bônus: R$ 1.688</span>span> - GRÁTIS para os primeiros 50 inscritos!
-                                </p>p>
-                      </div>div>
-              
-                {/* Urgência com Números */}
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                                <div className="bg-white bg-opacity-10 p-6 rounded-lg text-center border-2 border-white border-opacity-30">
-                                            <div className="text-4xl font-bold text-yellow-300 mb-2">{spotsLeft}</div>div>
-                                            <div className="text-lg">Vagas Restantes</div>div>
-                                            <p className="text-orange-100 text-sm mt-2">A cada hora, mais 1-2 pessoas se inscrevem</p>p>
-                                </div>div>
-                                <div className="bg-white bg-opacity-10 p-6 rounded-lg text-center border-2 border-white border-opacity-30">
-                                            <div className="text-4xl font-bold text-yellow-300 mb-2">48h</div>div>
-                                            <div className="text-lg">Tempo Restante</div>div>
-                                            <p className="text-orange-100 text-sm mt-2">Oferta exclusiva por prazo limitado</p>p>
-                                </div>div>
-                                <div className="bg-white bg-opacity-10 p-6 rounded-lg text-center border-2 border-white border-opacity-30">
-                                            <div className="text-4xl font-bold text-yellow-300 mb-2">12</div>div>
-                                            <div className="text-lg">Semanas</div>div>
-                                            <p className="text-orange-100 text-sm mt-2">Para dominar o Método SPA completamente</p>p>
-                                </div>div>
-                      </div>div>
-              
-                {/* CTA com Risco Zero */}
-                      <div className="text-center bg-white text-orange-600 p-8 rounded-lg mb-8 shadow-2xl">
-                                <h3 className="text-2xl font-bold mb-3">GARANTIA DE SATISFAÇÃO 100%</h3>h3>
-                                <p className="mb-4">
-                                            Se depois de 7 dias você achar que não é para você, devolvemos 100% do investimento. Sem perguntas. Sem burocracias.
-                                </p>p>
-                                <p className="text-lg font-bold">
-                                            Você não tem nada a perder, apenas R$ 680 mil em juros a economizar! 🚀
-                                </p>p>
-                      </div>div>
-              
-                {/* Countdown Crítico */}
-                      <div className="text-center">
-                                <p className="text-2xl font-bold mb-4 animate-pulse">
-                                            ⚡ ÚLTIMA CHANCE: Oferta expira em 48 HORAS ⚡
-                                </p>p>
-                                <p className="text-orange-100 text-lg">
-                                            Não adie esta decisão. Os primeiros 50 consultores que se inscreverem hoje receberão os 4 bônus GRÁTIS (valor R$ 1.688)
-                                </p>p>
-                      </div>div>
-              </div>div>
-        </section>section>
-      );
+                
+                    {/* Progress Bar */}
+                        <div className="mb-12">
+                                  <div className="flex justify-between items-center mb-3">
+                                              <p className="text-gray-300"><span className="text-yellow-400 font-bold">{totalSpots - spotsRemaining}</span>span> de {totalSpots} vagas preenchidas</p>p>
+                                              <p className="text-gray-400 text-sm">{Math.round(progressPercent)}% completo</p>p>
+                                  </div>div>
+                                  <div className="w-full bg-gray-800 rounded-full h-3 overflow-hidden border border-gray-700">
+                                              <div
+                                                                className="h-full bg-gradient-to-r from-yellow-500 to-yellow-400 transition-all duration-300"
+                                                                style={{ width: `${progressPercent}%` }}
+                                                              ></div>div>
+                                  </div>div>
+                        </div>div>
+                
+                    {/* Countdown Timer */}
+                        <div className="bg-gradient-to-r from-red-950 to-red-900 rounded-lg p-10 mb-12 border border-red-700">
+                                  <p className="text-center text-gray-300 mb-4 text-lg">Tempo Restante da Oferta</p>p>
+                                  <div className="grid grid-cols-3 gap-4 max-w-sm mx-auto">
+                                              <div className="text-center">
+                                                            <div className="bg-black rounded-lg py-4 px-6 border border-yellow-500">
+                                                                            <p className="text-4xl font-bold text-yellow-400">{String(hours).padStart(2, '0')}</p>p>
+                                                            </div>div>
+                                                            <p className="text-gray-400 text-sm mt-2">Horas</p>p>
+                                              </div>div>
+                                              <div className="text-center">
+                                                            <div className="bg-black rounded-lg py-4 px-6 border border-yellow-500">
+                                                                            <p className="text-4xl font-bold text-yellow-400">{String(minutes).padStart(2, '0')}</p>p>
+                                                            </div>div>
+                                                            <p className="text-gray-400 text-sm mt-2">Minutos</p>p>
+                                              </div>div>
+                                              <div className="text-center">
+                                                            <div className="bg-black rounded-lg py-4 px-6 border border-yellow-500">
+                                                                            <p className="text-4xl font-bold text-yellow-400">{String(seconds).padStart(2, '0')}</p>p>
+                                                            </div>div>
+                                                            <p className="text-gray-400 text-sm mt-2">Segundos</p>p>
+                                              </div>div>
+                                  </div>div>
+                        </div>div>
+                
+                    {/* Bonuses */}
+                        <div>
+                                  <h3 className="text-2xl font-bold text-white text-center mb-10">Bnus Exc lusivos da Oferta</h3>h3>
+                                  <div className="grid md:grid-cols-2 gap-6">
+                                      {bonuses.map((bonus, index) => (
+                            <div key={index} className="bg-gradient-to-r from-gray-900 to-gray-950 rounded-lg p-6 border border-yellow-500 border-opacity-30 hover:border-opacity-100 transition-all">
+                                            <div className="flex items-start gap-4">
+                                                              <div className="w-12 h-12 rounded-full bg-yellow-500 flex items-center justify-center flex-shrink-0">
+                                                                                  <span className="text-black font-bold text-xl">✓</span>span>
+                                                              </div>div>
+                                                              <div className="flex-1">
+                                                                                  <h4 className="text-white font-bold mb-1">{bonus.title}</h4>h4>
+                                                                                  <p className="text-yellow-400 font-semibold">Valor: {bonus.value}</p>p>
+                                                              </div>div>
+                                            </div>div>
+                            </div>div>
+                          ))}
+                                  </div>div>
+                        </div>div>
+                
+                    {/* CTA Button */}
+                        <div className="text-center mt-16">
+                                  <button className="px-10 py-4 bg-yellow-500 hover:bg-yellow-400 text-black font-bold text-lg rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/50 mb-4">
+                                              Garantir Minha Vaga Agora
+                                  </button>button>
+                                  <p className="text-gray-400 text-sm">Apenas {spotsRemaining} vagas disponíveis. Confirme sua presença antes que acabem.</p>p>
+                        </div>div>
+                </div>div>
+          </section>section>
+        )
 }</section>
