@@ -59,7 +59,7 @@ export default function Home() {
               <p className="text-gray-700 mb-4">1 carta de R$ 1 milhão</p>
             </div>
           </div>
-      </section>
+      
 
       <section id="faq" className="py-20">
         <div className="max-w-4xl mx-auto px-4">
