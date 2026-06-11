@@ -43,6 +43,6 @@ export default function Home() {
                               
                                           {/* Fase 3: Seção de 6 Arquetipos */}
                                     <SixArchetypesSection />
-                              </main>main>
+                              </main>
                             );
-}</main>;
+};
