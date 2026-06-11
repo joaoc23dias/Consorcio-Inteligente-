@@ -1,7 +1,5 @@
 'use client';
 
-import SixBenefitsSection from './components/SixBenefitsSection';
-import SixArchetypesSection from './components/SixArchetypesSection.js';
 
 export default function Home() {
             return (
