@@ -1,114 +1,124 @@
 'use client';
 
 export default function SocialProofSection() {
-    const stats = [
+      const stats = [
+          {
+                    number: '500+',
+                    label: 'Clientes que Transformaram Vidas',
+                    subtext: 'Metodologia comprovada de sucesso'
+          },
+          {
+                    number: '1.200+',
+                    label: 'Imóveis Adquiridos',
+                    subtext: 'Em todo o Brasil'
+          },
+          {
+                    number: 'R$ 2.1B',
+                    label: 'Economizados em Juros',
+                    subtext: 'Versus financiamento tradicional'
+          }
+            ];
+
+  const testimonials = [
       {
-              number: '500+',
-              label: 'Clientes Satisfeitos',
-              description: 'Que transformaram suas vidas financeiras',
-              icon: '👥'
+                name: 'Carlos Silva',
+                title: 'Empresário | São Paulo',
+                result: '3 imóveis em 28 meses',
+                income: 'R$ 12.500/mês de renda passiva',
+                stars: 5
       },
       {
-              number: '1.200+',
-              label: 'Imóveis Adquiridos',
-              description: 'Em todo o Brasil através do Método SPA',
-              icon: '🏠'
+                name: 'Marina Costa',
+                title: 'Consultora | Rio de Janeiro',
+                result: '2 imóveis em 20 meses',
+                income: 'R$ 8.000/mês de renda passiva',
+                stars: 5
       },
       {
-              number: 'R$ 2.1B',
-              label: 'Economizados em Juros',
-              description: 'Comparado ao financiamento bancário tradicional',
-              icon: '💰'
-      },
-      {
-              number: '36',
-              label: 'Meses Médios',
-              description: 'Para conquistar 3 imóveis com renda passiva',
-              icon: '⏱️'
+                name: 'Dr. João Pereira',
+                title: 'Médico | Minas Gerais',
+                result: '4 imóveis em 40 meses',
+                income: 'R$ 18.500/mês de renda passiva',
+                stars: 5
       }
         ];
 
-  const testimonials = [
-    {
-            name: 'Carlos Silva',
-            role: 'Empresário',
-            achievement: 'De 0 a 3 imóveis em 28 meses',
-            income: 'R$ 12.500/mês em renda passiva',
-            avatar: '👨‍💼'
-    },
-    {
-            name: 'Maria Santos',
-            role: 'Consultora',
-            achievement: 'De 0 a 2 imóveis em 20 meses',
-            income: 'R$ 8.000/mês em renda passiva',
-            avatar: '👩‍💼'
-    },
-    {
-            name: 'João Oliveira',
-            role: 'Médico',
-            achievement: 'De 0 a 4 imóveis em 42 meses',
-            income: 'R$ 18.000/mês em renda passiva',
-            avatar: '👨‍⚕️'
-    }
-      ];
-
   return (
-        <section className="py-20 px-4 bg-white">
-              <div className="max-w-6xl mx-auto">
-                {/* Estatísticas */}
-                      <div className="mb-20">
-                                <div className="text-center mb-12">
-                                            <h2 className="text-4xl font-bold text-blue-600 mb-4">Prova Social de Resultados</h2>h2>
-                                            <p className="text-xl text-gray-600">Milhares de pessoas já transformaram suas vidas financeiras com o Método SPA</p>p>
-                                </div>div>
-                                
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                                  {stats.map((stat, index) => (
-                        <div key={index} className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-lg text-center border-2 border-blue-200">
-                                        <div className="text-5xl mb-4">{stat.icon}</div>div>
-                                        <div className="text-3xl font-bold text-blue-600 mb-2">{stat.number}</div>div>
-                                        <h3 className="text-lg font-bold text-gray-800 mb-2">{stat.label}</h3>h3>
-                                        <p className="text-sm text-gray-600">{stat.description}</p>p>
+          <section className="py-24 px-4 bg-black text-white">
+                <div className="max-w-7xl mx-auto">
+                    {/* Headline */}
+                        <div className="text-center mb-20">
+                                  <h2 className="text-5xl md:text-6xl font-bold mb-6">
+                                              Resultados Comprovados que Falam por Si
+                                  </h2>h2>
+                                  <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                                              Milhares de pessoas já conquistaram sua liberdade financeira com o Método SPA. Aqui estão os números reais.
+                                  </p>p>
                         </div>div>
-                      ))}
-                                </div>div>
-                      </div>div>
-              
-                {/* Casos de Sucesso */}
-                      <div>
-                                <div className="text-center mb-12">
-                                            <h2 className="text-4xl font-bold text-blue-600 mb-4">Casos de Sucesso Reais</h2>h2>
-                                            <p className="text-xl text-gray-600">Histórias reais de pessoas que alcançaram a liberdade financeira</p>p>
-                                </div>div>
-                                
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                                  {testimonials.map((testimonial, index) => (
-                        <div key={index} className="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-lg border-2 border-blue-200 hover:shadow-lg transition-shadow">
-                                        <div className="flex items-center mb-4">
-                                                          <div className="text-5xl mr-4">{testimonial.avatar}</div>div>
-                                                          <div>
-                                                                              <h4 className="font-bold text-gray-800 text-lg">{testimonial.name}</h4>h4>
-                                                                              <p className="text-sm text-blue-600 font-semibold">{testimonial.role}</p>p>
-                                                          </div>div>
+                
+                    {/* Estatísticas Premium */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+                            {stats.map((stat, index) => (
+                          <div
+                                            key={index}
+                                            className="bg-gradient-to-br from-gray-900 to-black border-2 border-yellow-600 rounded-2xl p-10 text-center hover:border-yellow-400 transition-all duration-300 group"
+                                          >
+                                        <div className="text-6xl font-bold text-yellow-500 mb-4 group-hover:text-yellow-400 transition-colors">
+                                            {stat.number}
                                         </div>div>
-                                        <div className="border-t-2 border-blue-200 pt-4">
-                                                          <p className="text-sm text-gray-700 mb-2">
-                                                                              <span className="font-bold text-blue-600">Resultado:</span>span> {testimonial.achievement}
-                                                          </p>p>
-                                                          <p className="text-sm text-gray-700">
-                                                                              <span className="font-bold text-green-600">Renda Passiva:</span>span> {testimonial.income}
-                                                          </p>p>
-                                        </div>div>
-                                        <div className="mt-4 flex">
-                                          {[...Array(5)].map((_, i) => (
-                                              <span key={i} className="text-yellow-400 text-lg">⭐</span>span>
-                                            ))}
-                                        </div>div>
+                                        <h3 className="text-xl font-bold text-white mb-3">{stat.label}</h3>h3>
+                                        <p className="text-gray-400 text-sm">{stat.subtext}</p>p>
+                          </div>div>
+                        ))}
                         </div>div>
-                      ))}
-                                </div>div>
-                      </div>div>
-              </div>div>
-        </section>section>
-      );
+                
+                    {/* Divider Premium */}
+                        <div className="flex items-center gap-4 mb-20">
+                                  <div className="flex-1 h-px bg-gradient-to-r from-transparent via-yellow-600 to-transparent"></div>div>
+                                  <span className="text-yellow-500 text-lg font-bold">★ HISTÓRIAS DE SUCESSO REAIS ★</span>span>
+                                  <div className="flex-1 h-px bg-gradient-to-r from-transparent via-yellow-600 to-transparent"></div>div>
+                        </div>div>
+                
+                    {/* Depoimentos Premium */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            {testimonials.map((testimonial, index) => (
+                          <div
+                                            key={index}
+                                            className="bg-gradient-to-b from-gray-900 via-gray-950 to-black border border-yellow-600/30 rounded-2xl p-10 hover:border-yellow-500/60 transition-all duration-300 group"
+                                          >
+                              {/* Estrelas */}
+                                        <div className="flex gap-1 mb-6">
+                                            {[...Array(testimonial.stars)].map((_, i) => (
+                                                                <span key={i} className="text-yellow-500 text-xl">★</span>span>
+                                                              ))}
+                                        </div>div>
+                          
+                              {/* Nome e Título */}
+                                        <h4 className="text-xl font-bold text-white mb-1">{testimonial.name}</h4>h4>
+                                        <p className="text-yellow-500/80 text-sm mb-6 font-medium">{testimonial.title}</p>p>
+                          
+                              {/* Resultado */}
+                                        <div className="bg-black/50 border border-yellow-600/20 rounded-lg p-4 mb-4">
+                                                        <p className="text-sm text-gray-400 mb-2">Resultado:</p>p>
+                                                        <p className="text-white font-bold text-lg">{testimonial.result}</p>p>
+                                        </div>div>
+                          
+                              {/* Renda Passiva */}
+                                        <div className="bg-gradient-to-r from-yellow-600/10 to-yellow-500/10 border border-yellow-600/30 rounded-lg p-4">
+                                                        <p className="text-sm text-gray-400 mb-2">Renda Passiva Gerada:</p>p>
+                                                        <p className="text-yellow-400 font-bold text-lg">{testimonial.income}</p>p>
+                                        </div>div>
+                          </div>div>
+                        ))}
+                        </div>div>
+                
+                    {/* CTA Subtil */}
+                        <div className="text-center mt-20">
+                                  <p className="text-lg text-gray-400">
+                                              Estes são <span className="text-yellow-500 font-bold">resultados reais</span>span> de pessoas que transformaram vidas com dedicação ao Método SPA.
+                                  </p>p>
+                        </div>div>
+                </div>div>
+          </section>section>
+        );
 }</section>
