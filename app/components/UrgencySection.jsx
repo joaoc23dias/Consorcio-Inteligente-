@@ -36,7 +36,7 @@ export default function UrgencySection() {
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Esta Oferta Encerra em Breve</h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">Garanta seu lugar no programa antes que as vagas acabem</p>
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">Aproveite as condicoes especiais antes do encerramento da oferta</p>
         </div>
         <div className="bg-gradient-to-r from-red-950 to-red-900 rounded-lg p-10 mb-12 border border-red-700">
           <p className="text-center text-gray-300 mb-4 text-lg">{expired ? 'As inscricoes desta turma estao encerradas' : 'Tempo Restante da Oferta'}</p>
@@ -75,7 +75,7 @@ export default function UrgencySection() {
           </div>
         </div>
         <div className="text-center mt-16">
-          <a href="https://wa.me/19998187567" className="inline-block px-10 py-4 bg-yellow-500 hover:bg-yellow-400 text-black font-bold text-lg rounded-lg transition-all duration-300 mb-4">Garantir Minha Vaga Agora</a>
+          <a href="https://wa.me/19998187567" className="inline-block px-10 py-4 bg-yellow-500 hover:bg-yellow-400 text-black font-bold text-lg rounded-lg transition-all duration-300 mb-4">Quero Aproveitar a Oferta</a>
           <p className="text-gray-400 text-sm">Oferta valida ate 30 de junho de 2026.</p>
         </div>
       </div>
