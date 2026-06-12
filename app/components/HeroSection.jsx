@@ -17,7 +17,7 @@ export default function HeroSection() {
           Saia do Financiamento Bancário
           <br />
           <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
-            e Tenha 2-3 Imóveis em 24 Meses
+            com Estratégia Para Construir um Patrimônio de Imóveis
           </span>
           <br />
           <span className="text-2xl md:text-3xl text-gray-300">(Economizando R$ 680 Mil em Juros)</span>
@@ -26,14 +26,14 @@ export default function HeroSection() {
         <div className="flex justify-center mb-8">
           <div className="bg-gradient-to-r from-green-500/10 to-green-600/10 border border-green-500/50 rounded-xl px-6 py-4 max-w-2xl">
             <p className="text-green-400 text-center font-semibold text-lg">
-              ⏱️ CONTEMPLAÇÃO MÉDIA: 24 MESES vs 36-60 DO MERCADO
+              ⏱️ ESTRATÉGIA FOCADA EM ANTECIPAR A CONTEMPLAÇÃO VIA LANCE
             </p>
           </div>
         </div>
 
         <p className="text-lg text-gray-300 text-center mb-12 max-w-3xl mx-auto leading-relaxed">
           Nosso Método SPA® identifica os TOP 5-7% de grupos de consórcio 
-          e estrutura suas múltiplas aquisições para contemplação estratégica.
+          e organiza um plano estratégico de lances para buscar a contemplação no menor tempo possível.
           <br/>
           Sem juros, sem impacto no fluxo de caixa.
           <br/>
@@ -55,7 +55,7 @@ export default function HeroSection() {
           </div>
           <div className="hidden md:block">
             <p className="text-2xl md:text-3xl font-bold text-white">24</p>
-            <p className="text-gray-400 text-sm">Meses (Med.)</p>
+            <p className="text-gray-400 text-sm">Meses (objetivo)</p>
           </div>
         </div>
 
