@@ -3,46 +3,51 @@
 import { useState } from 'react';
 
 const faqs = [
-  { question: 'Como funciona o Consorcio Inteligente?', answer: 'O Consorcio Inteligente e um metodo de aquisicao de imoveis onde voce se une a outras pessoas em um grupo. Voce contribui mensalmente e quando chega sua vez (contemplacao), recebe o valor para adquirir seu imovel sem precisar de emprestimo bancario.' },
-  { question: 'Qual e a diferenca do Metodo SPA para outros metodos?', answer: 'O Metodo SPA (Sistema de Planejamento Avancado) combina consorcio inteligente com estrategias de alavancagem financeira, permitindo que voce contemple multiplos imoveis rapidamente e construa renda passiva exponencial.' },
-  { question: 'Quanto tempo leva para contemplar 3 imoveis?', answer: 'Nao existe prazo garantido: a contemplacao no consorcio ocorre por sorteio ou lance. O que fazemos e estruturar uma estrategia de lances para buscar antecipar a contemplacao. O tempo varia conforme o grupo, o valor das parcelas e a disponibilidade de recursos para lance.' },
-  { question: 'Preciso de quanto dinheiro para comecar?', answer: 'Voce pode comecar com R$ 10.000 a R$ 50.000 como entrada inicial, dependendo do valor do imovel que escolher. Apos isso, contribuicoes mensais baseadas no seu consorcio.' },
-  { question: 'E se eu nao conseguir pagar uma parcela?', answer: 'O consorcio e regulado e oferece protecao. Se voce nao conseguir pagar temporariamente, ha opcoes como suspensao de parcelas ou negociacao direta com o administrador.' },
-  { question: 'Que tipos de imoveis posso adquirir?', answer: 'Voce pode adquirir residencias, apartamentos, salas comerciais e terrenos atraves do consorcio. A escolha depende da disponibilidade e das cotas do consorcio que voce participar.' },
-  { question: 'Como e a renda passiva?', answer: 'Com o Metodo SPA voce escolhe imoveis em localizacoes de alta demanda que naturalmente apreciam. Ao locar os imoveis, voce gera renda mensal enquanto se posiciona para contemplar novamente.' },
-  { question: 'Existe risco na contemplacao?', answer: 'O consorcio nao e um investimento, e uma forma de compra programada regulada pelo Banco Central. A contemplacao depende de sorteio ou lance e nao pode ser garantida. Nosso metodo apoia voce com analise estrategica de grupos, localizacao e mercado.' }
+  { question: 'Como funciona o Consórcio Inteligente?', answer: 'O Consórcio Inteligente é um método de aquisição de imóveis onde você se une a outras pessoas em um grupo. Você contribui mensalmente e quando chega sua vez (contemplação), recebe o valor para adquirir seu imóvel sem precisar de empréstimo bancário.' },
+  { question: 'Qual é a diferença do Método SPA para outros métodos?', answer: 'O Método SPA (Sistema de Planejamento Avançado) combina consórcio inteligente com estratégias de alavancagem financeira, permitindo que você contemple múltiplos imóveis e construa renda passiva de forma planejada.' },
+  { question: 'Quanto tempo leva para contemplar imóveis?', answer: 'Não existe prazo garantido: a contemplação no consórcio ocorre por sorteio ou lance. O que fazemos é estruturar uma estratégia de lances para buscar antecipar a contemplação. O tempo varia conforme o grupo, o valor das parcelas e a disponibilidade de recursos para lance.' },
+  { question: 'Preciso de quanto dinheiro para começar?', answer: 'Você pode começar com R$ 10.000 a R$ 50.000 como entrada inicial, dependendo do valor do imóvel que escolher. Após isso, contribuições mensais baseadas no seu consórcio.' },
+  { question: 'E se eu não conseguir pagar uma parcela?', answer: 'O consórcio é regulado e oferece proteções ao cotista. Em caso de dificuldade, existem mecanismos de negociação e flexibilização. Nossa equipe orienta você sobre as melhores opções disponíveis no seu grupo.' },
+  { question: 'Que tipos de imóveis posso adquirir?', answer: 'Você pode adquirir residências, apartamentos, imóveis comerciais e terrenos. A carta de crédito do consórcio de imóveis tem ampla flexibilidade de uso conforme as regras do grupo contratado.' },
+  { question: 'Como é a renda passiva?', answer: 'Com o Método SPA você escolhe imóveis em localizações estratégicas para locação. O primeiro imóvel pode ser moradia e os demais geram renda de aluguel mensal, construindo um fluxo de caixa recorrente.' },
+  { question: 'O consórcio é seguro?', answer: 'O consórcio não é um investimento, é uma forma de aquisição planejada de bens. É regulado pelo Banco Central do Brasil (BACEN). Nossa assessoria ajuda a selecionar grupos dentro de administradoras reconhecidas e a estruturar estratégias de lances com base no seu perfil financeiro.' },
 ];
 
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState(null);
 
   return (
-    <section className="py-24 px-4 bg-black">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Duvidas Frequentes</h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">Respostas claras sobre o Metodo SPA e Consorcio Inteligente</p>
-          <div className="w-16 h-1 bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto mt-6"></div>
+    <section style={{ backgroundColor: 'var(--bg-secondary)' }} className="section_padding">
+      <div className="layout_container" style={{ maxWidth: '760px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+          <span className="accent_tag" style={{ marginBottom: '1rem', display: 'inline-flex' }}>Dúvidas Frequentes</span>
+          <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 800, color: 'var(--text-primary)', marginTop: '1rem' }}>
+            Perguntas Frequentes
+          </h2>
         </div>
-        <div className="space-y-4">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
           {faqs.map((faq, index) => (
-            <div key={index} className="border border-gray-700 rounded-lg overflow-hidden transition-all duration-300 hover:border-yellow-500 bg-gradient-to-r from-gray-900 to-gray-950">
-              <button onClick={() => setOpenIndex(openIndex === index ? null : index)} className="w-full px-8 py-5 text-left flex justify-between items-center hover:bg-gray-800 transition-colors">
-                <span className="text-lg font-semibold text-white pr-4">{faq.question}</span>
-                <span className={`text-yellow-400 text-2xl transition-transform duration-300 ${openIndex === index ? 'rotate-180' : ''}`}>{'\u25BC'}</span>
+            <div key={index} style={{ borderBottom: '1px solid var(--border-color)', overflow: 'hidden' }}>
+              <button
+                onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', padding: '1.25rem 0', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left' }}
+              >
+                <span style={{ fontSize: '1rem', fontWeight: 600, color: openIndex === index ? 'var(--accent-orange)' : 'var(--text-primary)', lineHeight: 1.4, transition: 'color 0.2s ease' }}>
+                  {faq.question}
+                </span>
+                <span style={{ fontSize: '1.25rem', color: openIndex === index ? 'var(--accent-orange)' : 'var(--text-muted)', flexShrink: 0, transition: 'color 0.2s ease', fontWeight: 300 }}>
+                  {openIndex === index ? '−' : '+'}
+                </span>
               </button>
               {openIndex === index && (
-                <div className="px-8 py-6 bg-gray-900 border-t border-gray-700">
-                  <p className="text-gray-300 leading-relaxed">{faq.answer}</p>
+                <div style={{ paddingBottom: '1.25rem' }}>
+                  <p style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>
+                    {faq.answer}
+                  </p>
                 </div>
               )}
             </div>
           ))}
-        </div>
-        <div className="mt-16 text-center p-10 rounded-lg bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 border border-yellow-500 border-opacity-30">
-          <h3 className="text-2xl font-bold text-white mb-4">Ainda tem duvidas?</h3>
-          <p className="text-gray-400 mb-6">Nossos consultores estao prontos para responder qualquer pergunta especifica sobre seu caso.</p>
-          <a href="https://wa.me/19998187567" className="inline-block px-8 py-3 bg-yellow-500 hover:bg-yellow-400 text-black font-bold rounded-lg transition-all duration-300">Agendar Consulta Gratuita</a>
         </div>
       </div>
     </section>
