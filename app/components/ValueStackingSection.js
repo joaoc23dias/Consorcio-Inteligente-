@@ -3,15 +3,15 @@ export default function ValueStackingSection() {
     <section className="bg-gradient-to-b from-black to-gray-950 text-white py-20 px-6">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-4xl font-bold text-center mb-4">
-          Qual é Seu Retorno Total com Método SPA?
+          Projeção de Cenário com o Método SPA
         </h2>
         <p className="text-gray-400 text-center mb-12">
-          Aqui está quanto você vai ganhar com Método SPA vs continuar financiando
+          Veja uma projeção de cenário comparando o Método SPA com continuar no financiamento. Valores ilustrativos, podem variar conforme cada caso.
         </p>
 
         <div className="bg-gradient-to-br from-yellow-900/20 to-yellow-950/20 border-2 border-yellow-500/50 rounded-2xl p-12 mb-8">
           <h3 className="text-2xl font-bold text-center mb-12">
-            🎯 SEU RETORNO TOTAL (48 MESES)
+            🎯 PROJEÇÃO DE CENÁRIO (48 MESES)
           </h3>
 
           <div className="space-y-6 mb-12">
@@ -53,7 +53,7 @@ export default function ValueStackingSection() {
           </div>
 
           <div className="bg-gradient-to-r from-yellow-600/30 to-yellow-700/30 border-t-2 border-yellow-500/50 pt-8">
-            <p className="text-center text-gray-300 mb-2 text-sm">SEU RETORNO TOTAL</p>
+            <p className="text-center text-gray-300 mb-2 text-sm">POTENCIAL PROJETADO</p>
             <p className="text-center text-4xl font-bold text-yellow-400">
               +R$ 1.3M+
             </p>
@@ -82,6 +82,7 @@ export default function ValueStackingSection() {
           </div>
         </div>
       </div>
-    </section>
+    <p className="text-center text-xs text-gray-500 mt-10 max-w-3xl mx-auto">Projeção meramente ilustrativa. Os valores dependem do grupo, das parcelas, da estratégia de lance e das condições de mercado. O consórcio não garante contemplação nem rentabilidade, e os resultados podem variar.</p>
+      </section>
   );
 }
