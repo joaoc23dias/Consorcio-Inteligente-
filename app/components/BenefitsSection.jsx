@@ -13,16 +13,16 @@ const benefits = [
   },
   {
     icon: Zap,
-    title: "CONTEMPLE EM 24 MESES",
-    description: "Mercado inteiro leva 36-60 meses. Nossos clientes? 24 meses.",
-    details: ["TOP 5-7% grupos", "Mercado: 36-60 meses", "Nós: 24 meses"],
-    metric: "3 ANOS À FRENTE",
+    title: "ESTRATÉGIA PARA ANTECIPAR A CONTEMPLAÇÃO",
+    description: "O mercado costuma levar 36-60 meses. Com estratégia de lance, o objetivo é antecipar esse prazo.",
+    details: ["Análise dos melhores grupos", "Estratégia de lances", "Foco em antecipar a contemplação"],
+    metric: "PLANO ESTRATÉGICO",
     color: "from-blue-500 to-blue-600"
   },
   {
     icon: Target,
     title: "ESTRUTURE 2-3 IMÓVEIS",
-    description: "1 cota = 1 imóvel. 2-3 cotas = 2-3 imóveis em 24-36 meses.",
+    description: "1 cota = 1 carta de crédito. Com 2-3 cotas, você estrutura a aquisição de múltiplos imóveis ao longo do plano.",
     details: ["Múltiplas cartas", "Contemplação sequencial", "Portfolio completo"],
     metric: "2-3 IMÓVEIS",
     color: "from-purple-500 to-purple-600"
@@ -31,7 +31,7 @@ const benefits = [
     icon: Heart,
     title: "RENDA PASSIVA MENSAL",
     description: "1º imóvel: moradia. 2º+: gera aluguel todo mês.",
-    details: ["Imóvel #1 em 24 meses", "Imóvel #2 em 30 meses", "Cash flow positivo"],
+    details: ["Aquisição sequencial planejada", "Estratégia para gerar renda", "Cash flow positivo como meta"],
     metric: "+R$ 2-5K/MÊS",
     color: "from-green-500 to-green-600"
   },
