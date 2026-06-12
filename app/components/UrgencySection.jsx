@@ -3,11 +3,13 @@
 import { useState, useEffect } from 'react';
 
 const bonuses = [
-  { title: 'Planilha de Analise de Imoveis', value: 'R$ 497' },
-  { title: 'Cronograma de 36 Meses', value: 'R$ 297' },
-  { title: 'Guia de Financiamento', value: 'R$ 197' },
-  { title: 'Consultoria 1x1 (valor de mercado)', value: 'R$ 1.997' }
+  { title: 'Planilha de Analise de Imoveis', objection: 'Resolve: "E se eu escolher o imovel errado?"', value: 'R$ 497' },
+  { title: 'Cronograma Estrategico de 36 Meses', objection: 'Resolve: "E se eu nao souber a ordem certa?"', value: 'R$ 297' },
+  { title: 'Guia Completo de Contemplacao', objection: 'Resolve: "E se eu travar no meio do caminho?"', value: 'R$ 197' },
+  { title: 'Consultoria 1x1 com Especialista', objection: 'Resolve: "E se eu precisar de ajuda personalizada?"', value: 'R$ 1.997' }
 ];
+
+const totalValue = 2988;
 
 export default function UrgencySection() {
   const [timeLeft, setTimeLeft] = useState(48 * 3600);
@@ -55,16 +57,28 @@ export default function UrgencySection() {
           </div>
         </div>
         <div>
-          <h3 className="text-2xl font-bold text-white text-center mb-10">Bonus Exclusivos da Oferta</h3>
+          <h3 className="text-2xl font-bold text-white text-center mb-4">Tudo o Que Voce Recebe Hoje</h3>
+          <p className="text-gray-400 text-center mb-10">Cada bonus existe para eliminar um motivo de voce nao conseguir</p>
           <div className="grid md:grid-cols-2 gap-6">
             {bonuses.map((bonus, index) => (
               <div key={index} className="bg-gradient-to-r from-gray-900 to-gray-950 rounded-lg p-6 border border-yellow-500 border-opacity-30 hover:border-opacity-100 transition-all">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-yellow-500 flex items-center justify-center flex-shrink-0"><span className="text-black font-bold text-xl">✓</span></div>
-                  <div className="flex-1"><h4 className="text-white font-bold mb-1">{bonus.title}</h4><p className="text-yellow-400 font-semibold">Valor: {bonus.value}</p></div>
+                  <div className="w-12 h-12 rounded-full bg-yellow-500 flex items-center justify-center flex-shrink-0"><span className="text-black font-bold text-xl">+</span></div>
+                  <div className="flex-1">
+                    <h4 className="text-white font-bold mb-1">{bonus.title}</h4>
+                    <p className="text-gray-400 text-sm mb-2 italic">{bonus.objection}</p>
+                    <p className="text-yellow-400 font-semibold">Valor: {bonus.value}</p>
+                  </div>
                 </div>
               </div>
             ))}
+          </div>
+          <div className="mt-10 bg-gradient-to-br from-yellow-900/30 to-yellow-950/30 border-2 border-yellow-500/60 rounded-2xl p-8 max-w-2xl mx-auto text-center">
+            <p className="text-gray-300 text-sm mb-2">VALOR TOTAL DOS BONUS</p>
+            <p className="text-gray-500 text-2xl font-bold line-through mb-4">R$ {totalValue.toLocaleString('pt-BR')}</p>
+            <p className="text-green-400 text-lg mb-1">Hoje, ao entrar no programa</p>
+            <p className="text-5xl font-bold text-yellow-400 mb-2">GRATIS</p>
+            <p className="text-gray-400 text-sm">Todos os bonus inclusos sem custo adicional para os {spotsRemaining} primeiros</p>
           </div>
         </div>
         <div className="text-center mt-16">
