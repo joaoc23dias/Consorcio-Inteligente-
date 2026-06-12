@@ -5,12 +5,12 @@ import { useState } from 'react';
 const faqs = [
   { question: 'Como funciona o Consorcio Inteligente?', answer: 'O Consorcio Inteligente e um metodo de aquisicao de imoveis onde voce se une a outras pessoas em um grupo. Voce contribui mensalmente e quando chega sua vez (contemplacao), recebe o valor para adquirir seu imovel sem precisar de emprestimo bancario.' },
   { question: 'Qual e a diferenca do Metodo SPA para outros metodos?', answer: 'O Metodo SPA (Sistema de Planejamento Avancado) combina consorcio inteligente com estrategias de alavancagem financeira, permitindo que voce contemple multiplos imoveis rapidamente e construa renda passiva exponencial.' },
-  { question: 'Quanto tempo leva para contemplar 3 imoveis?', answer: 'Nossos clientes conseguem contemplar 3 imoveis em media entre 24 a 36 meses, dependendo do tamanho do consorcio, valor das parcelas e da sua estrategia de lance.' },
+  { question: 'Quanto tempo leva para contemplar 3 imoveis?', answer: 'Nao existe prazo garantido: a contemplacao no consorcio ocorre por sorteio ou lance. O que fazemos e estruturar uma estrategia de lances para buscar antecipar a contemplacao. O tempo varia conforme o grupo, o valor das parcelas e a disponibilidade de recursos para lance.' },
   { question: 'Preciso de quanto dinheiro para comecar?', answer: 'Voce pode comecar com R$ 10.000 a R$ 50.000 como entrada inicial, dependendo do valor do imovel que escolher. Apos isso, contribuicoes mensais baseadas no seu consorcio.' },
   { question: 'E se eu nao conseguir pagar uma parcela?', answer: 'O consorcio e regulado e oferece protecao. Se voce nao conseguir pagar temporariamente, ha opcoes como suspensao de parcelas ou negociacao direta com o administrador.' },
   { question: 'Que tipos de imoveis posso adquirir?', answer: 'Voce pode adquirir residencias, apartamentos, salas comerciais e terrenos atraves do consorcio. A escolha depende da disponibilidade e das cotas do consorcio que voce participar.' },
   { question: 'Como e a renda passiva?', answer: 'Com o Metodo SPA voce escolhe imoveis em localizacoes de alta demanda que naturalmente apreciam. Ao locar os imoveis, voce gera renda mensal enquanto se posiciona para contemplar novamente.' },
-  { question: 'Existe risco na contemplacao?', answer: 'Todo investimento tem riscos, mas consorcio e regulado pelo Banco Central. Nosso metodo reduz riscos atraves de analise estrategica de localizacao e mercado.' }
+  { question: 'Existe risco na contemplacao?', answer: 'O consorcio nao e um investimento, e uma forma de compra programada regulada pelo Banco Central. A contemplacao depende de sorteio ou lance e nao pode ser garantida. Nosso metodo apoia voce com analise estrategica de grupos, localizacao e mercado.' }
 ];
 
 export default function FAQSection() {
