@@ -18,7 +18,7 @@ export default function SocialProofSection() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-20">
           <h2 className="text-5xl md:text-6xl font-bold mb-6">Resultados Comprovados que Falam por Si</h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">Milhares de pessoas ja conquistaram sua liberdade financeira com o Metodo SPA.</p>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">Centenas de pessoas ja estruturaram a compra dos seus imoveis com o Metodo SPA.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
           {stats.map((stat, index) => (
@@ -46,6 +46,7 @@ export default function SocialProofSection() {
           ))}
         </div>
       </div>
-    </section>
+    <p className="text-center text-xs text-gray-500 mt-12 max-w-3xl mx-auto">Os depoimentos refletem experiencias individuais e nao representam garantia de resultado. A contemplacao no consorcio depende de sorteio ou lance e os resultados podem variar de pessoa para pessoa.</p>
+      </section>
   );
 }
