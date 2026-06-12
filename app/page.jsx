@@ -229,9 +229,8 @@ export default function Home() {
                                               <p className="text-gray-400">© 2024 Todos direitos reservados</p>p>
                                   </div>div>
                         </div>div>
-                </footer>footer>          </>div>
-            );
-}</section>
-</>div>
+                </footer>footer>
+          </div>}</>div>
       );
 }
+h
