@@ -44,10 +44,7 @@ export default function Home() {
           ];
 
                 return (
-                          <div style={{
-                                      background: 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #0369a1 100%)',
-                                      minHeight: '100vh',
-                                      color: '#ffffff'
+                          <div <div className="w-full min-h-screen bg-gradient-to-b from-blue-900 via-blue-700 to-blue-600 text-white"><
                           }}>
                                 {/* SEÇÃO 1: HERO */}
                                       <HeroSection />
