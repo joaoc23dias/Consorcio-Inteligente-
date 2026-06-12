@@ -1,72 +1,83 @@
 'use client';
 
 import { useState } from 'react';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 
-const features = [
-  { title: 'Treinamento Completo', desc: 'Acesso a plataforma de cursos com todos os passos do metodo' },
-  { title: 'Analise de Imoveis', desc: 'Consultoria especializada para escolher as melhores propriedades' },
-  { title: 'Suporte Dedicado', desc: 'Acesso direto ao time de especialistas para duvidas e orientacao' }
+const benefitsList = [
+  'Análise gratuita do seu perfil financeiro',
+  'Seleção dos TOP 3 grupos de consórcio',
+  'Plano de lances estruturado',
+  'Suporte via WhatsApp por 30 dias',
 ];
 
 export default function CTASection() {
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
-  const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({ nome: '', email: '', telefone: '', mensagem: '' });
+  const [enviado, setEnviado] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
+  function handleChange(e) {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
 
-  const handleSubmit = (e) => {
+  function handleSubmit(e) {
     e.preventDefault();
-    setSubmitted(true);
-    setFormData({ name: '', email: '', phone: '', message: '' });
-    setTimeout(() => setSubmitted(false), 5000);
-  };
+    const msg = encodeURIComponent('Olá! Meu nome é ' + formData.nome + ', meu email é ' + formData.email + '. ' + (formData.mensagem || 'Quero conhecer o Método SPA.'));
+    window.open('https://wa.me/5511999999999?text=' + msg, '_blank');
+    setEnviado(true);
+  }
 
   return (
-    <section className="py-24 px-4 bg-black">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+    <section id="como-funciona" style={{ backgroundColor: 'var(--bg-secondary)' }} className="section_padding">
+      <div className="layout_container">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'start' }}>
           <div>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">Pronto para Multiplicar Seus Imoveis?</h2>
-            <p className="text-lg text-gray-300 mb-8 leading-relaxed">Comece agora e tenha acesso ao treinamento completo do Metodo SPA, analise gratuita de oportunidades e suporte de nossos especialistas.</p>
-            <ul className="space-y-4 mb-8">
-              {features.map((f, index) => (
-                <li key={index} className="flex items-start gap-4">
-                  <div className="w-8 h-8 rounded-full bg-yellow-500 flex items-center justify-center flex-shrink-0 mt-1"><span className="text-black font-bold text-sm">✓</span></div>
-                  <div><h4 className="text-white font-bold mb-1">{f.title}</h4><p className="text-gray-400">{f.desc}</p></div>
+            <span className="accent_tag" style={{ marginBottom: '1.25rem', display: 'inline-flex' }}>Consultoria Gratuita</span>
+            <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.75rem)', fontWeight: 800, color: 'var(--text-primary)', marginTop: '1rem', marginBottom: '1rem', lineHeight: 1.2 }}>
+              Pronto para Multiplicar Seus Imóveis?
+            </h2>
+            <p style={{ fontSize: '1.05rem', color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '2rem' }}>
+              Comece agora e tenha acesso ao Método SPA completo — o mesmo usado por +200 empresários para construir patrimônio imobiliário sem banco e sem juros.
+            </p>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              {benefitsList.map((b, i) => (
+                <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem' }}>
+                  <CheckCircle2 size={18} style={{ color: 'var(--accent-orange)', flexShrink: 0, marginTop: '0.1rem' }} />
+                  <span style={{ fontSize: '0.95rem', color: 'var(--text-secondary)' }}>{b}</span>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="bg-gradient-to-b from-gray-900 to-gray-950 rounded-lg p-10 border border-gray-700">
-            <h3 className="text-2xl font-bold text-white mb-6">Solicite sua Consulta</h3>
-            {submitted ? (
-              <div className="bg-green-900 border border-green-700 rounded-lg p-6 text-center">
-                <p className="text-green-300 font-semibold mb-2">Obrigado pelo seu interesse!</p>
-                <p className="text-gray-300">Entraremos em contato em breve.</p>
+          <div style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: '0.75rem', padding: '2rem' }}>
+            {enviado ? (
+              <div style={{ textAlign: 'center', padding: '2rem 0' }}>
+                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>✅</div>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>Mensagem Enviada!</h3>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>Nossa equipe entrará em contato em breve.</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Nome Completo</label>
-                  <input type="text" name="name" value={formData.name} onChange={handleChange} required className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-500" placeholder="Joao Silva" />
+                  <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: '0.4rem' }}>Nome completo *</label>
+                  <input type="text" name="nome" value={formData.nome} onChange={handleChange} placeholder="Seu nome" required className="input_field" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Email</label>
-                  <input type="email" name="email" value={formData.email} onChange={handleChange} required className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-500" placeholder="seu@email.com" />
+                  <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: '0.4rem' }}>E-mail *</label>
+                  <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="seu@email.com" required className="input_field" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Telefone</label>
-                  <input type="tel" name="phone" value={formData.phone} onChange={handleChange} required className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-500" placeholder="(11) 99999-9999" />
+                  <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: '0.4rem' }}>Telefone (WhatsApp)</label>
+                  <input type="tel" name="telefone" value={formData.telefone} onChange={handleChange} placeholder="(11) 99999-9999" className="input_field" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Mensagem (Opcional)</label>
-                  <textarea name="message" value={formData.message} onChange={handleChange} className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-500 resize-none h-20" placeholder="Conte um pouco sobre seu interesse..." />
+                  <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: '0.4rem' }}>Mensagem (opcional)</label>
+                  <textarea name="mensagem" value={formData.mensagem} onChange={handleChange} placeholder="Conte um pouco sobre seu objetivo..." rows={3} className="input_field" style={{ resize: 'vertical' }} />
                 </div>
-                <button type="submit" className="w-full py-3 px-6 bg-yellow-500 hover:bg-yellow-400 text-black font-bold rounded-lg transition-all duration-300 mt-6">Enviar Consulta</button>
-                <p className="text-xs text-gray-500 text-center mt-4">Responderemos em ate 24 horas</p>
+                <button type="submit" className="btn_primary" style={{ width: '100%', justifyContent: 'center', fontSize: '1.05rem', marginTop: '0.25rem' }}>
+                  Enviar Consulta
+                  <ArrowRight size={20} />
+                </button>
+                <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textAlign: 'center', lineHeight: 1.5 }}>
+                  🔒 Seus dados são tratados com total privacidade. Sem spam.
+                </p>
               </form>
             )}
           </div>
