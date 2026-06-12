@@ -13,9 +13,9 @@ const benefits = [
   },
   {
     icon: Zap,
-    title: "CONTEMPLE EM 14 MESES",
-    description: "Mercado inteiro leva 36-60 meses. Nossos clientes? 14 meses.",
-    details: ["TOP 5-7% grupos", "Mercado: 36-60 meses", "Nós: 14 meses"],
+    title: "CONTEMPLE EM 24 MESES",
+    description: "Mercado inteiro leva 36-60 meses. Nossos clientes? 24 meses.",
+    details: ["TOP 5-7% grupos", "Mercado: 36-60 meses", "Nós: 24 meses"],
     metric: "3 ANOS À FRENTE",
     color: "from-blue-500 to-blue-600"
   },
@@ -31,7 +31,7 @@ const benefits = [
     icon: Heart,
     title: "RENDA PASSIVA MENSAL",
     description: "1º imóvel: moradia. 2º+: gera aluguel todo mês.",
-    details: ["Imóvel #1 em 14 meses", "Imóvel #2 em 30 meses", "Cash flow positivo"],
+    details: ["Imóvel #1 em 24 meses", "Imóvel #2 em 30 meses", "Cash flow positivo"],
     metric: "+R$ 2-5K/MÊS",
     color: "from-green-500 to-green-600"
   },
