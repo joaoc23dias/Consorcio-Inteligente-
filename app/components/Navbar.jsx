@@ -36,10 +36,10 @@ export default function Navbar() {
         <Image
           src="/logo-gaia.png"
           alt="Gaia Group"
-          width={120}
-          height={40}
+          width={180}
+          height={60}
           priority
-          style={{ objectFit: 'contain', height: '40px', width: 'auto' }}
+          style={{ objectFit: 'contain', height: '60px', width: 'auto' }}
         />
       </div>
 
