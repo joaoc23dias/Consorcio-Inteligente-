@@ -2,27 +2,31 @@
 import { useEffect } from 'react';
 import HeroSection from './components/HeroSection';
 import BenefitsSection from './components/BenefitsSection';
+import MethodSection from './components/MethodSection';
 import SixBenefitsSection from './components/SixBenefitsSection';
-import ValueStackingSection from './components/ValueStackingSection';
 import SocialProofSection from './components/SocialProofSection';
-import FAQSection from './components/FAQSection';
-import CTASection from './components/CTASection';
+import ValueStackingSection from './components/ValueStackingSection';
 import UrgencySection from './components/UrgencySection';
 import GuaranteeSection from './components/GuaranteeSection';
+import CTASection from './components/CTASection';
+import FAQSection from './components/FAQSection';
 
 // Hormozi funnel order:
 // 1. Hero (Claim + Mecanismo + Prova imediata)
-// 2. Pain Agitation (97% erram — por quê)
-// 3. Mechanism / 6 Razões (como o SPA resolve cada dor)
-// 4. Social Proof (resultados reais)
-// 5. Grand Slam Offer / Value Stacking (Before/After + +R$1.3M)
-// 6. Urgency + Bonus Stack
-// 7. Guarantee (reversão de risco)
-// 8. CTA final (formulário)
-// 9. FAQ
+// 2. Pain Agitation (97% erram — por que)
+// 3. Mechanism: Como Funciona o Metodo SPA (3 passos)
+// 4. SixBenefits: 6 maneiras de usar o consorcio
+// 5. Social Proof (resultados reais)
+// 6. Grand Slam Offer / Value Stacking (Before/After + +R$1.3M)
+// 7. Urgency + Bonus Stack
+// 8. Guarantee (reversao de risco)
+// 9. CTA final (formulario)
+// 10. FAQ
+
 const sections = [
   HeroSection,
   BenefitsSection,
+  MethodSection,
   SixBenefitsSection,
   SocialProofSection,
   ValueStackingSection,
@@ -43,7 +47,7 @@ export default function Home() {
           }
         });
       },
-      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+      { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
     );
     document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
     return () => observer.disconnect();
