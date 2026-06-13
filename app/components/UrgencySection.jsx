@@ -3,9 +3,9 @@
 import { useState, useEffect } from 'react';
 
 const bonuses = [
-  { title: 'Planilha de Analise de Imoveis', objection: 'Resolve: "E se eu escolher o imovel errado?"', value: 'R$ 497' },
-  { title: 'Cronograma Estrategico de 36 Meses', objection: 'Resolve: "E se eu nao souber a ordem certa?"', value: 'R$ 297' },
-  { title: 'Guia Completo de Contemplacao', objection: 'Resolve: "E se eu travar no meio do caminho?"', value: 'R$ 197' },
+  { title: 'Planilha de Análise de Imóveis', objection: 'Resolve: "E se eu escolher o imóvel errado no consórcio?"', value: 'R$ 497' },
+  { title: 'Cronograma Estratégico de 36 Meses', objection: 'Resolve: "E se eu não souber a ordem certa dos lances?"', value: 'R$ 297' },
+  { title: 'Guia Completo de Contemplação', objection: 'Resolve: "E se eu travar no meio do caminho?"', value: 'R$ 197' },
   { title: 'Consultoria 1x1 com Especialista', objection: 'Resolve: "E se eu precisar de ajuda personalizada?"', value: 'R$ 1.997' }
 ];
 
@@ -39,12 +39,12 @@ export default function UrgencySection() {
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <span style={{ display: 'inline-block', backgroundColor: 'rgba(255,90,31,0.12)', color: 'var(--accent-orange)', border: '1px solid rgba(255,90,31,0.3)', borderRadius: '999px', padding: '0.35rem 1rem', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.08em', marginBottom: '1rem' }}>OFERTA ESPECIAL</span>
           <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '1rem' }}>Esta Oferta Encerra em Breve</h2>
-          <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', maxWidth: '36rem', margin: '0 auto' }}>Aproveite as condicoes especiais antes do encerramento da oferta</p>
+          <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', maxWidth: '36rem', margin: '0 auto' }}>Aproveite as condições especiais antes do encerramento — bônus exclusivos para quem entrar no consórcio agora</p>
         </div>
 
         {/* Countdown */}
         <div style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: '0.75rem', padding: '2.5rem', marginBottom: '3rem', textAlign: 'center' }}>
-          <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', fontSize: '1rem' }}>{expired ? 'As inscricoes desta turma estao encerradas' : 'Tempo Restante da Oferta'}</p>
+          <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', fontSize: '1rem' }}>{expired ? 'As inscrições desta turma estão encerradas' : 'Tempo Restante da Oferta'}</p>
           {!expired && (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.75rem', maxWidth: '28rem', margin: '0 auto' }}>
               {[{ val: pad(days), label: 'Dias' }, { val: pad(hours), label: 'Horas' }, { val: pad(minutes), label: 'Minutos' }, { val: pad(seconds), label: 'Segundos' }].map((item, i) => (
@@ -57,13 +57,13 @@ export default function UrgencySection() {
               ))}
             </div>
           )}
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', marginTop: '1.5rem' }}>Oferta valida ate 30 de junho de 2026.</p>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', marginTop: '1.5rem' }}>Oferta válida até 30 de junho de 2026.</p>
         </div>
 
         {/* Bonus Cards */}
         <div style={{ marginBottom: '2rem' }}>
-          <h3 style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--text-primary)', textAlign: 'center', marginBottom: '0.75rem' }}>Tudo o Que Voce Recebe Hoje</h3>
-          <p style={{ color: 'var(--text-secondary)', textAlign: 'center', marginBottom: '2.5rem' }}>Cada bonus existe para eliminar um motivo de voce nao conseguir</p>
+          <h3 style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--text-primary)', textAlign: 'center', marginBottom: '0.75rem' }}>Tudo o Que Você Recebe Hoje</h3>
+          <p style={{ color: 'var(--text-secondary)', textAlign: 'center', marginBottom: '2.5rem' }}>Cada bônus existe para eliminar um motivo de você não conseguir avançar no consórcio</p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem' }}>
             {bonuses.map((bonus, index) => (
               <div key={index} style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: '0.75rem', padding: '1.5rem', transition: 'border-color 0.2s' }}
@@ -87,19 +87,16 @@ export default function UrgencySection() {
 
         {/* Total Value Card */}
         <div style={{ backgroundColor: 'var(--bg-secondary)', border: '2px solid rgba(255,90,31,0.4)', borderRadius: '1rem', padding: '2.5rem', maxWidth: '32rem', margin: '0 auto 3rem', textAlign: 'center' }}>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', letterSpacing: '0.08em', marginBottom: '0.5rem', textTransform: 'uppercase' }}>VALOR TOTAL DOS BONUS</p>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', letterSpacing: '0.08em', marginBottom: '0.5rem', textTransform: 'uppercase' }}>VALOR TOTAL DOS BÔNUS</p>
           <p style={{ color: 'var(--text-muted)', fontSize: '1.75rem', fontWeight: 700, textDecoration: 'line-through', marginBottom: '0.75rem' }}>R$ {totalValue.toLocaleString('pt-BR')}</p>
-          <p style={{ color: '#4ade80', fontSize: '1rem', marginBottom: '0.35rem' }}>Hoje, ao entrar no programa</p>
-          <p style={{ fontSize: '3rem', fontWeight: 900, color: 'var(--accent-orange)', marginBottom: '0.5rem', letterSpacing: '-0.02em' }}>GRATIS</p>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Todos os bonus inclusos sem custo adicional ao entrar no programa</p>
+          <p style={{ color: '#4ade80', fontSize: '1rem', marginBottom: '0.35rem' }}>Hoje, ao entrar no consórcio com o Método SPA</p>
+          <p style={{ fontSize: '3rem', fontWeight: 900, color: 'var(--accent-orange)', marginBottom: '0.5rem', letterSpacing: '-0.02em' }}>GRÁTIS</p>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Todos os bônus inclusos sem custo adicional ao entrar no programa</p>
         </div>
 
         {/* CTA */}
         <div style={{ textAlign: 'center' }}>
-          <a href="https://wa.me/19998187567" style={{ display: 'inline-block', padding: '1rem 2.5rem', backgroundColor: 'var(--accent-orange)', color: '#fff', fontWeight: 800, fontSize: '1.1rem', borderRadius: '0.5rem', textDecoration: 'none', transition: 'background-color 0.2s' }}
-            onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--accent-orange-hover)'}
-            onMouseLeave={e => e.currentTarget.style.backgroundColor = 'var(--accent-orange)'}
-          >Quero Aproveitar a Oferta</a>
+          <a href="https://wa.me/19998187567" style={{ display: 'inline-block', padding: '1rem 2.5rem', backgroundColor: 'var(--accent-orange)', color: '#fff', fontWeight: 800, fontSize: '1.1rem', borderRadius: '0.5rem', textDecoration: 'none' }}>Quero Aproveitar a Oferta</a>
         </div>
 
       </div>
