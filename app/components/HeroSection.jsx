@@ -49,7 +49,6 @@ position: 'relative',
 overflow: 'hidden',
 }}
 >
-{/* Radial glow center */}
 <div style={{
 position: 'absolute', top: '50%', left: '50%',
 transform: 'translate(-50%, -50%)',
@@ -58,7 +57,6 @@ background: 'radial-gradient(ellipse, rgba(255,90,31,0.07) 0%, transparent 70%)'
 pointerEvents: 'none',
 }} />
 
-{/* Floating particles */}
 <div className="particle particle-1" />
 <div className="particle particle-2" />
 <div className="particle particle-3" />
@@ -66,7 +64,6 @@ pointerEvents: 'none',
 <div className="particle particle-5" />
 <div className="particle particle-6" />
 
-{/* Ambient corner glow */}
 <div style={{
 position: 'absolute', top: '-200px', right: '-200px',
 width: '600px', height: '600px',
@@ -76,36 +73,31 @@ pointerEvents: 'none',
 
 <div className="container" style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
 
-{/* Badge */}
 <div className={`animate-fade-up`} style={{ marginBottom: '2rem' }}>
 <span className="badge animate-glow-pulse">
 ✶ MÉTODO SPA® — PATENTEADO GAIA GROUP
 </span>
 </div>
 
-{/* HEADLINE */}
 <div className="animate-fade-up delay-1" style={{ marginBottom: '1.5rem' }}>
 <h1 className="text-hero">
 <span style={{ display: 'block', color: 'var(--text-primary)' }}>O Consórcio que</span>
 <span className="gradient-text" style={{ display: 'block' }}>Constrói Patrimônio</span>
 <span style={{ display: 'block', color: 'var(--text-primary)', fontSize: '0.72em', fontWeight: 800, marginTop: '0.25rem' }}>
-Sem Banco. Sem Juros. Sem Esperar 60 Meses.
+Sem Banco. Sem Juros. Com Estratégia.
 </span>
 </h1>
 </div>
 
-{/* Sub-headline */}
 <div className="animate-fade-up delay-2" style={{ marginBottom: '0.75rem' }}>
 <p className="text-lead container-sm" style={{ margin: '0 auto' }}>
-A maioria entra num consórcio e <strong style={{ color: 'var(--text-primary)' }}>espera 5 anos</strong>.
+A maioria entra num consórcio e <strong style={{ color: 'var(--text-primary)' }}>espera 5 anos no sorteio</strong>.
 Nossos clientes usam o <strong style={{ color: 'var(--accent-orange)' }}>Método SPA®</strong> para
-identificar os TOP 5-7% dos grupos, estruturar lances e contemplar em{' '}
-<strong style={{ color: 'var(--text-primary)' }}>14-36 meses</strong> — acumulando
-2-3 imóveis enquanto outros ainda pagam banco.
+identificar os TOP 5-7% dos grupos e estruturar lances estratégicos — buscando antecipar a
+contemplação e acumular imóveis enquanto outros ainda pagam banco.
 </p>
 </div>
 
-{/* Proof line */}
 <div className="animate-fade-up delay-2" style={{ marginBottom: '2.5rem' }}>
 <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
 Economia comprovada de até{' '}
@@ -114,7 +106,6 @@ vs. financiamento bancário tradicional
 </p>
 </div>
 
-{/* Strategy tag */}
 <div className="animate-fade-up delay-3" style={{ marginBottom: '2.5rem' }}>
 <div style={{
 display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
@@ -122,12 +113,11 @@ background: 'rgba(255,90,31,0.06)', border: '1px solid rgba(255,90,31,0.2)',
 borderRadius: '8px', padding: '0.6rem 1.2rem',
 }}>
 <span style={{ color: 'var(--accent-orange)', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.06em' }}>
-⊙ ESTRATÉGIA FOCADA EM ANTECIPAR A CONTEMPLAÇÃO VIA LANCE ESTRATÉGICO
+⊙ ESTRATÉGIA DE LANCE PARA BUSCAR CONTEMPLAÇÃO ANTECIPADA
 </span>
 </div>
 </div>
 
-{/* CTA Buttons — Hormozi: nunca "gratuita", sempre resultado */}
 <div className="animate-fade-up delay-3" style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '4rem' }}>
 <a href="#form" className="btn-primary" style={{ fontSize: '1.05rem', padding: '1rem 2.5rem' }}>
 Agendar Minha Análise Estratégica →
@@ -137,7 +127,6 @@ Ver Como Funciona
 </a>
 </div>
 
-{/* Stats bar */}
 <div className="animate-fade-up delay-4">
 <div style={{
 display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0',
