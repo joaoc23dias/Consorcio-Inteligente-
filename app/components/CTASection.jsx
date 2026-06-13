@@ -13,39 +13,33 @@ setSent(true);
 return (
 <section id="form" className="section" style={{ backgroundColor: 'var(--bg-secondary)', position: 'relative', overflow: 'hidden' }}>
 
-{/* Background glow */}
 <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: '800px', height: '500px', background: 'radial-gradient(ellipse, rgba(255,90,31,0.06) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
 <div className="container" style={{ position: 'relative', zIndex: 1 }}>
 <div style={{ maxWidth: '68rem', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'start' }}>
 
-{/* Coluna esquerda — copy Hormozi sem "gratuito" */}
 <div>
-{/* Badge Hormozi — resultado, não preço */}
 <span style={{ display: 'inline-block', backgroundColor: 'rgba(255,90,31,0.12)', color: 'var(--accent-orange)', border: '1px solid rgba(255,90,31,0.3)', borderRadius: '999px', padding: '0.35rem 1rem', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.08em', marginBottom: '1.25rem' }}>
 ANÁLISE ESTRATÉGICA — MÉTODO SPA®
 </span>
 
-{/* Headline Hormozi: quem + dor + resultado */}
 <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.75rem)', fontWeight: 900, color: 'var(--text-primary)', lineHeight: 1.15, marginBottom: '1.25rem' }}>
 Empresário, chega de{' '}
 <span style={{ color: 'var(--accent-orange)' }}>pagar banco</span>{' '}
-— descubra como o consórcio pode construir 2-3 imóveis para você em 36 meses
+— descubra como o consórcio pode acelerar a construção do seu patrimônio
 </h2>
 
-{/* Sub — Hormozi: especificidade, sem "sem compromisso" genérico */}
 <p style={{ fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '2rem' }}>
 Agende sua Sessão de Diagnóstico Estratégico. Em 30 minutos, nossos especialistas mapeiam
 seu perfil, identificam os TOP 3 grupos de consórcio disponíveis e montam seu plano de lances
-para contemplação acelerada.
+estratégicos personalizado.
 </p>
 
-{/* O que você recebe — Hormozi: resultado concreto por item */}
 <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 2rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
 {[
 'Mapeamento do seu perfil financeiro e objetivo patrimonial',
 'Seleção dos TOP 3 grupos de consórcio para o seu caso',
-'Plano de lances estruturado para contemplação acelerada',
+'Plano de lances estratégicos personalizado para o seu perfil',
 'Suporte via WhatsApp por 30 dias após a sessão',
 ].map((item, i) => (
 <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem', fontSize: '0.95rem', color: 'var(--text-secondary)' }}>
@@ -55,15 +49,13 @@ para contemplação acelerada.
 ))}
 </ul>
 
-{/* Prova social inline */}
 <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
-{['+200 empresários atendidos', '14-36 meses p/ contemplar', 'R$ 680M economizados'].map((s, i) => (
+{['+200 empresários atendidos', 'Estratégia de lance personalizada', 'R$ 680M economizados'].map((s, i) => (
 <span key={i} style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontWeight: 600, backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: '999px', padding: '0.3rem 0.85rem' }}>{s}</span>
 ))}
 </div>
 </div>
 
-{/* Coluna direita — formulário card-glass */}
 <div className="card-glass" style={{ padding: '2.5rem' }}>
 {sent ? (
 <div style={{ textAlign: 'center', padding: '2rem 0' }}>
@@ -74,7 +66,6 @@ para contemplação acelerada.
 ) : (
 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
 
-{/* Título — Hormozi: resultado, não "gratuita" */}
 <div style={{ textAlign: 'center', marginBottom: '0.25rem' }}>
 <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
 Agende Sua Sessão de Diagnóstico
@@ -105,7 +96,7 @@ onBlur={e => e.target.style.borderColor = 'var(--border-color)'}
 <div>
 <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.4rem' }}>Objetivo com o consórcio (opcional)</label>
 <textarea
-placeholder="Ex: Quero adquirir 2 imóveis em 36 meses com renda passiva de R$8k/mês..."
+placeholder="Ex: Quero estruturar minha estratégia de consórcio para acelerar meu patrimônio..."
 rows={3}
 style={{ width: '100%', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: '0.5rem', padding: '0.75rem 1rem', color: 'var(--text-primary)', fontSize: '0.9rem', outline: 'none', resize: 'vertical', boxSizing: 'border-box' }}
 onFocus={e => e.target.style.borderColor = 'var(--accent-orange)'}
