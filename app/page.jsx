@@ -1,5 +1,6 @@
 'use client';
 import { useEffect } from 'react';
+import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import BenefitsSection from './components/BenefitsSection';
 import MethodSection from './components/MethodSection';
@@ -55,9 +56,12 @@ export default function Home() {
 
   return (
     <main style={{ backgroundColor: 'var(--bg-primary)', overflowX: 'hidden' }}>
-      {sections.map((Section, i) => (
-        <Section key={i} />
-      ))}
+      <Navbar />
+      <div style={{ paddingTop: '70px' }}>
+        {sections.map((Section, i) => (
+          <Section key={i} />
+        ))}
+      </div>
       <hr className="divider-orange" />
       <footer style={{
         backgroundColor: 'var(--bg-secondary)',
@@ -65,6 +69,13 @@ export default function Home() {
         padding: '2rem 1.5rem',
         textAlign: 'center',
       }}>
+        <div style={{ marginBottom: '1rem' }}>
+          <img
+            src="/logo-gaia.png"
+            alt="Gaia Group"
+            style={{ height: '32px', width: 'auto', opacity: 0.7, display: 'inline-block' }}
+          />
+        </div>
         <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>
           &copy; 2024 Cons&oacute;rcio Inteligente &mdash; M&eacute;todo SPA&reg; Patenteado GAIA Group.
           Todos os direitos reservados.
