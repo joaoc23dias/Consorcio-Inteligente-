@@ -1,87 +1,104 @@
 'use client';
 
 import { useState } from 'react';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
-
-const benefitsList = [
-  'Análise gratuita do seu perfil financeiro',
-  'Seleção dos TOP 3 grupos de consórcio',
-  'Plano de lances estruturado',
-  'Suporte via WhatsApp por 30 dias',
-];
 
 export default function CTASection() {
-  const [formData, setFormData] = useState({ nome: '', email: '', telefone: '', mensagem: '' });
-  const [enviado, setEnviado] = useState(false);
+  const [sent, setSent] = useState(false);
 
-  function handleChange(e) {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  }
-
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const msg = encodeURIComponent('Olá! Meu nome é ' + formData.nome + ', meu email é ' + formData.email + '. ' + (formData.mensagem || 'Quero conhecer o Método SPA.'));
-    window.open('https://wa.me/5511999999999?text=' + msg, '_blank');
-    setEnviado(true);
-  }
+    setSent(true);
+  };
 
   return (
-    <section id="como-funciona" style={{ backgroundColor: 'var(--bg-secondary)' }} className="section_padding">
-      <div className="layout_container">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'start' }}>
-          <div>
-            <span className="accent_tag" style={{ marginBottom: '1.25rem', display: 'inline-flex' }}>Consultoria Gratuita</span>
-            <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.75rem)', fontWeight: 800, color: 'var(--text-primary)', marginTop: '1rem', marginBottom: '1rem', lineHeight: 1.2 }}>
-              Pronto para Multiplicar Seus Imóveis?
-            </h2>
-            <p style={{ fontSize: '1.05rem', color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '2rem' }}>
-              Comece agora e tenha acesso ao Método SPA completo — o mesmo usado por +200 empresários para construir patrimônio imobiliário sem banco e sem juros.
-            </p>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              {benefitsList.map((b, i) => (
-                <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem' }}>
-                  <CheckCircle2 size={18} style={{ color: 'var(--accent-orange)', flexShrink: 0, marginTop: '0.1rem' }} />
-                  <span style={{ fontSize: '0.95rem', color: 'var(--text-secondary)' }}>{b}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: '0.75rem', padding: '2rem' }}>
-            {enviado ? (
-              <div style={{ textAlign: 'center', padding: '2rem 0' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>✅</div>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>Mensagem Enviada!</h3>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>Nossa equipe entrará em contato em breve.</p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                <div>
-                  <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: '0.4rem' }}>Nome completo *</label>
-                  <input type="text" name="nome" value={formData.nome} onChange={handleChange} placeholder="Seu nome" required className="input_field" />
-                </div>
-                <div>
-                  <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: '0.4rem' }}>E-mail *</label>
-                  <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="seu@email.com" required className="input_field" />
-                </div>
-                <div>
-                  <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: '0.4rem' }}>Telefone (WhatsApp)</label>
-                  <input type="tel" name="telefone" value={formData.telefone} onChange={handleChange} placeholder="(11) 99999-9999" className="input_field" />
-                </div>
-                <div>
-                  <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: '0.4rem' }}>Mensagem (opcional)</label>
-                  <textarea name="mensagem" value={formData.mensagem} onChange={handleChange} placeholder="Conte um pouco sobre seu objetivo..." rows={3} className="input_field" style={{ resize: 'vertical' }} />
-                </div>
-                <button type="submit" className="btn_primary" style={{ width: '100%', justifyContent: 'center', fontSize: '1.05rem', marginTop: '0.25rem' }}>
-                  Enviar Consulta
-                  <ArrowRight size={20} />
-                </button>
-                <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textAlign: 'center', lineHeight: 1.5 }}>
-                  🔒 Seus dados são tratados com total privacidade. Sem spam.
-                </p>
-              </form>
-            )}
+    <section id="form" style={{ padding: '6rem 1rem', backgroundColor: 'var(--bg-primary)' }}>
+      <div style={{ maxWidth: '68rem', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'start' }}>
+
+        {/* Coluna esquerda — copy Hormozi */}
+        <div>
+          <span style={{ display: 'inline-block', backgroundColor: 'rgba(255,90,31,0.12)', color: 'var(--accent-orange)', border: '1px solid rgba(255,90,31,0.3)', borderRadius: '999px', padding: '0.35rem 1rem', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.08em', marginBottom: '1.25rem' }}>CONSULTORIA GRATUITA</span>
+
+          {/* Headline Hormozi: quem + dor + resultado */}
+          <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.75rem)', fontWeight: 900, color: 'var(--text-primary)', lineHeight: 1.15, marginBottom: '1.25rem' }}>
+            Empresário, chega de{' '}
+            <span style={{ color: 'var(--accent-orange)' }}>pagar banco</span>{' '}
+            — descubra como o consórcio pode construir 2-3 imóveis para você em 36 meses
+          </h2>
+
+          <p style={{ fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '2rem' }}>
+            Agende agora sua análise gratuita. Em 30 minutos, nossos especialistas vão mapear
+            seu perfil financeiro, identificar os TOP 3 grupos de consórcio disponíveis e
+            montar seu plano de lances estratégicos — sem compromisso, sem pressão.
+          </p>
+
+          <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 2rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            {[
+              'Análise gratuita do seu perfil financeiro',
+              'Seleção dos TOP 3 grupos de consórcio disponíveis',
+              'Plano de lances estruturado para contemplação acelerada',
+              'Suporte via WhatsApp por 30 dias após a consulta',
+            ].map((item, i) => (
+              <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem', fontSize: '0.95rem', color: 'var(--text-secondary)' }}>
+                <span style={{ color: 'var(--accent-orange)', fontWeight: 800, marginTop: '0.1rem', flexShrink: 0 }}>⊙</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+
+          {/* Prova social inline */}
+          <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
+            {['+200 empresários atendidos', '14-36 meses p/ contemplar', 'R$ 680M economizados'].map((s, i) => (
+              <span key={i} style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontWeight: 600, backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: '999px', padding: '0.3rem 0.85rem' }}>{s}</span>
+            ))}
           </div>
         </div>
+
+        {/* Coluna direita — formulário */}
+        <div style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: '1rem', padding: '2.5rem' }}>
+          {sent ? (
+            <div style={{ textAlign: 'center', padding: '2rem 0' }}>
+              <p style={{ fontSize: '2rem', marginBottom: '1rem' }}>✅</p>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>Recebemos sua consulta!</h3>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Um especialista entrará em contato em até 24h via WhatsApp.</p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.25rem', textAlign: 'center' }}>Agende sua Consultoria Gratuita</h3>
+              <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', textAlign: 'center', marginTop: '-0.5rem' }}>Sem compromisso. Sem custo. Só resultados.</p>
+
+              {[
+                { label: 'Nome completo *', placeholder: 'Seu nome completo', type: 'text', required: true },
+                { label: 'E-mail *', placeholder: 'seu@email.com', type: 'email', required: true },
+                { label: 'Telefone (WhatsApp)', placeholder: '(11) 99999-9999', type: 'tel', required: false },
+              ].map((field, i) => (
+                <div key={i}>
+                  <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.4rem' }}>{field.label}</label>
+                  <input type={field.type} placeholder={field.placeholder} required={field.required}
+                    style={{ width: '100%', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: '0.5rem', padding: '0.75rem 1rem', color: 'var(--text-primary)', fontSize: '0.9rem', outline: 'none', boxSizing: 'border-box' }}
+                    onFocus={e => e.target.style.borderColor = 'var(--accent-orange)'}
+                    onBlur={e => e.target.style.borderColor = 'var(--border-color)'}
+                  />
+                </div>
+              ))}
+
+              <div>
+                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.4rem' }}>Mensagem (opcional)</label>
+                <textarea placeholder="Conte um pouco sobre seu objetivo com o consórcio..." rows={3}
+                  style={{ width: '100%', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: '0.5rem', padding: '0.75rem 1rem', color: 'var(--text-primary)', fontSize: '0.9rem', outline: 'none', resize: 'vertical', boxSizing: 'border-box' }}
+                  onFocus={e => e.target.style.borderColor = 'var(--accent-orange)'}
+                  onBlur={e => e.target.style.borderColor = 'var(--border-color)'}
+                />
+              </div>
+
+              <button type="submit" style={{ width: '100%', backgroundColor: 'var(--accent-orange)', color: '#fff', fontWeight: 800, fontSize: '1rem', padding: '0.9rem', borderRadius: '0.5rem', border: 'none', cursor: 'pointer', letterSpacing: '0.02em' }}>
+                Enviar Consulta →
+              </button>
+
+              <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textAlign: 'center', marginTop: '-0.25rem' }}>🔒 Seus dados são tratados com total privacidade. Sem spam.</p>
+            </form>
+          )}
+        </div>
+
       </div>
     </section>
   );
