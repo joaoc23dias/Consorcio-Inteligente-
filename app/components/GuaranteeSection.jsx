@@ -1,36 +1,80 @@
+'use client';
+import { useEffect, useRef, useState } from 'react';
+
 const garantias = [
-  { icon: '🛡️', titulo: 'Garantia de Satisfação (30 dias)', descricao: 'Se em 30 dias você achar que o método não é para você, devolvemos 100% do valor da consultoria. Sem perguntas, sem burocracia.' },
-  { icon: '🎓', titulo: 'Garantia de Suporte Especializado', descricao: 'Acompanhamento do nosso time de especialistas durante todo o seu período de participação no consórcio, sem custo extra.' },
-  { icon: '✅', titulo: 'Garantia de Método Comprovado', descricao: 'Você tem acesso ao mesmo Método SPA estruturado que já foi aplicado com sucesso por centenas de clientes em todo o Brasil.' },
-  { icon: '🔍', titulo: 'Garantia de Análise Transparente', descricao: 'Todas as oportunidades de grupos são analisadas por especialistas, com critérios claros e informações verificadas antes de qualquer decisão.' },
+  { icon: '🛡️', titulo: 'Garantia de Satisfação (30 dias)', descricao: 'Se em 30 dias você achar que o método não é para você, devolvemos 100% do valor da consultoria. Sem perguntas, sem burocracia.', color: '#FF5A1F' },
+  { icon: '🎓', titulo: 'Garantia de Suporte Especializado', descricao: 'Acompanhamento do nosso time de especialistas durante todo o seu período de participação no consórcio, sem custo extra.', color: '#F59E0B' },
+  { icon: '✅', titulo: 'Garantia de Método Comprovado', descricao: 'Você tem acesso ao mesmo Método SPA estruturado que já foi aplicado com sucesso por centenas de clientes em todo o Brasil.', color: '#10B981' },
+  { icon: '🔍', titulo: 'Garantia de Análise Transparente', descricao: 'Todas as oportunidades de grupos são analisadas por especialistas, com critérios claros e informações verificadas antes de qualquer decisão.', color: '#6366F1' },
 ];
 
 export default function GuaranteeSection() {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true); }, { threshold: 0.05 });
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, []);
+
   return (
-    <section style={{ backgroundColor: 'var(--bg-primary)' }} className="section_padding">
-      <div className="layout_container">
-        <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-          <span className="accent_tag" style={{ marginBottom: '1rem', display: 'inline-flex' }}>Sua Segurança</span>
-          <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.75rem)', fontWeight: 800, color: 'var(--text-primary)', marginTop: '1rem' }}>
-            Sua Decisão com Segurança
+    <section ref={ref} className="section bg-noise" style={{ backgroundColor: 'var(--bg-primary)', position: 'relative', overflow: 'hidden' }}>
+
+      {/* Glow */}
+      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '800px', height: '400px', background: 'radial-gradient(ellipse, rgba(255,90,31,0.04) 0%, transparent 65%)', pointerEvents: 'none' }} />
+
+      <div className="container">
+
+        {/* Header */}
+        <div className={`reveal ${visible ? 'visible' : ''}`} style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
+          <span className="badge" style={{ marginBottom: '1rem' }}>🔐 SUA SEGURANÇA</span>
+          <h2 className="text-h2" style={{ marginBottom: '1rem' }}>
+            Sua Decisão com{' '}
+            <span className="gradient-text">Segurança</span>
           </h2>
-          <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', marginTop: '0.75rem', maxWidth: '520px', margin: '0.75rem auto 0' }}>
-            Reduzimos o seu risco com garantias claras
+          <p className="text-lead" style={{ maxWidth: '38rem', margin: '0 auto' }}>
+            Reduzimos o seu risco com garantias claras. Você só avança quando estiver seguro.
           </p>
         </div>
+
+        {/* Guarantee cards */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
           {garantias.map((g, index) => (
-            <div key={index} className="card_base" style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
-              <div style={{ width: '48px', height: '48px', borderRadius: '0.5rem', backgroundColor: 'var(--accent-orange-muted)', border: '1px solid rgba(255,90,31,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', flexShrink: 0 }}>
+            <div
+              key={index}
+              className={`card-glass reveal ${visible ? 'visible' : ''} delay-${index + 1}`}
+              style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', borderLeft: `3px solid ${g.color}` }}
+            >
+              {/* Icon */}
+              <div style={{
+                width: '3rem', height: '3rem', borderRadius: '0.625rem',
+                background: g.color + '18',
+                border: `1px solid ${g.color}35`,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: '1.4rem', flexShrink: 0,
+              }}>
                 {g.icon}
               </div>
+
               <div>
                 <h3 style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.5rem', lineHeight: 1.3 }}>{g.titulo}</h3>
-                <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>{g.descricao}</p>
+                <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.65 }}>{g.descricao}</p>
               </div>
             </div>
           ))}
         </div>
+
+        {/* Risk reversal CTA */}
+        <div className={`reveal ${visible ? 'visible' : ''} delay-5`} style={{ marginTop: '3rem', textAlign: 'center' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem', padding: '1rem 1.75rem', background: 'rgba(16,185,129,0.06)', border: '1px solid rgba(16,185,129,0.2)', borderRadius: 'var(--radius-lg)' }}>
+            <span style={{ fontSize: '1.25rem' }}>🤝</span>
+            <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', fontWeight: 500 }}>
+              Zero risco. Se não gostar em 30 dias,{' '}
+              <strong style={{ color: '#10B981' }}>devolvemos 100% do investimento</strong>.
+            </p>
+          </div>
+        </div>
+
       </div>
     </section>
   );
