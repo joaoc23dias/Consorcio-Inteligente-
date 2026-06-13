@@ -14,7 +14,7 @@ const VAGAS_RESTANTES = 7;
 export default function UrgencySection() {
   const DEADLINE = new Date('2026-06-30T23:59:00-03:00');
   const getRemaining = () => Math.max(0, Math.floor((DEADLINE.getTime() - Date.now()) / 1000));
-  const [timeLeft, setTimeLeft] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(() => Math.max(0, Math.floor((new Date('2026-06-30T23:59:00-03:00').getTime() - Date.now()) / 1000)));
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
   const expired = timeLeft <= 0;
