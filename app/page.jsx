@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import BenefitsSection from './components/BenefitsSection';
 import MethodSection from './components/MethodSection';
+import FounderSection from './components/FounderSection';
 import SixBenefitsSection from './components/SixBenefitsSection';
 import SocialProofSection from './components/SocialProofSection';
 import ValueStackingSection from './components/ValueStackingSection';
@@ -28,6 +29,7 @@ const sections = [
   HeroSection,
   BenefitsSection,
   MethodSection,
+  FounderSection,
   SixBenefitsSection,
   SocialProofSection,
   ValueStackingSection,
