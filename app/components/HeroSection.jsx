@@ -75,7 +75,7 @@ export default function HeroSection() {
 
         <div className={`animate-fade-up`} style={{ marginBottom: '2rem' }}>
           <span className="badge animate-glow-pulse">
-            ✶ MÉTODO SPA® — PATENTEADO GAIA GROUP
+            ✶ MÉTODO SPA® — Segurança, Patrimônio & Alavancagem | GAIA GROUP
           </span>
         </div>
 
@@ -96,7 +96,9 @@ export default function HeroSection() {
         <div className="animate-fade-up delay-2" style={{ marginBottom: '0.75rem' }}>
           <p className="text-lead container-sm" style={{ margin: '0 auto' }}>
             A maioria entra num consórcio e <strong style={{ color: 'var(--text-primary)' }}>espera 5 anos no sorteio</strong>.
-            Nossos clientes usam o <strong style={{ color: 'var(--accent-orange)' }}>Método SPA®</strong> para
+            Nossos clientes usam o <strong style={{ color: 'var(--accent-orange)' }}>Método SPA®</strong>{' '}
+            <span style={{ color: 'var(--text-muted)', fontSize: '0.9em' }}>(Segurança, Patrimônio & Alavancagem)</span>{' '}
+            do <strong style={{ color: 'var(--text-primary)' }}>Consórcio Inteligente</strong> para
             identificar os TOP 5-7% dos grupos e estruturar lances estratégicos — buscando antecipar a
             contemplação e acumular imóveis enquanto outros ainda pagam banco.
           </p>
