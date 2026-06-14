@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 const garantias = [
 {
 icon: '🛡',
-titulo: 'Garantia de Satisfação (30 dias)',
-descricao: 'Se em 30 dias você achar que o método não é para você, devolvemos 100% do valor da consultoria. Sem perguntas, sem burocracia.',
+titulo: 'Satisfação com a Consultoria (30 dias)',
+descricao: 'Se em 30 dias você avaliar que a consultoria e a metodologia não atendem às suas expectativas, devolvemos 100% do valor investido na consultoria. O resultado do consórcio depende de variáveis de mercado, mas a qualidade do nosso serviço é nossa responsabilidade.',
 color: '#FF5A1F',
 },
 {
@@ -124,9 +124,9 @@ borderRadius: 'var(--radius-lg)',
 }}>
 <span style={{ fontSize: '1.5rem' }}>🤝</span>
 <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontWeight: 500, textAlign: 'left' }}>
-Zero risco. Se não gostar em 30 dias,{' '}
-<strong style={{ color: '#10B981' }}>devolvemos 100% do investimento</strong>.
-Simples assim.
+Insatisfeito com a consultoria em 30 dias?{' '}
+                <strong style={{ color: '#10B981' }}>Devolvemos 100% do valor da consultoria</strong>.{' '}
+                O resultado no consórcio envolve variáveis de mercado fora do nosso controle — mas a qualidade da nossa consultoria, essa garantimos.
 </p>
 </div>
 </div>
