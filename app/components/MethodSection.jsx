@@ -51,7 +51,9 @@ Como Funciona o{' '}
 <span className="gradient-text">Método SPA®</span>
 </h2>
 <p className="text-lead" style={{ maxWidth: '40rem', margin: '0 auto' }}>
-3 etapas. Dados reais. Zero chute. Esse é o processo que maximiza a probabilidade de antecipar a contemplação via lance estratégico.
+<strong style={{ color: 'var(--accent-orange)' }}>SPA</strong> significa{' '}
+              <strong style={{ color: 'var(--text-primary)' }}>Segurança, Patrimônio & Alavancagem</strong>.{' '}
+              3 etapas. Dados reais. Zero chute. Esse é o processo que maximiza a probabilidade de antecipar a contemplação via lance estratégico.
 </p>
 </div>
 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
