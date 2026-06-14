@@ -82,13 +82,13 @@ export default function HeroSection() {
         <div className="animate-fade-up delay-1" style={{ marginBottom: '1.5rem' }}>
           <h1 className="text-hero" style={{ maxWidth: '52rem', margin: '0 auto' }}>
             <span style={{ display: 'block', color: 'var(--text-primary)', fontSize: '0.62em', fontWeight: 700, lineHeight: 1.25, marginBottom: '0.3rem', letterSpacing: '-0.01em' }}>
-              Como Adquirir Seu Próximo Imóvel Na Metade Do Tempo E
+              O Consórcio Que Faz Você Adquirir Imóveis
             </span>
             <span className="gradient-text" style={{ display: 'block', fontSize: '0.78em', lineHeight: 1.1 }}>
-              Economizar Até R$ 680 Mil Em Juros...
+              Na Metade Do Tempo E Economizar Até R$ 680 Mil Em Juros
             </span>
             <span style={{ display: 'block', color: 'var(--text-primary)', fontSize: '0.52em', fontWeight: 700, marginTop: '0.4rem', lineHeight: 1.3 }}>
-              Sem Ficar Refém Da Sorte Ou Dos Bancos.
+              — Sem Depender Da Sorte.
             </span>
           </h1>
         </div>
