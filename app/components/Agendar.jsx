@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { track } from '@vercel/analytics';
 import { WHATSAPP } from '../content';
 
 const OBJETIVOS = ['Imóvel', 'Veículo', 'Investimento'];
@@ -25,6 +26,7 @@ export default function Agendar() {
       return;
     }
     const texto = `Olá, João! Sou ${nome}${cidade ? `, de ${cidade}` : ''}. Quero conquistar: ${objetivo}. Melhor horário para a ligação: ${horario.toLowerCase()}. Meu WhatsApp: ${whatsapp}.`;
+    track('formulario_enviado', { objetivo });
     window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`, '_blank', 'noopener');
   }
 

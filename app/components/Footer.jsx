@@ -1,16 +1,27 @@
 import Image from 'next/image';
+import { GAIA, BC_URL } from '../content';
 
 export default function Footer() {
   return (
     <footer style={{ padding: '56px 0 40px', background: 'var(--bg)', borderTop: '1px solid var(--rule)' }}>
-      <div className="wrap row" style={{ gap: 28, alignItems: 'center', justifyContent: 'space-between' }}>
+      <div className="wrap row" style={{ gap: 28, alignItems: 'flex-start', justifyContent: 'space-between' }}>
         <div className="row" style={{ alignItems: 'center', gap: 22 }}>
           <Image src="/logo-gaia-vermelho.png" alt="Gaia Group" width={61} height={48} />
           <span className="ph" style={{ padding: '6px 10px' }}>LOGO HS</span>
         </div>
-        <p style={{ fontSize: 12, color: 'var(--ink-muted)', margin: 0, maxWidth: 640, lineHeight: 1.7 }}>
-          João Dias atua pela Gaia Group, que tem a HS Consórcios (Grupo Herval) como administradora exclusiva, autorizada pelo Banco Central. Consórcio não é investimento financeiro; a contemplação depende de sorteio ou lance.
-        </p>
+        <div style={{ maxWidth: 640, fontSize: 12, color: 'var(--ink-muted)', lineHeight: 1.7 }}>
+          <p style={{ margin: 0 }}>
+            João Dias atua pela Gaia Group, que tem a HS Consórcios (Grupo Herval) como administradora exclusiva, autorizada pelo Banco Central. Consórcio não é investimento financeiro; a contemplação depende de sorteio ou lance.
+          </p>
+          <p style={{ margin: '10px 0 0' }}>
+            {GAIA.razaoSocial} · CNPJ {GAIA.cnpj}
+          </p>
+          <p style={{ margin: '10px 0 0' }}>
+            <a href={BC_URL} target="_blank" rel="noopener noreferrer">Consulte a HS Consórcios no Banco Central</a>
+            {' · '}
+            <a href="/privacidade">Política de Privacidade</a>
+          </p>
+        </div>
       </div>
       <div className="wrap" style={{ marginTop: 40, paddingTop: 24, borderTop: '1px solid var(--rule)', textAlign: 'center' }}>
         <p style={{ fontFamily: 'var(--sans)', fontWeight: 400, fontSize: 14, letterSpacing: 'normal', color: '#7A847E', margin: 0 }}>

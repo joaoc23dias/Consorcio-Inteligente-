@@ -105,3 +105,25 @@ details .cp { padding: 0 0 24px; }
   .brand-name { font-size: 17px !important; }
   .brand-tag { display: none; }
 }
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+/* Linha do tempo do simulador */
+.timeline { list-style: none; margin: 36px 0 0; padding: 0; border-left: 1px solid var(--rule-strong); }
+.timeline li { position: relative; padding: 0 0 22px 24px; }
+.timeline li::before { content: ''; position: absolute; left: -5px; top: 4px; width: 9px; height: 9px; border-radius: 50%; background: var(--bg-alt); border: 1px solid var(--green); }
+.timeline li:nth-child(2)::before { background: var(--green); }
+.timeline li:last-child { padding-bottom: 0; }
+
+/* Entrada suave ao rolar (só com JavaScript e sem preferência por menos movimento) */
+.reveal-on main section > .wrap { opacity: 0; transform: translateY(18px); transition: opacity .8s ease, transform .8s ease; }
+.reveal-on main section > .wrap.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal-on main section > .wrap { opacity: 1; transform: none; transition: none; } }
+
+/* Páginas de texto (privacidade) */
+.texto { max-width: 760px; }
+.texto h2 { font-family: var(--serif); font-weight: 500; font-size: 28px; margin: 40px 0 12px; }
+.texto p, .texto li { font-size: 16px; line-height: 1.75; color: var(--ink-soft); }
+
+.comp-cards { display: none; }
+@media (max-width: 760px) { .comp-table { display: none; } .comp-cards { display: block; } }

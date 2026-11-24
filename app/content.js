@@ -68,3 +68,28 @@ export const TABELA_HS = {
     [300000, 2899.8, 1449.9, 120], [400000, 3314, 1657.2, 140], [500000, 4142.5, 2071.5, 140],
   ],
 };
+
+// Dados institucionais (preencher antes de publicar)
+export const GAIA = {
+  razaoSocial: '[Razão social da Gaia Group]',
+  cnpj: '[CNPJ da Gaia Group]',
+  email: '[e-mail de contato]',
+};
+
+// Consulta oficial de instituições autorizadas no Banco Central
+export const BC_URL = 'https://www.bcb.gov.br/estabilidadefinanceira/encontreinstituicao';
+
+// Comparativo ilustrativo: crédito de R$ 400 mil em 200 meses.
+// Consórcio: tabela HS (out/2026), estrutura operacional 22% + fundo de reserva 1%, sem reajuste anual.
+// Financiamento: Caixa SBPE (SFH), TR + 10,99% a.a. (taxa mínima divulgada em mar/2026), sistema SAC,
+// sem TR, seguros e tarifas. Recalcular se a tabela HS ou as taxas mudarem.
+export const COMPARATIVO = {
+  credito: 400000,
+  prazo: 200,
+  consorcio: { primeiroAporte: 1230, aporteIntegral: 2460, custoAlem: 92000, total: 492000 },
+  financiamento: { taxa: 'TR + 10,99% a.a.', primeiraPrestacao: 5491, custoAlem: 350826, total: 750826 },
+  fonte: {
+    texto: 'Taxa mínima da Caixa para aquisição residencial (SBPE/SFH), divulgada em março de 2026',
+    url: 'https://borainvestir.b3.com.br/noticias/do-minha-casa-minha-vida-ao-alto-padrao-veja-as-taxas-de-juros-para-financiar-imovel-pela-caixa/',
+  },
+};

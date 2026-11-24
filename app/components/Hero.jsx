@@ -18,13 +18,13 @@ export default function Hero() {
         </div>
         <figure className="col" style={{ flex: '1 1 380px', margin: 0 }}>
           <Image
-            src="/joao-dias.jpg"
+            src="/joao-dias-hero.jpg"
             alt="João Dias, especialista em planejamento patrimonial"
             width={460}
             height={560}
             priority
             sizes="(max-width: 760px) 100vw, 460px"
-            style={{ width: '100%', maxWidth: 460, height: 'auto', aspectRatio: '23 / 28', objectFit: 'cover', objectPosition: 'center 20%', marginLeft: 'auto' }}
+            style={{ width: '100%', maxWidth: 460, height: 'auto', aspectRatio: '23 / 28', objectFit: 'cover', marginLeft: 'auto' }}
           />
           <figcaption style={{ fontSize: 12, letterSpacing: '.06em', color: 'var(--ink-muted)', marginTop: 14, textAlign: 'right' }}>
             João Dias · Especialista em planejamento patrimonial

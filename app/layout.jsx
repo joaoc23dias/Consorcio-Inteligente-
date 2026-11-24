@@ -5,6 +5,8 @@ import '@fontsource/cormorant-garamond/500-italic.css';
 import '@fontsource/montserrat/400.css';
 import '@fontsource/montserrat/500.css';
 import '@fontsource/montserrat/600.css';
+import { Analytics } from '@vercel/analytics/react';
+import Melhorias from './components/Melhorias';
 import { ESCRITORIOS } from './content';
 
 const SITE_URL = 'https://joaodias.engenheirodoconsorcio.com.br';
@@ -21,7 +23,6 @@ export const metadata = {
     siteName: 'João Dias · Planejamento Patrimonial',
     locale: 'pt_BR',
     type: 'website',
-    images: [{ url: '/joao-dias.jpg', width: 1080, height: 1080, alt: 'João Dias' }],
   },
 };
 
@@ -35,7 +36,7 @@ const jsonLd = {
   name: 'João Dias',
   jobTitle: 'Especialista em planejamento patrimonial',
   url: SITE_URL,
-  image: `${SITE_URL}/joao-dias.jpg`,
+  image: `${SITE_URL}/joao-dias-hero.jpg`,
   sameAs: ['https://www.instagram.com/joaodias.consorcio/'],
   worksFor: {
     '@type': 'FinancialService',
@@ -54,6 +55,8 @@ export default function RootLayout({ children }) {
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         {children}
+        <Melhorias />
+        <Analytics />
       </body>
     </html>
   );
