@@ -1,11 +1,13 @@
 import { COMPARATIVO as C } from '../content';
 
 const brl = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+const brl2 = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 });
 
 const LINHAS = [
   { rotulo: 'Crédito', a: brl.format(C.credito), b: brl.format(C.credito) },
+  { rotulo: 'Entrada exigida', a: 'Não exige', b: `${brl.format(C.financiamento.entrada)} (20% do imóvel)` },
   { rotulo: 'Prazo', a: `${C.consorcio.prazo} meses`, b: `${C.financiamento.prazo} meses (35 anos)` },
-  { rotulo: 'Primeiro mês', a: `${brl.format(C.consorcio.primeiroAporte)} (meio aporte)`, b: `${brl.format(C.financiamento.primeiraPrestacao)} (SAC)` },
+  { rotulo: 'Primeiro mês', a: `${brl.format(C.consorcio.primeiroAporte)} (meio aporte)`, b: `${brl2.format(C.financiamento.primeiraPrestacao)} (SAC)` },
   { rotulo: 'Custo além do crédito', a: `${brl.format(C.consorcio.custoAlem)} (estrutura do grupo)`, b: `${brl.format(C.financiamento.custoAlem)} em juros` },
   { rotulo: 'Total no prazo', a: brl.format(C.consorcio.total), b: brl.format(C.financiamento.total), destaque: true },
   { rotulo: 'Acesso ao imóvel', a: 'Após a contemplação, com estratégia', b: 'Imediato, após aprovação do crédito' },
@@ -70,8 +72,7 @@ export default function Comparativo() {
         </div>
 
         <p className="cp" style={{ fontSize: 12, marginTop: 20, maxWidth: 860 }}>
-          Valores ilustrativos. Consórcio: tabela HS de referência (out/2026), estrutura operacional de 22% e fundo de reserva de 1%, sem o reajuste anual do grupo. Financiamento: {C.financiamento.taxa}, sistema SAC, sem TR, seguros e tarifas, o que deixa o custo real do financiamento ainda maior.{' '}
-          Fonte da taxa: <a href={C.fonte.url} target="_blank" rel="noopener noreferrer">{C.fonte.texto}</a>.
+          Financiamento: números do <a href={C.fonte.url} target="_blank" rel="noopener noreferrer">{C.fonte.texto}</a> para um imóvel de R$ 500 mil com R$ 400 mil financiados: taxa efetiva de {C.financiamento.taxa}, sistema SAC, {C.financiamento.prazo} meses e primeira parcela de {brl2.format(C.financiamento.primeiraPrestacao)}. O total soma apenas amortização e juros com essa taxa; seguros, TR e tarifas não entram, então o custo real é maior. Consórcio: tabela HS de referência (out/2026), estrutura operacional de 22% e fundo de reserva de 1%, sem o reajuste anual do grupo. Valores de referência, sujeitos a análise de crédito e às condições de cada contratação.
         </p>
       </div>
     </section>

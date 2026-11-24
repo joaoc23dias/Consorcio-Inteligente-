@@ -79,16 +79,19 @@ export const GAIA = {
 // Consulta oficial de instituições autorizadas no Banco Central
 export const BC_URL = 'https://www.bcb.gov.br/estabilidadefinanceira/encontreinstituicao';
 
-// Comparativo ilustrativo: crédito de R$ 400 mil. Consórcio em 200 meses; financiamento em 420 meses (prazo máximo da Caixa).
+// Comparativo: crédito de R$ 400 mil.
+// Financiamento: simulador oficial da Caixa (simuladorhabitacao.caixa.gov.br, Calculadora > Valor do imóvel + renda),
+// consultado em 24/11/2026: imóvel R$ 500 mil, entrada mínima R$ 100 mil, financiamento R$ 400 mil,
+// taxa efetiva 11,49% a.a., SAC, 420 meses, primeira parcela R$ 4.753,15.
+// O total soma só amortização + juros com essa taxa no SAC (sem seguros, TR e tarifas).
 // Consórcio: tabela HS (out/2026), estrutura operacional 22% + fundo de reserva 1%, sem reajuste anual.
-// Financiamento: Caixa SBPE (SFH), TR + 10,99% a.a. (taxa mínima divulgada em mar/2026), sistema SAC,
-// sem TR, seguros e tarifas. Recalcular se a tabela HS ou as taxas mudarem.
+// Refazer a simulação na Caixa e atualizar quando a taxa mudar.
 export const COMPARATIVO = {
   credito: 400000,
-  consorcio: { prazo: 200, primeiroAporte: 1230, aporteIntegral: 2460, custoAlem: 92000, total: 492000 },
-  financiamento: { prazo: 420, taxa: 'TR + 10,99% a.a.', primeiraPrestacao: 4443, custoAlem: 734815, total: 1134815 },
+  consorcio: { prazo: 200, primeiroAporte: 1230, custoAlem: 92000, total: 492000 },
+  financiamento: { prazo: 420, taxa: '11,49% a.a.', primeiraPrestacao: 4753.15, entrada: 100000, custoAlem: 766635, total: 1166635 },
   fonte: {
-    texto: 'Taxa mínima da Caixa para aquisição residencial (SBPE/SFH), divulgada em março de 2026',
-    url: 'https://borainvestir.b3.com.br/noticias/do-minha-casa-minha-vida-ao-alto-padrao-veja-as-taxas-de-juros-para-financiar-imovel-pela-caixa/',
+    texto: 'Simulador oficial da Caixa, consultado em 24/11/2026',
+    url: 'https://simuladorhabitacao.caixa.gov.br/home',
   },
 };
