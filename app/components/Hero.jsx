@@ -27,7 +27,7 @@ export default function Hero() {
             style={{ width: '100%', maxWidth: 460, height: 'auto', aspectRatio: '23 / 28', objectFit: 'cover', objectPosition: 'center 20%', marginLeft: 'auto' }}
           />
           <figcaption style={{ fontSize: 12, letterSpacing: '.06em', color: 'var(--ink-muted)', marginTop: 14, textAlign: 'right' }}>
-            João Dias · Criador do Método SPA®
+            João Dias · Especialista em planejamento patrimonial
           </figcaption>
         </figure>
       </div>

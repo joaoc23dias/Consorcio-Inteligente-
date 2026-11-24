@@ -14,7 +14,7 @@ export default function Metodo() {
           <p className="eyebrow">Quem é João Dias</p>
           <h2 id="metodo-titulo" className="h2">Segurança, Patrimônio e Alavancagem.</h2>
           <p className="lead">
-            Sou de São José do Rio Pardo e criei o Método SPA® para transformar o consórcio em ferramenta de crescimento patrimonial. Atendo pela <span translate="no">Gaia Group</span>, que tem a <span translate="no">HS Consórcios</span> como administradora exclusiva, e todo consultor que trabalha comigo é certificado no método.
+            Sou de São José do Rio Pardo e atendo pela <span translate="no">Gaia Group</span>, que tem a <span translate="no">HS Consórcios</span> como administradora exclusiva. Trabalho com o Método SPA® da Gaia Group, que transforma o consórcio em ferramenta de crescimento patrimonial, e todo consultor que atende comigo segue o método.
           </p>
           <dl style={{ margin: '44px 0 0', borderTop: '1px solid var(--rule)' }}>
             {PILARES.map((p) => (
