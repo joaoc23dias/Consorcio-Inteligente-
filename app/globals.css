@@ -102,6 +102,6 @@ details .cp { padding: 0 0 24px; }
   .hero-ctas .btn { width: 100%; }
   .pad-box { padding: 24px !important; }
   .header-row { flex-wrap: nowrap !important; }
-  .brand-name { font-size: 22px !important; }
+  .brand-name { font-size: 17px !important; }
   .brand-tag { display: none; }
 }
