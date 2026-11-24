@@ -4,7 +4,7 @@ const brl = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL',
 
 const LINHAS = [
   { rotulo: 'Crédito', a: brl.format(C.credito), b: brl.format(C.credito) },
-  { rotulo: 'Prazo', a: `${C.prazo} meses`, b: `${C.prazo} meses` },
+  { rotulo: 'Prazo', a: `${C.consorcio.prazo} meses`, b: `${C.financiamento.prazo} meses (35 anos)` },
   { rotulo: 'Primeiro mês', a: `${brl.format(C.consorcio.primeiroAporte)} (meio aporte)`, b: `${brl.format(C.financiamento.primeiraPrestacao)} (SAC)` },
   { rotulo: 'Custo além do crédito', a: `${brl.format(C.consorcio.custoAlem)} (estrutura do grupo)`, b: `${brl.format(C.financiamento.custoAlem)} em juros` },
   { rotulo: 'Total no prazo', a: brl.format(C.consorcio.total), b: brl.format(C.financiamento.total), destaque: true },
@@ -30,7 +30,7 @@ export default function Comparativo() {
 
         <div className="comp-table" style={{ overflowX: 'auto', marginTop: 48 }}>
           <table className="num" style={{ width: '100%', minWidth: 620, borderCollapse: 'collapse', fontSize: 15 }}>
-            <caption className="sr-only">Comparativo para crédito de {brl.format(C.credito)} em {C.prazo} meses</caption>
+            <caption className="sr-only">Comparativo para crédito de {brl.format(C.credito)}</caption>
             <thead>
               <tr>
                 <th scope="col" style={{ textAlign: 'left', padding: '0 0 16px', width: '28%' }} />
