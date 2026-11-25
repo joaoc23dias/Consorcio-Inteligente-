@@ -3,6 +3,8 @@ import { track } from '@vercel/analytics';
 import Image from 'next/image';
 import { WHATSAPP, CARTAS_DEPOIMENTOS, CARTAS_CASOS, LOGO_HS, CARTAS_FAQ, BC_URL } from '../content';
 
+const CAPA = 'https://d8j0ntlcm91z4.cloudfront.net/user_3MbR0sUBpodDPQLh4ssVdL8A42p/hf_20261125_204439_6b18dc3a-133f-4a5e-9b03-e10dc80cfc08.png';
+
 const wa = (texto) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`;
 
 
@@ -90,15 +92,16 @@ export default function Cartas() {
   return (
     <section id="cartas" className="sec alt" aria-labelledby="cartas-titulo">
       <div className="wrap">
-        <div className="row" style={{ gap: 48, alignItems: 'flex-end', justifyContent: 'space-between' }}>
-          <div className="col" style={{ flex: '1 1 600px' }}>
-            <h2 id="cartas-titulo" className="h2" style={{ margin: 0 }}>
+        <div className="cartas-capa">
+          <Image src={CAPA} alt="Chave sendo entregue sobre a maquete de uma casa, na mesa de estratégia" fill sizes="(max-width: 1240px) 100vw, 1160px" style={{ objectFit: 'cover', objectPosition: '70% 50%' }} />
+          <div className="cartas-capa-texto">
+            <h2 id="cartas-titulo" className="h2" style={{ margin: '0 0 16px' }}>
               Carta contemplada: compre crédito liberado ou venda a sua.
             </h2>
+            <p className="cp" style={{ margin: 0 }}>
+              Uma carta contemplada é um ativo com valor de mercado. Você compra uma carta já liberada ou vende a sua com segurança jurídica: a Gaia Group intermedeia a negociação e a HS Consórcios aprova a transferência.
+            </p>
           </div>
-          <p className="cp col" style={{ flex: '0 1 380px' }}>
-            Uma carta contemplada é um ativo com valor de mercado. Você compra uma carta já liberada ou vende a sua com segurança jurídica: a Gaia Group intermedeia a negociação e a HS Consórcios aprova a transferência.
-          </p>
         </div>
 
         <div className="row" style={{ gap: 20, marginTop: 40 }}>

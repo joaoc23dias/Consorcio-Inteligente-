@@ -1,15 +1,6 @@
 import './globals.css';
-import '@fontsource/cormorant-garamond/500.css';
-import '@fontsource/cormorant-garamond/600.css';
-import '@fontsource/cormorant-garamond/500-italic.css';
-import '@fontsource/instrument-sans/400.css';
-import '@fontsource/instrument-sans/500.css';
-import '@fontsource/instrument-sans/600.css';
-import '@fontsource/montserrat/400.css';
-import '@fontsource/montserrat/500.css';
-import '@fontsource/montserrat/600.css';
-import '@fontsource/ibm-plex-mono/400.css';
-import '@fontsource/ibm-plex-mono/500.css';
+import '@fontsource-variable/schibsted-grotesk';
+import '@fontsource-variable/schibsted-grotesk/wght-italic.css';
 import { Analytics } from '@vercel/analytics/react';
 import Melhorias from './components/Melhorias';
 import { ESCRITORIOS, FAQ, CARTAS_FAQ, WHATSAPP, GAIA } from './content';

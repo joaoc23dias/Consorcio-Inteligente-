@@ -18,10 +18,12 @@
   --rule-strong: #CFCEC6;
   --on-green: #F4EFE6;
   --on-green-soft: #C5CCD6;
-  --serif: 'Cormorant Garamond', Georgia, serif;
-  --sans: 'Instrument Sans', system-ui, sans-serif;
-  --brand: 'Montserrat', system-ui, sans-serif;
-  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --serif: 'Schibsted Grotesk Variable', 'Helvetica Neue', Arial, sans-serif;
+  --sans: 'Schibsted Grotesk Variable', 'Helvetica Neue', Arial, sans-serif;
+  --brand: 'Schibsted Grotesk Variable', 'Helvetica Neue', Arial, sans-serif;
+  --mono: 'Schibsted Grotesk Variable', 'Helvetica Neue', Arial, sans-serif;
+  --raio: 20px;
+  --raio-sm: 12px;
   --ease: cubic-bezier(.16, 1, .3, 1);
 }
 
@@ -581,3 +583,75 @@ main > section.painel + section, main > section + section.painel { box-shadow: n
   .poeira i:nth-child(4n) { width: 4px; height: 4px; filter: blur(1px); }
   @keyframes poeira { 0% { transform: translate(0, 0); opacity: 0; } 15% { opacity: .8; } 70% { opacity: .5; } 100% { transform: translate(calc(var(--p) * 3px - 24px), -90vh); opacity: 0; } }
 }
+
+
+/* ============ TIPOGRAFIA: Schibsted Grotesk em toda a página ============ */
+
+.h1, .h2, .h3, .mesa-h1, .cred-titulo, .quem-nome, .cred-papel, .hs-cred-destaque, h4 { letter-spacing: -.025em; }
+.mesa-h1 { font-weight: 650; font-size: clamp(40px, 5vw, 70px); line-height: 1.02; letter-spacing: -.035em; max-width: 14ch; }
+.h1 { font-weight: 650; font-size: clamp(38px, 4.6vw, 60px); line-height: 1.04; }
+.h2 { font-weight: 620; font-size: clamp(30px, 3.6vw, 46px); line-height: 1.08; }
+.h3 { font-weight: 600; font-size: 22px; line-height: 1.25; }
+.cred-titulo { font-weight: 620; font-size: clamp(28px, 3.2vw, 40px); }
+.cred-papel { font-weight: 600; font-size: 20px; }
+.cred-numeros dd { font-weight: 650; font-size: clamp(30px, 3vw, 40px); letter-spacing: -.03em; }
+.mesa-joao strong { font-weight: 650; font-size: 17px; }
+.prova-form blockquote, .dep-citacao blockquote { font-size: 18px !important; line-height: 1.55 !important; font-weight: 450; }
+summary { font-weight: 550; }
+.eyebrow, .label, .quem-papel { letter-spacing: .02em; text-transform: none; font-size: 13px; font-weight: 600; }
+.brand-name { font-weight: 700 !important; letter-spacing: -.02em !important; }
+.brand-tag { letter-spacing: .04em !important; text-transform: none !important; font-size: 12px !important; }
+.num, .cred-numeros dd { font-variant-numeric: tabular-nums lining-nums; }
+
+/* ============ BORDAS: mesmo raio em todos os blocos ============ */
+.bezel, .bezel-core, .nota, .pad-box, .guia, .av-card, .garantias, .minisim, .pausa-card, .caso-grid, .dep-video, .dep-video video, .caso-video, video, .cartas-capa, .painel .pad-box, .prova, .quem-e { border-radius: var(--raio); }
+.bezel { overflow: hidden; }
+.bezel-core { border-radius: calc(var(--raio) - 1px); }
+.input, .garantias-rodape, .hs-cred-ra { border-radius: var(--raio-sm); }
+.nota { overflow: hidden; }
+[style*="border: 1px solid var(--rule)"], [style*="border:1px solid var(--rule)"] { border-radius: var(--raio); }
+
+/* ============ CARTAS: capa com imagem ============ */
+.cartas-capa { position: relative; overflow: hidden; min-height: 420px; display: flex; align-items: center; background: #0B1524; color: #F4F1EA; }
+.cartas-capa::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(11,21,36,.95) 0%, rgba(11,21,36,.8) 38%, rgba(11,21,36,.1) 70%); }
+.cartas-capa-texto { position: relative; z-index: 1; max-width: 560px; padding: 56px; }
+.cartas-capa .h2 { color: #F8F5EE; }
+.cartas-capa .cp { color: rgba(244,241,234,.8); }
+@media (max-width: 760px) {
+  .cartas-capa { min-height: 0; flex-direction: column; align-items: stretch; }
+  .cartas-capa::after { background: linear-gradient(180deg, rgba(11,21,36,.1) 0%, rgba(11,21,36,.85) 45%, rgba(11,21,36,.97) 100%); }
+  .cartas-capa-texto { padding: 220px 24px 28px; }
+}
+
+/* ============ FECHAMENTO: a mesa como convite ============ */
+.pausa { background: #0B1524; color: #F4F1EA; min-height: 480px; }
+.pausa-foto::after { background: linear-gradient(90deg, rgba(11,21,36,.95) 0%, rgba(11,21,36,.75) 40%, rgba(11,21,36,.05) 75%) !important; display: block !important; }
+.pausa-card { background: transparent !important; border: 0 !important; padding: 0 !important; max-width: 480px; }
+.pausa .h2 { color: #F8F5EE; }
+.pausa .cp { color: rgba(244,241,234,.8); }
+@media (max-width: 760px) {
+  .pausa-foto { height: 260px; }
+  .pausa-foto::after { background: linear-gradient(180deg, rgba(11,21,36,0) 40%, rgba(11,21,36,1) 100%) !important; }
+  .pausa-card { padding: 8px 0 48px !important; }
+}
+
+/* ============ WHATSAPP em verde ============ */
+.whats-flutuante { isolation: isolate; position: fixed; right: 24px; bottom: 24px; z-index: 45; display: inline-flex; align-items: center; gap: 0; height: 60px; padding: 0 17px; border-radius: 999px; background: #25D366; color: #fff; text-decoration: none; box-shadow: 0 14px 30px -10px rgba(37,211,102,.6), 0 4px 10px rgba(0,0,0,.12); transition: gap .5s var(--ease), padding .5s var(--ease), transform .3s var(--ease), background-color .3s; }
+.whats-flutuante:hover { color: #fff; background: #1EBE5A; gap: 10px; padding: 0 22px 0 18px; }
+.whats-flutuante:active { transform: scale(.97); }
+.whats-texto { max-width: 0; overflow: hidden; white-space: nowrap; font-weight: 600; font-size: 15px; transition: max-width .5s var(--ease); }
+.whats-flutuante:hover .whats-texto, .whats-flutuante:focus-visible .whats-texto { max-width: 220px; }
+.whats-flutuante:focus-visible { outline: 2px solid #1EBE5A; outline-offset: 3px; }
+@media (prefers-reduced-motion: no-preference) {
+  .whats-flutuante::before { content: ''; position: absolute; inset: 0; border-radius: inherit; background: #25D366; z-index: -1; animation: onda 2.8s ease-out 3s infinite; }
+  @keyframes onda { 0% { transform: scale(1); opacity: .55; } 100% { transform: scale(1.6); opacity: 0; } }
+}
+@media (max-width: 760px) { .whats-flutuante { display: none; } }
+.barra-wa { background: #25D366 !important; color: #fff !important; border-color: #25D366 !important; padding-left: 16px; padding-right: 16px; }
+.barra-wa::before { background: #1EBE5A !important; }
+.barra-mobile { background: rgba(11,21,36,.96) !important; border-top-color: rgba(201,168,106,.2) !important; }
+.barra-mobile .btn-pri { background: var(--gold-light); color: #0E1A2B; }
+.barra-mobile .btn-pri::before { background: #DCC491; }
+.barra-mobile .btn-pri:not(.btn-sm):not(.btn-ico)::after { background-color: #12213A; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23D6AF61' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8h10M9 4l4 4-4 4'/%3E%3C/svg%3E"); }
+.num, .cred-numeros dd, .h1, .h2, .h3 { font-variant-numeric: lining-nums proportional-nums !important; }
+body { font-feature-settings: normal; }
