@@ -4,9 +4,22 @@ import { WHATSAPP } from '../content';
 
 const wa = (texto) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`;
 
+const Check = () => (
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" style={{ flex: 'none', marginTop: 4 }}>
+    <path d="M3 8.5l3.2 3L13 4.5" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const Seta = () => (
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+    <path d="M4 10L10 4M5 4h5v5" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
 const LADOS = [
   {
     id: 'comprar',
+    tag: 'Para quem tem entrada',
     titulo: 'Quero comprar',
     para: 'Para quem já tem a entrada e quer usar o crédito agora, sem esperar sorteio ou lance.',
     itens: [
@@ -19,6 +32,7 @@ const LADOS = [
   },
   {
     id: 'vender',
+    tag: 'Para quem já contemplou',
     titulo: 'Quero vender',
     para: 'Para quem contemplou e prefere transformar a carta em capital para outro projeto.',
     itens: [
@@ -30,6 +44,8 @@ const LADOS = [
     msg: 'Olá, João! Tenho uma carta contemplada e quero saber quanto ela vale.',
   },
 ];
+
+const CONFIANCA = ['Administradora HS Consórcios', 'Autorizada pelo Banco Central', 'Cessão formal em contrato', 'Valores apresentados no diagnóstico'];
 
 const PASSOS = [
   { t: 'Diagnóstico', d: 'Entendemos seu objetivo: usar o crédito agora ou transformar a carta em capital.' },
@@ -50,7 +66,7 @@ export default function Cartas() {
     <section id="cartas" className="sec alt" aria-labelledby="cartas-titulo">
       <div className="wrap">
         <div className="row" style={{ gap: 48, alignItems: 'flex-end', justifyContent: 'space-between' }}>
-          <div className="col" style={{ flex: '1 1 560px' }}>
+          <div className="col" style={{ flex: '1 1 600px' }}>
             <p className="eyebrow">Cartas contempladas</p>
             <h2 id="cartas-titulo" className="h2" style={{ margin: 0 }}>
               Crédito liberado para quem não quer esperar. Liquidez para quem quer realizar.
@@ -61,46 +77,67 @@ export default function Cartas() {
           </p>
         </div>
 
-        <div className="row" style={{ gap: 20, marginTop: 48 }}>
-          {LADOS.map((l) => (
-            <div key={l.id} className="col pad-box" style={{ flex: '1 1 420px', background: 'var(--surface)', border: '1px solid var(--rule)', padding: 36, display: 'flex', flexDirection: 'column' }}>
-              <h3 className="h3" style={{ margin: '0 0 8px', color: 'var(--green)' }}>{l.titulo}</h3>
-              <p className="cp" style={{ marginBottom: 20 }}>{l.para}</p>
-              <ul style={{ listStyle: 'none', margin: '0 0 28px', padding: 0, flex: 1 }}>
-                {l.itens.map((i) => (
-                  <li key={i} style={{ padding: '12px 0 12px 22px', borderTop: '1px solid var(--rule)', position: 'relative', fontSize: 15 }}>
-                    <span aria-hidden="true" style={{ position: 'absolute', left: 0, top: 12, color: 'var(--gold)' }}>✓</span>
-                    {i}
-                  </li>
-                ))}
-              </ul>
-              <a
-                href={wa(l.msg)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={l.id === 'comprar' ? 'btn btn-pri' : 'btn btn-sec'}
-                style={{ alignSelf: 'flex-start' }}
-                onClick={() => track('cartas_whatsapp', { lado: l.id })}
-              >
-                {l.cta}
-              </a>
-            </div>
-          ))}
+        <div className="row" style={{ gap: 20, marginTop: 56 }}>
+          {LADOS.map((l) => {
+            const escuro = l.id === 'comprar';
+            return (
+              <div key={l.id} className={`col bezel${escuro ? ' bezel-dark' : ''}`} style={{ flex: '1 1 420px' }}>
+                <div className="bezel-core pad-box" style={{ padding: 40 }}>
+                  <p className="tag eyebrow" style={{ marginBottom: 14 }}>{l.tag}</p>
+                  <h3 className="h3" style={{ margin: '0 0 10px', fontSize: 34, color: escuro ? 'var(--bg)' : 'var(--green)' }}>{l.titulo}</h3>
+                  <p className="cp" style={{ marginBottom: 24 }}>{l.para}</p>
+                  <ul style={{ listStyle: 'none', margin: '0 0 32px', padding: 0, flex: 1 }}>
+                    {l.itens.map((i) => (
+                      <li key={i} style={{ display: 'flex', gap: 12, padding: '14px 0', borderTop: '1px solid var(--rule)', fontSize: 15, color: escuro ? undefined : 'var(--ink)' }}>
+                        <span style={{ color: escuro ? 'var(--gold-light)' : 'var(--gold)' }}><Check /></span>
+                        {i}
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href={wa(l.msg)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`btn btn-ico ${escuro ? 'btn-claro' : 'btn-pri'}`}
+                    style={{ alignSelf: 'flex-start' }}
+                    onClick={() => track('cartas_whatsapp', { lado: l.id })}
+                  >
+                    {l.cta}
+                    <span className="ico"><Seta /></span>
+                  </a>
+                  <p className="cp" style={{ fontSize: 12, margin: '12px 0 0' }}>Conversa direta comigo no WhatsApp, sem compromisso.</p>
+                </div>
+              </div>
+            );
+          })}
         </div>
 
-        <div className="row" style={{ gap: 72, marginTop: 72 }}>
-          <div className="col" style={{ flex: '1 1 360px' }}>
-            <h3 className="h3" style={{ marginTop: 0 }}>Como funciona a transferência</h3>
-            <ol className="timeline">
-              {PASSOS.map((p) => (
-                <li key={p.t}>
-                  <strong style={{ display: 'block', marginBottom: 4 }}>{p.t}</strong>
-                  <span className="cp">{p.d}</span>
-                </li>
-              ))}
-            </ol>
+        <ul className="row" style={{ listStyle: 'none', margin: '28px 0 0', padding: 0, gap: '10px 28px', fontSize: 13, color: 'var(--ink-soft)' }}>
+          {CONFIANCA.map((c) => (
+            <li key={c} style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+              <span style={{ color: 'var(--gold)' }}><Check /></span>{c}
+            </li>
+          ))}
+        </ul>
+
+        <h3 className="h3" style={{ margin: '88px 0 28px' }}>Como funciona a transferência</h3>
+        <ol className="passos">
+          {PASSOS.map((p, i) => (
+            <li key={p.t}>
+              <span className="n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <strong style={{ display: 'block', marginBottom: 6 }}>{p.t}</strong>
+              <span className="cp" style={{ fontSize: 15 }}>{p.d}</span>
+            </li>
+          ))}
+        </ol>
+
+        <div className="row" style={{ gap: 72, marginTop: 88 }}>
+          <div className="col" style={{ flex: '1 1 320px' }}>
+            <h3 className="h3" style={{ marginTop: 0 }}>O que todo mundo pergunta antes de decidir</h3>
+            <p className="cp" style={{ marginBottom: 28 }}>Se a sua dúvida não estiver aqui, ela tem lugar no diagnóstico. É lá que a sua carta, ou a que você procura, é analisada com números reais.</p>
+            <a href="#diagnostico" className="btn btn-sec">Agendar diagnóstico</a>
           </div>
-          <div className="col" style={{ flex: '1 1 480px', borderTop: '1px solid var(--rule)' }}>
+          <div className="col" style={{ flex: '1 1 520px', borderTop: '1px solid var(--rule)' }}>
             {OBJECOES.map((o) => (
               <details key={o.q}>
                 <summary>{o.q}</summary>
@@ -110,7 +147,7 @@ export default function Cartas() {
           </div>
         </div>
 
-        <p className="cp" style={{ fontSize: 12, marginTop: 40, maxWidth: 860 }}>
+        <p className="cp" style={{ fontSize: 12, marginTop: 48, maxWidth: 860 }}>
           O valor de negociação de uma carta depende do mercado e das condições da cota. Não há garantia de ágio, prazo de venda ou rentabilidade. Toda transferência está sujeita à análise e aprovação da administradora.
         </p>
       </div>
