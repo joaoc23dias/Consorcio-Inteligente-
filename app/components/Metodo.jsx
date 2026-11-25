@@ -5,7 +5,7 @@ const MARCAS = new Set(['Gaia', 'Group,', 'Group', 'HS', 'Consórcios']);
 
 export default function Metodo() {
   return (
-    <section id="metodo" className="sec painel" aria-labelledby="metodo-titulo">
+    <section id="metodo" className="sec" aria-labelledby="metodo-titulo">
       <div className="wrap row" style={{ gap: 72, alignItems: 'flex-start' }}>
         <div className="col" style={{ flex: '1 1 460px' }}>
           <h2 id="metodo-titulo" className="h2">Método SPA®: segurança, patrimônio e alavancagem.</h2>

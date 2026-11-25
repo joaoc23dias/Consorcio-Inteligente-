@@ -8,6 +8,8 @@ import '@fontsource/instrument-sans/600.css';
 import '@fontsource/montserrat/400.css';
 import '@fontsource/montserrat/500.css';
 import '@fontsource/montserrat/600.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
 import { Analytics } from '@vercel/analytics/react';
 import Melhorias from './components/Melhorias';
 import { ESCRITORIOS, FAQ, CARTAS_FAQ, WHATSAPP, GAIA } from './content';
