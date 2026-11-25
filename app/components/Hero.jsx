@@ -1,11 +1,10 @@
 import Image from 'next/image';
 import { NUMEROS_JOAO } from '../content';
-import MiniSim from './MiniSim';
 import Contador from './Contador';
 
 export default function Hero() {
   return (
-    <section style={{ padding: '96px 0 88px' }}>
+    <section style={{ padding: '72px 0 64px' }}>
       <div className="wrap row" style={{ gap: 72, alignItems: 'center' }}>
         <div className="col" style={{ flex: '1 1 500px' }}>
           <h1 className="h1">Seu próximo ativo merece uma estratégia.</h1>
@@ -35,11 +34,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="wrap" style={{ marginTop: 72 }}>
-        <MiniSim />
-      </div>
-
-      <div className="wrap" style={{ marginTop: 56 }}>
+      <div className="wrap" style={{ marginTop: 64 }}>
         <div className="quem-e" aria-label="Quem faz o quê">
           <div className="quem-bloco">
             <Image src="/logo-gaia-vermelho.png" alt="Gaia Group Investimentos & Consórcios" width={70} height={55} />

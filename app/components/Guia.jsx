@@ -10,9 +10,8 @@ export default function Guia() {
       <div className="wrap">
         <div className="guia">
           <div>
-            <p className="quem-papel" style={{ marginBottom: 10 }}>Ainda pesquisando?</p>
             <h2 id="guia-titulo" className="h3" style={{ fontSize: 32, margin: '0 0 12px' }}>5 perguntas para fazer antes de assinar qualquer consórcio.</h2>
-            <p className="cp">Um guia curto, direto e sem propaganda, para você comparar propostas com segurança, inclusive as de outras administradoras.</p>
+            <p className="cp">Ainda pesquisando? Um guia curto, direto e sem propaganda, para você comparar propostas com segurança, inclusive as de outras administradoras.</p>
           </div>
           <div>
             <a href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(MSG)}`} target="_blank" rel="noopener noreferrer"

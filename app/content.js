@@ -163,7 +163,7 @@ export const CARTAS_PASSOS = [
 ];
 
 export const CARTAS_FAQ = [
-  { q: 'Preciso ter entrada para comprar uma carta contemplada?', a: 'Sim, a entrada é obrigatória. Ela é o valor pago a quem está vendendo a carta; o restante segue em aportes mensais no grupo. Sem entrada, a compra não acontece, e o caminho certo para você é o consórcio estratégico desde o início.', abrir: true },
+  { q: 'Preciso ter entrada para comprar uma carta contemplada?', a: 'Sim, a entrada é obrigatória. Ela é o valor pago a quem está vendendo a carta; o restante segue em aportes mensais no grupo. Sem entrada, a compra não acontece, e o caminho certo para você é o consórcio estratégico desde o início.' },
   { q: 'Para quem é a carta contemplada?', lista: CARTAS_PARA_QUEM.e },
   { q: 'Por que usar uma carta contemplada?', lista: CARTAS_PARA_QUEM.porque },
   { q: 'Como usar uma carta contemplada?', passos: CARTAS_PASSOS },

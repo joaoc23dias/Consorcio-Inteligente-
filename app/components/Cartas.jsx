@@ -1,6 +1,7 @@
 'use client';
 import { track } from '@vercel/analytics';
-import { WHATSAPP, CARTAS_DEPOIMENTOS, CARTAS_CASOS, LOGO_HS, CARTAS_FAQ } from '../content';
+import Image from 'next/image';
+import { WHATSAPP, CARTAS_DEPOIMENTOS, CARTAS_CASOS, LOGO_HS, CARTAS_FAQ, BC_URL } from '../content';
 
 const wa = (texto) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`;
 
@@ -22,7 +23,7 @@ const LADOS = [
     id: 'comprar',
     tag: 'Para quem tem entrada',
     titulo: 'Quero comprar',
-    para: 'Para quem já tem a entrada e quer usar o crédito agora, sem esperar a contemplação.',
+    para: 'Para quem já tem a entrada e quer usar o crédito agora, sem esperar a contemplação. A entrada é obrigatória: é o valor pago a quem vende a carta.',
     itens: [
       'Crédito já liberado, pronto para a compra do imóvel ou veículo',
       'Análise do saldo devedor e do custo total antes de qualquer decisão',
@@ -46,7 +47,41 @@ const LADOS = [
   },
 ];
 
-const CONFIANCA = ['Autorizada pelo Banco Central', 'Contratos revisados pelo jurídico da Gaia', 'Entrada obrigatória para compra', 'Cessão formal em contrato', 'Valores somente na cotação individual'];
+const GARANTIAS = [
+  {
+    id: 'gaia',
+    papel: 'Conduz a negociação',
+    nome: 'Gaia Group',
+    logo: { src: '/logo-gaia-vermelho.png', w: 61, h: 48, alt: 'Gaia Group Investimentos & Consórcios' },
+    itens: [
+      'Avalia a carta e encontra a contraparte certa para você',
+      'Contratos revisados pelo jurídico da Gaia, conduzido por advogada especialista em direito imobiliário',
+      'Acompanha cada etapa até a transferência concluída',
+    ],
+  },
+  {
+    id: 'hs',
+    papel: 'Aprova a transferência',
+    nome: 'HS Consórcios',
+    logo: { src: LOGO_HS, w: 150, h: 40, alt: 'HS Consórcios, uma empresa do Grupo Herval' },
+    itens: [
+      'Administradora do Grupo Herval, autorizada pelo Banco Central',
+      'Faz a análise de crédito de quem assume a carta',
+      'A cessão só é concluída com a aprovação dela',
+    ],
+    link: { href: BC_URL, txt: 'Consulte a autorização no Banco Central' },
+  },
+  {
+    id: 'voce',
+    papel: 'Decide com os números na mesa',
+    nome: 'Você',
+    itens: [
+      'Cotação individual da sua carta, sem tabela genérica',
+      'Saldo devedor, aportes restantes e custo total antes de assinar',
+      'Comparativo com o financiamento, número contra número',
+    ],
+  },
+];
 
 
 
@@ -58,19 +93,11 @@ export default function Cartas() {
         <div className="row" style={{ gap: 48, alignItems: 'flex-end', justifyContent: 'space-between' }}>
           <div className="col" style={{ flex: '1 1 600px' }}>
             <h2 id="cartas-titulo" className="h2" style={{ margin: 0 }}>
-              Carta contemplada: crédito liberado para quem não quer esperar, liquidez para quem quer realizar.
+              Carta contemplada: compre crédito liberado ou venda a sua.
             </h2>
           </div>
           <p className="cp col" style={{ flex: '0 1 380px' }}>
             Uma carta contemplada é um ativo com valor de mercado. Você compra uma carta já liberada ou vende a sua com segurança jurídica: a Gaia Group intermedeia a negociação e a HS Consórcios aprova a transferência.
-          </p>
-        </div>
-
-        <div className="nota" style={{ marginTop: 56 }}>
-          <p className="eyebrow" style={{ marginBottom: 8 }}>Requisito para comprar</p>
-          <p style={{ margin: '0 0 8px', fontFamily: 'var(--serif)', fontSize: 26, lineHeight: 1.25, color: 'var(--ink)' }}>Para comprar uma carta contemplada, você precisa ter entrada.</p>
-          <p className="cp" style={{ margin: 0, maxWidth: 720 }}>
-            A entrada é o valor pago a quem está vendendo a carta. O restante segue em aportes mensais no grupo. Ainda não tem entrada? <a href="#conta">Faça a conta do consórcio estratégico</a>.
           </p>
         </div>
 
@@ -80,12 +107,15 @@ export default function Cartas() {
             const principal = l.id === 'comprar';
             return (
               <div key={l.id} className={`col bezel${escuro ? ' bezel-dark' : ''}`} style={{ flex: '1 1 420px' }}>
-                <div className="bezel-core pad-box" style={{ padding: 40 }}>
-                  <h3 className="h3" style={{ margin: '0 0 10px', fontSize: 34, color: escuro ? 'var(--bg)' : 'var(--green)' }}>{l.titulo}</h3>
-                  <p className="cp" style={{ marginBottom: 24 }}>{l.para}</p>
+                <div className="bezel-core pad-box" style={{ padding: 36 }}>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 16px', alignItems: 'center', justifyContent: 'space-between', margin: '0 0 10px' }}>
+                    <h3 className="h3" style={{ margin: 0, fontSize: 34, color: escuro ? 'var(--bg)' : 'var(--green)' }}>{l.titulo}</h3>
+                    <span className="tag-pill">{l.tag}</span>
+                  </div>
+                  <p className="cp" style={{ marginBottom: 20 }}>{l.para}</p>
                   <ul style={{ listStyle: 'none', margin: '0 0 32px', padding: 0, flex: 1 }}>
                     {l.itens.map((i) => (
-                      <li key={i} style={{ display: 'flex', gap: 12, padding: '14px 0', borderTop: '1px solid var(--rule)', fontSize: 15, color: escuro ? undefined : 'var(--ink)' }}>
+                      <li key={i} style={{ display: 'flex', gap: 12, padding: '11px 0', borderTop: '1px solid var(--rule)', fontSize: 15, color: escuro ? undefined : 'var(--ink)' }}>
                         <span style={{ color: escuro ? 'var(--gold-light)' : 'var(--gold)' }}><Check /></span>
                         {i}
                       </li>
@@ -109,21 +139,43 @@ export default function Cartas() {
           })}
         </div>
 
-        <ul className="row" style={{ listStyle: 'none', margin: '28px 0 0', padding: 0, gap: '10px 28px', fontSize: 13, color: 'var(--ink-soft)', alignItems: 'center' }}>
-          <li style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-            {LOGO_HS
-              ? <img src={LOGO_HS} alt="HS Consórcios" height={32} style={{ height: 32, width: "auto" }} />
-              : <span className="ph" style={{ padding: '6px 10px', fontSize: 11 }}>LOGO HS</span>}
-            Administradora HS Consórcios
-          </li>
-          {CONFIANCA.map((c) => (
-            <li key={c} style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-              <span style={{ color: 'var(--gold)' }}><Check /></span>{c}
-            </li>
-          ))}
-        </ul>
+        <div className="garantias" aria-labelledby="garantias-titulo">
+          <div className="garantias-topo">
+            <p className="eyebrow" style={{ margin: 0 }}>Segurança da negociação</p>
+            <h3 id="garantias-titulo" className="h3" style={{ margin: 0, fontSize: 'clamp(26px, 3vw, 34px)' }}>Cada etapa tem um responsável, e nada acontece sem contrato.</h3>
+          </div>
+          <div className="garantias-grade">
+            {GARANTIAS.map((g) => (
+              <div key={g.id} className={`garantia garantia-${g.id}`}>
+                <div className="garantia-marca">
+                  {g.logo
+                    ? <Image src={g.logo.src} alt={g.logo.alt} width={g.logo.w} height={g.logo.h} style={{ width: 'auto', height: g.logo.h }} />
+                    : <span className="garantia-eu" aria-hidden="true">Você</span>}
+                </div>
+                <p className="quem-papel">{g.papel}</p>
+                <p className="quem-nome">{g.nome}</p>
+                <ul className="garantia-itens">
+                  {g.itens.map((i) => (
+                    <li key={i}><span style={{ color: 'var(--gold)' }}><Check /></span>{i}</li>
+                  ))}
+                </ul>
+                {g.numeros && (
+                  <dl className="quem-numeros">
+                    {g.numeros.map((n) => (
+                      <div key={n.r}><dd className="num">{n.v}</dd><dt>{n.r}</dt></div>
+                    ))}
+                  </dl>
+                )}
+                {g.link && <a className="garantia-link" href={g.link.href} target="_blank" rel="noopener noreferrer">{g.link.txt}<Seta /></a>}
+              </div>
+            ))}
+          </div>
+          <p className="garantias-rodape">
+            <strong>Sem acordo de gaveta.</strong> Toda carta é transferida por cessão formal, com contrato e aprovação da administradora. Os valores são informados somente na cotação individual.
+          </p>
+        </div>
 
-        <div style={{ marginTop: 88 }}>
+        <div style={{ marginTop: 72 }}>
           <h3 className="h3" style={{ fontSize: 34, maxWidth: 640 }}>Quem usou a carta contemplada como investimento conta como foi.</h3>
           {CARTAS_CASOS.map((c) => (
             <article key={c.video} className="bezel" style={{ marginTop: 32 }}>
@@ -187,7 +239,7 @@ export default function Cartas() {
           )}
         </div>
 
-        <div id="cartas-faq" className="row" style={{ gap: 72, marginTop: 88 }}>
+        <div id="cartas-faq" className="row" style={{ gap: 72, marginTop: 72 }}>
           <div className="col" style={{ flex: '1 1 320px' }}>
             <h3 className="h3" style={{ marginTop: 0, fontSize: 34 }}>Antes de pedir a cotação, confira se a carta é para você.</h3>
             <p className="cp" style={{ marginBottom: 28 }}>Se a sua dúvida não estiver aqui, me mande no WhatsApp junto com o pedido de cotação. Cada carta é analisada com números reais.</p>
@@ -213,18 +265,7 @@ export default function Cartas() {
           </div>
         </div>
 
-        <div className="row" style={{ marginTop: 72, paddingTop: 40, borderTop: '1px solid var(--rule)', gap: 24, alignItems: 'center', justifyContent: 'space-between' }}>
-          <p style={{ margin: 0, fontFamily: 'var(--serif)', fontSize: 28, lineHeight: 1.2, flex: '1 1 360px' }}>Tem a entrada ou uma carta contemplada? Peça a sua cotação.</p>
-          <div className="row" style={{ gap: 12 }}>
-            {LADOS.map((l) => (
-              <a key={l.id} href={wa(l.msg)} target="_blank" rel="noopener noreferrer" className={`btn btn-ico ${l.id === 'comprar' ? 'btn-pri' : 'btn-sec'}`} onClick={() => track('cartas_whatsapp', { lado: `${l.id}_final` })}>
-                {l.cta}<span className="ico"><Seta /></span>
-              </a>
-            ))}
-          </div>
-        </div>
-
-        <p className="cp" style={{ fontSize: 12, marginTop: 48, maxWidth: '62ch' }}>
+        <p className="cp" style={{ fontSize: 12, marginTop: 40, maxWidth: '62ch' }}>
           O valor de negociação de uma carta depende do mercado e das condições da cota. Não há garantia de ágio, prazo de venda ou rentabilidade. Toda transferência está sujeita à análise e aprovação da administradora. A negociação de cartas contempladas é feita entre clientes, com intermediação da Gaia Group; a HS Consórcios não comercializa cotas contempladas e atua na análise e aprovação da transferência.
         </p>
       </div>
