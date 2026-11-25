@@ -40,28 +40,34 @@ export default function Hero() {
       </div>
 
       <div className="wrap" style={{ marginTop: 56 }}>
-        <hr className="rule" />
-        <div className="row" style={{ gap: 32, alignItems: 'center', justifyContent: 'space-between', padding: '28px 0' }}>
-          <div className="row" style={{ alignItems: 'center', gap: 22 }}>
-            <Image src="/logo-gaia-vermelho.png" alt="Gaia Group Investimentos & Consórcios" width={76} height={60} />
-            <span aria-hidden="true" style={{ width: 1, height: 36, background: 'var(--rule)' }} />
-            <Image src="/logo-hs.png" alt="HS Consórcios, uma empresa do Grupo Herval" width={150} height={40} />
-            <span className="small" style={{ color: 'var(--ink-soft)' }}>
-              Administração exclusiva <span translate="no">HS Consórcios</span> · autorizada pelo Banco Central
-            </span>
+        <div className="quem-e" aria-label="Quem faz o quê">
+          <div className="quem-bloco">
+            <Image src="/logo-gaia-vermelho.png" alt="Gaia Group Investimentos & Consórcios" width={70} height={55} />
+            <div>
+              <p className="quem-papel">Onde você é atendido</p>
+              <p className="quem-nome">Gaia Group</p>
+              <p className="cp" style={{ fontSize: 14 }}>Consultoria em consórcio estratégico e planejamento patrimonial. É aqui que o seu plano é desenhado e acompanhado.</p>
+              {NUMEROS_JOAO.every((n) => !n.valor.startsWith('[')) && (
+                <dl className="quem-numeros">
+                  {NUMEROS_JOAO.map((n) => (
+                    <div key={n.rotulo}>
+                      <dd className="num"><Contador texto={n.valor} /></dd>
+                      <dt>{n.rotulo}</dt>
+                    </div>
+                  ))}
+                </dl>
+              )}
+            </div>
           </div>
-          {NUMEROS_JOAO.every((n) => !n.valor.startsWith('[')) && (
-          <dl className="row" style={{ gap: 40, margin: 0 }}>
-            {NUMEROS_JOAO.map((n) => (
-              <div key={n.rotulo} style={{ display: 'flex', flexDirection: 'column-reverse' }}>
-                <dt className="label" style={{ marginTop: 8 }}>{n.rotulo}</dt>
-                <dd className="num" style={{ margin: 0, fontFamily: 'var(--serif)', fontSize: 30, lineHeight: 1, color: 'var(--green)' }}><Contador texto={n.valor} /></dd>
-              </div>
-            ))}
-          </dl>
-          )}
+          <div className="quem-bloco">
+            <Image src="/logo-hs.png" alt="HS Consórcios, uma empresa do Grupo Herval" width={150} height={40} />
+            <div>
+              <p className="quem-papel">Quem administra o seu consórcio</p>
+              <p className="quem-nome">HS Consórcios</p>
+              <p className="cp" style={{ fontSize: 14 }}>Administradora do Grupo Herval, autorizada pelo Banco Central. Cuida dos grupos, das assembleias e das contemplações.</p>
+            </div>
+          </div>
         </div>
-        <hr className="rule" />
       </div>
     </section>
   );

@@ -10,6 +10,7 @@ import Comparativo from './components/Comparativo';
 import Cartas from './components/Cartas';
 import BarraMobile from './components/BarraMobile';
 import Pausa from './components/Pausa';
+import Guia from './components/Guia';
 import Duvidas from './components/Duvidas';
 import Agendar from './components/Agendar';
 import Footer from './components/Footer';
@@ -30,6 +31,7 @@ export default function Home() {
         <Depoimentos />
         <QuandoNao />
         <Duvidas />
+        <Guia />
         <Pausa />
         <Agendar />
         <BarraMobile />

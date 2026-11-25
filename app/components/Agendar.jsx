@@ -1,7 +1,14 @@
 'use client';
 import { useState } from 'react';
 import { track } from '@vercel/analytics';
-import { WHATSAPP } from '../content';
+import { WHATSAPP, AVALIACOES_GOOGLE } from '../content';
+
+const LEVA = [
+  'Um plano por escrito com crédito, aporte e prazo',
+  'O aporte que cabe no seu mês, com folga',
+  'A estratégia de contemplação com os dados reais do grupo',
+  'O comparativo com o financiamento para o seu caso',
+];
 
 const OBJETIVOS = ['Imóvel', 'Veículo', 'Investimento'];
 const HORARIOS = ['Amanhã às 9h', 'Amanhã às 14h'];
@@ -38,6 +45,14 @@ export default function Agendar() {
           <p className="lead">
             Deixe seu contato e escolha o horário. Eu te ligo por 5 minutos para entender o seu objetivo e marcar o diagnóstico patrimonial.
           </p>
+          <p className="quem-papel" style={{ margin: '36px 0 12px' }}>O que você leva do diagnóstico</p>
+          <ul className="leva">
+            {LEVA.map((x) => <li key={x}>{x}</li>)}
+          </ul>
+          <figure className="prova-form">
+            <blockquote>“{AVALIACOES_GOOGLE[1].texto.split('. ').slice(0, 2).join('. ')}.”</blockquote>
+            <figcaption>{AVALIACOES_GOOGLE[1].nome} · avaliação no Google · +2.000 famílias atendidas pela Gaia Group</figcaption>
+          </figure>
         </div>
         <form
           noValidate

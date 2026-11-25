@@ -37,7 +37,7 @@ export const DEPOIMENTOS = [
 
 // Fonte: gaiagroup.com.br (consultado em 25/11/2026).
 export const NUMEROS_JOAO = [
-  { valor: '+2.000', rotulo: 'famílias atendidas pela Gaia' },
+  { valor: '+2.000', rotulo: 'famílias atendidas' },
   { valor: '9 anos', rotulo: 'de entregas reais' },
 ];
 
@@ -174,10 +174,12 @@ export const CARTAS_FAQ = [
   { q: 'Quanto tempo leva?', a: 'Varia conforme a negociação e a análise da administradora. Na cotação você já recebe uma estimativa realista para o seu caso.' },
 ];
 
-// Avaliações públicas da Gaia Group no Google (trechos curtos, como aparecem em gaiagroup.com.br).
+// Avaliações públicas da Gaia Group no Google (5 estrelas), como aparecem em gaiagroup.com.br.
+// Ficaram de fora as que prometem lucro ou rendimento, por conformidade.
 export const AVALIACOES_GOOGLE = [
-  { nome: 'Paulo Cezar Gracias Junior', texto: 'Tinha um certo receio com o consórcio até conhecer o escritório. Após toda a explicação fiz uma carta e fui contemplado.' },
-  { nome: 'Taquara Pesca', texto: 'Já são duas cartas adquiridas, uma de automóvel contemplada em 12 meses. A assessoria do pessoal fez toda diferença.' },
-  { nome: 'Gabriel Vicente', texto: 'Uma empresa íntegra, correta e coerente, com ótimo atendimento, que nos direciona sempre ao melhor investimento.' },
-  { nome: 'Moacyr Petrocelli', texto: 'Excelentes serviços. Atendimento personalizado e assertivo para cada necessidade.' },
+  { nome: 'Taquara Pesca', data: 'agosto de 2025', texto: 'Super recomendo! Já são duas cartas adquiridas, uma de automóvel contemplada em 12 meses. A assessoria do pessoal fez toda diferença para envolver o melhor plano de investimento! Nota 10' },
+  { nome: 'Paulo Cezar Gracias Junior', data: 'agosto de 2025', texto: 'Tinha um certo receio com o consórcio até conhecer o escritório. Após toda a explicação fiz uma carta e fui contemplado. Atualmente tenho mais de 4 cartas de consórcio. Recomendo totalmente o escritório pelo seu atendimento e seriedade!' },
+  { nome: 'Gabriel Vicente', data: 'agosto de 2025', texto: 'Uma empresa íntegra, correta e coerente! Com ótimo atendimento, que nos direciona sempre ao melhor investimento! Gaia é certeza de bons negócios!' },
+  { nome: 'Moacyr Petrocelli', data: 'agosto de 2025', texto: 'Excelentes serviços! Atendimento personalizado e assertivo para cada necessidade! Parabéns!' },
+  { nome: 'André Luiz Abbiati', data: 'agosto de 2025', texto: 'Excelente empresa, recomendo!' },
 ];

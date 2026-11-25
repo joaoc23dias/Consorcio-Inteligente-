@@ -206,7 +206,56 @@ p.cp, .lead, footer .row p, details p, .nota p, p.nota { max-width: 62ch; }
 @media (max-width: 760px) { .dep-unico .dep-item { grid-template-columns: 1fr; gap: 28px; } .dep-unico .dep-video { max-width: 260px; } }
 
 .avaliacoes { margin-top: 72px; padding-top: 40px; border-top: 1px solid var(--rule); }
-.avaliacoes ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 32px; }
-.avaliacoes p { margin: 8px 0 12px; font-size: 15px; line-height: 1.6; color: var(--ink); }
-.avaliacoes .estrelas { color: var(--gold); letter-spacing: .12em; font-size: 13px; }
-.avaliacoes .autor { font-size: 13px; color: var(--ink-muted); }
+.av-cabecalho { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 24px; }
+.av-setas { display: flex; gap: 8px; }
+.av-setas button { width: 44px; height: 44px; border: 1px solid var(--rule-strong); background: var(--surface); color: var(--ink); font-size: 22px; line-height: 1; cursor: pointer; transition: background-color .3s var(--ease), border-color .3s var(--ease), transform .3s var(--ease); }
+.av-setas button:hover:not(:disabled) { border-color: var(--green); }
+.av-setas button:active:not(:disabled) { transform: scale(.96); }
+.av-setas button:disabled { opacity: .35; cursor: default; }
+.av-trilho { list-style: none; margin: 0; padding: 4px 2px 12px; display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 40px) / 3); gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
+.av-trilho::-webkit-scrollbar { display: none; }
+.av-card { scroll-snap-align: start; background: var(--surface); border: 1px solid var(--rule); padding: 24px; display: flex; flex-direction: column; transition: transform .6s var(--ease), box-shadow .6s var(--ease), border-color .6s var(--ease); }
+.av-card:hover { transform: translateY(-4px); border-color: var(--rule-strong); box-shadow: 0 18px 36px -28px rgba(31,58,46,.35); }
+.av-topo { display: flex; align-items: center; gap: 12px; }
+.av-avatar { width: 42px; height: 42px; border-radius: 50%; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-weight: 600; font-size: 17px; flex: none; }
+.av-quem { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.av-quem strong { font-size: 15px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.av-quem span { font-size: 12px; color: var(--ink-muted); }
+.av-google { font-size: 12px; font-weight: 600; color: var(--ink-muted); letter-spacing: .02em; }
+.av-estrelas { color: #C99A2E; letter-spacing: .14em; font-size: 16px; margin: 16px 0 10px; }
+.av-texto { margin: 0; font-size: 15px; line-height: 1.6; color: var(--ink); display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+.av-texto.aberto { -webkit-line-clamp: unset; display: block; }
+.av-mais { align-self: flex-start; margin-top: 10px; padding: 0; background: none; border: 0; color: var(--ink-muted); font: inherit; font-size: 13px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+@media (max-width: 980px) { .av-trilho { grid-auto-columns: calc((100% - 20px) / 2); } }
+@media (max-width: 620px) { .av-trilho { grid-auto-columns: 86%; } }
+@media (prefers-reduced-motion: reduce) { .av-card, .av-setas button { transition: none; } .av-card:hover { transform: none; } }
+
+/* Quem é quem: Gaia atende, HS administra */
+.quem-e { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.quem-bloco { display: flex; gap: 24px; align-items: flex-start; padding: 32px 32px 32px 0; }
+.quem-bloco + .quem-bloco { padding: 32px 0 32px 32px; border-left: 1px solid var(--rule); }
+.quem-bloco > img { flex: none; margin-top: 4px; }
+.quem-papel { margin: 0 0 4px; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--gold); }
+.quem-nome { margin: 0 0 8px; font-family: var(--serif); font-size: 26px; line-height: 1.1; color: var(--ink); }
+.quem-numeros { display: flex; gap: 32px; margin: 18px 0 0; }
+.quem-numeros > div { display: flex; flex-direction: column; }
+.quem-numeros dd { margin: 0; font-family: var(--serif); font-size: 28px; line-height: 1; color: var(--green); }
+.quem-numeros dt { margin-top: 6px; font-size: 12px; color: var(--ink-muted); }
+@media (max-width: 860px) {
+  .quem-e { grid-template-columns: 1fr; }
+  .quem-bloco, .quem-bloco + .quem-bloco { padding: 28px 0; border-left: 0; }
+  .quem-bloco + .quem-bloco { border-top: 1px solid var(--rule); }
+  .quem-bloco { flex-direction: column; gap: 16px; }
+}
+
+/* Diagnóstico: o que você leva + prova junto do formulário */
+.leva { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); max-width: 520px; }
+.leva li { position: relative; padding: 12px 0 12px 26px; border-bottom: 1px solid var(--rule); font-size: 15px; color: var(--ink); }
+.leva li::before { content: ''; position: absolute; left: 2px; top: 19px; width: 12px; height: 7px; border-left: 1.4px solid var(--gold); border-bottom: 1.4px solid var(--gold); transform: rotate(-45deg); }
+.prova-form { margin: 32px 0 0; max-width: 520px; }
+.prova-form blockquote { margin: 0 0 8px; font-family: var(--serif); font-size: 21px; line-height: 1.35; color: var(--ink); }
+.prova-form figcaption { font-size: 13px; color: var(--ink-muted); }
+
+/* Isca: guia no WhatsApp */
+.guia { display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center; border: 1px solid var(--rule); background: var(--surface); padding: 40px; }
+@media (max-width: 860px) { .guia { grid-template-columns: 1fr; gap: 24px; padding: 28px 24px; } }
