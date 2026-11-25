@@ -104,7 +104,15 @@ export default function Cartas() {
           </p>
         </div>
 
-        <div className="row" style={{ gap: 20, marginTop: 56 }}>
+        <div className="nota" style={{ marginTop: 56 }}>
+          <p className="eyebrow" style={{ marginBottom: 8 }}>Requisito para comprar</p>
+          <p style={{ margin: '0 0 8px', fontFamily: 'var(--serif)', fontSize: 26, lineHeight: 1.25, color: 'var(--ink)' }}>Para comprar uma carta contemplada, você precisa ter entrada.</p>
+          <p className="cp" style={{ margin: 0, maxWidth: 720 }}>
+            A entrada é o valor pago a quem está vendendo a carta. O restante segue em aportes mensais no grupo. Ainda não tem entrada? <a href="#conta">Faça a conta do consórcio estratégico</a>.
+          </p>
+        </div>
+
+        <div className="row" style={{ gap: 20, marginTop: 40 }}>
           {LADOS.map((l) => {
             const escuro = false;
             const principal = l.id === 'comprar';
@@ -219,14 +227,6 @@ export default function Cartas() {
           )}
         </div>
 
-        <div className="nota" style={{ marginTop: 72 }}>
-          <p className="eyebrow" style={{ marginBottom: 8 }}>Requisito para comprar</p>
-          <p style={{ margin: '0 0 8px', fontFamily: 'var(--serif)', fontSize: 26, lineHeight: 1.25, color: 'var(--ink)' }}>Para comprar uma carta contemplada, você precisa ter entrada.</p>
-          <p className="cp" style={{ margin: 0, maxWidth: 720 }}>
-            A entrada é o valor pago a quem está vendendo a carta. O restante segue em aportes mensais no grupo. Ainda não tem entrada? <a href="#conta">Faça a conta do consórcio estratégico</a>.
-          </p>
-        </div>
-
         <div id="cartas-faq" className="row" style={{ gap: 72, marginTop: 88 }}>
           <div className="col" style={{ flex: '1 1 320px' }}>
             <p className="eyebrow">Perguntas frequentes</p>
@@ -250,6 +250,17 @@ export default function Cartas() {
                   </ol>
                 )}
               </details>
+            ))}
+          </div>
+        </div>
+
+        <div className="row" style={{ marginTop: 72, paddingTop: 40, borderTop: '1px solid var(--rule)', gap: 24, alignItems: 'center', justifyContent: 'space-between' }}>
+          <p style={{ margin: 0, fontFamily: 'var(--serif)', fontSize: 28, lineHeight: 1.2, flex: '1 1 360px' }}>Tem a entrada ou uma carta contemplada? Peça a sua cotação.</p>
+          <div className="row" style={{ gap: 12 }}>
+            {LADOS.map((l) => (
+              <a key={l.id} href={wa(l.msg)} target="_blank" rel="noopener noreferrer" className={`btn btn-ico ${l.id === 'comprar' ? 'btn-pri' : 'btn-sec'}`} onClick={() => track('cartas_whatsapp', { lado: `${l.id}_final` })}>
+                {l.cta}<span className="ico"><Seta /></span>
+              </a>
             ))}
           </div>
         </div>
