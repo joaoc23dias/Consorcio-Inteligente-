@@ -3,7 +3,7 @@ import { track } from '@vercel/analytics';
 import Image from 'next/image';
 import { WHATSAPP, CARTAS_DEPOIMENTOS, CARTAS_CASOS, LOGO_HS, CARTAS_FAQ, BC_URL } from '../content';
 
-const CAPA = 'https://d8j0ntlcm91z4.cloudfront.net/user_3MbR0sUBpodDPQLh4ssVdL8A42p/hf_20261125_204439_6b18dc3a-133f-4a5e-9b03-e10dc80cfc08.png';
+const CAPA = '/cartas-chave.webp';
 
 const wa = (texto) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`;
 

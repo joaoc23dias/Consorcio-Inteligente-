@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 // Fechamento: a mesma mesa de estratégia do topo, agora como convite.
-const FOTO = 'https://d8j0ntlcm91z4.cloudfront.net/user_3MbR0sUBpodDPQLh4ssVdL8A42p/hf_20261125_202538_fd81f68f-1de6-4b7b-851b-fc107ac7b0d8.png';
+const FOTO = '/mesa-estrategia.webp';
 
 export default function Pausa() {
   return (

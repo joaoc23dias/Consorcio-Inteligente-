@@ -7,7 +7,7 @@ const POEIRA = Array.from({ length: 16 }, (_, i) => i);
 // Topo: a mesa de estratégia. Imóvel, torre, carro e terreno ligados por um
 // caminho dourado até a chave, a imagem do consórcio usado com inteligência.
 // João entra recortado, em primeiro plano, como quem conduz o plano.
-const FUNDO = 'https://d8j0ntlcm91z4.cloudfront.net/user_3MbR0sUBpodDPQLh4ssVdL8A42p/hf_20261125_202538_fd81f68f-1de6-4b7b-851b-fc107ac7b0d8.png';
+const FUNDO = '/mesa-estrategia.webp';
 
 export default function Hero() {
   return (
