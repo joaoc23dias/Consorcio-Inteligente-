@@ -19,14 +19,14 @@ export default function Home() {
       <Header />
       <main id="conteudo">
         <Hero />
-        <Plano />
-        <QuandoNao />
         <Metodo />
+        <Plano />
         <HS />
+        <Simulador />
         <Comparativo />
         <Cartas />
         <Depoimentos />
-        <Simulador />
+        <QuandoNao />
         <Duvidas />
         <Agendar />
       </main>

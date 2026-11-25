@@ -2,7 +2,7 @@ import { QUANDO_NAO } from '../content';
 
 export default function QuandoNao() {
   return (
-    <section className="sec" aria-labelledby="nao-titulo">
+    <section className="sec alt" aria-labelledby="nao-titulo">
       <div className="wrap row" style={{ gap: 72 }}>
         <div className="col" style={{ flex: '1 1 380px' }}>
           <p className="eyebrow">Quando a gente diz não</p>

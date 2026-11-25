@@ -17,7 +17,7 @@ export const PASSOS = [
 ];
 
 export const QUANDO_NAO = [
-  { t: 'Você precisa do bem amanhã', d: 'Consórcio não é compra imediata. Avaliamos uma carta contemplada ou dizemos que não é o caso.' },
+  { t: 'Você precisa do bem amanhã', d: 'Consórcio não é compra imediata. Se você tem entrada, avaliamos uma carta contemplada; se não tem, dizemos que não é o caso.' },
   { t: 'O aporte aperta o seu mês', d: 'Se não couber com folga, refazemos o plano ou recuamos.' },
   { t: 'O objetivo ainda não está claro', d: 'Primeiro estruturamos, depois escolhemos o crédito.' },
   { t: 'Alguém prometeu data de contemplação', d: 'Não existe data garantida. Existe estratégia.' },
@@ -45,7 +45,8 @@ export const NUMEROS_HS = ['[anos de mercado]', '[consorciados]', '[crédito ent
 export const FAQ = [
   { q: 'Qual a relação entre João Dias, a Gaia Group e a HS?', a: 'João atende pela Gaia Group, que tem a HS Consórcios (Grupo Herval) como administradora exclusiva. A HS é autorizada pelo Banco Central e administra os grupos, as assembleias e as contemplações.' },
   { q: 'Em quanto tempo sou contemplado?', a: 'Não existe data garantida. Existe estratégia de contemplação, definida com dados do grupo no seu diagnóstico.' },
-  { q: 'Consórcio tem juros?', a: 'Não. Existe a estrutura operacional do grupo, apresentada antes da assinatura.' },
+  { q: 'Consórcio tem juros?', a: 'No lugar dos juros do financiamento, o consórcio tem a estrutura operacional do grupo (taxa de administração e fundo de reserva), apresentada antes da assinatura.' },
+  { q: 'Vocês trabalham com carta contemplada?', a: 'Sim. Para quem já tem entrada e quer o crédito agora, ou para quem contemplou e quer vender. A cotação é individual, direto no WhatsApp, na seção Cartas contempladas.' },
   { q: 'Quanto custa o diagnóstico patrimonial?', a: 'Nada. É personalizado e você só segue se fizer sentido.' },
   { q: 'Já sou cliente. Com quem falo?', a: 'Com o seu consultor, direto no WhatsApp.' },
 ];

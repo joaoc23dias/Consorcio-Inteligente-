@@ -2,7 +2,7 @@ import { ESCRITORIOS, NUMEROS_HS } from '../content';
 
 export default function HS() {
   return (
-    <section id="hs" className="sec alt" aria-labelledby="hs-titulo">
+    <section id="hs" className="sec" aria-labelledby="hs-titulo">
       <div className="wrap">
         <div className="row" style={{ gap: 72, alignItems: 'center' }}>
           <div className="col" style={{ flex: '1 1 520px' }}>
