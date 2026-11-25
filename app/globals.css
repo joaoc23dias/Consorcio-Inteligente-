@@ -168,3 +168,16 @@ main > section.sec:not(.alt) + section.sec:not(.alt) { box-shadow: inset 0 1px 0
 }
 @media (prefers-reduced-motion: reduce) { .barra-mobile { transition: none; } }
 input[type="range"] { accent-color: var(--green); }
+
+/* Pausa com foto antes do diagnóstico */
+.pausa { position: relative; min-height: 600px; display: flex; align-items: center; overflow: hidden; }
+.pausa-foto { position: absolute; inset: 0; }
+.pausa-foto::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(250,247,241,.55) 0%, rgba(250,247,241,0) 45%); }
+.pausa-wrap { position: relative; width: 100%; }
+.pausa-card { max-width: 440px; background: var(--surface); border: 1px solid var(--rule); padding: 40px; }
+@media (max-width: 760px) {
+  .pausa { display: block; min-height: 0; }
+  .pausa-foto { position: relative; height: 300px; }
+  .pausa-foto::after { display: none; }
+  .pausa-card { max-width: none; border: 0; padding: 32px 0 56px; background: transparent; }
+}

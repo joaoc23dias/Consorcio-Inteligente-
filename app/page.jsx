@@ -9,6 +9,7 @@ import Simulador from './components/Simulador';
 import Comparativo from './components/Comparativo';
 import Cartas from './components/Cartas';
 import BarraMobile from './components/BarraMobile';
+import Pausa from './components/Pausa';
 import Duvidas from './components/Duvidas';
 import Agendar from './components/Agendar';
 import Footer from './components/Footer';
@@ -29,6 +30,7 @@ export default function Home() {
         <Depoimentos />
         <QuandoNao />
         <Duvidas />
+        <Pausa />
         <Agendar />
         <BarraMobile />
       </main>
