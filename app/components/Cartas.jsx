@@ -1,6 +1,6 @@
 'use client';
 import { track } from '@vercel/analytics';
-import { WHATSAPP } from '../content';
+import { WHATSAPP, CARTAS_DEPOIMENTOS, CARTAS_CASO, LOGO_HS } from '../content';
 
 const wa = (texto) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`;
 
@@ -46,7 +46,7 @@ const LADOS = [
   },
 ];
 
-const CONFIANCA = ['Administradora HS Consórcios', 'Autorizada pelo Banco Central', 'Entrada obrigatória para compra', 'Cessão formal em contrato', 'Valores somente na cotação individual'];
+const CONFIANCA = ['Autorizada pelo Banco Central', 'Entrada obrigatória para compra', 'Cessão formal em contrato', 'Valores somente na cotação individual'];
 
 const PARA_QUEM = {
   e: [
@@ -139,13 +139,62 @@ export default function Cartas() {
           })}
         </div>
 
-        <ul className="row" style={{ listStyle: 'none', margin: '28px 0 0', padding: 0, gap: '10px 28px', fontSize: 13, color: 'var(--ink-soft)' }}>
+        <ul className="row" style={{ listStyle: 'none', margin: '28px 0 0', padding: 0, gap: '10px 28px', fontSize: 13, color: 'var(--ink-soft)', alignItems: 'center' }}>
+          <li style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+            {LOGO_HS
+              ? <img src={LOGO_HS} alt="HS Consórcios" height={28} style={{ height: 28, width: 'auto' }} />
+              : <span className="ph" style={{ padding: '6px 10px', fontSize: 11 }}>LOGO HS</span>}
+            Administradora HS Consórcios
+          </li>
           {CONFIANCA.map((c) => (
             <li key={c} style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
               <span style={{ color: 'var(--gold)' }}><Check /></span>{c}
             </li>
           ))}
         </ul>
+
+        <div style={{ marginTop: 88 }}>
+          <p className="eyebrow">Quem já passou por aqui</p>
+          <h3 className="h3" style={{ fontSize: 34, maxWidth: 640 }}>Histórias reais de quem comprou e de quem vendeu a carta com a Gaia Group.</h3>
+          <div className="prova">
+            {CARTAS_DEPOIMENTOS.map((d, i) => {
+              const pendente = d.texto.startsWith('[');
+              return (
+                <figure key={i} className="bezel" style={{ margin: 0 }}>
+                  <div className="bezel-core pad-box" style={{ padding: 32, gap: 20 }}>
+                    <p className="eyebrow" style={{ margin: 0 }}>{d.lado}</p>
+                    <blockquote style={{ margin: 0, fontFamily: 'var(--serif)', fontSize: 24, lineHeight: 1.3, flex: 1 }} className={pendente ? 'ph' : undefined}>
+                      {pendente ? d.texto : `“${d.texto}”`}
+                    </blockquote>
+                    <figcaption style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
+                      {d.foto
+                        ? <img src={d.foto} alt="" width={48} height={48} style={{ width: 48, height: 48, objectFit: 'cover', borderRadius: '50%' }} />
+                        : <span className="ph" aria-hidden="true" style={{ width: 48, height: 48, padding: 0, borderRadius: '50%', fontSize: 10 }}>foto</span>}
+                      <span>
+                        <strong style={{ display: 'block', fontSize: 15 }}>{d.nome}</strong>
+                        <span className="cp" style={{ fontSize: 13 }}>{d.detalhe}</span>
+                      </span>
+                    </figcaption>
+                  </div>
+                </figure>
+              );
+            })}
+            <article className="bezel bezel-dark caso" style={{ margin: 0 }}>
+              <div className="bezel-core pad-box" style={{ padding: 32 }}>
+                <p className="tag eyebrow" style={{ marginBottom: 10 }}>Caso real</p>
+                <h4 style={{ margin: '0 0 20px', fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 26, lineHeight: 1.25, color: 'var(--bg)' }}>{CARTAS_CASO.titulo}</h4>
+                <ol style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+                  {CARTAS_CASO.etapas.map((e) => (
+                    <li key={e.rotulo} style={{ padding: '14px 0', borderTop: '1px solid rgba(250,247,241,.14)' }}>
+                      <span className="tag" style={{ display: 'block', fontSize: 11, letterSpacing: '.14em', textTransform: 'uppercase', marginBottom: 4 }}>{e.rotulo}</span>
+                      <span style={{ fontSize: 15 }}>{e.texto}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </article>
+          </div>
+        </div>
 
         <div className="bezel bezel-dark" style={{ marginTop: 72 }}>
           <div className="bezel-core pad-box row" style={{ flexDirection: 'row', flexWrap: 'wrap', padding: '32px 40px', gap: 24, alignItems: 'center', justifyContent: 'space-between' }}>

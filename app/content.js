@@ -95,3 +95,22 @@ export const COMPARATIVO = {
     url: 'https://simuladorhabitacao.caixa.gov.br/home',
   },
 };
+
+// Cartas contempladas: prova social e caso real.
+// Preencher SOMENTE com clientes reais e autorização por escrito. Enquanto houver [colchetes], o bloco aparece como espaço reservado.
+export const CARTAS_DEPOIMENTOS = [
+  { lado: 'Comprou uma carta', texto: '[Frase real do cliente, 1 a 2 linhas: o que ele queria e o que aconteceu]', nome: '[Nome do cliente] · [cidade]', detalhe: 'Carta de [imóvel/veículo] · [mês/ano]', foto: '' },
+  { lado: 'Vendeu a carta', texto: '[Frase real do cliente, 1 a 2 linhas: por que vendeu e como foi a negociação]', nome: '[Nome do cliente] · [cidade]', detalhe: 'Carta de [imóvel/veículo] · [mês/ano]', foto: '' },
+];
+
+export const CARTAS_CASO = {
+  titulo: '[Título do caso, ex.: Da entrada guardada às chaves na mão]',
+  etapas: [
+    { rotulo: 'Situação', texto: '[Quem era o cliente e o que ele tinha: ex. casal com entrada guardada, queria o imóvel sem financiamento]' },
+    { rotulo: 'Caminho', texto: '[O que foi feito: cotação, carta escolhida, análise e transferência pela HS]' },
+    { rotulo: 'Resultado', texto: '[O que ele conquistou e em quanto tempo, sem valores da carta]' },
+  ],
+};
+
+// Logo da HS para a faixa de confiança: salvar o arquivo em public/logo-hs.png e trocar para '/logo-hs.png'.
+export const LOGO_HS = '';
