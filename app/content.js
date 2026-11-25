@@ -35,8 +35,9 @@ export const DEPOIMENTOS = [
   { nome: '[Nome do cliente] · [cidade]', detalhe: 'Contemplado no veículo · atendido por [consultor] · [mês/ano]' },
 ];
 
-// Fonte: gaiagroup.com.br (consultado em 25/11/2026).
+// Fontes: gaiagroup.com.br (famílias e anos) e site institucional da Gaia em construção (créditos), consultados em 25/11/2026.
 export const NUMEROS_JOAO = [
+  { valor: '+R$ 250 mi', rotulo: 'em créditos comercializados' },
   { valor: '+2.000', rotulo: 'famílias atendidas' },
   { valor: '9 anos', rotulo: 'de entregas reais' },
 ];
@@ -49,6 +50,8 @@ export const NUMEROS_HS = [
   { valor: '+R$ 3 bi', rotulo: 'em bens entregues em 2025' },
   { valor: '+2.600', rotulo: 'contemplações por mês' },
 ];
+// Fonte: página da HS Consórcios no Reclame Aqui, dados de 01/03/2026 a 31/08/2026.
+export const RECLAME_AQUI = { reputacao: 'Ótima', nota: '8,6', periodo: 'mar. a ago. de 2026', url: 'https://www.reclameaqui.com.br/empresa/hs-consorcios/' };
 export const NUMEROS_HS_FONTE = 'Dados divulgados pela HS Consórcios em hsconsorcios.com.br, novembro de 2026.';
 
 export const FAQ = [

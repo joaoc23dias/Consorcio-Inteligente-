@@ -1,6 +1,4 @@
-import Image from 'next/image';
-import Contador from './Contador';
-import { ESCRITORIOS, NUMEROS_HS, NUMEROS_HS_FONTE, HS_DESTAQUE } from '../content';
+import { ESCRITORIOS } from '../content';
 
 export default function HS() {
   return (
@@ -15,21 +13,8 @@ export default function HS() {
               Todo plano estruturado aqui é administrado pela HS Consórcios, do Grupo Herval, administradora exclusiva da Gaia Group e autorizada pelo Banco Central. Você tem o planejamento e o acompanhamento do especialista e a solidez de uma administradora com grupos, assembleias e contemplações reguladas.
             </p>
           </div>
-          <div className="col pad-box" style={{ flex: '1 1 360px', background: 'var(--surface)', border: '1px solid var(--rule)', padding: 36 }}>
-            <Image src="/logo-hs.png" alt="HS Consórcios, uma empresa do Grupo Herval" width={240} height={64} />
-            <p style={{ margin: '18px 0 0', fontFamily: 'var(--serif)', fontSize: 22, lineHeight: 1.25, color: 'var(--ink)' }}>{HS_DESTAQUE}.</p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '20px 16px', marginTop: 20 }}>
-              {NUMEROS_HS.map((n) => (
-                <div key={n.rotulo} style={{ borderTop: '1px solid var(--rule-strong)', paddingTop: 14 }}>
-                  <span className="num" style={{ display: 'block', fontFamily: 'var(--serif)', fontSize: 'clamp(22px, 2.2vw, 30px)', lineHeight: 1.1, color: 'var(--green)', whiteSpace: 'nowrap' }}><Contador texto={n.valor} /></span>
-                  <span style={{ display: 'block', marginTop: 6, fontSize: 12, lineHeight: 1.4, color: 'var(--ink-soft)' }}>{n.rotulo}</span>
-                </div>
-              ))}
-            </div>
-            <p className="cp" style={{ fontSize: 12, margin: '16px 0 0' }}>{NUMEROS_HS_FONTE}</p>
-          </div>
         </div>
-        <ul style={{ listStyle: 'none', margin: '72px 0 0', padding: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', borderTop: '1px solid var(--rule-strong)' }}>
+        <ul style={{ listStyle: 'none', margin: '48px 0 0', padding: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', borderTop: '1px solid var(--rule-strong)' }}>
           {ESCRITORIOS.map((e) => (
             <li key={e.cidade} style={{ padding: '28px 28px 0 0' }}>
               <div className="eyebrow" style={{ marginBottom: 10 }}>Escritório</div>

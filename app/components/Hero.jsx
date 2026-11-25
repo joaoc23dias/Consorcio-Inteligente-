@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { NUMEROS_JOAO } from '../content';
+import { NUMEROS_JOAO, NUMEROS_HS, HS_DESTAQUE, RECLAME_AQUI } from '../content';
 import Contador from './Contador';
 
 export default function Hero() {
@@ -25,42 +25,48 @@ export default function Hero() {
             height={560}
             priority
             sizes="(max-width: 760px) 100vw, 460px"
-            style={{ width: '100%', maxWidth: 460, height: 'auto', aspectRatio: '23 / 28', objectFit: 'cover', marginLeft: 'auto' }}
+            style={{ width: '100%', maxWidth: 460, height: 'auto', aspectRatio: '1 / 1', objectFit: 'cover', objectPosition: 'center 22%', marginLeft: 'auto' }}
           />
-          <figcaption style={{ fontSize: 13, color: 'var(--ink-muted)', marginTop: 14, textAlign: 'right' }}>
-            João Dias · Especialista em planejamento patrimonial
-          </figcaption>
         </figure>
+        <aside className="hs-credencial" aria-label="Administradora do seu consórcio">
+          <div className="hs-cred-topo">
+            <Image src="/logo-hs.png" alt="HS Consórcios, uma empresa do Grupo Herval" width={128} height={34} />
+            <p>Administra o seu consórcio. Autorizada pelo Banco Central.</p>
+          </div>
+          <p className="hs-cred-destaque">{HS_DESTAQUE}.</p>
+          <dl className="hs-cred-numeros">
+            {NUMEROS_HS.map((n) => (
+              <div key={n.rotulo}><dd className="num"><Contador texto={n.valor} /></dd><dt>{n.rotulo}</dt></div>
+            ))}
+          </dl>
+          <a className="hs-cred-ra" href={RECLAME_AQUI.url} target="_blank" rel="noopener noreferrer">
+            <span className="hs-cred-selo">Reclame Aqui</span>
+            <span>Reputação <strong>{RECLAME_AQUI.reputacao}</strong> · nota <strong>{RECLAME_AQUI.nota}</strong> de 10</span>
+          </a>
+          <p className="hs-cred-fonte">Fontes: hsconsorcios.com.br (nov. de 2026) e Reclame Aqui ({RECLAME_AQUI.periodo}).</p>
+        </aside>
         </div>
       </div>
 
       <div className="wrap" style={{ marginTop: 64 }}>
-        <div className="quem-e" aria-label="Quem faz o quê">
+        <div className="quem-e quem-e-gaia" aria-label="Onde você é atendido">
           <div className="quem-bloco">
             <Image src="/logo-gaia-vermelho.png" alt="Gaia Group Investimentos & Consórcios" width={70} height={55} />
             <div>
               <p className="quem-papel">Onde você é atendido</p>
               <p className="quem-nome">Gaia Group</p>
               <p className="cp" style={{ fontSize: 14 }}>Consultoria em consórcio estratégico e planejamento patrimonial. É aqui que o seu plano é desenhado e acompanhado.</p>
-              {NUMEROS_JOAO.every((n) => !n.valor.startsWith('[')) && (
-                <dl className="quem-numeros">
-                  {NUMEROS_JOAO.map((n) => (
-                    <div key={n.rotulo}>
-                      <dd className="num"><Contador texto={n.valor} /></dd>
-                      <dt>{n.rotulo}</dt>
-                    </div>
-                  ))}
-                </dl>
-              )}
             </div>
-          </div>
-          <div className="quem-bloco">
-            <Image src="/logo-hs.png" alt="HS Consórcios, uma empresa do Grupo Herval" width={150} height={40} />
-            <div>
-              <p className="quem-papel">Quem administra o seu consórcio</p>
-              <p className="quem-nome">HS Consórcios</p>
-              <p className="cp" style={{ fontSize: 14 }}>Administradora do Grupo Herval, autorizada pelo Banco Central. Cuida dos grupos, das assembleias e das contemplações.</p>
-            </div>
+            {NUMEROS_JOAO.every((n) => !n.valor.startsWith('[')) && (
+              <dl className="quem-numeros gaia-numeros">
+                {NUMEROS_JOAO.map((n) => (
+                  <div key={n.rotulo}>
+                    <dd className="num"><Contador texto={n.valor} /></dd>
+                    <dt>{n.rotulo}</dt>
+                  </div>
+                ))}
+              </dl>
+            )}
           </div>
         </div>
       </div>
