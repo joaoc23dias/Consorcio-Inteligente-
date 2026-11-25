@@ -26,8 +26,8 @@ export default async function OpengraphImage() {
             Seu próximo ativo merece uma estratégia, não uma cota qualquer.
           </div>
           <div style={{ display: 'flex', alignItems: 'center', marginTop: 36 }}>
-            <div style={{ width: 40, height: 2, background: '#1F3A2E', marginRight: 16 }} />
-            <div style={{ fontFamily: 'Montserrat', fontSize: 22, color: '#1F3A2E' }}>João Dias | Consórcio Inteligente</div>
+            <div style={{ width: 40, height: 2, background: '#13233B', marginRight: 16 }} />
+            <div style={{ fontFamily: 'Montserrat', fontSize: 22, color: '#13233B' }}>João Dias | Consórcio Inteligente</div>
           </div>
           <div style={{ fontFamily: 'Montserrat', fontSize: 15, color: '#6E7872', marginTop: 12 }}>
             Gaia Group · Administração exclusiva HS Consórcios

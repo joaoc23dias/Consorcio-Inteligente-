@@ -1,5 +1,17 @@
 import Image from 'next/image';
 import { RECLAME_AQUI, BC_URL } from '../content';
+import Contador from './Contador';
+
+const Numeros = ({ itens }) => (
+  <dl className="cred-numeros">
+    {itens.map(([v, r], i) => (
+      <div key={r} style={{ '--d': `${i * 140}ms` }}>
+        <dd className="num"><Contador texto={v} duracao={1800} /></dd>
+        <dt>{r}</dt>
+      </div>
+    ))}
+  </dl>
+);
 
 // Gaia e HS apresentadas como um texto, não como painel de números:
 // cada empresa com a sua logo em tamanho natural e os fatos escritos em frase.
@@ -13,15 +25,17 @@ export default function Credenciais() {
             <Image src="/logo-gaia-vermelho.png" alt="Gaia Group Investimentos & Consórcios" width={92} height={73} className="cred-logo" />
             <p className="cred-papel">É onde você é atendido.</p>
             <p className="cred-texto">
-              A Gaia Group já comercializou mais de R$ 250 milhões em créditos e atendeu mais de 2.000 famílias em 9 anos. É aqui que o seu plano é desenhado e acompanhado, nos escritórios de Ribeirão Preto, São José do Rio Pardo e Mococa ou por videochamada.
+              É aqui que o seu plano é desenhado e acompanhado, nos escritórios de Ribeirão Preto, São José do Rio Pardo e Mococa ou por videochamada.
             </p>
+            <Numeros itens={[['+R$ 250 mi', 'em créditos comercializados'], ['+2.000', 'famílias atendidas'], ['9 anos', 'de entregas reais']]} />
           </article>
           <article className="cred-empresa">
             <Image src="/logo-hs.png" alt="HS Consórcios, uma empresa do Grupo Herval" width={200} height={53} className="cred-logo" />
             <p className="cred-papel">É quem administra o seu consórcio.</p>
             <p className="cred-texto">
-              A HS Consórcios é do Grupo Herval e está no mercado desde 1993, com mais de 410 mil cotas ativas. É autorizada pelo Banco Central e tem reputação {RECLAME_AQUI.reputacao.toLowerCase()} no Reclame Aqui, com nota {RECLAME_AQUI.nota} de 10.
+              Empresa do Grupo Herval, autorizada pelo Banco Central, com reputação {RECLAME_AQUI.reputacao.toLowerCase()} no Reclame Aqui.
             </p>
+            <Numeros itens={[['30 anos', 'de mercado, desde 1993'], ['+410 mil', 'cotas ativas'], [`${RECLAME_AQUI.nota}`, 'nota no Reclame Aqui']]} />
             <p className="cred-links">
               <a href={RECLAME_AQUI.url} target="_blank" rel="noopener noreferrer">Ver a reputação no Reclame Aqui</a>
               <a href={BC_URL} target="_blank" rel="noopener noreferrer">Consultar no Banco Central</a>

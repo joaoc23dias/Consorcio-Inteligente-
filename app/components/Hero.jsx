@@ -1,48 +1,34 @@
 import Image from 'next/image';
-import GrupoVivo from './GrupoVivo';
 
-// Conceito Consórcio Inteligente: o topo mostra um grupo de consórcio vivo.
-// Cada ponto é uma cota; a cada assembleia algumas são contempladas.
-// O ponto dourado é o plano do cliente, com estratégia definida no diagnóstico.
+// Topo: a mesa de estratégia. Imóvel, torre, carro e terreno ligados por um
+// caminho dourado até a chave, a imagem do consórcio usado com inteligência.
+// João entra recortado, em primeiro plano, como quem conduz o plano.
+const FUNDO = 'https://d8j0ntlcm91z4.cloudfront.net/user_3MbR0sUBpodDPQLh4ssVdL8A42p/hf_20261125_202538_fd81f68f-1de6-4b7b-851b-fc107ac7b0d8.png';
 
 export default function Hero() {
   return (
-    <section className="prancha" aria-labelledby="hero-titulo">
-      <div className="wrap">
-        <div className="prancha-corpo">
-          <div className="prancha-texto">
-            <h1 id="hero-titulo" className="prancha-h1">
-              Consórcio com estratégia, do primeiro aporte à conquista.
-            </h1>
-            <p className="prancha-lead">
-              Sou João Dias, especialista em planejamento patrimonial pela Gaia Group. Num grupo de consórcio, a maioria só espera a sua vez. Aqui o seu plano nasce com crédito, aporte, prazo e estratégia de contemplação definidos antes da assinatura, com o consórcio estratégico HS.
-            </p>
-            <div className="prancha-ctas">
-              <a href="#diagnostico" className="btn btn-pri">Agendar meu diagnóstico patrimonial</a>
-              <a href="#metodo" className="prancha-link">Conhecer o Método SPA®</a>
-            </div>
+    <section className="mesa" aria-labelledby="hero-titulo">
+      <div className="mesa-fundo" aria-hidden="true">
+        <Image src={FUNDO} alt="" fill priority sizes="100vw" style={{ objectFit: 'cover', objectPosition: '70% 60%' }} />
+      </div>
+      <div className="wrap mesa-grade">
+        <div className="mesa-texto">
+          <h1 id="hero-titulo" className="mesa-h1">Consórcio inteligente é patrimônio com estratégia.</h1>
+          <p className="mesa-lead">
+            Sou João Dias, especialista em planejamento patrimonial pela Gaia Group. Imóvel, carro, terreno ou o próximo investimento: cada conquista entra no seu plano com crédito, aporte, prazo e estratégia de contemplação definidos antes da assinatura.
+          </p>
+          <div className="mesa-ctas">
+            <a href="#diagnostico" className="btn btn-pri">Agendar meu diagnóstico patrimonial</a>
+            <a href="#metodo" className="mesa-link">Conhecer o Método SPA®</a>
           </div>
-
-          <figure className="vivo">
-            <GrupoVivo />
-            <div className="vivo-foto">
-              <Image
-                src="/joao-dias-hero.jpg"
-                alt="João Dias, especialista em planejamento patrimonial"
-                fill
-                priority
-                sizes="(max-width: 960px) 60vw, 300px"
-                style={{ objectFit: 'cover', objectPosition: 'center 24%' }}
-              />
-            </div>
-            <figcaption className="vivo-legenda">
-              <span><i className="leg leg-on" /> Cotas contempladas a cada assembleia</span>
-              <span><i className="leg leg-seu" /> O seu plano: estratégia definida no diagnóstico</span>
-              <span className="vivo-nota">Ilustração de um grupo de consórcio</span>
-            </figcaption>
-          </figure>
         </div>
-
+        <figure className="mesa-joao">
+          <Image src="/joao-dias-recorte.webp" alt="João Dias, especialista em planejamento patrimonial" width={912} height={912} priority sizes="(max-width: 960px) 80vw, 460px" />
+          <figcaption>
+            <strong>João Dias</strong>
+            <span>Especialista em planejamento patrimonial</span>
+          </figcaption>
+        </figure>
       </div>
     </section>
   );

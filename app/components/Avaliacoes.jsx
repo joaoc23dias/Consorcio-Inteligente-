@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { AVALIACOES_GOOGLE } from '../content';
 
-const CORES = ['#1F3A2E', '#75592A', '#4F5A54', '#2D5241', '#8A6B3A'];
+const CORES = ['#13233B', '#8A6A2F', '#4A5361', '#1D3352', '#8A6B3A'];
 
 function Cartao({ a, i }) {
   const [aberto, setAberto] = useState(false);
