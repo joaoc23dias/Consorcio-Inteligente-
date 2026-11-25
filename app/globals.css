@@ -672,3 +672,20 @@ body { font-feature-settings: normal; }
 
 .marca-nome, .marca-tag { white-space: nowrap; }
 @media (max-width: 760px) { .so-desk { display: none; } .marca-nome { font-size: 14px; letter-spacing: .14em; } .marca-tag { font-size: 10px; letter-spacing: .18em; } }
+
+/* Marca v2: Archivo expandida, sem caixa-alta; logo da Gaia maior e no canto */
+.topo .wrap.header-row { max-width: 1320px; padding-left: 28px; padding-right: 28px; }
+.marca { gap: 32px; }
+.marca-gaia { width: 58px; }
+.marca-divisor { display: none; }
+.marca-texto { gap: 5px; }
+.marca-nome { font-family: 'Archivo Variable', var(--sans); font-weight: 640; font-stretch: 118%; font-size: 21px; letter-spacing: -.01em; text-transform: none; line-height: 1; }
+.marca-tag { font-family: 'Archivo Variable', var(--sans); font-weight: 450; font-stretch: 108%; font-size: 12.5px; letter-spacing: .01em; text-transform: none; line-height: 1; }
+.mesa-joao figcaption .marca-nome { font-size: 18px; letter-spacing: -.01em; }
+.mesa-joao figcaption .marca-tag { font-size: 12px; letter-spacing: .01em; }
+@media (max-width: 760px) {
+  .topo .wrap.header-row { padding-left: 16px; padding-right: 16px; }
+  .marca { gap: 16px; } .marca-gaia { width: 44px; }
+  .marca-nome { font-size: 17px; letter-spacing: -.01em; } .marca-tag { font-size: 11.5px; letter-spacing: 0; }
+}
+.so-desk { margin-left: .3em; }

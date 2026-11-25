@@ -1,6 +1,6 @@
 import './globals.css';
 import '@fontsource-variable/schibsted-grotesk';
-import '@fontsource-variable/jost';
+import '@fontsource-variable/archivo/wdth.css';
 import '@fontsource-variable/schibsted-grotesk/wght-italic.css';
 import { Analytics } from '@vercel/analytics/react';
 import Melhorias from './components/Melhorias';
