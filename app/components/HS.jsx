@@ -8,7 +8,6 @@ export default function HS() {
       <div className="wrap">
         <div className="row" style={{ gap: 72, alignItems: 'center' }}>
           <div className="col" style={{ flex: '1 1 520px' }}>
-            <p className="eyebrow">Quem administra o seu consórcio</p>
             <h2 id="hs-titulo" className="h2">
               Planejamento João Dias. Administração <span translate="no">HS Consórcios</span>.
             </h2>
@@ -27,7 +26,7 @@ export default function HS() {
                 </div>
               ))}
             </div>
-            <p className="cp" style={{ fontSize: 11, margin: '16px 0 0' }}>{NUMEROS_HS_FONTE}</p>
+            <p className="cp" style={{ fontSize: 12, margin: '16px 0 0' }}>{NUMEROS_HS_FONTE}</p>
           </div>
         </div>
         <ul style={{ listStyle: 'none', margin: '72px 0 0', padding: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', borderTop: '1px solid var(--rule-strong)' }}>

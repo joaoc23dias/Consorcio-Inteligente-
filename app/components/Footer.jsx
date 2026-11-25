@@ -33,10 +33,10 @@ export default function Footer() {
         </div>
       </div>
       <div className="wrap" style={{ marginTop: 40, paddingTop: 24, borderTop: '1px solid var(--rule)', textAlign: 'center' }}>
-        <p style={{ fontFamily: 'var(--sans)', fontWeight: 400, fontSize: 14, letterSpacing: 'normal', color: '#7A847E', margin: 0 }}>
+        <p style={{ fontFamily: 'var(--sans)', fontWeight: 400, fontSize: 14, letterSpacing: 'normal', color: 'var(--ink-soft)', margin: 0 }}>
           João Dias | Consórcio Inteligente
         </p>
-        <p style={{ fontSize: 11, color: 'var(--ink-muted)', margin: '6px 0 0' }}>© {new Date().getFullYear()} Todos os direitos reservados.</p>
+        <p style={{ fontSize: 12, color: 'var(--ink-muted)', margin: '6px 0 0' }}>© {new Date().getFullYear()} Todos os direitos reservados.</p>
       </div>
     </footer>
   );

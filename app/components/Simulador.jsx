@@ -42,7 +42,6 @@ export default function Simulador() {
     <section id="conta" className="sec alt" aria-labelledby="conta-titulo">
       <div className="wrap row" style={{ gap: 64 }}>
         <div className="col" style={{ flex: '1 1 420px' }}>
-          <p className="eyebrow">Faça a conta</p>
           <h2 id="conta-titulo" className="h2">A conta da sua próxima conquista.</h2>
 
           <div role="group" aria-label="Tipo de bem" className="row" style={{ gap: 8, margin: '28px 0 36px' }}>

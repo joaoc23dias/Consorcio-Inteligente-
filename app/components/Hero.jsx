@@ -7,7 +7,6 @@ export default function Hero() {
     <section style={{ padding: '96px 0 88px' }}>
       <div className="wrap row" style={{ gap: 72, alignItems: 'center' }}>
         <div className="col" style={{ flex: '1 1 500px' }}>
-          <p className="eyebrow">Método SPA® · Segurança, Patrimônio e Alavancagem</p>
           <h1 className="h1">Seu próximo ativo merece uma estratégia, não uma cota qualquer.</h1>
           <p className="lead" style={{ marginBottom: 40 }}>
             Sou João Dias, especialista em planejamento patrimonial pela Gaia Group. Você me diz onde quer chegar, eu monto o plano com o consórcio estratégico HS e o meu time acompanha cada mês até a sua conquista patrimonial.
@@ -28,7 +27,7 @@ export default function Hero() {
             sizes="(max-width: 760px) 100vw, 460px"
             style={{ width: '100%', maxWidth: 460, height: 'auto', aspectRatio: '23 / 28', objectFit: 'cover', marginLeft: 'auto' }}
           />
-          <figcaption style={{ fontSize: 12, letterSpacing: '.06em', color: 'var(--ink-muted)', marginTop: 14, textAlign: 'right' }}>
+          <figcaption style={{ fontSize: 13, color: 'var(--ink-muted)', marginTop: 14, textAlign: 'right' }}>
             João Dias · Especialista em planejamento patrimonial
           </figcaption>
         </figure>

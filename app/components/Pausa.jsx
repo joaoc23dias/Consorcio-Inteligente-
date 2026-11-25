@@ -11,7 +11,6 @@ export default function Pausa() {
       </div>
       <div className="wrap pausa-wrap">
         <div className="pausa-card">
-          <p className="eyebrow">Diagnóstico patrimonial</p>
           <h2 id="pausa-titulo" className="h2" style={{ margin: '0 0 14px' }}>A próxima conquista começa com uma conversa.</h2>
           <p className="cp" style={{ margin: '0 0 24px' }}>
             Sem compromisso. Você sai com o seu cenário claro, os números na mesa e o caminho que faz sentido para você.

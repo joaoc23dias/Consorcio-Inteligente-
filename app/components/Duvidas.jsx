@@ -5,7 +5,6 @@ export default function Duvidas() {
     <section id="duvidas" className="sec" aria-labelledby="duvidas-titulo">
       <div className="wrap row" style={{ gap: 72 }}>
         <div className="col" style={{ flex: '1 1 320px' }}>
-          <p className="eyebrow">Dúvidas</p>
           <h2 id="duvidas-titulo" className="h2">Pergunte a qualquer hora. Decida com quem entende.</h2>
           <p className="lead" style={{ fontSize: 16 }}>
             O assistente responde suas dúvidas no WhatsApp. Na hora de decidir, eu ou um consultor certificado do meu time assumimos a conversa.

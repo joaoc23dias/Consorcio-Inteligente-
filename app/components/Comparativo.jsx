@@ -20,7 +20,6 @@ export default function Comparativo() {
       <div className="wrap">
         <div className="row" style={{ gap: 48, alignItems: 'flex-end', justifyContent: 'space-between' }}>
           <div className="col" style={{ flex: '1 1 560px' }}>
-            <p className="eyebrow">Consórcio estratégico ou financiamento</p>
             <h2 id="comp-titulo" className="h2" style={{ margin: 0 }}>
               O mesmo imóvel. <span className="num">{brl.format(diferenca)}</span> de diferença.
             </h2>
@@ -71,7 +70,7 @@ export default function Comparativo() {
           ))}
         </div>
 
-        <p className="cp" style={{ fontSize: 12, marginTop: 20, maxWidth: 860 }}>
+        <p className="cp" style={{ fontSize: 12, marginTop: 20, maxWidth: '68ch' }}>
           Financiamento: números do <a href={C.fonte.url} target="_blank" rel="noopener noreferrer">{C.fonte.texto}</a> para um imóvel de R$ 500 mil com R$ 400 mil financiados: taxa efetiva de {C.financiamento.taxa}, sistema SAC, {C.financiamento.prazo} meses e primeiro pagamento de {brl2.format(C.financiamento.primeiraPrestacao)}. O total soma apenas amortização e juros com essa taxa; seguros, TR e tarifas não entram, então o custo real é maior. Consórcio: tabela HS de referência (out/2026), estrutura operacional de 22% e fundo de reserva de 1%, sem o reajuste anual do grupo. Valores de referência, sujeitos a análise de crédito e às condições de cada contratação.
         </p>
       </div>

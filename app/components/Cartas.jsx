@@ -57,9 +57,8 @@ export default function Cartas() {
       <div className="wrap">
         <div className="row" style={{ gap: 48, alignItems: 'flex-end', justifyContent: 'space-between' }}>
           <div className="col" style={{ flex: '1 1 600px' }}>
-            <p className="eyebrow">Cartas contempladas</p>
             <h2 id="cartas-titulo" className="h2" style={{ margin: 0 }}>
-              Crédito liberado para quem não quer esperar. Liquidez para quem quer realizar.
+              Carta contemplada: crédito liberado para quem não quer esperar, liquidez para quem quer realizar.
             </h2>
           </div>
           <p className="cp col" style={{ flex: '0 1 380px' }}>
@@ -82,8 +81,8 @@ export default function Cartas() {
             return (
               <div key={l.id} className={`col bezel${escuro ? ' bezel-dark' : ''}`} style={{ flex: '1 1 420px' }}>
                 <div className="bezel-core pad-box" style={{ padding: 40 }}>
-                  <p className="tag eyebrow" style={{ marginBottom: 14 }}>{l.tag}</p>
                   <h3 className="h3" style={{ margin: '0 0 10px', fontSize: 34, color: escuro ? 'var(--bg)' : 'var(--green)' }}>{l.titulo}</h3>
+                  <p style={{ margin: '0 0 12px', fontSize: 13, fontWeight: 600, color: 'var(--gold)' }}>{l.tag}</p>
                   <p className="cp" style={{ marginBottom: 24 }}>{l.para}</p>
                   <ul style={{ listStyle: 'none', margin: '0 0 32px', padding: 0, flex: 1 }}>
                     {l.itens.map((i) => (
@@ -126,7 +125,6 @@ export default function Cartas() {
         </ul>
 
         <div style={{ marginTop: 88 }}>
-          <p className="eyebrow">Casos reais</p>
           <h3 className="h3" style={{ fontSize: 34, maxWidth: 640 }}>Quem usou a carta contemplada como investimento conta como foi.</h3>
           {CARTAS_CASOS.map((c) => (
             <article key={c.video} className="bezel" style={{ marginTop: 32 }}>
@@ -192,7 +190,6 @@ export default function Cartas() {
 
         <div id="cartas-faq" className="row" style={{ gap: 72, marginTop: 88 }}>
           <div className="col" style={{ flex: '1 1 320px' }}>
-            <p className="eyebrow">Perguntas frequentes</p>
             <h3 className="h3" style={{ marginTop: 0, fontSize: 34 }}>Antes de pedir a cotação, confira se a carta é para você.</h3>
             <p className="cp" style={{ marginBottom: 28 }}>Se a sua dúvida não estiver aqui, me mande no WhatsApp junto com o pedido de cotação. Cada carta é analisada com números reais.</p>
             <a href={wa('Olá, João! Tenho uma dúvida sobre cartas contempladas e quero uma cotação.')} target="_blank" rel="noopener noreferrer" className="btn btn-sec" onClick={() => track('cartas_whatsapp', { lado: 'duvida' })}>Falar no WhatsApp</a>
@@ -228,7 +225,7 @@ export default function Cartas() {
           </div>
         </div>
 
-        <p className="cp" style={{ fontSize: 12, marginTop: 48, maxWidth: 860 }}>
+        <p className="cp" style={{ fontSize: 12, marginTop: 48, maxWidth: '68ch' }}>
           O valor de negociação de uma carta depende do mercado e das condições da cota. Não há garantia de ágio, prazo de venda ou rentabilidade. Toda transferência está sujeita à análise e aprovação da administradora. A negociação de cartas contempladas é feita entre clientes, com intermediação da Gaia Group; a HS Consórcios não comercializa cotas contempladas e atua na análise e aprovação da transferência.
         </p>
       </div>

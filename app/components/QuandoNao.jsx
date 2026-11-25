@@ -5,7 +5,6 @@ export default function QuandoNao() {
     <section className="sec alt" aria-labelledby="nao-titulo">
       <div className="wrap row" style={{ gap: 72 }}>
         <div className="col" style={{ flex: '1 1 380px' }}>
-          <p className="eyebrow">Quando a gente diz não</p>
           <h2 id="nao-titulo" className="h2">Aqui ninguém sai com um consórcio que não faz sentido.</h2>
           <p className="lead">
             O Método SPA® começa pela segurança. Se o consórcio estratégico não for o caminho certo para o seu objetivo, você ouve isso de mim na primeira conversa.
