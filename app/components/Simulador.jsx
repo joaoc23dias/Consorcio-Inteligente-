@@ -29,7 +29,7 @@ export default function Simulador() {
 
   const etapas = [
     { t: 'Até a contemplação', v: `${brl2.format(meio)}/mês`, d: 'Meio aporte, que respeita o seu fluxo.' },
-    { t: 'Contemplação', v: brl.format(credito), d: 'Crédito liberado por sorteio ou pela estratégia de lance.' },
+    { t: 'Contemplação', v: brl.format(credito), d: 'Crédito liberado em assembleia, pela contemplação do grupo ou pela estratégia de lance.' },
     { t: 'Depois', v: 'Você escolhe', d: 'A diferença do meio aporte é diluída nos aportes restantes ou abatida do crédito. Definimos juntos no diagnóstico.' },
   ];
 

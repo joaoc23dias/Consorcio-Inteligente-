@@ -26,7 +26,7 @@ export default function Comparativo() {
             </h2>
           </div>
           <p className="cp col" style={{ flex: '0 1 360px' }}>
-            Não é sobre um ser melhor que o outro. É sobre escolher com os números na mesa, sabendo o que cada caminho custa e quando você acessa o imóvel.
+            Os dois caminhos têm o seu lugar. A escolha certa vem com os números na mesa: quanto cada um custa e quando você acessa o imóvel.
           </p>
         </div>
 
@@ -72,7 +72,7 @@ export default function Comparativo() {
         </div>
 
         <p className="cp" style={{ fontSize: 12, marginTop: 20, maxWidth: 860 }}>
-          Financiamento: números do <a href={C.fonte.url} target="_blank" rel="noopener noreferrer">{C.fonte.texto}</a> para um imóvel de R$ 500 mil com R$ 400 mil financiados: taxa efetiva de {C.financiamento.taxa}, sistema SAC, {C.financiamento.prazo} meses e primeira parcela de {brl2.format(C.financiamento.primeiraPrestacao)}. O total soma apenas amortização e juros com essa taxa; seguros, TR e tarifas não entram, então o custo real é maior. Consórcio: tabela HS de referência (out/2026), estrutura operacional de 22% e fundo de reserva de 1%, sem o reajuste anual do grupo. Valores de referência, sujeitos a análise de crédito e às condições de cada contratação.
+          Financiamento: números do <a href={C.fonte.url} target="_blank" rel="noopener noreferrer">{C.fonte.texto}</a> para um imóvel de R$ 500 mil com R$ 400 mil financiados: taxa efetiva de {C.financiamento.taxa}, sistema SAC, {C.financiamento.prazo} meses e primeiro pagamento de {brl2.format(C.financiamento.primeiraPrestacao)}. O total soma apenas amortização e juros com essa taxa; seguros, TR e tarifas não entram, então o custo real é maior. Consórcio: tabela HS de referência (out/2026), estrutura operacional de 22% e fundo de reserva de 1%, sem o reajuste anual do grupo. Valores de referência, sujeitos a análise de crédito e às condições de cada contratação.
         </p>
       </div>
     </section>

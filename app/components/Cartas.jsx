@@ -1,6 +1,6 @@
 'use client';
 import { track } from '@vercel/analytics';
-import { WHATSAPP, CARTAS_DEPOIMENTOS, CARTAS_CASOS, LOGO_HS } from '../content';
+import { WHATSAPP, CARTAS_DEPOIMENTOS, CARTAS_CASOS, LOGO_HS, CARTAS_FAQ } from '../content';
 
 const wa = (texto) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`;
 
@@ -22,7 +22,7 @@ const LADOS = [
     id: 'comprar',
     tag: 'Para quem tem entrada',
     titulo: 'Quero comprar',
-    para: 'Para quem já tem a entrada e quer usar o crédito agora, sem esperar sorteio ou lance.',
+    para: 'Para quem já tem a entrada e quer usar o crédito agora, sem esperar a contemplação.',
     itens: [
       'Crédito já liberado, pronto para a compra do imóvel ou veículo',
       'Análise do saldo devedor e do custo total antes de qualquer decisão',
@@ -48,45 +48,8 @@ const LADOS = [
 
 const CONFIANCA = ['Autorizada pelo Banco Central', 'Entrada obrigatória para compra', 'Cessão formal em contrato', 'Valores somente na cotação individual'];
 
-const PARA_QUEM = {
-  e: [
-    'Tem a entrada disponível e quer comprar o imóvel ou o veículo agora, sem esperar contemplação',
-    'Tem renda compatível com os aportes restantes e passa na análise de crédito da administradora',
-    'Quer comparar, número contra número, com o financiamento antes de decidir',
-    'Contemplou, não vai usar o crédito agora e quer transformar a carta em capital',
-  ],
-  porque: [
-    'Crédito já liberado: você negocia o bem como comprador à vista',
-    'Custo estrutural do consórcio no lugar dos juros do financiamento bancário',
-    'Aportes previsíveis até o fim do grupo, sem depender da aprovação de um banco',
-    'Transferência formal, com contrato e aprovação da HS Consórcios',
-  ],
-  nao: [
-    'Quem não tem entrada: para você, o caminho certo é o consórcio estratégico desde o início',
-    'Quem tem restrição no nome ou renda que não comporta os aportes restantes',
-    'Quem procura crédito sem custo ou ganho garantido na revenda',
-    'Quem quer apenas especular, sem um bem definido para comprar',
-  ],
-};
 
-const PASSOS = [
-  { t: 'Separe a entrada', d: 'A entrada é o valor pago a quem está vendendo a carta. Sem ela, a compra não acontece.' },
-  { t: 'Peça a cotação', d: 'Clique no botão, informe bem, crédito e entrada. A cotação chega no seu WhatsApp.' },
-  { t: 'Análise e contrato', d: 'Avaliamos saldo e aportes restantes. A transferência é formalizada e aprovada pela administradora.' },
-  { t: 'Compre o bem', d: 'Com a aprovação, o crédito é usado na compra do imóvel ou veículo, e você segue com os aportes.' },
-];
 
-const OBJECOES = [
-  { q: 'Preciso ter entrada para comprar uma carta contemplada?', a: 'Sim, a entrada é obrigatória. Ela é o valor pago a quem está vendendo a carta; o restante segue em aportes mensais no grupo. Sem entrada, a compra não acontece, e o caminho certo para você é o consórcio estratégico desde o início.', abrir: true },
-  { q: 'Para quem é a carta contemplada?', lista: PARA_QUEM.e },
-  { q: 'Por que usar uma carta contemplada?', lista: PARA_QUEM.porque },
-  { q: 'Como usar uma carta contemplada?', passos: PASSOS },
-  { q: 'Para quem a carta contemplada não é?', lista: PARA_QUEM.nao },
-  { q: 'É seguro comprar ou vender uma carta?', a: 'Sim, quando a transferência é feita do jeito certo: com contrato, cessão registrada e aprovação da administradora. Nada de acordo de gaveta. Conduzimos cada etapa.' },
-  { q: 'Quem compra a minha carta?', a: 'Pessoas que já têm entrada e querem o crédito agora, e investidores que acompanham esse mercado. Nosso papel é encontrar o comprador certo e conduzir a negociação.' },
-  { q: 'Quanto vale a minha carta?', a: 'Depende do crédito, do saldo devedor, dos aportes restantes e do momento do mercado. Por isso não publicamos valores: você solicita a cotação e recebe o número da sua cota, analisada individualmente.' },
-  { q: 'Quanto tempo leva?', a: 'Varia conforme a negociação e a análise da administradora. Na cotação você já recebe uma estimativa realista para o seu caso.' },
-];
 
 export default function Cartas() {
   return (
@@ -235,7 +198,7 @@ export default function Cartas() {
             <a href={wa('Olá, João! Tenho uma dúvida sobre cartas contempladas e quero uma cotação.')} target="_blank" rel="noopener noreferrer" className="btn btn-sec" onClick={() => track('cartas_whatsapp', { lado: 'duvida' })}>Falar no WhatsApp</a>
           </div>
           <div className="col" style={{ flex: '1 1 520px', borderTop: '1px solid var(--rule)' }}>
-            {OBJECOES.map((o) => (
+            {CARTAS_FAQ.map((o) => (
               <details key={o.q} open={o.abrir}>
                 <summary>{o.q}</summary>
                 {o.a && <p className="cp">{o.a}</p>}

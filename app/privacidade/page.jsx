@@ -5,6 +5,7 @@ import { GAIA, WHATSAPP } from '../content';
 export const metadata = {
   title: 'Política de Privacidade | João Dias · Consórcio Inteligente',
   description: 'Como tratamos os dados pessoais enviados pelo site, conforme a Lei Geral de Proteção de Dados (LGPD).',
+  alternates: { canonical: '/privacidade' },
 };
 
 // Rascunho: revisar com o jurídico da Gaia Group antes de publicar.

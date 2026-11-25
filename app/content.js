@@ -44,8 +44,8 @@ export const NUMEROS_HS = ['[anos de mercado]', '[consorciados]', '[crédito ent
 
 export const FAQ = [
   { q: 'Qual a relação entre João Dias, a Gaia Group e a HS?', a: 'João atende pela Gaia Group, que tem a HS Consórcios (Grupo Herval) como administradora exclusiva. A HS é autorizada pelo Banco Central e administra os grupos, as assembleias e as contemplações.' },
-  { q: 'Em quanto tempo sou contemplado?', a: 'Não existe data garantida. Existe estratégia de contemplação, definida com dados do grupo no seu diagnóstico.' },
-  { q: 'Consórcio tem juros?', a: 'No lugar dos juros do financiamento, o consórcio tem a estrutura operacional do grupo (taxa de administração e fundo de reserva), apresentada antes da assinatura.' },
+  { q: 'Em quanto tempo sou contemplado?', a: 'Ninguém pode garantir uma data. No diagnóstico, definimos a estratégia de contemplação com os dados reais do grupo.' },
+  { q: 'Consórcio tem juros?', a: 'No lugar dos juros do financiamento, o consórcio tem a estrutura operacional do grupo e o fundo de reserva, apresentados antes da assinatura.' },
   { q: 'Vocês trabalham com carta contemplada?', a: 'Sim. Para quem já tem entrada e quer o crédito agora, ou para quem contemplou e quer vender. A cotação é individual, direto no WhatsApp, na seção Cartas contempladas.' },
   { q: 'Quanto custa o diagnóstico patrimonial?', a: 'Nada. É personalizado e você só segue se fizer sentido.' },
   { q: 'Já sou cliente. Com quem falo?', a: 'Com o seu consultor, direto no WhatsApp.' },
@@ -122,3 +122,44 @@ export const CARTAS_CASOS = [
 
 // Logo da HS para a faixa de confiança: salvar o arquivo em public/logo-hs.png e trocar para '/logo-hs.png'.
 export const LOGO_HS = '';
+
+// Cartas contempladas: conteúdo das perguntas frequentes (usado na página e nos dados estruturados do Google)
+export const CARTAS_PARA_QUEM = {
+  e: [
+    'Tem a entrada disponível e quer comprar o imóvel ou o veículo agora, sem esperar contemplação',
+    'Tem renda compatível com os aportes restantes e passa na análise de crédito da administradora',
+    'Quer comparar, número contra número, com o financiamento antes de decidir',
+    'Contemplou, não vai usar o crédito agora e quer transformar a carta em capital',
+  ],
+  porque: [
+    'Crédito já liberado: você negocia o bem como comprador à vista',
+    'Custo estrutural do consórcio no lugar dos juros do financiamento bancário',
+    'Aportes previsíveis até o fim do grupo, sem depender da aprovação de um banco',
+    'Transferência formal, com contrato e aprovação da HS Consórcios',
+  ],
+  nao: [
+    'Quem não tem entrada: para você, o caminho certo é o consórcio estratégico desde o início',
+    'Quem tem restrição no nome ou renda que não comporta os aportes restantes',
+    'Quem procura crédito sem custo ou ganho garantido na revenda',
+    'Quem quer apenas especular, sem um bem definido para comprar',
+  ],
+};
+
+export const CARTAS_PASSOS = [
+  { t: 'Separe a entrada', d: 'A entrada é o valor pago a quem está vendendo a carta. Sem ela, a compra não acontece.' },
+  { t: 'Peça a cotação', d: 'Clique no botão, informe bem, crédito e entrada. A cotação chega no seu WhatsApp.' },
+  { t: 'Análise e contrato', d: 'Avaliamos saldo e aportes restantes. A transferência é formalizada e aprovada pela administradora.' },
+  { t: 'Compre o bem', d: 'Com a aprovação, o crédito é usado na compra do imóvel ou veículo, e você segue com os aportes.' },
+];
+
+export const CARTAS_FAQ = [
+  { q: 'Preciso ter entrada para comprar uma carta contemplada?', a: 'Sim, a entrada é obrigatória. Ela é o valor pago a quem está vendendo a carta; o restante segue em aportes mensais no grupo. Sem entrada, a compra não acontece, e o caminho certo para você é o consórcio estratégico desde o início.', abrir: true },
+  { q: 'Para quem é a carta contemplada?', lista: CARTAS_PARA_QUEM.e },
+  { q: 'Por que usar uma carta contemplada?', lista: CARTAS_PARA_QUEM.porque },
+  { q: 'Como usar uma carta contemplada?', passos: CARTAS_PASSOS },
+  { q: 'Para quem a carta contemplada não é?', lista: CARTAS_PARA_QUEM.nao },
+  { q: 'É seguro comprar ou vender uma carta?', a: 'Sim, quando a transferência é feita do jeito certo: com contrato, cessão registrada e aprovação da administradora. Nada de acordo de gaveta. Conduzimos cada etapa.' },
+  { q: 'Quem compra a minha carta?', a: 'Pessoas que já têm entrada e querem o crédito agora, e investidores que acompanham esse mercado. Nosso papel é encontrar o comprador certo e conduzir a negociação.' },
+  { q: 'Quanto vale a minha carta?', a: 'Depende do crédito, do saldo devedor, dos aportes restantes e do momento do mercado. Por isso não publicamos valores: você solicita a cotação e recebe o número da sua cota, analisada individualmente.' },
+  { q: 'Quanto tempo leva?', a: 'Varia conforme a negociação e a análise da administradora. Na cotação você já recebe uma estimativa realista para o seu caso.' },
+];

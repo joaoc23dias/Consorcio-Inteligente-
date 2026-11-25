@@ -33,7 +33,7 @@ export default function HS() {
           ))}
         </ul>
         <p className="cp small" style={{ marginTop: 28 }}>
-          Diagnóstico presencial em qualquer escritório ou por videochamada, se você estiver em outra cidade.
+          Atendimento presencial em Ribeirão Preto, São José do Rio Pardo e Mococa, e em toda a região: Guaxupé, Monte Santo de Minas, Tambaú e Casa Branca. Em outras cidades, o diagnóstico é feito por videochamada.
         </p>
       </div>
     </section>
