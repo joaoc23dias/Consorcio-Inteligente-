@@ -40,13 +40,15 @@ export const NUMEROS_JOAO = [
   { valor: '[R$ crédito]', rotulo: 'estruturado' },
 ];
 
-// Fonte: Demonstrações financeiras HS Consórcios de 31/12/2025 (hsconsorcios.com.br/wp-content/uploads/2026/04/122025_DF.pdf).
+// Fonte: site oficial da HS Consórcios (hsconsorcios.com.br, seção "Nossos números"), consultado em 25/11/2026.
+export const HS_DESTAQUE = 'Maior administradora do Brasil no setor imobiliário';
 export const NUMEROS_HS = [
   { valor: '30+ anos', rotulo: 'de mercado, desde 1993' },
-  { valor: '361 mil', rotulo: 'consorciados ativos' },
-  { valor: 'R$ 11 bi', rotulo: 'em créditos liberados' },
+  { valor: '+410 mil', rotulo: 'cotas ativas' },
+  { valor: '+R$ 3 bi', rotulo: 'em bens entregues em 2025' },
+  { valor: '+2.600', rotulo: 'contemplações por mês' },
 ];
-export const NUMEROS_HS_FONTE = 'Dados das demonstrações financeiras da HS Consórcios, dezembro de 2025.';
+export const NUMEROS_HS_FONTE = 'Dados divulgados pela HS Consórcios em hsconsorcios.com.br, novembro de 2026.';
 
 export const FAQ = [
   { q: 'Qual a relação entre João Dias, a Gaia Group e a HS?', a: 'João atende pela Gaia Group, que tem a HS Consórcios (Grupo Herval) como administradora exclusiva. A HS é autorizada pelo Banco Central e administra os grupos, as assembleias e as contemplações.' },

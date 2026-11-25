@@ -63,7 +63,7 @@ export default function Cartas() {
             </h2>
           </div>
           <p className="cp col" style={{ flex: '0 1 380px' }}>
-            Uma carta contemplada é um ativo com valor de mercado. Pela Gaia Group, você compra uma carta já liberada ou vende a sua com segurança jurídica e a HS Consórcios como administradora.
+            Uma carta contemplada é um ativo com valor de mercado. Pela Gaia Group, você compra uma carta já liberada ou vende a sua com segurança jurídica, intermediação da Gaia Group e a transferência aprovada pela HS Consórcios.
           </p>
         </div>
 
@@ -229,7 +229,7 @@ export default function Cartas() {
         </div>
 
         <p className="cp" style={{ fontSize: 12, marginTop: 48, maxWidth: 860 }}>
-          O valor de negociação de uma carta depende do mercado e das condições da cota. Não há garantia de ágio, prazo de venda ou rentabilidade. Toda transferência está sujeita à análise e aprovação da administradora.
+          O valor de negociação de uma carta depende do mercado e das condições da cota. Não há garantia de ágio, prazo de venda ou rentabilidade. Toda transferência está sujeita à análise e aprovação da administradora. A negociação de cartas contempladas é feita entre clientes, com intermediação da Gaia Group; a HS Consórcios não comercializa cotas contempladas e atua na análise e aprovação da transferência.
         </p>
       </div>
     </section>

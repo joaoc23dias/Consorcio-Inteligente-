@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { ESCRITORIOS, NUMEROS_HS, NUMEROS_HS_FONTE } from '../content';
+import { ESCRITORIOS, NUMEROS_HS, NUMEROS_HS_FONTE, HS_DESTAQUE } from '../content';
 
 export default function HS() {
   return (
@@ -17,7 +17,8 @@ export default function HS() {
           </div>
           <div className="col pad-box" style={{ flex: '1 1 360px', background: 'var(--surface)', border: '1px solid var(--rule)', padding: 36 }}>
             <Image src="/logo-hs.png" alt="HS Consórcios, uma empresa do Grupo Herval" width={240} height={64} />
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 12, marginTop: 20 }}>
+            <p style={{ margin: '18px 0 0', fontFamily: 'var(--serif)', fontSize: 22, lineHeight: 1.25, color: 'var(--ink)' }}>{HS_DESTAQUE}.</p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '20px 16px', marginTop: 20 }}>
               {NUMEROS_HS.map((n) => (
                 <div key={n.rotulo} style={{ borderTop: '1px solid var(--rule-strong)', paddingTop: 14 }}>
                   <span className="num" style={{ display: 'block', fontFamily: 'var(--serif)', fontSize: 'clamp(22px, 2.2vw, 30px)', lineHeight: 1.1, color: 'var(--green)', whiteSpace: 'nowrap' }}>{n.valor}</span>
