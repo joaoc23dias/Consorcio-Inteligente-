@@ -1,13 +1,18 @@
 import { PILARES } from '../content';
 
+const TEXTO = 'Sou de São José do Rio Pardo e há uma década trabalho nos mercados financeiro e imobiliário. Atendo pela Gaia Group, que tem a HS Consórcios como administradora exclusiva, com o Método SPA® da Gaia Group, que transforma o consórcio em ferramenta de crescimento patrimonial. Todo consultor que atende comigo segue o mesmo método.';
+const MARCAS = new Set(['Gaia', 'Group,', 'Group', 'HS', 'Consórcios']);
+
 export default function Metodo() {
   return (
-    <section id="metodo" className="sec" aria-labelledby="metodo-titulo">
+    <section id="metodo" className="sec painel" aria-labelledby="metodo-titulo">
       <div className="wrap row" style={{ gap: 72, alignItems: 'flex-start' }}>
         <div className="col" style={{ flex: '1 1 460px' }}>
           <h2 id="metodo-titulo" className="h2">Método SPA®: segurança, patrimônio e alavancagem.</h2>
-          <p className="lead">
-            Sou de São José do Rio Pardo e há uma década trabalho nos mercados financeiro e imobiliário. Atendo pela <span translate="no">Gaia Group</span>, que tem a <span translate="no">HS Consórcios</span> como administradora exclusiva, com o Método SPA® da Gaia Group, que transforma o consórcio em ferramenta de crescimento patrimonial. Todo consultor que atende comigo segue o mesmo método.
+          <p className="lead scrub" style={{ '--n': TEXTO.split(' ').length }}>
+            {TEXTO.split(' ').map((w, k) => (
+              <span key={k} className="w" style={{ '--k': k }} translate={MARCAS.has(w) ? 'no' : undefined}>{w}{' '}</span>
+            ))}
           </p>
         </div>
         <div className="col" style={{ flex: '1 1 420px' }}>

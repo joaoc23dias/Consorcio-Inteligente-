@@ -38,7 +38,7 @@ export default function Agendar() {
   }
 
   return (
-    <section id="diagnostico" className="sec alt" aria-labelledby="agendar-titulo">
+    <section id="diagnostico" className="sec painel" aria-labelledby="agendar-titulo">
       <div className="wrap row" style={{ gap: 72, alignItems: 'center' }}>
         <div className="col" style={{ flex: '1 1 420px' }}>
           <h2 id="agendar-titulo" className="h2">Agende o seu diagnóstico patrimonial.</h2>
