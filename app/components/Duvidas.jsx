@@ -7,7 +7,7 @@ export default function Duvidas() {
         <div className="col" style={{ flex: '1 1 320px' }}>
           <h2 id="duvidas-titulo" className="h2">Pergunte a qualquer hora. Decida com quem entende.</h2>
           <p className="lead" style={{ fontSize: 16 }}>
-            O assistente responde suas dúvidas no WhatsApp. Na hora de decidir, eu ou um consultor certificado do meu time assumimos a conversa.
+            Mande sua dúvida pelo WhatsApp. Quando chegar a hora de decidir, eu ou um consultor do meu time conduzimos a conversa com você.
           </p>
           <div className="nota nota-verde" style={{ marginTop: 40 }}>
             <p className="eyebrow" style={{ marginBottom: 8 }}>Parceria</p>

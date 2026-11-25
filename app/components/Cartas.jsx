@@ -62,7 +62,7 @@ export default function Cartas() {
             </h2>
           </div>
           <p className="cp col" style={{ flex: '0 1 380px' }}>
-            Uma carta contemplada é um ativo com valor de mercado. Pela Gaia Group, você compra uma carta já liberada ou vende a sua com segurança jurídica, intermediação da Gaia Group e a transferência aprovada pela HS Consórcios.
+            Uma carta contemplada é um ativo com valor de mercado. Você compra uma carta já liberada ou vende a sua com segurança jurídica: a Gaia Group intermedeia a negociação e a HS Consórcios aprova a transferência.
           </p>
         </div>
 
@@ -82,7 +82,6 @@ export default function Cartas() {
               <div key={l.id} className={`col bezel${escuro ? ' bezel-dark' : ''}`} style={{ flex: '1 1 420px' }}>
                 <div className="bezel-core pad-box" style={{ padding: 40 }}>
                   <h3 className="h3" style={{ margin: '0 0 10px', fontSize: 34, color: escuro ? 'var(--bg)' : 'var(--green)' }}>{l.titulo}</h3>
-                  <p style={{ margin: '0 0 12px', fontSize: 13, fontWeight: 600, color: 'var(--gold)' }}>{l.tag}</p>
                   <p className="cp" style={{ marginBottom: 24 }}>{l.para}</p>
                   <ul style={{ listStyle: 'none', margin: '0 0 32px', padding: 0, flex: 1 }}>
                     {l.itens.map((i) => (

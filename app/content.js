@@ -20,17 +20,17 @@ export const QUANDO_NAO = [
   { t: 'Você precisa do bem amanhã', d: 'Consórcio não é compra imediata. Se você tem entrada, avaliamos uma carta contemplada; se não tem, dizemos que não é o caso.' },
   { t: 'O aporte aperta o seu mês', d: 'Se não couber com folga, refazemos o plano ou recuamos.' },
   { t: 'O objetivo ainda não está claro', d: 'Primeiro estruturamos, depois escolhemos o crédito.' },
-  { t: 'Alguém prometeu data de contemplação', d: 'Não existe data garantida. Existe estratégia.' },
+  { t: 'Alguém prometeu data de contemplação', d: 'Ninguém pode garantir data de contemplação. Desconfie de quem promete.' },
 ];
 
 export const PILARES = [
   { t: 'Segurança', d: 'O plano respeita o seu fluxo e a sua reserva.' },
-  { t: 'Patrimônio', d: 'Cada aporte constrói um ativo, não um passivo.' },
+  { t: 'Patrimônio', d: 'Cada aporte vira patrimônio que fica com você.' },
   { t: 'Alavancagem', d: 'Estratégia de contemplação para acelerar o próximo ativo.' },
 ];
 
 export const DEPOIMENTOS = [
-  { nome: 'Cliente Gaia Group', detalhe: 'Casa própria · contemplado, vendeu a carta e aumentou o poder de lance', video: '/casos/caso-carta-vendida.mp4', poster: '/casos/caso-carta-vendida.jpg' },
+  { nome: 'Cliente Gaia Group', detalhe: 'Casa própria · contemplado, vendeu a carta e aumentou o poder de lance', citacao: 'Logo no primeiro mês nós já fomos contemplados. Vendemos essa carta e aumentou o nosso potencial de lance para as próximas.', video: '/casos/caso-carta-vendida.mp4', poster: '/casos/caso-carta-vendida.jpg' },
   { nome: '[Nome do cliente] · [cidade]', detalhe: 'Plano de investimento · atendido por [consultor] · [mês/ano]' },
   { nome: '[Nome do cliente] · [cidade]', detalhe: 'Contemplado no veículo · atendido por [consultor] · [mês/ano]' },
 ];

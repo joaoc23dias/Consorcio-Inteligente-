@@ -34,7 +34,7 @@ export default function Agendar() {
     <section id="diagnostico" className="sec alt" aria-labelledby="agendar-titulo">
       <div className="wrap row" style={{ gap: 72, alignItems: 'center' }}>
         <div className="col" style={{ flex: '1 1 420px' }}>
-          <h2 id="agendar-titulo" className="h2">O dia mais importante da sua conquista é o dia em que você começa.</h2>
+          <h2 id="agendar-titulo" className="h2">Agende o seu diagnóstico patrimonial.</h2>
           <p className="lead">
             Deixe seu contato e escolha o horário. Eu te ligo por 5 minutos para entender o seu objetivo e marcar o diagnóstico patrimonial.
           </p>

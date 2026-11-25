@@ -7,13 +7,13 @@ export default function Hero() {
     <section style={{ padding: '96px 0 88px' }}>
       <div className="wrap row" style={{ gap: 72, alignItems: 'center' }}>
         <div className="col" style={{ flex: '1 1 500px' }}>
-          <h1 className="h1">Seu próximo ativo merece uma estratégia, não uma cota qualquer.</h1>
+          <h1 className="h1">Seu próximo ativo merece uma estratégia.</h1>
           <p className="lead" style={{ marginBottom: 40 }}>
             Sou João Dias, especialista em planejamento patrimonial pela Gaia Group. Você me diz onde quer chegar, eu monto o plano com o consórcio estratégico HS e o meu time acompanha cada mês até a sua conquista patrimonial.
           </p>
           <div className="row hero-ctas" style={{ gap: 14 }}>
             <a href="#diagnostico" className="btn btn-pri">Agendar meu diagnóstico patrimonial</a>
-            <a href="#conta" className="btn btn-sec">Fazer a conta</a>
+            <a href="#metodo" className="btn btn-sec">Conhecer o método</a>
           </div>
         </div>
         <div className="col hero-figura" style={{ flex: '1 1 380px' }}>
@@ -31,11 +31,14 @@ export default function Hero() {
             João Dias · Especialista em planejamento patrimonial
           </figcaption>
         </figure>
-        <MiniSim />
         </div>
       </div>
 
-      <div className="wrap" style={{ marginTop: 80 }}>
+      <div className="wrap" style={{ marginTop: 72 }}>
+        <MiniSim />
+      </div>
+
+      <div className="wrap" style={{ marginTop: 56 }}>
         <hr className="rule" />
         <div className="row" style={{ gap: 32, alignItems: 'center', justifyContent: 'space-between', padding: '28px 0' }}>
           <div className="row" style={{ alignItems: 'center', gap: 22 }}>
@@ -46,14 +49,16 @@ export default function Hero() {
               Administração exclusiva <span translate="no">HS Consórcios</span> · autorizada pelo Banco Central
             </span>
           </div>
+          {NUMEROS_JOAO.every((n) => !n.valor.startsWith('[')) && (
           <dl className="row" style={{ gap: 40, margin: 0 }}>
             {NUMEROS_JOAO.map((n) => (
               <div key={n.rotulo} style={{ display: 'flex', flexDirection: 'column-reverse' }}>
                 <dt className="label" style={{ marginTop: 8 }}>{n.rotulo}</dt>
-                <dd className="ph num" style={{ margin: 0, padding: '6px 10px' }}>{n.valor}</dd>
+                <dd className="num" style={{ margin: 0, fontFamily: 'var(--serif)', fontSize: 28, color: 'var(--green)' }}>{n.valor}</dd>
               </div>
             ))}
           </dl>
+          )}
         </div>
         <hr className="rule" />
       </div>

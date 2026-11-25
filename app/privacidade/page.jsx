@@ -11,6 +11,8 @@ export const metadata = {
 // Rascunho: revisar com o jurídico da Gaia Group antes de publicar.
 export default function Privacidade() {
   const whats = `+${WHATSAPP.slice(0, 2)} (${WHATSAPP.slice(2, 4)}) ${WHATSAPP.slice(4, 9)}-${WHATSAPP.slice(9)}`;
+  const temDados = !GAIA.cnpj.startsWith('[');
+  const temEmail = !GAIA.email.startsWith('[');
   return (
     <>
       <a href="#conteudo" className="skip">Pular para o conteúdo</a>
@@ -25,7 +27,7 @@ export default function Privacidade() {
             </p>
 
             <h2>Quem é o controlador</h2>
-            <p>{GAIA.razaoSocial}, CNPJ {GAIA.cnpj}, por meio do especialista João Dias. Contato: {GAIA.email} ou WhatsApp {whats}.</p>
+            <p>{temDados ? `${GAIA.razaoSocial}, CNPJ ${GAIA.cnpj}` : 'Gaia Group Investimentos & Consórcios'}, por meio do especialista João Dias. Contato: {temEmail ? `${GAIA.email} ou ` : ''}WhatsApp {whats}.</p>
 
             <h2>Quais dados coletamos</h2>
             <ul>
@@ -52,7 +54,7 @@ export default function Privacidade() {
 
             <h2>Seus direitos</h2>
             <p>
-              Você pode pedir, a qualquer momento, confirmação do tratamento, acesso, correção, eliminação dos dados, informação sobre compartilhamento e revogação do consentimento. Basta escrever para {GAIA.email} ou chamar no WhatsApp {whats}.
+              Você pode pedir, a qualquer momento, confirmação do tratamento, acesso, correção, eliminação dos dados, informação sobre compartilhamento e revogação do consentimento. Basta {temEmail ? `escrever para ${GAIA.email} ou ` : ''}chamar no WhatsApp {whats}.
             </p>
 
             <p style={{ marginTop: 40, fontSize: 13 }}>Última atualização: [data de publicação].</p>

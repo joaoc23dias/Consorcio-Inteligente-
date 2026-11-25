@@ -24,28 +24,35 @@ export default function MiniSim() {
 
   return (
     <div className="minisim" role="group" aria-labelledby="minisim-titulo">
-      <p id="minisim-titulo" className="eyebrow" style={{ marginBottom: 12 }}>Qual é o seu próximo ativo?</p>
-      <div className="row" style={{ gap: 8, marginBottom: 18 }}>
-        {TIPOS.map((t) => (
-          <button key={t.id} type="button" className="chip" aria-pressed={tipo === t.id} onClick={() => { setTipo(t.id); setIdx(t.inicial); }}>
-            {t.label}
-          </button>
-        ))}
+      <div className="ms-head">
+        <p id="minisim-titulo" className="h3" style={{ margin: '0 0 6px' }}>Faça uma conta rápida</p>
+        <p className="cp" style={{ margin: 0 }}>Escolha o bem e o crédito. O plano completo fica logo abaixo.</p>
       </div>
-      <label htmlFor="minisim-credito" className="label" style={{ display: 'block', marginBottom: 6 }}>Crédito</label>
-      <output htmlFor="minisim-credito" className="num" style={{ display: 'block', fontFamily: 'var(--serif)', fontSize: 34, lineHeight: 1.1, color: 'var(--green)' }}>{brl.format(credito)}</output>
-      <input id="minisim-credito" type="range" min={0} max={tabela.length - 1} step={1} value={i}
-        onChange={(e) => setIdx(Number(e.target.value))}
-        aria-valuetext={brl.format(credito)} style={{ width: '100%', margin: '14px 0 16px' }} />
-      <p style={{ margin: '0 0 18px', fontSize: 14, color: 'var(--ink-soft)' }}>
-        Meio aporte de <strong className="num" style={{ color: 'var(--ink)' }}>{brl2.format(meio)}</strong>/mês até a contemplação, em {prazo} meses.
-      </p>
-      <a href="#conta" className="btn btn-pri btn-ico" style={{ width: '100%', justifyContent: 'space-between' }} onClick={verPlano}>
-        Ver meu plano completo
-        <span className="ico" aria-hidden="true">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M4 10L10 4M5 4h5v5" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" /></svg>
-        </span>
-      </a>
+      <div className="ms-controles">
+        <div className="row" style={{ gap: 8, marginBottom: 14 }}>
+          {TIPOS.map((t) => (
+            <button key={t.id} type="button" className="chip" aria-pressed={tipo === t.id} onClick={() => { setTipo(t.id); setIdx(t.inicial); }}>
+              {t.label}
+            </button>
+          ))}
+        </div>
+        <label htmlFor="minisim-credito" className="label" style={{ display: 'block', marginBottom: 4 }}>Crédito</label>
+        <output htmlFor="minisim-credito" className="num" style={{ display: 'block', fontFamily: 'var(--serif)', fontSize: 32, lineHeight: 1.1, color: 'var(--green)' }}>{brl.format(credito)}</output>
+        <input id="minisim-credito" type="range" min={0} max={tabela.length - 1} step={1} value={i}
+          onChange={(e) => setIdx(Number(e.target.value))}
+          aria-valuetext={brl.format(credito)} style={{ width: '100%', margin: '10px 0 0' }} />
+      </div>
+      <div className="ms-resultado">
+        <p style={{ margin: '0 0 16px', fontSize: 15, color: 'var(--ink-soft)' }}>
+          Meio aporte de <strong className="num" style={{ color: 'var(--ink)' }}>{brl2.format(meio)}</strong>/mês até a contemplação, em {prazo} meses.
+        </p>
+        <a href="#conta" className="btn btn-pri btn-ico" style={{ width: '100%', justifyContent: 'space-between' }} onClick={verPlano}>
+          Ver meu plano completo
+          <span className="ico" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M4 10L10 4M5 4h5v5" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          </span>
+        </a>
+      </div>
     </div>
   );
 }

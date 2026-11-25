@@ -13,9 +13,9 @@ export default function Footer() {
           <p style={{ margin: 0 }}>
             João Dias atua pela Gaia Group, que tem a HS Consórcios (Grupo Herval) como administradora exclusiva, autorizada pelo Banco Central. Consórcio não é investimento financeiro; a contemplação depende de sorteio ou lance.
           </p>
-          <p style={{ margin: '10px 0 0' }}>
-            {GAIA.razaoSocial} · CNPJ {GAIA.cnpj}
-          </p>
+          {!GAIA.cnpj.startsWith('[') && (
+            <p style={{ margin: '10px 0 0' }}>{GAIA.razaoSocial} · CNPJ {GAIA.cnpj}</p>
+          )}
           <p style={{ margin: '10px 0 0' }}>
             <a href={BC_URL} target="_blank" rel="noopener noreferrer">Consulte a HS Consórcios no Banco Central</a>
             {' · '}

@@ -12,10 +12,9 @@ export default function Pausa() {
       <div className="wrap pausa-wrap">
         <div className="pausa-card">
           <h2 id="pausa-titulo" className="h2" style={{ margin: '0 0 14px' }}>A próxima conquista começa com uma conversa.</h2>
-          <p className="cp" style={{ margin: '0 0 24px' }}>
+          <p className="cp" style={{ margin: 0 }}>
             Sem compromisso. Você sai com o seu cenário claro, os números na mesa e o caminho que faz sentido para você.
           </p>
-          <a href="#diagnostico" className="btn btn-pri">Agendar meu diagnóstico</a>
         </div>
       </div>
     </section>
