@@ -12,6 +12,7 @@ export default function Header() {
           <a href="/#metodo">Método SPA®</a>
           <a href="/#hs" translate="no">HS Consórcios</a>
           <a href="/#conta">Faça a conta</a>
+          <a href="/#cartas">Cartas</a>
           <a href="/#duvidas">Dúvidas</a>
         </nav>
         <div className="row" style={{ alignItems: 'center', gap: 20 }}>

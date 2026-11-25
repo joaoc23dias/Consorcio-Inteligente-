@@ -7,6 +7,7 @@ import HS from './components/HS';
 import Depoimentos from './components/Depoimentos';
 import Simulador from './components/Simulador';
 import Comparativo from './components/Comparativo';
+import Cartas from './components/Cartas';
 import Duvidas from './components/Duvidas';
 import Agendar from './components/Agendar';
 import Footer from './components/Footer';
@@ -23,6 +24,7 @@ export default function Home() {
         <Metodo />
         <HS />
         <Comparativo />
+        <Cartas />
         <Depoimentos />
         <Simulador />
         <Duvidas />
