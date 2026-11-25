@@ -106,7 +106,8 @@ export default function Cartas() {
 
         <div className="row" style={{ gap: 20, marginTop: 56 }}>
           {LADOS.map((l) => {
-            const escuro = l.id === 'comprar';
+            const escuro = false;
+            const principal = l.id === 'comprar';
             return (
               <div key={l.id} className={`col bezel${escuro ? ' bezel-dark' : ''}`} style={{ flex: '1 1 420px' }}>
                 <div className="bezel-core pad-box" style={{ padding: 40 }}>
@@ -125,7 +126,7 @@ export default function Cartas() {
                     href={wa(l.msg)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`btn btn-ico ${escuro ? 'btn-claro' : 'btn-pri'}`}
+                    className={`btn btn-ico ${principal ? 'btn-pri' : 'btn-sec'}`}
                     style={{ alignSelf: 'flex-start' }}
                     onClick={() => track('cartas_whatsapp', { lado: l.id })}
                   >
@@ -159,16 +160,24 @@ export default function Cartas() {
           {CARTAS_CASOS.map((c) => (
             <article key={c.video} className="bezel" style={{ marginTop: 32 }}>
               <div className="bezel-core caso-grid">
+                <figure style={{ margin: 0 }}>
                 <video
-                  className="caso-video"
-                  src={c.video}
-                  poster={c.poster}
-                  controls
-                  playsInline
-                  preload="none"
-                  aria-label={`Depoimento em vídeo: ${c.titulo}`}
-                  onPlay={() => track('caso_video_play', { caso: c.video })}
-                />
+                    className="caso-video"
+                    src={c.video}
+                    poster={c.poster}
+                    controls
+                    playsInline
+                    preload="none"
+                    aria-label={`Depoimento em vídeo: ${c.titulo}`}
+                    onPlay={() => track('caso_video_play', { caso: c.video })}
+                  />
+                  {c.cliente && (
+                    <figcaption style={{ marginTop: 12, textAlign: 'center' }}>
+                      <span style={{ display: 'block', fontFamily: 'var(--serif)', fontSize: 20, color: 'var(--ink)' }}>{c.cliente}</span>
+                      {c.profissao && <span className="label">{c.profissao}</span>}
+                    </figcaption>
+                  )}
+                </figure>
                 <div className="pad-box" style={{ padding: 40, display: 'flex', flexDirection: 'column' }}>
                   <p className="eyebrow" style={{ marginBottom: 10 }}>{c.perfil} · Cliente Gaia Group</p>
                   <h4 style={{ margin: '0 0 24px', fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 30, lineHeight: 1.2, color: 'var(--green)' }}>{c.titulo}</h4>
@@ -180,7 +189,7 @@ export default function Cartas() {
                       </li>
                     ))}
                   </ol>
-                  {c.cliente ? <p style={{ fontFamily: 'var(--serif)', fontSize: 22, margin: '20px 0 24px' }}>{c.cliente}</p> : <div style={{ height: 24 }} />}
+                  <div style={{ height: 24 }} />
                   <a href={wa('Olá, João! Vi o caso real no site e quero entender como usar a carta contemplada na minha estratégia.')} target="_blank" rel="noopener noreferrer" className="btn btn-pri btn-ico" style={{ alignSelf: 'flex-start' }} onClick={() => track('cartas_whatsapp', { lado: 'caso' })}>
                     Quero uma estratégia assim<span className="ico"><Seta /></span>
                   </a>
@@ -210,16 +219,12 @@ export default function Cartas() {
           )}
         </div>
 
-        <div className="bezel bezel-dark" style={{ marginTop: 72 }}>
-          <div className="bezel-core pad-box row" style={{ flexDirection: 'row', flexWrap: 'wrap', padding: '32px 40px', gap: 24, alignItems: 'center', justifyContent: 'space-between' }}>
-            <div className="col" style={{ flex: '1 1 420px' }}>
-              <p className="tag eyebrow" style={{ marginBottom: 8 }}>Requisito para comprar</p>
-              <p style={{ margin: 0, fontFamily: 'var(--serif)', fontSize: 30, lineHeight: 1.2, color: 'var(--bg)' }}>Para comprar uma carta contemplada, você precisa ter entrada.</p>
-            </div>
-            <p className="cp col" style={{ flex: '1 1 320px', margin: 0 }}>
-              A entrada é o valor pago a quem está vendendo a carta. O restante segue em aportes mensais no grupo. Ainda não tem entrada? <a href="#conta" style={{ color: 'var(--gold-light)' }}>Faça a conta do consórcio estratégico</a>.
-            </p>
-          </div>
+        <div className="nota" style={{ marginTop: 72 }}>
+          <p className="eyebrow" style={{ marginBottom: 8 }}>Requisito para comprar</p>
+          <p style={{ margin: '0 0 8px', fontFamily: 'var(--serif)', fontSize: 26, lineHeight: 1.25, color: 'var(--ink)' }}>Para comprar uma carta contemplada, você precisa ter entrada.</p>
+          <p className="cp" style={{ margin: 0, maxWidth: 720 }}>
+            A entrada é o valor pago a quem está vendendo a carta. O restante segue em aportes mensais no grupo. Ainda não tem entrada? <a href="#conta">Faça a conta do consórcio estratégico</a>.
+          </p>
         </div>
 
         <div id="cartas-faq" className="row" style={{ gap: 72, marginTop: 88 }}>

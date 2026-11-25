@@ -108,6 +108,7 @@ export const CARTAS_CASOS = [
     video: '/casos/caso-paulo-investidor.mp4',
     poster: '/casos/caso-paulo-investidor.jpg',
     cliente: 'Paulo',
+    profissao: 'Corretor de seguros',
     perfil: 'Investidor',
     titulo: 'Começou com uma carta para conhecer. Hoje tem uma carteira de 15.',
     etapas: [
