@@ -55,6 +55,7 @@ export const RECLAME_AQUI = { selo: 'RA1000', nota: '9,1', fonte: 'Dados divulga
 export const NUMEROS_HS_FONTE = 'Dados divulgados pela HS Consórcios em hsconsorcios.com.br, novembro de 2026.';
 
 export const FAQ = [
+  { q: 'Quando o consórcio não faz sentido?', a: 'Quando você precisa do bem amanhã e não tem entrada, quando o aporte aperta o seu mês, quando o objetivo ainda não está claro ou quando alguém promete data de contemplação. Nesses casos, você ouve isso de mim na primeira conversa.', lista: QUANDO_NAO.map((x) => `${x.t}: ${x.d}`) },
   { q: 'Qual a relação entre João Dias, a Gaia Group e a HS?', a: 'João atende pela Gaia Group, que tem a HS Consórcios (Grupo Herval) como administradora exclusiva. A HS é autorizada pelo Banco Central e administra os grupos, as assembleias e as contemplações.' },
   { q: 'Em quanto tempo sou contemplado?', a: 'Ninguém pode garantir uma data. No diagnóstico, definimos a estratégia de contemplação com os dados reais do grupo.' },
   { q: 'Consórcio tem juros?', a: 'No lugar dos juros do financiamento, o consórcio tem a estrutura operacional do grupo e o fundo de reserva, apresentados antes da assinatura.' },

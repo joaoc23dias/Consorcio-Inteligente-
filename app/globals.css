@@ -767,3 +767,54 @@ body { font-feature-settings: normal; }
   .simule a { width: 44px; height: 40px; } .simule a svg { width: 24px; height: 24px; }
   .simule-dica { display: none; }
 }
+
+/* ============ QUAL É A SUA ESTRATÉGIA? ============ */
+.estr { position: relative; margin-top: -56px; padding: 0 0 24px; z-index: 2; scroll-margin-top: 90px; }
+.estr-caixa { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 56px; padding: 44px 48px; background: var(--surface); border: 1px solid var(--rule); border-radius: var(--raio); box-shadow: 0 40px 80px -50px rgba(11,21,36,.45); }
+.estr-intro .h2 { font-size: clamp(28px, 3vw, 38px); margin: 0 0 12px; }
+.estr-progresso { display: flex; gap: 8px; margin-top: 28px; }
+.estr-progresso span { height: 4px; flex: 1; max-width: 64px; border-radius: 4px; background: var(--rule); transition: background-color .5s var(--ease); }
+.estr-progresso .atual { background: var(--gold-light); }
+.estr-progresso .feito { background: var(--green); }
+.estr-palco { min-height: 250px; }
+.estr-pergunta { border: 0; margin: 0; padding: 0; min-width: 0; }
+.estr-pergunta legend { display: flex; flex-direction: column; gap: 6px; padding: 0; margin-bottom: 20px; font-size: 22px; font-weight: 620; letter-spacing: -.02em; line-height: 1.25; color: var(--ink); }
+.estr-contagem { font-size: 13px; font-weight: 600; letter-spacing: 0; color: var(--gold); }
+.estr-opcoes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.estr-opcao { min-height: 60px; padding: 14px 18px; text-align: left; font: inherit; font-size: 16px; font-weight: 550; color: var(--ink); background: var(--bg); border: 1px solid var(--rule-strong); border-radius: var(--raio-sm); cursor: pointer; transition: border-color .3s var(--ease), background-color .3s var(--ease), transform .2s var(--ease); }
+.estr-opcao:hover { border-color: var(--green); background: #fff; }
+.estr-opcao:active { transform: scale(.98); }
+.estr-opcao:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+.estr-voltar { margin-top: 16px; padding: 4px 0; background: none; border: 0; font: inherit; font-size: 14px; color: var(--ink-soft); text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+.estr-resultado h3 { margin: 6px 0 10px; font-size: clamp(22px, 2.2vw, 28px); font-weight: 650; letter-spacing: -.02em; line-height: 1.2; color: var(--ink); }
+.estr-resultado ul { list-style: none; margin: 16px 0 24px; padding: 0; display: grid; gap: 8px; }
+.estr-resultado li { position: relative; padding-left: 24px; font-size: 15px; color: var(--ink); }
+.estr-resultado li::before { content: ''; position: absolute; left: 2px; top: 7px; width: 11px; height: 6px; border-left: 1.6px solid var(--gold); border-bottom: 1.6px solid var(--gold); transform: rotate(-45deg); }
+.estr-acoes { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 28px; }
+.estr-link { font-size: 15px; font-weight: 600; color: var(--green); text-underline-offset: 4px; }
+@media (prefers-reduced-motion: no-preference) {
+  .estr-pergunta, .estr-resultado { animation: estr-entra .55s var(--ease) both; }
+  @keyframes estr-entra { from { opacity: 0; transform: translateX(18px); } to { opacity: 1; transform: none; } }
+}
+@media (max-width: 900px) {
+  .estr { margin-top: 0; padding: 40px 0 8px; }
+  .estr-caixa { grid-template-columns: 1fr; gap: 24px; padding: 28px 22px; }
+  .estr-opcoes { grid-template-columns: 1fr; }
+  .estr-acoes .btn { width: 100%; }
+  .estr-palco { min-height: 0; }
+}
+
+/* Método: as quatro etapas dentro da mesma seção */
+.passos-metodo { list-style: none; margin: 64px 0 0; padding: 32px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; border-top: 1px solid var(--rule-strong); }
+.passo-n { display: block; margin-bottom: 14px; font-size: 13px; font-weight: 600; color: var(--gold); }
+@media (max-width: 860px) { .passos-metodo { grid-template-columns: 1fr 1fr; gap: 28px 20px; margin-top: 40px; } }
+@media (max-width: 480px) { .passos-metodo { grid-template-columns: 1fr; } }
+
+.simule-titulo { background: none; border: 0; padding: 0; font-family: inherit; cursor: default; }
+@media (max-width: 760px) {
+  .simule { bottom: 104px; width: auto; padding: 0; border-width: 0 !important; border-left: 3px solid var(--gold-light) !important; flex-direction: row; align-items: center; gap: 0; transform: translateX(calc(100% - 34px)); transition: transform .5s var(--ease); }
+  .simule-aberto { transform: none; }
+  .simule-titulo { cursor: pointer; writing-mode: vertical-rl; transform: rotate(180deg); width: 34px; padding: 12px 0; margin: 0; font-size: 11px; letter-spacing: .12em; }
+  .simule a { width: 46px; height: auto; min-height: 52px; }
+  .simule { order: 0; }
+}

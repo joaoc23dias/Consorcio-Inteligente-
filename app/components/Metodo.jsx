@@ -1,4 +1,4 @@
-import { PILARES } from '../content';
+import { PILARES, PASSOS } from '../content';
 
 const TEXTO = 'Sou de São José do Rio Pardo e há uma década trabalho nos mercados financeiro e imobiliário. Atendo pela Gaia Group, que tem a HS Consórcios como administradora exclusiva, com o Método SPA® da Gaia Group, que transforma o consórcio em ferramenta de crescimento patrimonial. Todo consultor que atende comigo segue o mesmo método.';
 const MARCAS = new Set(['Gaia', 'Group,', 'Group', 'HS', 'Consórcios']);
@@ -25,6 +25,17 @@ export default function Metodo() {
             ))}
           </dl>
         </div>
+      </div>
+      <div className="wrap">
+        <ol className="passos-metodo" aria-label="Como o plano é feito">
+          {PASSOS.map((p) => (
+            <li key={p.n}>
+              <span className="passo-n">{p.n}</span>
+              <h3 className="h3" style={{ margin: '0 0 6px' }}>{p.t}</h3>
+              <p className="cp">{p.d}</p>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );

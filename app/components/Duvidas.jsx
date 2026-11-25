@@ -22,7 +22,11 @@ export default function Duvidas() {
           {FAQ.map((f) => (
             <details key={f.q}>
               <summary>{f.q}</summary>
-              <p className="cp">{f.a}</p>
+              {f.lista ? (
+                <ul className="cp" style={{ margin: '0 0 24px', paddingLeft: 20 }}>
+                  {f.lista.map((i) => <li key={i} style={{ marginBottom: 8 }}>{i}</li>)}
+                </ul>
+              ) : <p className="cp">{f.a}</p>}
             </details>
           ))}
         </div>

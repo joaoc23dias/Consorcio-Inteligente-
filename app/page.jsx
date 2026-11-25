@@ -1,8 +1,7 @@
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Credenciais from './components/Credenciais';
-import Plano from './components/Plano';
-import QuandoNao from './components/QuandoNao';
+import Estrategia from './components/Estrategia';
 import Metodo from './components/Metodo';
 import HS from './components/HS';
 import Depoimentos from './components/Depoimentos';
@@ -25,15 +24,14 @@ export default function Home() {
       <Header />
       <main id="conteudo">
         <Hero />
+        <Estrategia />
         <Credenciais />
         <HS />
         <Metodo />
-        <Plano />
         <Simulador />
         <Comparativo />
         <Cartas />
         <Depoimentos />
-        <QuandoNao />
         <Duvidas />
         <Guia />
         <Pausa />

@@ -1,4 +1,5 @@
 'use client';
+import { useState } from 'react';
 import { track } from '@vercel/analytics';
 import { WHATSAPP } from '../content';
 
@@ -15,9 +16,10 @@ const simular = (tipo, idx) => (e) => {
 const MSG = 'Olá, João! Quero simular um consórcio como investimento.';
 
 export default function SimuleLateral() {
+  const [aberto, setAberto] = useState(false);
   return (
-    <nav className="simule" aria-label="Simule">
-      <span className="simule-titulo">Simule</span>
+    <nav className={`simule${aberto ? ' simule-aberto' : ''}`} aria-label="Simule">
+      <button type="button" className="simule-titulo" aria-expanded={aberto} onClick={() => setAberto((v) => !v)}>Simule</button>
       <a href="#conta" onClick={simular('imovel', 6)} aria-label="Simular consórcio de imóvel"><Casa /><span className="simule-dica">Imóvel</span></a>
       <a href="#conta" onClick={simular('veiculo', 4)} aria-label="Simular consórcio de veículo"><Carro /><span className="simule-dica">Veículo</span></a>
       <a href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(MSG)}`} target="_blank" rel="noopener noreferrer" aria-label="Simular consórcio como investimento no WhatsApp" onClick={() => track('simule_lateral', { tipo: 'investimento' })}><Invest /><span className="simule-dica">Investimento</span></a>
