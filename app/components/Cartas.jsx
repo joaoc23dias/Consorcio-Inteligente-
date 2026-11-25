@@ -155,7 +155,7 @@ export default function Cartas() {
 
         <div style={{ marginTop: 88 }}>
           <p className="eyebrow">Casos reais</p>
-          <h3 className="h3" style={{ fontSize: 34, maxWidth: 640 }}>Quem usou a carta contemplada como estratégia conta como foi.</h3>
+          <h3 className="h3" style={{ fontSize: 34, maxWidth: 640 }}>Quem usou a carta contemplada como investimento conta como foi.</h3>
           {CARTAS_CASOS.map((c) => (
             <article key={c.video} className="bezel" style={{ marginTop: 32 }}>
               <div className="bezel-core caso-grid">

@@ -30,7 +30,7 @@ export const PILARES = [
 ];
 
 export const DEPOIMENTOS = [
-  { nome: '[Nome do cliente] · [cidade]', detalhe: 'Contemplado no imóvel · atendido por João Dias · [mês/ano]' },
+  { nome: 'Cliente Gaia Group', detalhe: 'Casa própria · contemplado, vendeu a carta e aumentou o poder de lance', video: '/casos/caso-carta-vendida.mp4', poster: '/casos/caso-carta-vendida.jpg' },
   { nome: '[Nome do cliente] · [cidade]', detalhe: 'Plano de investimento · atendido por [consultor] · [mês/ano]' },
   { nome: '[Nome do cliente] · [cidade]', detalhe: 'Contemplado no veículo · atendido por [consultor] · [mês/ano]' },
 ];
@@ -104,18 +104,6 @@ export const CARTAS_DEPOIMENTOS = [
 ];
 
 export const CARTAS_CASOS = [
-  {
-    video: '/casos/caso-carta-vendida.mp4',
-    poster: '/casos/caso-carta-vendida.jpg',
-    cliente: '',
-    perfil: 'Vendeu a carta',
-    titulo: 'Contemplou, vendeu a carta e aumentou o poder de lance para a casa própria.',
-    etapas: [
-      { rotulo: 'Objetivo', texto: 'Conquistar a casa própria, com uma meta de 18 meses.' },
-      { rotulo: 'Estratégia', texto: 'Um plano com várias cartas, traçado para concluir o objetivo dentro do prazo.' },
-      { rotulo: 'Resultado', texto: 'Contemplado logo no início, vendeu a carta e usou o valor para aumentar o potencial de lance nas próximas.' },
-    ],
-  },
   {
     video: '/casos/caso-paulo-investidor.mp4',
     poster: '/casos/caso-paulo-investidor.jpg',
