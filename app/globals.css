@@ -150,3 +150,7 @@ details .cp { padding: 0 0 24px; }
 @media (max-width: 900px) { .passos { grid-template-columns: 1fr 1fr; row-gap: 12px; } }
 @media (max-width: 520px) { .passos { grid-template-columns: 1fr; } .passos li { padding-right: 0; } .bezel:hover { transform: none; } }
 @media (prefers-reduced-motion: reduce) { .bezel, .btn-ico, .btn-ico .ico { transition: none; } .bezel:hover { transform: none; } }
+.qual { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; margin-top: 72px; }
+.qual > div { padding: 24px 0; }
+.qual > .qual-nao { background: rgba(163,38,27,.04); padding: 24px; }
+@media (max-width: 900px) { .qual { grid-template-columns: 1fr; gap: 40px; } }

@@ -11,6 +11,12 @@ const Check = () => (
   </svg>
 );
 
+const Xis = () => (
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" style={{ flex: 'none', marginTop: 4 }}>
+    <path d="M4.5 4.5l7 7M11.5 4.5l-7 7" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" />
+  </svg>
+);
+
 const Seta = () => (
   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
     <path d="M4 10L10 4M5 4h5v5" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" />
@@ -29,7 +35,7 @@ const LADOS = [
       'Comparativo honesto com o financiamento, número contra número',
     ],
     cta: 'Solicitar cotação',
-    msg: 'Olá, João! Vi o site e quero uma cotação de carta contemplada para comprar.',
+    msg: 'Olá, João! Vi o site e quero uma cotação de carta contemplada para comprar.\n\nTipo de bem (imóvel ou veículo): \nCrédito que procuro: R$ \nEntrada que tenho disponível: R$ ',
   },
   {
     id: 'vender',
@@ -42,17 +48,38 @@ const LADOS = [
       'Transferência formal, com aprovação da administradora',
     ],
     cta: 'Cotar minha carta',
-    msg: 'Olá, João! Tenho uma carta contemplada e quero uma cotação para vender.',
+    msg: 'Olá, João! Tenho uma carta contemplada e quero uma cotação para vender.\n\nAdministradora: \nValor do crédito: R$ \nAportes já pagos: ',
   },
 ];
 
-const CONFIANCA = ['Administradora HS Consórcios', 'Autorizada pelo Banco Central', 'Cessão formal em contrato', 'Valores somente na cotação individual'];
+const CONFIANCA = ['Administradora HS Consórcios', 'Autorizada pelo Banco Central', 'Entrada obrigatória para compra', 'Cessão formal em contrato', 'Valores somente na cotação individual'];
+
+const PARA_QUEM = {
+  e: [
+    'Tem a entrada disponível e quer comprar o imóvel ou o veículo agora, sem esperar contemplação',
+    'Tem renda compatível com os aportes restantes e passa na análise de crédito da administradora',
+    'Quer comparar, número contra número, com o financiamento antes de decidir',
+    'Contemplou, não vai usar o crédito agora e quer transformar a carta em capital',
+  ],
+  porque: [
+    'Crédito já liberado: você negocia o bem como comprador à vista',
+    'Custo estrutural do consórcio no lugar dos juros do financiamento bancário',
+    'Aportes previsíveis até o fim do grupo, sem depender da aprovação de um banco',
+    'Transferência formal, com contrato e aprovação da HS Consórcios',
+  ],
+  nao: [
+    'Quem não tem entrada: para você, o caminho certo é o consórcio estratégico desde o início',
+    'Quem tem restrição no nome ou renda que não comporta os aportes restantes',
+    'Quem procura crédito sem custo ou ganho garantido na revenda',
+    'Quem quer apenas especular, sem um bem definido para comprar',
+  ],
+};
 
 const PASSOS = [
-  { t: 'Cotação', d: 'Você clica, cai direto no meu WhatsApp e recebe a cotação individual.' },
-  { t: 'Avaliação', d: 'Analisamos crédito, saldo devedor, aportes restantes e o valor de mercado da cota.' },
-  { t: 'Contrato e aprovação', d: 'A transferência é formalizada e passa pela análise da administradora.' },
-  { t: 'Crédito na mão', d: 'Com a aprovação, o crédito fica disponível para quem comprou e o valor combinado, para quem vendeu.' },
+  { t: 'Separe a entrada', d: 'A entrada é o valor pago a quem está vendendo a carta. Sem ela, a compra não acontece.' },
+  { t: 'Peça a cotação', d: 'Clique no botão, informe bem, crédito e entrada. A cotação chega no seu WhatsApp.' },
+  { t: 'Análise e contrato', d: 'Avaliamos saldo e aportes restantes. A transferência é formalizada e aprovada pela administradora.' },
+  { t: 'Compre o bem', d: 'Com a aprovação, o crédito é usado na compra do imóvel ou veículo, e você segue com os aportes.' },
 ];
 
 const OBJECOES = [
@@ -121,7 +148,38 @@ export default function Cartas() {
           ))}
         </ul>
 
-        <h3 className="h3" style={{ margin: '88px 0 28px' }}>Como funciona a transferência</h3>
+        <div className="bezel bezel-dark" style={{ marginTop: 72 }}>
+          <div className="bezel-core pad-box row" style={{ flexDirection: 'row', flexWrap: 'wrap', padding: '32px 40px', gap: 24, alignItems: 'center', justifyContent: 'space-between' }}>
+            <div className="col" style={{ flex: '1 1 420px' }}>
+              <p className="tag eyebrow" style={{ marginBottom: 8 }}>Requisito para comprar</p>
+              <p style={{ margin: 0, fontFamily: 'var(--serif)', fontSize: 30, lineHeight: 1.2, color: 'var(--bg)' }}>Para comprar uma carta contemplada, você precisa ter entrada.</p>
+            </div>
+            <p className="cp col" style={{ flex: '1 1 320px', margin: 0 }}>
+              A entrada é o valor pago a quem está vendendo a carta. O restante segue em aportes mensais no grupo. Ainda não tem entrada? <a href="#conta" style={{ color: 'var(--gold-light)' }}>Faça a conta do consórcio estratégico</a>.
+            </p>
+          </div>
+        </div>
+
+        <div className="qual">
+          {[
+            { k: 'e', t: 'Para quem é', cor: 'var(--gold)', Icone: Check },
+            { k: 'porque', t: 'Por que usar', cor: 'var(--gold)', Icone: Check },
+            { k: 'nao', t: 'Para quem não é', cor: '#A3261B', Icone: Xis },
+          ].map((c) => (
+            <div key={c.k} className={c.k === 'nao' ? 'qual-nao' : undefined}>
+              <h3 className="h3" style={{ marginBottom: 16 }}>{c.t}</h3>
+              <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+                {PARA_QUEM[c.k].map((i) => (
+                  <li key={i} style={{ display: 'flex', gap: 12, padding: '14px 0', borderTop: '1px solid var(--rule-strong)', fontSize: 15, color: 'var(--ink)' }}>
+                    <span style={{ color: c.cor }}><c.Icone /></span>{i}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <h3 className="h3" style={{ margin: '88px 0 28px' }}>Como usar</h3>
         <ol className="passos">
           {PASSOS.map((p, i) => (
             <li key={p.t}>
