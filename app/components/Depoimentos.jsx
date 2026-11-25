@@ -1,4 +1,4 @@
-import { DEPOIMENTOS } from '../content';
+import { DEPOIMENTOS, AVALIACOES_GOOGLE } from '../content';
 
 export default function Depoimentos() {
   const reais = DEPOIMENTOS.filter((d) => d.video && !d.nome.startsWith('['));
@@ -20,6 +20,17 @@ export default function Depoimentos() {
               </figcaption>
             </figure>
           ))}
+        </div>
+        <div className="avaliacoes">
+          <p className="label" style={{ margin: '0 0 20px' }}>Avaliações públicas da Gaia Group no Google</p>
+          <ul>
+            {AVALIACOES_GOOGLE.map((a) => (
+              <li key={a.nome}>
+                <p>“{a.texto}”</p>
+                <span className="autor">{a.nome}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

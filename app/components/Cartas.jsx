@@ -46,7 +46,7 @@ const LADOS = [
   },
 ];
 
-const CONFIANCA = ['Autorizada pelo Banco Central', 'Entrada obrigatória para compra', 'Cessão formal em contrato', 'Valores somente na cotação individual'];
+const CONFIANCA = ['Autorizada pelo Banco Central', 'Contratos revisados pelo jurídico da Gaia', 'Entrada obrigatória para compra', 'Cessão formal em contrato', 'Valores somente na cotação individual'];
 
 
 

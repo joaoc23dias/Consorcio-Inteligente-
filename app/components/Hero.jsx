@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { NUMEROS_JOAO } from '../content';
 import MiniSim from './MiniSim';
+import Contador from './Contador';
 
 export default function Hero() {
   return (
@@ -54,7 +55,7 @@ export default function Hero() {
             {NUMEROS_JOAO.map((n) => (
               <div key={n.rotulo} style={{ display: 'flex', flexDirection: 'column-reverse' }}>
                 <dt className="label" style={{ marginTop: 8 }}>{n.rotulo}</dt>
-                <dd className="num" style={{ margin: 0, fontFamily: 'var(--serif)', fontSize: 28, color: 'var(--green)' }}>{n.valor}</dd>
+                <dd className="num" style={{ margin: 0, fontFamily: 'var(--serif)', fontSize: 30, lineHeight: 1, color: 'var(--green)' }}><Contador texto={n.valor} /></dd>
               </div>
             ))}
           </dl>

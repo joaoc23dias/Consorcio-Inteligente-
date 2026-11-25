@@ -7,7 +7,7 @@ export default function Metodo() {
         <div className="col" style={{ flex: '1 1 460px' }}>
           <h2 id="metodo-titulo" className="h2">Método SPA®: segurança, patrimônio e alavancagem.</h2>
           <p className="lead">
-            Sou de São José do Rio Pardo e atendo pela <span translate="no">Gaia Group</span>, que tem a <span translate="no">HS Consórcios</span> como administradora exclusiva. Trabalho com o Método SPA® da Gaia Group, que transforma o consórcio em ferramenta de crescimento patrimonial, e todo consultor que atende comigo segue o método.
+            Sou de São José do Rio Pardo e há uma década trabalho nos mercados financeiro e imobiliário. Atendo pela <span translate="no">Gaia Group</span>, que tem a <span translate="no">HS Consórcios</span> como administradora exclusiva, com o Método SPA® da Gaia Group, que transforma o consórcio em ferramenta de crescimento patrimonial. Todo consultor que atende comigo segue o mesmo método.
           </p>
         </div>
         <div className="col" style={{ flex: '1 1 420px' }}>

@@ -35,9 +35,10 @@ export const DEPOIMENTOS = [
   { nome: '[Nome do cliente] · [cidade]', detalhe: 'Contemplado no veículo · atendido por [consultor] · [mês/ano]' },
 ];
 
+// Fonte: gaiagroup.com.br (consultado em 25/11/2026).
 export const NUMEROS_JOAO = [
-  { valor: '[clientes]', rotulo: 'atendidos' },
-  { valor: '[R$ crédito]', rotulo: 'estruturado' },
+  { valor: '+2.000', rotulo: 'famílias atendidas pela Gaia' },
+  { valor: '9 anos', rotulo: 'de entregas reais' },
 ];
 
 // Fonte: site oficial da HS Consórcios (hsconsorcios.com.br, seção "Nossos números"), consultado em 25/11/2026.
@@ -82,7 +83,8 @@ export const TABELA_HS = {
 export const GAIA = {
   razaoSocial: '[Razão social da Gaia Group]',
   cnpj: '[CNPJ da Gaia Group]',
-  email: '[e-mail de contato]',
+  email: 'contato@gaiagroup.com.br',
+  horario: 'Segunda a sexta, das 9h às 18h',
 };
 
 // Consulta oficial de instituições autorizadas no Banco Central
@@ -166,8 +168,16 @@ export const CARTAS_FAQ = [
   { q: 'Por que usar uma carta contemplada?', lista: CARTAS_PARA_QUEM.porque },
   { q: 'Como usar uma carta contemplada?', passos: CARTAS_PASSOS },
   { q: 'Para quem a carta contemplada não é?', lista: CARTAS_PARA_QUEM.nao },
-  { q: 'É seguro comprar ou vender uma carta?', a: 'Sim, quando a transferência é feita do jeito certo: com contrato, cessão registrada e aprovação da administradora. Nada de acordo de gaveta. Conduzimos cada etapa.' },
+  { q: 'É seguro comprar ou vender uma carta?', a: 'Sim, quando a transferência é feita do jeito certo: com contrato, cessão registrada e aprovação da administradora. Nada de acordo de gaveta: os contratos passam pelo jurídico da Gaia Group, conduzido por advogada especialista em direito imobiliário, e nós conduzimos cada etapa.' },
   { q: 'Quem compra a minha carta?', a: 'Pessoas que já têm entrada e querem o crédito agora, e investidores que acompanham esse mercado. Nosso papel é encontrar o comprador certo e conduzir a negociação.' },
   { q: 'Quanto vale a minha carta?', a: 'Depende do crédito, do saldo devedor, dos aportes restantes e do momento do mercado. Por isso não publicamos valores: você solicita a cotação e recebe o número da sua cota, analisada individualmente.' },
   { q: 'Quanto tempo leva?', a: 'Varia conforme a negociação e a análise da administradora. Na cotação você já recebe uma estimativa realista para o seu caso.' },
+];
+
+// Avaliações públicas da Gaia Group no Google (trechos curtos, como aparecem em gaiagroup.com.br).
+export const AVALIACOES_GOOGLE = [
+  { nome: 'Paulo Cezar Gracias Junior', texto: 'Tinha um certo receio com o consórcio até conhecer o escritório. Após toda a explicação fiz uma carta e fui contemplado.' },
+  { nome: 'Taquara Pesca', texto: 'Já são duas cartas adquiridas, uma de automóvel contemplada em 12 meses. A assessoria do pessoal fez toda diferença.' },
+  { nome: 'Gabriel Vicente', texto: 'Uma empresa íntegra, correta e coerente, com ótimo atendimento, que nos direciona sempre ao melhor investimento.' },
+  { nome: 'Moacyr Petrocelli', texto: 'Excelentes serviços. Atendimento personalizado e assertivo para cada necessidade.' },
 ];

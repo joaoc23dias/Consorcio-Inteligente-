@@ -17,6 +17,9 @@ export default function Footer() {
             <p style={{ margin: '10px 0 0' }}>{GAIA.razaoSocial} · CNPJ {GAIA.cnpj}</p>
           )}
           <p style={{ margin: '10px 0 0' }}>
+            <a href={`mailto:${GAIA.email}`}>{GAIA.email}</a> · {GAIA.horario}
+          </p>
+          <p style={{ margin: '10px 0 0' }}>
             <a href={BC_URL} target="_blank" rel="noopener noreferrer">Consulte a HS Consórcios no Banco Central</a>
             {' · '}
             <a href="/privacidade">Política de Privacidade</a>

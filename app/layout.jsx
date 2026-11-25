@@ -10,7 +10,7 @@ import '@fontsource/montserrat/500.css';
 import '@fontsource/montserrat/600.css';
 import { Analytics } from '@vercel/analytics/react';
 import Melhorias from './components/Melhorias';
-import { ESCRITORIOS, FAQ, CARTAS_FAQ, WHATSAPP } from './content';
+import { ESCRITORIOS, FAQ, CARTAS_FAQ, WHATSAPP, GAIA } from './content';
 
 const SITE_URL = 'https://joaodias.engenheirodoconsorcio.com.br';
 
@@ -66,6 +66,7 @@ const jsonLd = {
       name: 'Gaia Group Investimentos & Consórcios',
       url: SITE_URL,
       telephone: TELEFONE,
+      email: GAIA.email,
       logo: `${SITE_URL}/logo-gaia-vermelho.png`,
       areaServed: REGIAO.map((c) => ({ '@type': 'City', name: c })),
       makesOffer: [
