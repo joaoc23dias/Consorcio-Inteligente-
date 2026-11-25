@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Contador from './Contador';
 import { ESCRITORIOS, NUMEROS_HS, NUMEROS_HS_FONTE, HS_DESTAQUE } from '../content';
 
 export default function HS() {
@@ -21,7 +22,7 @@ export default function HS() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '20px 16px', marginTop: 20 }}>
               {NUMEROS_HS.map((n) => (
                 <div key={n.rotulo} style={{ borderTop: '1px solid var(--rule-strong)', paddingTop: 14 }}>
-                  <span className="num" style={{ display: 'block', fontFamily: 'var(--serif)', fontSize: 'clamp(22px, 2.2vw, 30px)', lineHeight: 1.1, color: 'var(--green)', whiteSpace: 'nowrap' }}>{n.valor}</span>
+                  <span className="num" style={{ display: 'block', fontFamily: 'var(--serif)', fontSize: 'clamp(22px, 2.2vw, 30px)', lineHeight: 1.1, color: 'var(--green)', whiteSpace: 'nowrap' }}><Contador texto={n.valor} /></span>
                   <span style={{ display: 'block', marginTop: 6, fontSize: 12, lineHeight: 1.4, color: 'var(--ink-soft)' }}>{n.rotulo}</span>
                 </div>
               ))}

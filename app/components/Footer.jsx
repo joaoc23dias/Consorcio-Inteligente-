@@ -21,6 +21,15 @@ export default function Footer() {
             {' · '}
             <a href="/privacidade">Política de Privacidade</a>
           </p>
+          <p style={{ margin: '10px 0 0' }}>
+            Documentos oficiais da HS:{' '}
+            <a href="https://hsconsorcios.com.br/entenda-mais#regulamento" target="_blank" rel="noopener noreferrer">Regulamento Geral</a>
+            {' · '}
+            <a href="https://hsconsorcios.com.br/wp-content/uploads/2025/01/Regulamento-Geral.-Requisitos-para-liberacao-do-credito.pdf" target="_blank" rel="noopener noreferrer">Requisitos para liberação do crédito</a>
+          </p>
+          <p className="nota" style={{ margin: '18px 0 0', padding: '2px 0 2px 14px', color: 'var(--ink-soft)' }}>
+            <strong style={{ fontWeight: 600 }}>Segurança:</strong> o único WhatsApp oficial do João Dias é (19) 99818-7567. Nenhum pagamento é feito fora do contrato com a HS Consórcios. Desconfie de pedidos de depósito ou Pix em nome de terceiros.
+          </p>
         </div>
       </div>
       <div className="wrap" style={{ marginTop: 40, paddingTop: 24, borderTop: '1px solid var(--rule)', textAlign: 'center' }}>

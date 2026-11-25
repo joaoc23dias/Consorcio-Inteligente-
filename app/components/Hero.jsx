@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { NUMEROS_JOAO } from '../content';
+import MiniSim from './MiniSim';
 
 export default function Hero() {
   return (
@@ -16,7 +17,8 @@ export default function Hero() {
             <a href="#conta" className="btn btn-sec">Fazer a conta</a>
           </div>
         </div>
-        <figure className="col" style={{ flex: '1 1 380px', margin: 0 }}>
+        <div className="col hero-figura" style={{ flex: '1 1 380px' }}>
+        <figure style={{ margin: 0 }}>
           <Image
             src="/joao-dias-hero.jpg"
             alt="João Dias, especialista em planejamento patrimonial"
@@ -30,6 +32,8 @@ export default function Hero() {
             João Dias · Especialista em planejamento patrimonial
           </figcaption>
         </figure>
+        <MiniSim />
+        </div>
       </div>
 
       <div className="wrap" style={{ marginTop: 80 }}>

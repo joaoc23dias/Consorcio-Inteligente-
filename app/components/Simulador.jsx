@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { track } from '@vercel/analytics';
 import { TABELA_HS, TABELA_REF, WHATSAPP } from '../content';
 
@@ -14,6 +14,11 @@ const TIPOS = [
 export default function Simulador() {
   const [tipo, setTipo] = useState('imovel');
   const [idx, setIdx] = useState(6);
+  useEffect(() => {
+    const ouvir = (e) => { setTipo(e.detail.tipo); setIdx(e.detail.idx); };
+    window.addEventListener('sim:set', ouvir);
+    return () => window.removeEventListener('sim:set', ouvir);
+  }, []);
   const tabela = TABELA_HS[tipo];
   const i = Math.min(idx, tabela.length - 1);
   const [credito, integral, meio, prazo] = tabela[i];
