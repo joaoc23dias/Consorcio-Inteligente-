@@ -655,3 +655,20 @@ summary { font-weight: 550; }
 .barra-mobile .btn-pri:not(.btn-sm):not(.btn-ico)::after { background-color: #12213A; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23D6AF61' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8h10M9 4l4 4-4 4'/%3E%3C/svg%3E"); }
 .num, .cred-numeros dd, .h1, .h2, .h3 { font-variant-numeric: lining-nums proportional-nums !important; }
 body { font-feature-settings: normal; }
+
+
+/* ============ MARCA: Gaia em branco + João Dias | Consórcio Inteligente ============ */
+.marca { display: flex; align-items: center; gap: 16px; text-decoration: none; }
+.marca-gaia { width: 44px; height: auto; display: block; }
+.marca-divisor { width: 1px; height: 34px; background: rgba(214,175,97,.45); }
+.marca-texto { display: flex; flex-direction: column; gap: 5px; }
+.marca-nome { font-family: 'Jost Variable', 'Futura', sans-serif; font-weight: 500; font-size: 17px; line-height: 1; letter-spacing: .2em; text-transform: uppercase; color: #F6F2E9; }
+.marca-tag { font-family: 'Jost Variable', 'Futura', sans-serif; font-weight: 400; font-size: 11px; line-height: 1; letter-spacing: .32em; text-transform: uppercase; color: var(--gold-light); }
+.mesa-joao figcaption { gap: 7px; padding: 14px 18px; }
+.mesa-joao figcaption .marca-nome { font-size: 15px; }
+.mesa-joao figcaption .marca-tag { font-size: 9.5px; }
+@media (max-width: 760px) { .marca { gap: 12px; } .marca-gaia { width: 36px; } .marca-divisor { height: 28px; } .marca-nome { font-size: 15px; letter-spacing: .16em; } .marca-tag { font-size: 9.5px; letter-spacing: .26em; } }
+@media (max-width: 400px) { .topo .btn-sm { padding: 0 12px !important; font-size: 13px; } }
+
+.marca-nome, .marca-tag { white-space: nowrap; }
+@media (max-width: 760px) { .so-desk { display: none; } .marca-nome { font-size: 14px; letter-spacing: .14em; } .marca-tag { font-size: 10px; letter-spacing: .18em; } }
