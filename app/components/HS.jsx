@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { ESCRITORIOS, NUMEROS_HS } from '../content';
+import { ESCRITORIOS, NUMEROS_HS, NUMEROS_HS_FONTE } from '../content';
 
 export default function HS() {
   return (
@@ -19,9 +19,13 @@ export default function HS() {
             <Image src="/logo-hs.png" alt="HS Consórcios, uma empresa do Grupo Herval" width={240} height={64} />
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 12, marginTop: 20 }}>
               {NUMEROS_HS.map((n) => (
-                <div key={n} className="ph num" style={{ padding: '14px 8px' }}>{n}</div>
+                <div key={n.rotulo} style={{ borderTop: '1px solid var(--rule-strong)', paddingTop: 14 }}>
+                  <span className="num" style={{ display: 'block', fontFamily: 'var(--serif)', fontSize: 'clamp(22px, 2.2vw, 30px)', lineHeight: 1.1, color: 'var(--green)', whiteSpace: 'nowrap' }}>{n.valor}</span>
+                  <span style={{ display: 'block', marginTop: 6, fontSize: 12, lineHeight: 1.4, color: 'var(--ink-soft)' }}>{n.rotulo}</span>
+                </div>
               ))}
             </div>
+            <p className="cp" style={{ fontSize: 11, margin: '16px 0 0' }}>{NUMEROS_HS_FONTE}</p>
           </div>
         </div>
         <ul style={{ listStyle: 'none', margin: '72px 0 0', padding: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', borderTop: '1px solid var(--rule-strong)' }}>
