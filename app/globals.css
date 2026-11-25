@@ -704,3 +704,20 @@ body { font-feature-settings: normal; }
 .garantia-marca img { max-height: 56px; width: auto !important; }
 .garantia-itens { text-align: left; max-width: 300px; margin-left: auto; margin-right: auto; }
 .garantia-link { align-self: center; }
+
+/* Assinatura do rodapé com a mesma marca do cabeçalho */
+.marca-rodape { display: inline-flex; flex-direction: column; align-items: center; gap: 6px; }
+.marca-rodape .marca-nome { color: var(--ink); font-size: 20px; }
+.marca-rodape .marca-tag { color: var(--gold); font-size: 12.5px; }
+
+/* Gaia e HS: colunas centralizadas, mesmo padrão do bloco de segurança */
+.cred-titulo { margin-left: auto; margin-right: auto; text-align: center; }
+.cred-empresa { align-items: center; text-align: center; justify-items: center; }
+.cred-logo { object-position: center center !important; margin-left: auto; margin-right: auto; }
+.cred-empresa .cred-logo { height: 60px !important; }
+.cred-texto { margin-left: auto; margin-right: auto; }
+.cred-numeros { justify-content: center; width: 100%; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 24px; }
+.cred-numeros > div { align-items: center; }
+.cred-numeros dt { max-width: 18ch; text-align: center; }
+.cred-links { justify-content: center; }
+@media (max-width: 760px) { footer > .wrap.row > .row:first-child { width: 100%; justify-content: center; } }

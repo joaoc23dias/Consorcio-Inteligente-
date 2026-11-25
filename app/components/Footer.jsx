@@ -36,8 +36,9 @@ export default function Footer() {
         </div>
       </div>
       <div className="wrap" style={{ marginTop: 40, paddingTop: 24, borderTop: '1px solid var(--rule)', textAlign: 'center' }}>
-        <p style={{ fontFamily: 'var(--brand)', fontWeight: 400, fontSize: 14, letterSpacing: 'normal', color: 'var(--ink-soft)', margin: 0 }}>
-          João Dias | Consórcio Inteligente
+        <p className="marca-rodape" style={{ margin: 0 }}>
+          <span className="marca-nome">João Dias</span>
+          <span className="marca-tag">Consórcio Inteligente</span>
         </p>
         <p style={{ fontSize: 12, color: 'var(--ink-muted)', margin: '6px 0 0' }}>© {new Date().getFullYear()} Todos os direitos reservados.</p>
       </div>
