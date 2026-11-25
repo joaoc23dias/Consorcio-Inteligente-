@@ -17,7 +17,7 @@ export default async function OpengraphImage() {
 
   return new ImageResponse(
     (
-      <div style={{ width: '100%', height: '100%', display: 'flex', background: '#FAF7F1' }}>
+      <div style={{ width: '100%', height: '100%', display: 'flex', background: '#F7F7F3' }}>
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '0 64px', width: 720 }}>
           <div style={{ fontFamily: 'Montserrat', fontSize: 16, letterSpacing: 4, color: '#8C7036', textTransform: 'uppercase' }}>
             Planejamento patrimonial

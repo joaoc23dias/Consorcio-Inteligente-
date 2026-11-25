@@ -22,7 +22,12 @@ export default function Melhorias() {
         },
         { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
       );
-      alvos.forEach((el, idx) => (idx === 0 ? el.classList.add('in') : observer.observe(el)));
+      alvos.forEach((el, idx) => {
+        [...el.children].forEach((c, i) => c.style.setProperty('--i', Math.min(i, 6)));
+        if (idx === 0) el.classList.add('in'); else observer.observe(el);
+      });
+      const pausa = document.querySelector('.pausa');
+      if (pausa) observer.observe(pausa);
     }
 
     const clique = (ev) => {

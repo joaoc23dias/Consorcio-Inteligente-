@@ -225,7 +225,7 @@ export default function Cartas() {
           </div>
         </div>
 
-        <p className="cp" style={{ fontSize: 12, marginTop: 48, maxWidth: '68ch' }}>
+        <p className="cp" style={{ fontSize: 12, marginTop: 48, maxWidth: '62ch' }}>
           O valor de negociação de uma carta depende do mercado e das condições da cota. Não há garantia de ágio, prazo de venda ou rentabilidade. Toda transferência está sujeita à análise e aprovação da administradora. A negociação de cartas contempladas é feita entre clientes, com intermediação da Gaia Group; a HS Consórcios não comercializa cotas contempladas e atua na análise e aprovação da transferência.
         </p>
       </div>

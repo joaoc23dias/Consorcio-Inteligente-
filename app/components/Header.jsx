@@ -2,10 +2,10 @@ import Image from 'next/image';
 
 export default function Header() {
   return (
-    <header style={{ position: 'sticky', top: 0, zIndex: 20, background: 'rgba(250,247,241,.95)', backdropFilter: 'saturate(1.2) blur(6px)', borderBottom: '1px solid var(--rule)' }}>
+    <header style={{ position: 'sticky', top: 0, zIndex: 20, background: 'rgba(247,247,243,.94)', backdropFilter: 'saturate(1.2) blur(6px)', borderBottom: '1px solid var(--rule)' }}>
       <div className="wrap row header-row" style={{ alignItems: 'center', justifyContent: 'space-between', gap: 16, paddingTop: 14, paddingBottom: 14 }}>
         <a href="/#conteudo" style={{ display: 'flex', flexDirection: 'column', textDecoration: 'none' }}>
-          <span className="brand-name" style={{ fontFamily: 'var(--sans)', fontSize: 19, fontWeight: 600, letterSpacing: '.01em', color: 'var(--ink)', lineHeight: 1.1 }}>João Dias</span>
+          <span className="brand-name" style={{ fontFamily: 'var(--brand)', fontSize: 19, fontWeight: 600, letterSpacing: '.01em', color: 'var(--ink)', lineHeight: 1.1 }}>João Dias</span>
           <span className="brand-tag" style={{ fontSize: 11, letterSpacing: '.18em', textTransform: 'uppercase', color: 'var(--gold)', marginTop: 5 }}>Consórcio Inteligente</span>
         </a>
         <nav aria-label="Principal" className="nav">

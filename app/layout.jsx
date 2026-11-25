@@ -2,6 +2,9 @@ import './globals.css';
 import '@fontsource/cormorant-garamond/500.css';
 import '@fontsource/cormorant-garamond/600.css';
 import '@fontsource/cormorant-garamond/500-italic.css';
+import '@fontsource/instrument-sans/400.css';
+import '@fontsource/instrument-sans/500.css';
+import '@fontsource/instrument-sans/600.css';
 import '@fontsource/montserrat/400.css';
 import '@fontsource/montserrat/500.css';
 import '@fontsource/montserrat/600.css';
@@ -29,7 +32,7 @@ export const metadata = {
 };
 
 export const viewport = {
-  themeColor: '#FAF7F1',
+  themeColor: '#F7F7F3',
 };
 
 const texto = (f) => f.a || (f.lista ? f.lista.join('. ') + '.' : f.passos.map((p, i) => `${i + 1}. ${p.t}: ${p.d}`).join(' '));
