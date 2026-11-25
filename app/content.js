@@ -51,7 +51,7 @@ export const NUMEROS_HS = [
   { valor: '+2.600', rotulo: 'contemplações por mês' },
 ];
 // Fonte: página da HS Consórcios no Reclame Aqui, dados de 01/03/2026 a 31/08/2026.
-export const RECLAME_AQUI = { reputacao: 'Ótima', nota: '8,6', periodo: 'mar. a ago. de 2026', url: 'https://www.reclameaqui.com.br/empresa/hs-consorcios/' };
+export const RECLAME_AQUI = { selo: 'RA1000', nota: '9,1', fonte: 'Dados divulgados pela HS Consórcios em hsconsorcios.com.br', url: 'https://www.reclameaqui.com.br/empresa/hs-consorcios/' };
 export const NUMEROS_HS_FONTE = 'Dados divulgados pela HS Consórcios em hsconsorcios.com.br, novembro de 2026.';
 
 export const FAQ = [

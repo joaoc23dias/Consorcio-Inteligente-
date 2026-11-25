@@ -1,6 +1,7 @@
 import Image from 'next/image';
-import { RECLAME_AQUI, BC_URL } from '../content';
+import { BC_URL } from '../content';
 import Contador from './Contador';
+import SeloRA from './SeloRA';
 
 const Numeros = ({ itens }) => (
   <dl className="cred-numeros">
@@ -27,17 +28,17 @@ export default function Credenciais() {
             <p className="cred-texto">
               É aqui que o seu plano é desenhado e acompanhado, nos escritórios de Ribeirão Preto, São José do Rio Pardo e Mococa ou por videochamada.
             </p>
-            <Numeros itens={[['+R$ 250 mi', 'em créditos comercializados'], ['+2.000', 'famílias atendidas'], ['9 anos', 'de entregas reais']]} />
+            <Numeros itens={[['+R$ 250 mi', 'em créditos comercializados'], ['+2.000', 'famílias atendidas'], ['9 anos', 'de entregas reais'], ['3', 'escritórios na região']]} />
           </article>
           <article className="cred-empresa">
             <Image src="/logo-hs.png" alt="HS Consórcios, uma empresa do Grupo Herval" width={200} height={53} className="cred-logo" />
             <p className="cred-papel">É quem administra o seu consórcio.</p>
             <p className="cred-texto">
-              Empresa do Grupo Herval, autorizada pelo Banco Central, com reputação {RECLAME_AQUI.reputacao.toLowerCase()} no Reclame Aqui.
+              Maior administradora do Brasil no setor imobiliário. Empresa do Grupo Herval, autorizada pelo Banco Central.
             </p>
-            <Numeros itens={[['30 anos', 'de mercado, desde 1993'], ['+410 mil', 'cotas ativas'], [`${RECLAME_AQUI.nota}`, 'nota no Reclame Aqui']]} />
+            <Numeros itens={[['+R$ 3 bi', 'em bens entregues em 2025'], ['+2.600', 'contemplações por mês'], ['+1.400', 'corretores'], ['+410 mil', 'cotas ativas']]} />
             <p className="cred-links">
-              <a href={RECLAME_AQUI.url} target="_blank" rel="noopener noreferrer">Ver a reputação no Reclame Aqui</a>
+              <SeloRA />
               <a href={BC_URL} target="_blank" rel="noopener noreferrer">Consultar no Banco Central</a>
             </p>
           </article>

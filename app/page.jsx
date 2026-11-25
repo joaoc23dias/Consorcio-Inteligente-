@@ -11,6 +11,7 @@ import Comparativo from './components/Comparativo';
 import Cartas from './components/Cartas';
 import BarraMobile from './components/BarraMobile';
 import WhatsFlutuante from './components/WhatsFlutuante';
+import SimuleLateral from './components/SimuleLateral';
 import Pausa from './components/Pausa';
 import Guia from './components/Guia';
 import Duvidas from './components/Duvidas';
@@ -39,6 +40,7 @@ export default function Home() {
         <Agendar />
         <BarraMobile />
         <WhatsFlutuante />
+        <SimuleLateral />
       </main>
       <Footer />
     </>
