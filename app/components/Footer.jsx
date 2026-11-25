@@ -6,7 +6,7 @@ export default function Footer() {
     <footer style={{ padding: '56px 0 40px', background: 'var(--bg)', borderTop: '1px solid var(--rule)' }}>
       <div className="wrap row" style={{ gap: 28, alignItems: 'flex-start', justifyContent: 'space-between' }}>
         <div className="row" style={{ alignItems: 'center', gap: 22 }}>
-          <Image src="/logo-gaia-vermelho.png" alt="Gaia Group Investimentos & Consórcios" width={71} height={56} />
+          <Image src="/logo-gaia-vermelho.png" alt="Gaia Group Investimentos & Consórcios" width={78} height={62} />
           <Image src="/logo-hs.png" alt="HS Consórcios, uma empresa do Grupo Herval" width={135} height={36} />
         </div>
         <div style={{ maxWidth: 640, fontSize: 12, color: 'var(--ink-muted)', lineHeight: 1.7 }}>

@@ -721,3 +721,11 @@ body { font-feature-settings: normal; }
 .cred-numeros dt { max-width: 18ch; text-align: center; }
 .cred-links { justify-content: center; }
 @media (max-width: 760px) { footer > .wrap.row > .row:first-child { width: 100%; justify-content: center; } }
+
+/* Logos Gaia e HS com o mesmo peso visual (mesma área ocupada) */
+.cred-empresa .cred-logo { height: 48px !important; }
+.cred-empresa:first-child .cred-logo { height: 82px !important; }
+.garantia-marca { height: 76px; }
+.garantia-gaia .garantia-marca img { height: 68px !important; max-height: none; }
+.garantia-hs .garantia-marca img { height: 40px !important; max-height: none; }
+@media (min-width: 861px) { .cred-empresa .cred-logo { align-self: center !important; } }
