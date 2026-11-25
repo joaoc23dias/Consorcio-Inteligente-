@@ -689,3 +689,18 @@ body { font-feature-settings: normal; }
   .marca-nome { font-size: 17px; letter-spacing: -.01em; } .marca-tag { font-size: 11.5px; letter-spacing: 0; }
 }
 .so-desk { margin-left: .3em; }
+
+/* Perguntas das cartas: título e ação em cima, perguntas em duas colunas */
+.faq-topo { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 24px 72px; align-items: center; padding-bottom: 32px; }
+.faq-colunas { display: grid; grid-template-columns: 1fr 1fr; gap: 0 56px; align-items: start; }
+.faq-coluna { border-top: 1px solid var(--rule); }
+@media (max-width: 860px) { .faq-topo, .faq-colunas { grid-template-columns: 1fr; } .faq-coluna + .faq-coluna { border-top: 0; } }
+
+/* Bloco de segurança: colunas centralizadas e alinhadas */
+.garantias-topo { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: 12px; }
+.garantias-topo .h3 { max-width: 22ch; }
+.garantia { align-items: center; text-align: center; }
+.garantia-marca { justify-content: center; height: 64px; }
+.garantia-marca img { max-height: 56px; width: auto !important; }
+.garantia-itens { text-align: left; max-width: 300px; margin-left: auto; margin-right: auto; }
+.garantia-link { align-self: center; }

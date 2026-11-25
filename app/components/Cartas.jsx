@@ -54,7 +54,7 @@ const GARANTIAS = [
     id: 'gaia',
     papel: 'Conduz a negociação',
     nome: 'Gaia Group',
-    logo: { src: '/logo-gaia-vermelho.png', w: 61, h: 48, alt: 'Gaia Group Investimentos & Consórcios' },
+    logo: { src: '/logo-gaia-vermelho.png', w: 66, h: 52, alt: 'Gaia Group Investimentos & Consórcios' },
     itens: [
       'Avalia a carta e encontra a contraparte certa para você',
       'Contratos revisados pelo jurídico da Gaia, conduzido por advogada especialista em direito imobiliário',
@@ -65,7 +65,7 @@ const GARANTIAS = [
     id: 'hs',
     papel: 'Aprova a transferência',
     nome: 'HS Consórcios',
-    logo: { src: LOGO_HS, w: 150, h: 40, alt: 'HS Consórcios, uma empresa do Grupo Herval' },
+    logo: { src: LOGO_HS, w: 165, h: 44, alt: 'HS Consórcios, uma empresa do Grupo Herval' },
     itens: [
       'Administradora do Grupo Herval, autorizada pelo Banco Central',
       'Faz a análise de crédito de quem assume a carta',
@@ -242,14 +242,18 @@ export default function Cartas() {
           )}
         </div>
 
-        <div id="cartas-faq" className="row" style={{ gap: 72, marginTop: 72 }}>
-          <div className="col" style={{ flex: '1 1 320px' }}>
-            <h3 className="h3" style={{ marginTop: 0, fontSize: 34 }}>Antes de pedir a cotação, confira se a carta é para você.</h3>
-            <p className="cp" style={{ marginBottom: 28 }}>Se a sua dúvida não estiver aqui, me mande no WhatsApp junto com o pedido de cotação. Cada carta é analisada com números reais.</p>
-            <a href={wa('Olá, João! Tenho uma dúvida sobre cartas contempladas e quero uma cotação.')} target="_blank" rel="noopener noreferrer" className="btn btn-sec" onClick={() => track('cartas_whatsapp', { lado: 'duvida' })}>Falar no WhatsApp</a>
+        <div id="cartas-faq" style={{ marginTop: 72 }}>
+          <div className="faq-topo">
+            <h3 className="h3" style={{ margin: 0, fontSize: 'clamp(26px, 3vw, 34px)' }}>Antes de pedir a cotação, confira se a carta é para você.</h3>
+            <div>
+              <p className="cp" style={{ marginBottom: 20 }}>Se a sua dúvida não estiver aqui, me mande no WhatsApp junto com o pedido de cotação. Cada carta é analisada com números reais.</p>
+              <a href={wa('Olá, João! Tenho uma dúvida sobre cartas contempladas e quero uma cotação.')} target="_blank" rel="noopener noreferrer" className="btn btn-sec" onClick={() => track('cartas_whatsapp', { lado: 'duvida' })}>Falar no WhatsApp</a>
+            </div>
           </div>
-          <div className="col" style={{ flex: '1 1 520px', borderTop: '1px solid var(--rule)' }}>
-            {CARTAS_FAQ.map((o) => (
+          <div className="faq-colunas">
+            {[CARTAS_FAQ.slice(0, Math.ceil(CARTAS_FAQ.length / 2)), CARTAS_FAQ.slice(Math.ceil(CARTAS_FAQ.length / 2))].map((grupo, gi) => (
+              <div key={gi} className="faq-coluna">
+                {grupo.map((o) => (
               <details key={o.q} open={o.abrir}>
                 <summary>{o.q}</summary>
                 {o.a && <p className="cp">{o.a}</p>}
@@ -264,6 +268,8 @@ export default function Cartas() {
                   </ol>
                 )}
               </details>
+                ))}
+              </div>
             ))}
           </div>
         </div>
