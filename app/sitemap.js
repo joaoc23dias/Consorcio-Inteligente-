@@ -1,4 +1,4 @@
-const SITE_URL = 'https://joaodias.engenheirodoconsorcio.com.br';
+const SITE_URL = 'https://www.consorciointeligente.com.br';
 
 export default function sitemap() {
   return [

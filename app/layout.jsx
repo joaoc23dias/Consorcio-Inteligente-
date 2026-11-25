@@ -14,7 +14,7 @@ import { Analytics } from '@vercel/analytics/react';
 import Melhorias from './components/Melhorias';
 import { ESCRITORIOS, FAQ, CARTAS_FAQ, WHATSAPP, GAIA } from './content';
 
-const SITE_URL = 'https://joaodias.engenheirodoconsorcio.com.br';
+const SITE_URL = 'https://www.consorciointeligente.com.br';
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
