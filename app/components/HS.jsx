@@ -14,7 +14,7 @@ export default function HS() {
               Todo plano estruturado aqui é administrado pela HS Consórcios, do Grupo Herval, administradora exclusiva da Gaia Group e autorizada pelo Banco Central. Você tem o planejamento e o acompanhamento do especialista e a solidez de uma administradora com grupos, assembleias e contemplações reguladas.
             </p>
           </div>
-          <div className="col pad-box" style={{ flex: '1 1 360px', background: 'var(--surface)', padding: 36 }}>
+          <div className="col pad-box" style={{ flex: '1 1 360px', background: 'var(--surface)', border: '1px solid var(--rule)', padding: 36 }}>
             <div className="ph" style={{ height: 80 }}>LOGO HS CONSÓRCIOS · GRUPO HERVAL</div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 12, marginTop: 20 }}>
               {NUMEROS_HS.map((n) => (

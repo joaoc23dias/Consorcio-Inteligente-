@@ -31,9 +31,10 @@ export default function Agendar() {
   }
 
   return (
-    <section id="diagnostico" className="sec on-green" aria-labelledby="agendar-titulo">
+    <section id="diagnostico" className="sec alt" aria-labelledby="agendar-titulo">
       <div className="wrap row" style={{ gap: 72, alignItems: 'center' }}>
         <div className="col" style={{ flex: '1 1 420px' }}>
+          <p className="eyebrow">Diagnóstico patrimonial</p>
           <h2 id="agendar-titulo" className="h2">O dia mais importante da sua conquista é o dia em que você começa.</h2>
           <p className="lead">
             Deixe seu contato e escolha o horário. Eu te ligo por 5 minutos para entender o seu objetivo e marcar o diagnóstico patrimonial.
@@ -43,7 +44,7 @@ export default function Agendar() {
           noValidate
           onSubmit={enviar}
           className="col pad-box"
-          style={{ flex: '1 1 400px', background: 'var(--bg)', color: 'var(--ink)', padding: 40, display: 'flex', flexDirection: 'column', gap: 16 }}
+          style={{ flex: '1 1 400px', background: 'var(--surface)', border: '1px solid var(--rule)', color: 'var(--ink)', padding: 40, display: 'flex', flexDirection: 'column', gap: 16 }}
         >
           <div className="field">
             <label htmlFor="nome">Seu nome</label>

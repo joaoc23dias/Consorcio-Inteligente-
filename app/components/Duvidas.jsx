@@ -10,7 +10,7 @@ export default function Duvidas() {
           <p className="lead" style={{ fontSize: 16 }}>
             O assistente responde suas dúvidas no WhatsApp. Na hora de decidir, eu ou um consultor certificado do meu time assumimos a conversa.
           </p>
-          <div style={{ marginTop: 40, padding: 28, background: 'var(--bg-alt)' }}>
+          <div className="nota" style={{ marginTop: 40 }}>
             <p style={{ margin: '0 0 8px', fontFamily: 'var(--serif)', fontSize: 24 }}>Imobiliária ou construtora?</p>
             <p className="cp" style={{ marginBottom: 18 }}>
               Seu cliente não aprovou o crédito? Ele não precisa ir embora. O Programa Parceiro Estratégico devolve a compra para você.
