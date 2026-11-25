@@ -1,6 +1,6 @@
 'use client';
 import { track } from '@vercel/analytics';
-import { WHATSAPP, CARTAS_DEPOIMENTOS, CARTAS_CASO, LOGO_HS } from '../content';
+import { WHATSAPP, CARTAS_DEPOIMENTOS, CARTAS_CASOS, LOGO_HS } from '../content';
 
 const wa = (texto) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`;
 
@@ -154,22 +154,50 @@ export default function Cartas() {
         </ul>
 
         <div style={{ marginTop: 88 }}>
-          <p className="eyebrow">Quem já passou por aqui</p>
-          <h3 className="h3" style={{ fontSize: 34, maxWidth: 640 }}>Histórias reais de quem comprou e de quem vendeu a carta com a Gaia Group.</h3>
-          <div className="prova">
-            {CARTAS_DEPOIMENTOS.map((d, i) => {
-              const pendente = d.texto.startsWith('[');
-              return (
+          <p className="eyebrow">Casos reais</p>
+          <h3 className="h3" style={{ fontSize: 34, maxWidth: 640 }}>Quem usou a carta contemplada como estratégia conta como foi.</h3>
+          {CARTAS_CASOS.map((c) => (
+            <article key={c.video} className="bezel" style={{ marginTop: 32 }}>
+              <div className="bezel-core caso-grid">
+                <video
+                  className="caso-video"
+                  src={c.video}
+                  poster={c.poster}
+                  controls
+                  playsInline
+                  preload="none"
+                  aria-label={`Depoimento em vídeo: ${c.titulo}`}
+                  onPlay={() => track('caso_video_play', { caso: c.video })}
+                />
+                <div className="pad-box" style={{ padding: 40, display: 'flex', flexDirection: 'column' }}>
+                  <p className="eyebrow" style={{ marginBottom: 10 }}>{c.perfil} · Cliente Gaia Group</p>
+                  <h4 style={{ margin: '0 0 24px', fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 30, lineHeight: 1.2, color: 'var(--green)' }}>{c.titulo}</h4>
+                  <ol style={{ listStyle: 'none', margin: 0, padding: 0, flex: 1 }}>
+                    {c.etapas.map((e) => (
+                      <li key={e.rotulo} style={{ padding: '14px 0', borderTop: '1px solid var(--rule)' }}>
+                        <span className="label" style={{ display: 'block', marginBottom: 4 }}>{e.rotulo}</span>
+                        <span style={{ fontSize: 15 }}>{e.texto}</span>
+                      </li>
+                    ))}
+                  </ol>
+                  {c.cliente ? <p style={{ fontFamily: 'var(--serif)', fontSize: 22, margin: '20px 0 24px' }}>{c.cliente}</p> : <div style={{ height: 24 }} />}
+                  <a href={wa('Olá, João! Vi o caso real no site e quero entender como usar a carta contemplada na minha estratégia.')} target="_blank" rel="noopener noreferrer" className="btn btn-pri btn-ico" style={{ alignSelf: 'flex-start' }} onClick={() => track('cartas_whatsapp', { lado: 'caso' })}>
+                    Quero uma estratégia assim<span className="ico"><Seta /></span>
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))}
+          <p className="cp" style={{ fontSize: 12, marginTop: 16 }}>Depoimentos reais, publicados com autorização. Resultados individuais, que dependem da estratégia, do grupo e do mercado; não representam garantia de contemplação, ágio ou rentabilidade.</p>
+          {CARTAS_DEPOIMENTOS.some((d) => !d.texto.startsWith('[')) && (
+            <div className="prova">
+              {CARTAS_DEPOIMENTOS.filter((d) => !d.texto.startsWith('[')).map((d, i) => (
                 <figure key={i} className="bezel" style={{ margin: 0 }}>
                   <div className="bezel-core pad-box" style={{ padding: 32, gap: 20 }}>
                     <p className="eyebrow" style={{ margin: 0 }}>{d.lado}</p>
-                    <blockquote style={{ margin: 0, fontFamily: 'var(--serif)', fontSize: 24, lineHeight: 1.3, flex: 1 }} className={pendente ? 'ph' : undefined}>
-                      {pendente ? d.texto : `“${d.texto}”`}
-                    </blockquote>
+                    <blockquote style={{ margin: 0, fontFamily: 'var(--serif)', fontSize: 24, lineHeight: 1.3, flex: 1 }}>“{d.texto}”</blockquote>
                     <figcaption style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
-                      {d.foto
-                        ? <img src={d.foto} alt="" width={48} height={48} style={{ width: 48, height: 48, objectFit: 'cover', borderRadius: '50%' }} />
-                        : <span className="ph" aria-hidden="true" style={{ width: 48, height: 48, padding: 0, borderRadius: '50%', fontSize: 10 }}>foto</span>}
+                      {d.foto && <img src={d.foto} alt="" width={48} height={48} style={{ width: 48, height: 48, objectFit: 'cover', borderRadius: '50%' }} />}
                       <span>
                         <strong style={{ display: 'block', fontSize: 15 }}>{d.nome}</strong>
                         <span className="cp" style={{ fontSize: 13 }}>{d.detalhe}</span>
@@ -177,23 +205,9 @@ export default function Cartas() {
                     </figcaption>
                   </div>
                 </figure>
-              );
-            })}
-            <article className="bezel bezel-dark caso" style={{ margin: 0 }}>
-              <div className="bezel-core pad-box" style={{ padding: 32 }}>
-                <p className="tag eyebrow" style={{ marginBottom: 10 }}>Caso real</p>
-                <h4 style={{ margin: '0 0 20px', fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 26, lineHeight: 1.25, color: 'var(--bg)' }}>{CARTAS_CASO.titulo}</h4>
-                <ol style={{ listStyle: 'none', margin: 0, padding: 0 }}>
-                  {CARTAS_CASO.etapas.map((e) => (
-                    <li key={e.rotulo} style={{ padding: '14px 0', borderTop: '1px solid rgba(250,247,241,.14)' }}>
-                      <span className="tag" style={{ display: 'block', fontSize: 11, letterSpacing: '.14em', textTransform: 'uppercase', marginBottom: 4 }}>{e.rotulo}</span>
-                      <span style={{ fontSize: 15 }}>{e.texto}</span>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            </article>
-          </div>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="bezel bezel-dark" style={{ marginTop: 72 }}>

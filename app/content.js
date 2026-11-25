@@ -103,14 +103,32 @@ export const CARTAS_DEPOIMENTOS = [
   { lado: 'Vendeu a carta', texto: '[Frase real do cliente, 1 a 2 linhas: por que vendeu e como foi a negociação]', nome: '[Nome do cliente] · [cidade]', detalhe: 'Carta de [imóvel/veículo] · [mês/ano]', foto: '' },
 ];
 
-export const CARTAS_CASO = {
-  titulo: '[Título do caso, ex.: Da entrada guardada às chaves na mão]',
-  etapas: [
-    { rotulo: 'Situação', texto: '[Quem era o cliente e o que ele tinha: ex. casal com entrada guardada, queria o imóvel sem financiamento]' },
-    { rotulo: 'Caminho', texto: '[O que foi feito: cotação, carta escolhida, análise e transferência pela HS]' },
-    { rotulo: 'Resultado', texto: '[O que ele conquistou e em quanto tempo, sem valores da carta]' },
-  ],
-};
+export const CARTAS_CASOS = [
+  {
+    video: '/casos/caso-carta-vendida.mp4',
+    poster: '/casos/caso-carta-vendida.jpg',
+    cliente: '',
+    perfil: 'Vendeu a carta',
+    titulo: 'Contemplou, vendeu a carta e aumentou o poder de lance para a casa própria.',
+    etapas: [
+      { rotulo: 'Objetivo', texto: 'Conquistar a casa própria, com uma meta de 18 meses.' },
+      { rotulo: 'Estratégia', texto: 'Um plano com várias cartas, traçado para concluir o objetivo dentro do prazo.' },
+      { rotulo: 'Resultado', texto: 'Contemplado logo no início, vendeu a carta e usou o valor para aumentar o potencial de lance nas próximas.' },
+    ],
+  },
+  {
+    video: '/casos/caso-paulo-investidor.mp4',
+    poster: '/casos/caso-paulo-investidor.jpg',
+    cliente: 'Paulo',
+    perfil: 'Investidor',
+    titulo: 'Começou com uma carta para conhecer. Hoje tem uma carteira de 15.',
+    etapas: [
+      { rotulo: 'Começo', texto: 'Fez a primeira carta para entender, na prática, como o consórcio funciona como investimento.' },
+      { rotulo: 'Confiança', texto: 'Com a primeira funcionando, fez mais três. Depois da contemplação delas, montou uma carteira de 15 cartas.' },
+      { rotulo: 'Resultado', texto: 'Foi contemplado já no primeiro mês em uma das cartas, com retorno relevante para a carteira.' },
+    ],
+  },
+];
 
 // Logo da HS para a faixa de confiança: salvar o arquivo em public/logo-hs.png e trocar para '/logo-hs.png'.
 export const LOGO_HS = '';
