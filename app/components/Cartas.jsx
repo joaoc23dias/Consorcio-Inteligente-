@@ -11,12 +11,6 @@ const Check = () => (
   </svg>
 );
 
-const Xis = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" style={{ flex: 'none', marginTop: 4 }}>
-    <path d="M4.5 4.5l7 7M11.5 4.5l-7 7" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" />
-  </svg>
-);
-
 const Seta = () => (
   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
     <path d="M4 10L10 4M5 4h5v5" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" />
@@ -83,6 +77,11 @@ const PASSOS = [
 ];
 
 const OBJECOES = [
+  { q: 'Preciso ter entrada para comprar uma carta contemplada?', a: 'Sim, a entrada é obrigatória. Ela é o valor pago a quem está vendendo a carta; o restante segue em aportes mensais no grupo. Sem entrada, a compra não acontece, e o caminho certo para você é o consórcio estratégico desde o início.', abrir: true },
+  { q: 'Para quem é a carta contemplada?', lista: PARA_QUEM.e },
+  { q: 'Por que usar uma carta contemplada?', lista: PARA_QUEM.porque },
+  { q: 'Como usar uma carta contemplada?', passos: PASSOS },
+  { q: 'Para quem a carta contemplada não é?', lista: PARA_QUEM.nao },
   { q: 'É seguro comprar ou vender uma carta?', a: 'Sim, quando a transferência é feita do jeito certo: com contrato, cessão registrada e aprovação da administradora. Nada de acordo de gaveta. Conduzimos cada etapa.' },
   { q: 'Quem compra a minha carta?', a: 'Pessoas que já têm entrada e querem o crédito agora, e investidores que acompanham esse mercado. Nosso papel é encontrar o comprador certo e conduzir a negociação.' },
   { q: 'Quanto vale a minha carta?', a: 'Depende do crédito, do saldo devedor, dos aportes restantes e do momento do mercado. Por isso não publicamos valores: você solicita a cotação e recebe o número da sua cota, analisada individualmente.' },
@@ -160,47 +159,28 @@ export default function Cartas() {
           </div>
         </div>
 
-        <div className="qual">
-          {[
-            { k: 'e', t: 'Para quem é', cor: 'var(--gold)', Icone: Check },
-            { k: 'porque', t: 'Por que usar', cor: 'var(--gold)', Icone: Check },
-            { k: 'nao', t: 'Para quem não é', cor: '#A3261B', Icone: Xis },
-          ].map((c) => (
-            <div key={c.k} className={c.k === 'nao' ? 'qual-nao' : undefined}>
-              <h3 className="h3" style={{ marginBottom: 16 }}>{c.t}</h3>
-              <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
-                {PARA_QUEM[c.k].map((i) => (
-                  <li key={i} style={{ display: 'flex', gap: 12, padding: '14px 0', borderTop: '1px solid var(--rule-strong)', fontSize: 15, color: 'var(--ink)' }}>
-                    <span style={{ color: c.cor }}><c.Icone /></span>{i}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        <h3 className="h3" style={{ margin: '88px 0 28px' }}>Como usar</h3>
-        <ol className="passos">
-          {PASSOS.map((p, i) => (
-            <li key={p.t}>
-              <span className="n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-              <strong style={{ display: 'block', marginBottom: 6 }}>{p.t}</strong>
-              <span className="cp" style={{ fontSize: 15 }}>{p.d}</span>
-            </li>
-          ))}
-        </ol>
-
-        <div className="row" style={{ gap: 72, marginTop: 88 }}>
+        <div id="cartas-faq" className="row" style={{ gap: 72, marginTop: 88 }}>
           <div className="col" style={{ flex: '1 1 320px' }}>
-            <h3 className="h3" style={{ marginTop: 0 }}>O que todo mundo pergunta antes de decidir</h3>
+            <p className="eyebrow">Perguntas frequentes</p>
+            <h3 className="h3" style={{ marginTop: 0, fontSize: 34 }}>Antes de pedir a cotação, confira se a carta é para você.</h3>
             <p className="cp" style={{ marginBottom: 28 }}>Se a sua dúvida não estiver aqui, me mande no WhatsApp junto com o pedido de cotação. Cada carta é analisada com números reais.</p>
             <a href={wa('Olá, João! Tenho uma dúvida sobre cartas contempladas e quero uma cotação.')} target="_blank" rel="noopener noreferrer" className="btn btn-sec" onClick={() => track('cartas_whatsapp', { lado: 'duvida' })}>Falar no WhatsApp</a>
           </div>
           <div className="col" style={{ flex: '1 1 520px', borderTop: '1px solid var(--rule)' }}>
             {OBJECOES.map((o) => (
-              <details key={o.q}>
+              <details key={o.q} open={o.abrir}>
                 <summary>{o.q}</summary>
-                <p className="cp">{o.a}</p>
+                {o.a && <p className="cp">{o.a}</p>}
+                {o.lista && (
+                  <ul className="cp" style={{ margin: '0 0 24px', paddingLeft: 20 }}>
+                    {o.lista.map((i) => <li key={i} style={{ marginBottom: 8 }}>{i}</li>)}
+                  </ul>
+                )}
+                {o.passos && (
+                  <ol className="cp" style={{ margin: '0 0 24px', paddingLeft: 20 }}>
+                    {o.passos.map((p) => <li key={p.t} style={{ marginBottom: 8 }}><strong style={{ color: 'var(--ink)' }}>{p.t}.</strong> {p.d}</li>)}
+                  </ol>
+                )}
               </details>
             ))}
           </div>
