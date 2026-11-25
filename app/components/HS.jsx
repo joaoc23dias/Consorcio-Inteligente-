@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { ESCRITORIOS, NUMEROS_HS } from '../content';
 
 export default function HS() {
@@ -15,7 +16,7 @@ export default function HS() {
             </p>
           </div>
           <div className="col pad-box" style={{ flex: '1 1 360px', background: 'var(--surface)', border: '1px solid var(--rule)', padding: 36 }}>
-            <div className="ph" style={{ height: 80 }}>LOGO HS CONSÓRCIOS · GRUPO HERVAL</div>
+            <Image src="/logo-hs.png" alt="HS Consórcios, uma empresa do Grupo Herval" width={240} height={64} />
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 12, marginTop: 20 }}>
               {NUMEROS_HS.map((n) => (
                 <div key={n} className="ph num" style={{ padding: '14px 8px' }}>{n}</div>

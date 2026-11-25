@@ -38,7 +38,7 @@ export default function Hero() {
           <div className="row" style={{ alignItems: 'center', gap: 22 }}>
             <Image src="/logo-gaia-vermelho.png" alt="Gaia Group" width={66} height={52} />
             <span aria-hidden="true" style={{ width: 1, height: 36, background: 'var(--rule)' }} />
-            <span className="ph" style={{ padding: '8px 12px' }}>LOGO HS CONSÓRCIOS</span>
+            <Image src="/logo-hs.png" alt="HS Consórcios, uma empresa do Grupo Herval" width={150} height={40} />
             <span className="small" style={{ color: 'var(--ink-soft)' }}>
               Administração exclusiva <span translate="no">HS Consórcios</span> · autorizada pelo Banco Central
             </span>

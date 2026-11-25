@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="wrap row" style={{ gap: 28, alignItems: 'flex-start', justifyContent: 'space-between' }}>
         <div className="row" style={{ alignItems: 'center', gap: 22 }}>
           <Image src="/logo-gaia-vermelho.png" alt="Gaia Group" width={61} height={48} />
-          <span className="ph" style={{ padding: '6px 10px' }}>LOGO HS</span>
+          <Image src="/logo-hs.png" alt="HS Consórcios, uma empresa do Grupo Herval" width={135} height={36} />
         </div>
         <div style={{ maxWidth: 640, fontSize: 12, color: 'var(--ink-muted)', lineHeight: 1.7 }}>
           <p style={{ margin: 0 }}>

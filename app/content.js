@@ -120,8 +120,8 @@ export const CARTAS_CASOS = [
   },
 ];
 
-// Logo da HS para a faixa de confiança: salvar o arquivo em public/logo-hs.png e trocar para '/logo-hs.png'.
-export const LOGO_HS = '';
+// Logo da HS (public/logo-hs.png), usado na faixa de confiança das cartas.
+export const LOGO_HS = '/logo-hs.png';
 
 // Cartas contempladas: conteúdo das perguntas frequentes (usado na página e nos dados estruturados do Google)
 export const CARTAS_PARA_QUEM = {

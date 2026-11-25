@@ -114,7 +114,7 @@ export default function Cartas() {
         <ul className="row" style={{ listStyle: 'none', margin: '28px 0 0', padding: 0, gap: '10px 28px', fontSize: 13, color: 'var(--ink-soft)', alignItems: 'center' }}>
           <li style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
             {LOGO_HS
-              ? <img src={LOGO_HS} alt="HS Consórcios" height={28} style={{ height: 28, width: 'auto' }} />
+              ? <img src={LOGO_HS} alt="HS Consórcios" height={32} style={{ height: 32, width: "auto" }} />
               : <span className="ph" style={{ padding: '6px 10px', fontSize: 11 }}>LOGO HS</span>}
             Administradora HS Consórcios
           </li>
