@@ -16,7 +16,7 @@ export default function Header() {
           <a href="/#duvidas">Dúvidas</a>
         </nav>
         <div className="row" style={{ alignItems: 'center', gap: 20 }}>
-          <Image src="/logo-gaia-vermelho.png" alt="Gaia Group" width={56} height={44} className="hide-mobile" priority />
+          <Image src="/logo-gaia-vermelho.png" alt="Gaia Group Investimentos & Consórcios" width={56} height={44} className="hide-mobile" priority />
           <a href="/#diagnostico" className="btn btn-pri btn-sm" style={{ whiteSpace: 'nowrap', padding: '0 16px' }}>Agendar diagnóstico</a>
         </div>
       </div>

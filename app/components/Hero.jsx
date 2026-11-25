@@ -36,7 +36,7 @@ export default function Hero() {
         <hr className="rule" />
         <div className="row" style={{ gap: 32, alignItems: 'center', justifyContent: 'space-between', padding: '28px 0' }}>
           <div className="row" style={{ alignItems: 'center', gap: 22 }}>
-            <Image src="/logo-gaia-vermelho.png" alt="Gaia Group" width={66} height={52} />
+            <Image src="/logo-gaia-vermelho.png" alt="Gaia Group Investimentos & Consórcios" width={76} height={60} />
             <span aria-hidden="true" style={{ width: 1, height: 36, background: 'var(--rule)' }} />
             <Image src="/logo-hs.png" alt="HS Consórcios, uma empresa do Grupo Herval" width={150} height={40} />
             <span className="small" style={{ color: 'var(--ink-soft)' }}>
