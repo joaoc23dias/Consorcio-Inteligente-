@@ -2,6 +2,7 @@ import './globals.css';
 import '@fontsource-variable/schibsted-grotesk';
 import '@fontsource-variable/archivo/wdth.css';
 import '@fontsource-variable/schibsted-grotesk/wght-italic.css';
+import '@fontsource-variable/source-serif-4/opsz.css';
 import { Analytics } from '@vercel/analytics/react';
 import Melhorias from './components/Melhorias';
 import { ESCRITORIOS, WHATSAPP, GAIA } from './content';

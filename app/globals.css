@@ -803,3 +803,18 @@ body { font-feature-settings: normal; }
 .contato-campos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .contato .btn { align-self: flex-start; }
 @media (max-width: 560px) { .contato-campos { grid-template-columns: 1fr; } .contato .btn { align-self: stretch; } }
+
+/* Fase 5: serifa editorial nos títulos (Source Serif 4); subtítulos, nomes e perguntas seguem em Schibsted Grotesk */
+:root { --serif: 'Source Serif 4 Variable', Georgia, 'Times New Roman', serif; }
+.mesa-h1, .h1, .h2, .cred-titulo, .dep-citacao, .prova-form blockquote { font-family: var(--serif); font-optical-sizing: auto; }
+.mesa-h1 { font-weight: 400; font-size: clamp(42px, 5.4vw, 76px); line-height: 1.04; letter-spacing: -.02em; }
+.h1 { font-weight: 450; font-size: clamp(40px, 4.8vw, 64px); line-height: 1.06; letter-spacing: -.02em; }
+.h2, .cred-titulo { font-weight: 480; font-size: clamp(30px, 3.6vw, 48px); line-height: 1.1; letter-spacing: -.015em; }
+.dep-citacao { font-weight: 400; letter-spacing: -.01em; }
+.prova-form blockquote { font-weight: 400; }
+.h3, .quem-nome, summary, .texto h2 { font-family: var(--sans); font-weight: 600; letter-spacing: -.01em; }
+summary { font-size: 19px; }
+@media (max-width: 760px) { .mesa-h1 { font-size: 40px; } .h2, .cred-titulo { font-size: 30px; } .h1 { font-size: 38px; } }
+.cred-numeros dd { font-family: var(--sans); font-weight: 600; font-size: clamp(28px, 2.8vw, 38px); letter-spacing: -.02em; }
+@media (max-width: 760px) { .cred-numeros dd { font-size: 28px; } }
+.cred-papel { font-family: var(--sans); font-weight: 600; letter-spacing: -.01em; }

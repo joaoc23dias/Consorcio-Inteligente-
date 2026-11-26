@@ -16,7 +16,7 @@ export default function Depoimentos() {
                 aria-label={`Depoimento em vídeo: ${d.detalhe}`} className="dep-video" />
               <figcaption className="dep-texto">
                 {d.citacao && <blockquote className="dep-citacao">“{d.citacao}”</blockquote>}
-                <div style={{ fontFamily: 'var(--serif)', fontSize: 22 }}>{d.nome}</div>
+                <div style={{ fontFamily: 'var(--sans)', fontWeight: 600, fontSize: 18 }}>{d.nome}</div>
                 <p className="cp" style={{ marginTop: 4, fontSize: 14 }}>{d.detalhe}</p>
               </figcaption>
             </figure>

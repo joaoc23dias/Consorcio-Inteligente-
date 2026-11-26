@@ -35,8 +35,8 @@ export default function Comparativo() {
             <thead>
               <tr>
                 <th scope="col" style={{ textAlign: 'left', padding: '0 0 16px', width: '28%' }} />
-                <th scope="col" style={{ textAlign: 'left', padding: '0 16px 16px', fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 24, color: 'var(--green)' }}>Consórcio estratégico HS</th>
-                <th scope="col" style={{ textAlign: 'left', padding: '0 16px 16px', fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 24, color: 'var(--ink-soft)' }}>Financiamento bancário</th>
+                <th scope="col" style={{ textAlign: 'left', padding: '0 16px 16px', fontFamily: 'var(--sans)', fontWeight: 600, fontSize: 20, color: 'var(--green)' }}>Consórcio estratégico HS</th>
+                <th scope="col" style={{ textAlign: 'left', padding: '0 16px 16px', fontFamily: 'var(--sans)', fontWeight: 600, fontSize: 20, color: 'var(--ink-soft)' }}>Financiamento bancário</th>
               </tr>
             </thead>
             <tbody>
@@ -57,7 +57,7 @@ export default function Comparativo() {
             { nome: 'Financiamento bancário', cor: 'var(--ink-soft)', k: 'b' },
           ].map((col) => (
             <div key={col.k} style={{ background: col.k === 'a' ? 'var(--bg-alt)' : 'transparent', border: '1px solid var(--rule)', padding: 22, marginBottom: 14 }}>
-              <div style={{ fontFamily: 'var(--serif)', fontSize: 24, color: col.cor, marginBottom: 10 }}>{col.nome}</div>
+              <div style={{ fontFamily: 'var(--sans)', fontWeight: 600, fontSize: 20, color: col.cor, marginBottom: 10 }}>{col.nome}</div>
               <dl className="num" style={{ margin: 0 }}>
                 {LINHAS.map((l) => (
                   <div key={l.rotulo} style={{ display: 'flex', justifyContent: 'space-between', gap: 16, padding: '10px 0', borderTop: '1px solid var(--rule)' }}>

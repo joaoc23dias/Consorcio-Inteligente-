@@ -53,7 +53,7 @@ export default function Simulador() {
           </div>
 
           <label htmlFor="credito" className="label" style={{ display: 'block', marginBottom: 6 }}>Valor do crédito</label>
-          <output htmlFor="credito" className="num" style={{ display: 'block', fontFamily: 'var(--serif)', fontSize: 40, color: 'var(--ink)', marginBottom: 6 }}>
+          <output htmlFor="credito" className="num" style={{ display: 'block', fontFamily: 'var(--sans)', fontWeight: 600, fontSize: 40, fontVariantNumeric: 'tabular-nums', color: 'var(--ink)', marginBottom: 6 }}>
             {brl.format(credito)}
           </output>
           <input
@@ -76,7 +76,7 @@ export default function Simulador() {
             {etapas.map((e) => (
               <li key={e.t}>
                 <div className="label">{e.t}</div>
-                <div className="num" style={{ fontFamily: 'var(--serif)', fontSize: 22, margin: '2px 0' }}>{e.v}</div>
+                <div className="num" style={{ fontFamily: 'var(--sans)', fontWeight: 600, fontSize: 22, margin: '2px 0' }}>{e.v}</div>
                 <p className="cp small">{e.d}</p>
               </li>
             ))}

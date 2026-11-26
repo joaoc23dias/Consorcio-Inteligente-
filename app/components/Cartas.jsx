@@ -196,7 +196,7 @@ export default function Cartas() {
                   />
                   {c.cliente && (
                     <figcaption style={{ marginTop: 12, textAlign: 'center' }}>
-                      <span style={{ display: 'block', fontFamily: 'var(--serif)', fontSize: 20, color: 'var(--ink)' }}>{c.cliente}</span>
+                      <span style={{ display: 'block', fontFamily: 'var(--sans)', fontWeight: 600, fontSize: 18, color: 'var(--ink)' }}>{c.cliente}</span>
                       {c.profissao && <span className="label">{c.profissao}</span>}
                     </figcaption>
                   )}
