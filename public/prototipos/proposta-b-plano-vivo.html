@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proposta B · Plano Vivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* VOICE: software sério, preciso e calmo; fala como ferramenta, não como anúncio.
+   IDEA: um aplicativo de planejamento em que o visitante monta um objeto "Plano" que acompanha todos os módulos.
+   PICTURE: o painel "Seu plano" que se preenche ao vivo, com aderência à tabela HS e caminho indicado.
+   COLOUR and TYPE: grafite quase preto, superfícies em camadas, dourado só na ação principal, azul-gelo para dados; Geist e Geist Mono nos números.
+   LAYOUT: barra de módulos no topo (embaixo no celular), área de trabalho e painel do plano à direita; empilha abaixo de 980px. */
+:root{color-scheme:dark;--bg:#0A0D12;--s1:#10141B;--s2:#161B24;--ln:#232A35;--ink:#E8ECF1;--soft:#A4AEBC;--mut:#77828F;--gold:#D6AF61;--data:#8DB6DD;--ok:#7CC6A4;--warn:#E3B76B;--bad:#E58F7E}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15.5px/1.55 Geist,system-ui,sans-serif;overflow-x:clip}
+a{color:inherit}button{font:inherit;color:inherit}
+.num,.mono{font-family:"Geist Mono",monospace;font-variant-numeric:tabular-nums}
+.app{display:grid;grid-template-rows:auto 1fr;min-height:100dvh}
+.bar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:20px;height:60px;padding:0 20px;border-bottom:1px solid var(--ln);background:rgba(10,13,18,.92);backdrop-filter:blur(12px)}
+.marca{text-decoration:none;line-height:1.1}.marca b{display:block;font-weight:650;letter-spacing:-.01em}.marca span{font-size:12px;color:var(--gold)}
+.mods{display:flex;gap:2px;margin-left:12px;overflow-x:auto;scrollbar-width:none}
+.mods a{white-space:nowrap;text-decoration:none;color:var(--soft);padding:8px 12px;border-radius:8px;font-size:14px}
+.mods a[aria-current=page]{background:var(--s2);color:var(--ink)}
+.mods a.eq{color:var(--mut);border:1px dashed var(--ln)}
+.k{margin-left:auto;display:flex;align-items:center;gap:10px}
+.kbd{font:12px "Geist Mono";color:var(--mut);border:1px solid var(--ln);border-radius:6px;padding:2px 6px}
+.bt{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:10px;border:0;background:var(--gold);color:#12161D;font-weight:600;text-decoration:none;cursor:pointer}
+.bt:hover{filter:brightness(1.06)}.bt.sec{background:var(--s2);color:var(--ink);box-shadow:inset 0 0 0 1px var(--ln)}
+:focus-visible{outline:2px solid var(--data);outline-offset:2px}
+.corpo{display:grid;grid-template-columns:minmax(0,1fr) 340px}
+.area{padding:40px clamp(18px,4vw,56px) 96px}
+.rail{border-left:1px solid var(--ln);background:var(--s1);padding:24px 20px;position:sticky;top:60px;height:calc(100dvh - 60px);overflow:auto}
+h1,h2,h3{margin:0;letter-spacing:-.025em;text-wrap:balance}
+h1{font-size:clamp(34px,4.4vw,58px);line-height:1.03;font-weight:600}
+h2{font-size:clamp(26px,2.8vw,36px);line-height:1.1;font-weight:600}
+h3{font-size:17px;font-weight:600;letter-spacing:-.01em}
+p{margin:0}.lead{color:var(--soft);font-size:18px;max-width:62ch}
+.rot{font-size:13px;color:var(--mut)}
+.vista[hidden]{display:none}
+/* Explorar */
+.objs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:32px 0}
+.obj{display:grid;gap:10px;align-content:start;min-height:132px;padding:16px;border-radius:14px;border:1px solid var(--ln);background:var(--s1);text-align:left;cursor:pointer;transition:border-color .2s,background .2s}
+.obj:hover{border-color:#3A4352;background:var(--s2)}.obj svg{width:28px;height:28px;stroke:var(--data);fill:none;stroke-width:1.5}
+.obj small{color:var(--mut);font-size:13px}
+.obj.venda{border-style:dashed}
+.tres{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--ln);border:1px solid var(--ln);border-radius:14px;overflow:hidden;margin-top:12px}
+.tres div{background:var(--bg);padding:20px}.tres p{color:var(--soft);font-size:14.5px;margin-top:6px}
+.quem{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:40px}
+.quem article{border-top:1px solid var(--ln);padding-top:16px}.quem p{color:var(--soft);font-size:14.5px;margin-top:6px}
+.quem .n{display:flex;gap:22px;margin-top:12px}.quem .n b{font-size:20px}
+/* Diagnóstico */
+.conversa{max-width:720px;margin-top:28px;display:grid;gap:14px}
+.linha{display:flex;justify-content:space-between;gap:16px;padding:12px 16px;border-radius:12px;background:var(--s1);border:1px solid var(--ln)}
+.linha span{color:var(--soft)}.linha button{background:none;border:0;color:var(--mut);text-decoration:underline;cursor:pointer;font-size:13px}
+.atual{padding:20px;border-radius:16px;border:1px solid #39424F;background:var(--s2)}
+.atual h3{font-size:22px;margin:6px 0 16px}
+.ops{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.op{display:flex;align-items:center;gap:12px;min-height:50px;padding:0 14px;border-radius:10px;border:1px solid var(--ln);background:var(--bg);text-align:left;cursor:pointer}
+.op:hover{border-color:var(--gold)}.op .kbd{flex:none}
+.prog{height:3px;background:var(--ln);border-radius:2px;margin-top:22px;max-width:720px}.prog i{display:block;height:100%;background:var(--gold);border-radius:2px;transition:width .3s}
+.res{max-width:720px;margin-top:20px;padding:24px;border-radius:16px;background:var(--s1);border:1px solid var(--ln)}
+.res h3{font-size:24px;margin:6px 0 10px}.res p{color:var(--soft)}.res ul{color:var(--soft);padding-left:18px;margin:14px 0 20px}
+/* Contato */
+.ct{display:grid;gap:10px}.ct-campos{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ct label{display:grid;gap:6px;font-size:13px;color:var(--soft)}
+.ct input[name=nome],.ct input[type=tel]{min-height:46px;border-radius:10px;border:1px solid var(--ln);background:var(--bg);color:var(--ink);padding:0 12px;font:16px Geist,sans-serif}
+.ct-ok{grid-template-columns:20px 1fr!important}.ct-ok input{width:18px;height:18px;accent-color:var(--gold);margin:1px 0 0}
+.ct-erro{color:var(--bad);font-size:14px}.ct-erro:empty{display:none}.ct .bt{justify-self:start}.ct-fim{font-size:14px;color:var(--soft)}.ct-fim a{color:var(--gold)}
+/* Simulador */
+.cen{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:28px}
+.cart{padding:20px;border-radius:16px;background:var(--s1);border:1px solid var(--ln);display:grid;gap:14px}
+.cart header{display:flex;justify-content:space-between;align-items:center}
+.seg{display:inline-flex;background:var(--bg);border:1px solid var(--ln);border-radius:10px;padding:3px}
+.seg button{min-height:36px;padding:0 12px;border-radius:7px;border:0;background:none;color:var(--soft);cursor:pointer;font-size:14px}.seg button[aria-pressed=true]{background:var(--s2);color:var(--ink)}
+input[type=range]{width:100%;accent-color:var(--gold);height:30px}
+.big{font:600 clamp(28px,3vw,38px)/1 "Geist Mono",monospace;letter-spacing:-.03em}
+.kv{display:grid;grid-template-columns:1fr auto;gap:6px 12px;font-size:14px}.kv dt{color:var(--soft)}.kv dd{margin:0;text-align:right;font-family:"Geist Mono";white-space:nowrap}
+.fig{position:relative;height:200px;margin-top:4px}.fig svg{position:absolute;inset:0;width:100%;height:100%}
+.prem{margin-top:22px;padding:16px 18px;border-radius:12px;border:1px dashed var(--ln);color:var(--soft);font-size:14px;max-width:90ch}
+.comp{margin-top:22px;display:grid;gap:10px;max-width:760px}
+.comp .row{display:grid;grid-template-columns:200px minmax(0,1fr) 130px;gap:12px;align-items:center;font-size:14px}
+.comp .bar{height:12px;border-radius:6px;background:var(--data)}.comp .row:first-child .bar{background:var(--gold)}
+/* SPA */
+.pipe{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:32px;border:1px solid var(--ln);border-radius:16px;overflow:hidden}
+.no{padding:22px;background:var(--s1);border-right:1px solid var(--ln);display:grid;gap:10px;align-content:start}.no:last-child{border-right:0}
+.no .mono{color:var(--gold);font-size:13px}.no p{color:var(--soft);font-size:14.5px}
+.no ul{margin:0;padding-left:16px;color:var(--soft);font-size:14px}
+.no.on{background:var(--s2)}
+.etp{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:20px}
+.etp div{padding:14px 0;border-top:2px solid var(--ln)}.etp div.on{border-color:var(--gold)}.etp p{color:var(--soft);font-size:14px;margin-top:4px}
+/* Cartas */
+.portas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:28px}
+.porta{padding:22px;border-radius:16px;border:1px solid var(--ln);background:var(--s1);display:grid;gap:12px;align-content:start}
+.porta ul{margin:0;padding-left:18px;color:var(--soft);font-size:14.5px}
+.campo{display:grid;gap:6px;font-size:13px;color:var(--soft)}.campo select{min-height:44px;border-radius:10px;border:1px solid var(--ln);background:var(--bg);color:var(--ink);padding:0 10px;font:15px Geist,sans-serif}
+/* Equipe */
+.eqgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;margin-top:24px}
+.painel{padding:20px;border-radius:16px;background:var(--s1);border:1px solid var(--ln)}
+.regra{display:grid;grid-template-columns:minmax(0,1fr) 120px 44px;gap:10px;align-items:center;font-size:14px;padding:6px 0;border-bottom:1px solid var(--ln)}
+.regra input{accent-color:var(--data)}
+.leads{width:100%;border-collapse:collapse;font-size:14px}.leads td,.leads th{padding:10px 8px;border-bottom:1px solid var(--ln);text-align:left}.leads th{color:var(--mut);font-weight:500}
+.cl{display:inline-flex;width:26px;height:26px;border-radius:7px;align-items:center;justify-content:center;font:600 13px "Geist Mono"}
+.cA{background:rgba(124,198,164,.18);color:var(--ok)}.cB{background:rgba(141,182,221,.18);color:var(--data)}.cC{background:rgba(227,183,107,.18);color:var(--warn)}.cD{background:rgba(119,130,143,.18);color:var(--soft)}
+/* Rail */
+.rail h3{display:flex;justify-content:space-between;align-items:center}
+.campos{display:grid;gap:2px;margin-top:14px}
+.campos div{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--ln);font-size:13.5px}
+.campos span{color:var(--mut)}.campos b{font-weight:500;text-align:right}.campos b.vazio{color:#4A5361;font-weight:400}
+.ader{margin-top:18px;padding:14px;border-radius:12px;background:var(--bg);border:1px solid var(--ln);font-size:13.5px;color:var(--soft)}
+.ader b{display:block;color:var(--ink);font-size:15px;margin-bottom:4px}
+.rail .bt{width:100%;margin-top:16px}
+.legal{font-size:12.5px;color:var(--mut);margin-top:40px;max-width:90ch}
+.prot{font-size:12px;color:var(--mut);border:1px dashed var(--ln);border-radius:999px;padding:4px 10px}
+@media(max-width:980px){.corpo{grid-template-columns:1fr}.rail{position:static;height:auto;border-left:0;border-top:1px solid var(--ln)}.objs{grid-template-columns:repeat(2,minmax(0,1fr))}.cen,.portas,.eqgrid,.quem,.tres,.pipe{grid-template-columns:1fr}.no{border-right:0;border-bottom:1px solid var(--ln)}.etp{grid-template-columns:repeat(2,minmax(0,1fr))}.k .kbd,.k .prot{display:none}}
+@media(max-width:640px){.bar{height:auto;flex-wrap:wrap;padding:10px 14px;gap:8px}.mods{order:3;width:100%;margin:0}.ops,.ct-campos{grid-template-columns:1fr}.area{padding:28px 16px 80px}.comp .row{grid-template-columns:1fr;gap:4px}.ct .bt{justify-self:stretch}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="bar">
+  <a class="marca" href="#explorar"><b>João Dias</b><span>Consórcio Inteligente</span></a>
+  <nav class="mods" aria-label="Módulos">
+    <a href="#explorar">Explorar</a><a href="#diagnostico">Diagnóstico</a><a href="#simulador">Simulador</a><a href="#metodo">Método SPA®</a><a href="#cartas">Cartas contempladas</a><a class="eq" href="#equipe">Visão da equipe</a>
+  </nav>
+  <div class="k"><span class="prot">Protótipo B</span><span class="kbd">/ diagnóstico</span><a class="bt" href="#diagnostico">Montar meu plano</a></div>
+</header>
+<div class="corpo">
+<main class="area">
+
+<section class="vista" id="v-explorar">
+  <p class="rot">Plataforma de inteligência patrimonial</p>
+  <h1 style="margin-top:10px">Planeje a sua próxima aquisição como um projeto, não como uma parcela.</h1>
+  <p class="lead" style="margin-top:16px">Escolha o objetivo. A plataforma monta o seu plano com a tabela oficial da HS Consórcios, mostra se o aporte cabe no seu mês e indica o caminho. Quem conduz o plano com você é o João Dias, pela Gaia Group.</p>
+  <div class="objs" id="objs"></div>
+  <div class="tres">
+    <div><h3>1. Monte o plano</h3><p>Sete perguntas, só as necessárias. A plataforma adapta a jornada às suas respostas.</p></div>
+    <div><h3>2. Teste cenários</h3><p>Compare cartas, aportes e prazos com os números da tabela HS, sem promessas.</p></div>
+    <div><h3>3. Valide com um especialista</h3><p>O diagnóstico patrimonial fecha a estratégia de contemplação antes de qualquer assinatura.</p></div>
+  </div>
+  <div class="quem">
+    <article><h3>João Dias</h3><p>Especialista em planejamento patrimonial pela Gaia Group, responsável pelo seu relacionamento.</p></article>
+    <article><h3>Gaia Group</h3><p>Onde o plano é desenhado e acompanhado, com o Método SPA®, de propriedade da Gaia Group.</p><div class="n"><div><b class="num">+2.000</b><div class="rot">famílias atendidas</div></div><div><b class="num">9 anos</b><div class="rot">de entregas reais</div></div></div></article>
+    <article><h3>HS Consórcios</h3><p>Administradora dos grupos, das assembleias e das contemplações. Grupo Herval, autorizada pelo Banco Central.</p></article>
+  </div>
+</section>
+
+<section class="vista" id="v-diagnostico" hidden>
+  <p class="rot">Módulo 02 · Diagnóstico inteligente</p>
+  <h2 style="margin-top:8px">Monte o seu plano.</h2>
+  <p class="lead" style="margin-top:10px">Cada resposta preenche o painel do plano. Você pode corrigir qualquer uma.</p>
+  <div class="prog"><i id="prog"></i></div>
+  <div class="conversa" id="conversa" aria-live="polite"></div>
+</section>
+
+<section class="vista" id="v-simulador" hidden>
+  <p class="rot">Módulo 03 · Simulador estratégico</p>
+  <h2 style="margin-top:8px">Dois cenários lado a lado.</h2>
+  <p class="lead" style="margin-top:10px">Ajuste cada cenário e compare. Todos os valores vêm da tabela HS de referência, e as contas aparecem abertas.</p>
+  <div class="cen" id="cen"></div>
+  <div class="prem" id="prem"></div>
+  <h3 style="margin-top:36px">Referência: crédito de R$ 400 mil, total pago</h3>
+  <div class="comp">
+    <div class="row"><span>Consórcio estratégico HS</span><div class="bar" style="width:42.2%"></div><span class="num">R$ 492.000</span></div>
+    <div class="row"><span>Financiamento SAC</span><div class="bar" style="width:100%"></div><span class="num">R$ 1.166.635</span></div>
+  </div>
+  <p class="legal" style="margin-top:10px">Financiamento: simulador oficial da Caixa (24/11/2026), 420 meses, 11,49% a.a., entrada de R$ 100 mil, só amortização e juros. Consórcio: 200 meses, aporte integral de R$ 2.460,00, estrutura operacional de 22% e fundo de reserva de 1%.</p>
+</section>
+
+<section class="vista" id="v-metodo" hidden>
+  <p class="rot">Módulo 04 · Método SPA® da Gaia Group</p>
+  <h2 style="margin-top:8px">Três verificações, nessa ordem, antes de qualquer carta.</h2>
+  <p class="lead" style="margin-top:10px">O Método SPA® funciona como um sistema: o plano só avança para a próxima camada quando passa pela anterior. O seu plano aparece marcado conforme as respostas.</p>
+  <div class="pipe" id="pipe"></div>
+  <div class="etp"><div class="on"><h3>Conversa</h3><p>O que você quer conquistar e em quanto tempo.</p></div><div><h3>Diagnóstico patrimonial</h3><p>Quanto você pode aportar sem apertar o fluxo.</p></div><div><h3>Estratégia</h3><p>Crédito, grupo e estratégia de contemplação, antes de assinar.</p></div><div><h3>Acompanhamento</h3><p>Assembleias acompanhadas até o acesso ao crédito.</p></div></div>
+  <p class="legal">Método SPA® é propriedade da Gaia Group.</p>
+</section>
+
+<section class="vista" id="v-cartas" hidden>
+  <p class="rot">Módulo 05 · Cartas contempladas</p>
+  <h2 style="margin-top:8px">Duas portas: quem compra e quem vende.</h2>
+  <p class="lead" style="margin-top:10px">A carta contemplada é uma cota com crédito já liberado. Não é investimento financeiro e não tem rentabilidade prometida. Cada cotação é analisada individualmente.</p>
+  <div class="portas">
+    <div class="porta"><h3>Quero comprar uma carta</h3><ul><li>Entrada obrigatória, paga a quem vende</li><li>O restante segue em aportes mensais no grupo</li><li>Transferência formal, aprovada pela HS</li></ul>
+      <label class="campo">Bem<select id="cc-bem"><option>Imóvel</option><option>Veículo</option></select></label>
+      <label class="campo">Crédito desejado<select id="cc-cred"></select></label>
+      <label class="campo">Entrada disponível<select id="cc-ent"><option>Até 20% do crédito</option><option>Entre 20% e 40%</option><option>Acima de 40%</option></select></label>
+      <div id="ct-compra"></div></div>
+    <div class="porta"><h3>Quero vender a minha carta</h3><ul><li>Cotação individual, sem valores publicados</li><li>Depende do crédito, do saldo e dos aportes restantes</li><li>Contrato e cessão conduzidos pela Gaia Group</li></ul>
+      <label class="campo">Situação da carta<select id="cv-sit"><option>Contemplada, crédito não usado</option><option>Ainda não contemplada</option></select></label>
+      <label class="campo">Administradora<select id="cv-adm"><option>HS Consórcios</option><option>Outra administradora</option></select></label>
+      <div id="ct-venda"></div></div>
+  </div>
+</section>
+
+<section class="vista" id="v-equipe" hidden>
+  <p class="rot">Painel interno · como a equipe Gaia veria este plano</p>
+  <h2 style="margin-top:8px">Classificação transparente, com regras editáveis.</h2>
+  <p class="lead" style="margin-top:10px">Cada critério soma pontos que a equipe pode ajustar. Mude um peso e a classificação do plano atual muda na hora. No produto real, esta tela fica atrás de login e não aparece para o visitante.</p>
+  <div class="eqgrid">
+    <div class="painel"><h3>Regras de pontuação</h3><div id="regras" style="margin-top:10px"></div></div>
+    <div class="painel"><h3>Plano atual</h3><div id="eq-atual" style="margin-top:10px"></div>
+      <h3 style="margin-top:24px">Fila de exemplo</h3><p class="rot">Planos fictícios para demonstrar a ordenação, não são clientes reais.</p>
+      <table class="leads" id="fila" style="margin-top:8px"></table></div>
+  </div>
+</section>
+
+<p class="legal">João Dias atua pela Gaia Group, que tem a HS Consórcios (Grupo Herval) como administradora exclusiva, autorizada pelo Banco Central. Consórcio não é investimento financeiro; a contemplação depende de sorteio ou lance, e ninguém pode garantir data. Simulações ilustrativas com a tabela HS de referência (out/2026). Protótipo de direção: envios desativados.</p>
+</main>
+
+<aside class="rail" aria-label="Seu plano">
+  <h3>Seu plano <span class="prot" id="rail-st">rascunho</span></h3>
+  <div class="campos" id="campos"></div>
+  <div class="ader" id="ader">Responda o diagnóstico para ver se o aporte cabe na tabela HS.</div>
+  <a class="bt" id="rail-bt" href="#diagnostico">Continuar o plano</a>
+</aside>
+</div>
+</div>
+
+<script>
+// Núcleo comum dos protótipos: mesmas tabelas HS e mesma lógica de diagnóstico do site atual (content.js e Estrategia.jsx).
+const CI = (() => {
+  const WHATS = '5519998187567';
+  const TABELA_REF = 'Tabela HS Consórcios de referência (out/2026)';
+  const TABELA = {
+    imovel: [[100000,683.2,341.5,180],[150000,1024.8,512.25,180],[200000,1230,615,200],[250000,1537.5,768.75,200],[300000,1845,922.5,200],[350000,2152.5,1076.25,200],[400000,2460,1230,200],[500000,2795,1397.5,220],[600000,3354,1677,220],[700000,3913,1956.5,220],[800000,4472,2236,220],[1000000,5590.9,2795,220],[1200000,6708,3354,220],[1500000,8386,4193,220]],
+    veiculo: [[40000,464,232,100],[50000,580,290,100],[60000,696,348,100],[80000,928,464,100],[100000,1160,580,120],[120000,1392,696,120],[150000,1449.9,724.95,120],[200000,1933.2,966.6,120],[250000,2416.52,1208.25,120],[300000,2899.8,1449.9,120],[400000,3314,1657.2,140],[500000,4142.5,2071.5,140]],
+  };
+  const COMPARATIVO = { credito: 400000, consorcio: { prazo: 200, aporte: 2460, total: 492000 }, financiamento: { prazo: 420, taxa: '11,49% a.a.', primeira: 4753.15, entrada: 100000, total: 1166635 }, fonte: 'Simulador oficial da Caixa, consultado em 24/11/2026' };
+  const brl = (v) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+  const brl2 = (v) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const curto = (v) => v >= 1e6 ? 'R$ ' + (v / 1e6).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + ' mi' : 'R$ ' + Math.round(v / 1e3) + ' mil';
+  const PERGUNTAS = [
+    { id: 'objetivo', rotulo: 'Objetivo', titulo: 'O que você quer conquistar?', opcoes: [['imovel', 'Imóvel'], ['veiculo', 'Veículo'], ['investimento', 'Fazer o patrimônio crescer'], ['indefinido', 'Ainda estou decidindo']] },
+    { id: 'entrada', rotulo: 'Entrada', titulo: 'Você tem um valor guardado para dar de entrada?', opcoes: [['sim', 'Sim, tenho'], ['parte', 'Tenho uma parte'], ['nao', 'Ainda não']] },
+    { id: 'prazo', rotulo: 'Prazo', titulo: 'Quando você quer usar o crédito?', opcoes: [['agora', 'O quanto antes'], ['medio', 'Nos próximos 2 anos'], ['planejar', 'Sem pressa, quero planejar']] },
+  ];
+  const ROTULO = { imovel: 'um imóvel', veiculo: 'um veículo', investimento: 'fazer o patrimônio crescer', indefinido: 'ainda estou decidindo', sim: 'tenho entrada', parte: 'tenho parte da entrada', nao: 'ainda não tenho entrada', agora: 'quero usar o crédito o quanto antes', medio: 'quero usar nos próximos 2 anos', planejar: 'sem pressa, quero planejar' };
+  function caminho({ objetivo, entrada, prazo }) {
+    if (objetivo === 'indefinido') return { chave: 'conversa', titulo: 'O seu primeiro passo é desenhar o objetivo.', texto: 'Antes de escolher crédito ou prazo, estruturamos o que você quer conquistar e quanto cabe no seu mês. É assim que o Método SPA® começa.', itens: ['Objetivo definido com números', 'Aporte que cabe com folga', 'Comparativo entre os caminhos possíveis'] };
+    if (prazo === 'agora' && entrada !== 'nao') return { chave: 'carta', titulo: 'Para você, o caminho é a carta contemplada.', texto: 'Com entrada e pressa, você compra uma carta com o crédito já liberado e negocia como comprador à vista. O restante segue em aportes mensais no grupo.', itens: ['Crédito já liberado, sem esperar contemplação', 'Saldo devedor e custo total analisados antes', 'Transferência formal, aprovada pela HS'] };
+    if (prazo === 'agora' && entrada === 'nao') return { chave: 'honesto', titulo: 'Para usar o crédito agora, sem entrada, o consórcio não é o caminho mais rápido.', texto: 'Prefiro dizer isso agora. Na conversa vemos se faz sentido começar um plano hoje, com estratégia de contemplação, ou se existe uma alternativa melhor para o seu momento.', itens: ['Sem promessa de data de contemplação', 'Plano só se o aporte couber com folga', 'Comparativo honesto com o financiamento'] };
+    const invest = objetivo === 'investimento';
+    return { chave: invest ? 'patrimonio' : 'estrategico', titulo: invest ? 'Para você, o caminho é o consórcio como estratégia patrimonial.' : 'Para você, o caminho é o consórcio estratégico.', texto: invest ? 'Cartas planejadas para formar patrimônio ao longo do tempo, com aporte que cabe no mês e estratégia de contemplação definida antes de assinar.' : `Você planeja ${objetivo === 'imovel' ? 'o imóvel' : 'o veículo'} com aporte que cabe no mês e define a estratégia de contemplação antes de assinar.`, itens: entrada === 'nao' ? ['Aporte reduzido até a contemplação', 'Estratégia de contemplação com dados reais do grupo', 'Acompanhamento mês a mês'] : ['Entrada pode virar lance estratégico', 'Estratégia de contemplação com dados reais do grupo', 'Acompanhamento mês a mês'] };
+  }
+  const waLink = (t) => `https://wa.me/${WHATS}?text=${encodeURIComponent(t)}`;
+  const msgDiag = (nome, r, resp) => `Olá, João! Sou ${nome}. Fiz o diagnóstico rápido no site.\n\nObjetivo: ${ROTULO[resp.objetivo]}\nEntrada: ${ROTULO[resp.entrada]}\nPrazo: ${ROTULO[resp.prazo]}\n\nResultado: ${r.titulo}\nQuero conversar sobre a minha estratégia.`;
+  const msgSim = (tipo, linha) => `Olá, João! Fiz a conta no seu site: carta de ${brl(linha[0])} para ${tipo === 'imovel' ? 'imóvel' : 'veículo'}, ${linha[3]} meses, meio aporte de ${brl2(linha[2])} até a contemplação. Quero entender a melhor estratégia para o meu caso.`;
+  const whatsValido = (v) => { const n = String(v || '').replace(/\D/g, '').replace(/^55(?=\d{10,11}$)/, ''); return n.length === 10 || n.length === 11; };
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  // Formulário de contato: valida, mostra o link do WhatsApp (no site real, o lead vai antes para /api/lead).
+  function contato(el, { id, rotulo, msg }) {
+    el.innerHTML = `<form class="ct" novalidate><div class="ct-campos"><label>Seu nome<input name="nome" autocomplete="name"></label><label>Seu WhatsApp<input name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="(16) 99999-9999"></label></div><label class="ct-ok"><input type="checkbox" name="ok"> Autorizo o contato da Gaia Group sobre o meu diagnóstico, conforme a Política de Privacidade.</label><p class="ct-erro" role="alert"></p><button class="bt">${esc(rotulo)}</button><p class="ct-fim" hidden></p></form>`;
+    const f = el.querySelector('form');
+    f.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nome = f.nome.value.trim(); const erro = f.querySelector('.ct-erro');
+      const falta = !nome ? 'Escreva seu nome.' : !whatsValido(f.whatsapp.value) ? 'Confira o WhatsApp com DDD.' : !f.ok.checked ? 'Marque a autorização de contato.' : '';
+      erro.textContent = falta; if (falta) return;
+      const fim = f.querySelector('.ct-fim'); fim.hidden = false;
+      fim.innerHTML = `Pronto, ${esc(nome)}. No site real o seu contato é registrado antes de abrir a conversa. <a href="${waLink(msg(nome))}" target="_blank" rel="noopener">Abrir a conversa no WhatsApp</a>`;
+    });
+  }
+  return { TABELA, TABELA_REF, COMPARATIVO, PERGUNTAS, ROTULO, caminho, brl, brl2, curto, waLink, msgDiag, msgSim, contato, esc };
+})();
+
+// ===== Motor de qualificação (Fase "Plataforma de Inteligência Patrimonial") =====
+const MOTOR = (() => {
+  // Faixas usadas nas perguntas. Valores médios servem só para checar aderência com a tabela HS.
+  const FX_CRED = [['ate100', 'Até R$ 100 mil', 90000], ['100a300', 'R$ 100 mil a R$ 300 mil', 200000], ['300a600', 'R$ 300 mil a R$ 600 mil', 450000], ['600a1mi', 'R$ 600 mil a R$ 1 milhão', 800000], ['mais1mi', 'Acima de R$ 1 milhão', 1200000]];
+  const FX_APORTE = [['ate1', 'Até R$ 1 mil', 1000], ['1a2', 'R$ 1 mil a R$ 2 mil', 2000], ['2a4', 'R$ 2 mil a R$ 4 mil', 4000], ['4a8', 'R$ 4 mil a R$ 8 mil', 8000], ['mais8', 'Acima de R$ 8 mil', 12000]];
+  // Perguntas. "se" decide quando a pergunta aparece (jornada adaptativa).
+  const PERGUNTAS = [
+    { id: 'objetivo', titulo: 'O que você quer conquistar?', opcoes: [['imovel', 'Um imóvel'], ['veiculo', 'Um veículo'], ['terreno', 'Um terreno'], ['expansao', 'Expandir o meu patrimônio'], ['empresa', 'Aquisições para a minha empresa'], ['futuro', 'Planejar aquisições futuras'], ['carta_venda', 'Tenho uma carta contemplada e quero vender']] },
+    { id: 'credito', titulo: 'Qual valor de crédito você imagina?', se: (r) => r.objetivo !== 'carta_venda', opcoes: FX_CRED.map(([v, t]) => [v, t]) },
+    { id: 'aporte', titulo: 'Quanto cabe no seu mês, com folga, para aportar?', se: (r) => r.objetivo !== 'carta_venda', opcoes: FX_APORTE.map(([v, t]) => [v, t]) },
+    { id: 'recursos', titulo: 'Você tem recursos guardados para entrada ou lance?', se: (r) => r.objetivo !== 'carta_venda', opcoes: [['nenhum', 'Ainda não'], ['ate10', 'Até 10% do crédito'], ['10a30', 'Entre 10% e 30% do crédito'], ['mais30', 'Mais de 30% do crédito']] },
+    { id: 'prazo', titulo: 'Quando você quer usar o crédito?', se: (r) => r.objetivo !== 'carta_venda', opcoes: [['agora', 'O quanto antes'], ['12m', 'Nos próximos 12 meses'], ['1a3', 'Entre 1 e 3 anos'], ['sempressa', 'Sem pressa, quero planejar']] },
+    { id: 'experiencia', titulo: 'Você já teve consórcio?', opcoes: [['nunca', 'Nunca tive'], ['ja', 'Já tive'], ['ativa', 'Tenho uma carta ativa hoje']], se: (r) => r.objetivo !== 'carta_venda' },
+    { id: 'carta_status', titulo: 'Como está a sua carta?', se: (r) => r.objetivo === 'carta_venda', opcoes: [['contemplada', 'Contemplada, crédito ainda não usado'], ['ativa', 'Ainda não contemplada'], ['nao_sei', 'Não sei dizer']] },
+    { id: 'momento', titulo: 'Em que momento da decisão você está?', opcoes: [['pesquisando', 'Estou pesquisando'], ['comparando', 'Estou comparando opções'], ['decidir', 'Quero decidir este mês']] },
+  ];
+  const proxima = (r) => PERGUNTAS.find((q) => !(q.id in r) && (!q.se || q.se(r)));
+  const total = (r) => PERGUNTAS.filter((q) => !q.se || q.se(r)).length;
+  const rotulo = (id, v) => (PERGUNTAS.find((q) => q.id === id)?.opcoes.find((o) => o[0] === v) || [, v])[1];
+
+  // Aderência: compara a capacidade informada com a linha da tabela HS mais próxima do crédito desejado.
+  function aderencia(r) {
+    if (!r.credito || !r.aporte) return null;
+    const tabela = CI.TABELA[r.objetivo === 'veiculo' ? 'veiculo' : 'imovel'];
+    const alvo = FX_CRED.find((f) => f[0] === r.credito)[2];
+    const cap = FX_APORTE.find((f) => f[0] === r.aporte)[2];
+    const linha = tabela.reduce((a, b) => (Math.abs(b[0] - alvo) < Math.abs(a[0] - alvo) ? b : a));
+    const nivel = cap >= linha[1] ? 'integral' : cap >= linha[2] ? 'meio' : 'nao';
+    const cabe = [...tabela].reverse().find((l) => l[1] <= cap) || null;
+    return { linha, cap, nivel, cabe };
+  }
+
+  // Regras de pontuação. Editáveis pela equipe Gaia (no produto real, ficam numa tabela do painel interno).
+  const REGRAS = {
+    aderencia: { integral: 20, meio: 12, nao: 0 },
+    credito: { ate100: 5, '100a300': 10, '300a600': 15, '600a1mi': 20, mais1mi: 25 },
+    momento: { decidir: 20, comparando: 12, pesquisando: 4 },
+    recursos: { mais30: 15, '10a30': 10, ate10: 5, nenhum: 0 },
+    experiencia: { ativa: 8, ja: 5, nunca: 2 },
+    objetivo: { imovel: 5, veiculo: 5, terreno: 5, empresa: 5, expansao: 3, futuro: 2 },
+    classes: [[70, 'A', 'Prioridade de atendimento'], [45, 'B', 'Atendimento consultivo'], [25, 'C', 'Nutrição'], [0, 'D', 'Educação']],
+  };
+
+  function jornada(r, ad) {
+    if (r.objetivo === 'carta_venda') return { chave: 'carta_venda', nome: 'Venda de carta contemplada', titulo: 'Vamos avaliar a sua carta.', texto: 'A cotação é individual: depende do crédito, do saldo devedor, dos aportes restantes e do momento do mercado. A transferência é formal e aprovada pela administradora.', itens: ['Cotação analisada individualmente', 'Contrato e cessão aprovados pela HS', 'Negociação conduzida pela Gaia Group'] };
+    if ((r.prazo === 'agora' || r.prazo === '12m') && (r.recursos === '10a30' || r.recursos === 'mais30')) return { chave: 'carta_compra', nome: 'Compra de carta contemplada', titulo: 'Para você, o caminho pode ser a carta contemplada.', texto: 'Com recursos para a entrada e prazo curto, você compra uma carta com o crédito já liberado. O restante segue em aportes mensais no grupo.', itens: ['Crédito já liberado, sem esperar contemplação', 'Saldo devedor e custo total analisados antes', 'Transferência formal, aprovada pela HS'] };
+    if (ad && ad.nivel === 'nao') return { chave: 'reajuste', nome: 'Reajuste de plano', titulo: 'O crédito que você imagina pede um aporte maior do que cabe hoje.', texto: ad.cabe ? `Com o aporte que você informou, a tabela HS comporta uma carta de até ${CI.brl(ad.cabe[0])} com folga. No diagnóstico vemos se faz sentido começar por ela ou combinar estratégias.` : 'Com o aporte informado, a tabela atual não tem uma carta que caiba com folga. Prefiro dizer isso agora e desenhar o caminho com você.', itens: ['Plano só se o aporte couber com folga', 'Sem promessa de data de contemplação', 'Comparativo honesto com outras alternativas'] };
+    if (r.prazo === 'agora' && r.recursos === 'nenhum') return { chave: 'honesto', nome: 'Orientação', titulo: 'Para usar o crédito agora, sem recursos, o consórcio não é o caminho mais rápido.', texto: 'Na conversa vemos se faz sentido começar um plano hoje, com estratégia de contemplação, ou se existe uma alternativa melhor para o seu momento.', itens: ['Sem promessa de data de contemplação', 'Plano só se o aporte couber com folga', 'Comparativo honesto com o financiamento'] };
+    if (r.objetivo === 'expansao' || r.objetivo === 'futuro') return { chave: 'patrimonial', nome: 'Planejamento patrimonial', titulo: 'Para você, o caminho é o consórcio como estratégia patrimonial.', texto: 'Cartas planejadas para formar patrimônio ao longo do tempo, com aporte que cabe no mês e estratégia de contemplação definida antes de assinar.', itens: ['Sequência de aquisições desenhada', 'Aporte que cabe com folga', 'Estratégia de contemplação com dados reais do grupo'] };
+    return { chave: 'estrategico', nome: 'Consórcio estratégico', titulo: 'Para você, o caminho é o consórcio estratégico.', texto: 'Você planeja a aquisição com aporte que cabe no mês e define a estratégia de contemplação antes de assinar.', itens: [r.recursos && r.recursos !== 'nenhum' ? 'Recursos guardados podem virar lance estratégico' : 'Aporte reduzido até a contemplação', 'Estratégia de contemplação com dados reais do grupo', 'Acompanhamento mês a mês'] };
+  }
+
+  function classificar(r, regras = REGRAS) {
+    const ad = aderencia(r);
+    const partes = [];
+    const soma = (nome, mapa, chave) => { if (chave in (mapa || {})) partes.push([nome, mapa[chave], chave]); };
+    if (r.objetivo === 'carta_venda') {
+      partes.push(['Carta para venda', r.carta_status === 'contemplada' ? 35 : 15, r.carta_status]);
+      soma('Momento de decisão', regras.momento, r.momento);
+    } else {
+      if (ad) partes.push(['Aderência à tabela HS', regras.aderencia[ad.nivel], ad.nivel]);
+      soma('Valor de crédito', regras.credito, r.credito);
+      soma('Momento de decisão', regras.momento, r.momento);
+      soma('Recursos disponíveis', regras.recursos, r.recursos);
+      soma('Experiência com consórcio', regras.experiencia, r.experiencia);
+      soma('Objetivo definido', regras.objetivo, r.objetivo);
+    }
+    const pontos = partes.reduce((a, p) => a + p[1], 0);
+    const [, classe, nomeClasse] = regras.classes.find(([min]) => pontos >= min);
+    return { pontos, classe, nomeClasse, partes, aderencia: ad, jornada: jornada(r, ad) };
+  }
+
+  const resumo = (r) => PERGUNTAS.filter((q) => q.id in r).map((q) => `${q.titulo} ${rotulo(q.id, r[q.id])}`).join('\n');
+  const msgPlano = (nome, r, c) => `Olá, João! Sou ${nome}. Fiz o diagnóstico no Consórcio Inteligente.\n\n${resumo(r)}\n\nCaminho indicado: ${c.jornada.nome}.\nQuero conversar sobre a minha estratégia.`;
+  return { PERGUNTAS, proxima, total, rotulo, aderencia, classificar, REGRAS, msgPlano, FX_CRED, FX_APORTE };
+})();
+
+{
+const $ = (s) => document.querySelector(s);
+const plano = {};
+const ICON = { imovel: '<path d="M4 12 14 4l10 8v12H4z"/><path d="M11 24v-7h6v7"/>', veiculo: '<path d="M3 18v-4l3-6h16l3 6v4z"/><circle cx="8" cy="19" r="2.5"/><circle cx="20" cy="19" r="2.5"/>', terreno: '<path d="M3 21 9 9l5 7 4-5 7 10z"/><path d="M14 4v5"/>', expansao: '<rect x="3" y="14" width="6" height="10"/><rect x="11" y="9" width="6" height="15"/><rect x="19" y="4" width="6" height="20"/>', empresa: '<rect x="4" y="8" width="20" height="16"/><path d="M10 8V4h8v4M4 15h20"/>', futuro: '<circle cx="14" cy="14" r="10"/><path d="M14 8v6l4 3"/>', carta_venda: '<rect x="3" y="7" width="22" height="14" rx="2"/><path d="M3 12h22M7 17h5"/>' };
+const DESC = { imovel: 'Casa, apartamento ou sala', veiculo: 'Carro, moto ou utilitário', terreno: 'Lote urbano ou rural', expansao: 'Mais de um ativo em sequência', empresa: 'Frota, sede, equipamentos', futuro: 'Aquisições dos próximos anos', carta_venda: 'Avaliação da sua carta' };
+$('#objs').innerHTML = MOTOR.PERGUNTAS[0].opcoes.map(([v, t]) => `<button class="obj${v === 'carta_venda' ? ' venda' : ''}" data-v="${v}"><svg viewBox="0 0 28 28">${ICON[v]}</svg><h3>${t}</h3><small>${DESC[v]}</small></button>`).join('');
+document.querySelectorAll('.obj').forEach((b) => b.addEventListener('click', () => { for (const k in plano) delete plano[k]; plano.objetivo = b.dataset.v; location.hash = 'diagnostico'; tudo(); }));
+
+// Rotas por hash
+const VISTAS = ['explorar', 'diagnostico', 'simulador', 'metodo', 'cartas', 'equipe'];
+function rota() { const h = location.hash.slice(1); const v = VISTAS.includes(h) ? h : 'explorar'; VISTAS.forEach((x) => { $('#v-' + x).hidden = x !== v; }); document.querySelectorAll('.mods a').forEach((a) => a.toggleAttribute('aria-current', a.getAttribute('href') === '#' + v)); document.querySelectorAll('.mods a[aria-current]').forEach((a) => a.setAttribute('aria-current', 'page')); window.scrollTo(0, 0); }
+addEventListener('hashchange', rota);
+addEventListener('keydown', (e) => {
+  if (/input|select/i.test(document.activeElement.tagName)) return;
+  if (e.key === '/') { e.preventDefault(); location.hash = 'diagnostico'; }
+  if (location.hash === '#diagnostico') { const b = document.querySelectorAll('#conversa .op')[Number(e.key) - 1]; if (b) b.click(); }
+});
+
+// Diagnóstico adaptativo
+function renderDiag() {
+  const q = MOTOR.proxima(plano), feitas = MOTOR.PERGUNTAS.filter((p) => p.id in plano);
+  $('#prog').style.width = Math.round(feitas.length / MOTOR.total(plano) * 100) + '%';
+  let h = feitas.map((p) => `<div class="linha"><span>${p.titulo}</span><b>${MOTOR.rotulo(p.id, plano[p.id])}</b><button data-corrige="${p.id}">corrigir</button></div>`).join('');
+  if (q) {
+    h += `<div class="atual"><span class="rot">Pergunta ${feitas.length + 1} de ${MOTOR.total(plano)}</span><h3>${q.titulo}</h3><div class="ops">${q.opcoes.map(([v, t], i) => `<button class="op" data-v="${v}"><span class="kbd">${i + 1}</span>${t}</button>`).join('')}</div></div>`;
+  } else {
+    const c = MOTOR.classificar(plano);
+    h += `<div class="res"><span class="rot">Caminho indicado · ${c.jornada.nome}</span><h3>${c.jornada.titulo}</h3><p>${c.jornada.texto}</p><ul>${c.jornada.itens.map((i) => `<li>${i}</li>`).join('')}</ul><div id="ct-diag"></div></div>`;
+  }
+  $('#conversa').innerHTML = h;
+  document.querySelectorAll('#conversa .op').forEach((b) => b.addEventListener('click', () => { plano[q.id] = b.dataset.v; tudo(); }));
+  document.querySelectorAll('[data-corrige]').forEach((b) => b.addEventListener('click', () => { const i = MOTOR.PERGUNTAS.findIndex((p) => p.id === b.dataset.corrige); MOTOR.PERGUNTAS.slice(i).forEach((p) => delete plano[p.id]); tudo(); }));
+  if (!q) { const c = MOTOR.classificar(plano); CI.contato($('#ct-diag'), { rotulo: 'Validar o plano com o João', msg: (n) => MOTOR.msgPlano(n, plano, c) }); }
+}
+
+// Painel do plano
+function renderRail() {
+  const ids = ['objetivo', 'credito', 'aporte', 'recursos', 'prazo', 'experiencia', 'momento'];
+  const nomes = { objetivo: 'Objetivo', credito: 'Crédito', aporte: 'Aporte mensal', recursos: 'Recursos', prazo: 'Prazo', experiencia: 'Experiência', momento: 'Momento' };
+  $('#campos').innerHTML = ids.filter((id) => plano.objetivo !== 'carta_venda' || ['objetivo', 'momento'].includes(id)).map((id) => `<div><span>${nomes[id]}</span><b class="${id in plano ? '' : 'vazio'}">${id in plano ? MOTOR.rotulo(id, plano[id]) : 'a definir'}</b></div>`).join('');
+  const ad = MOTOR.aderencia(plano), fim = !MOTOR.proxima(plano);
+  if (ad) {
+    const t = { integral: ['Cabe com folga', 'O aporte integral da carta mais próxima cabe no valor que você informou.'], meio: ['Cabe no meio aporte', 'Até a contemplação, o meio aporte cabe. Depois, o aporte sobe: isso precisa entrar no plano.'], nao: ['Não cabe hoje', ad.cabe ? `A maior carta que cabe com folga é de ${CI.brl(ad.cabe[0])}.` : 'Nenhuma carta da tabela cabe com folga nesse aporte.'] }[ad.nivel];
+    $('#ader').innerHTML = `<b>${t[0]}</b>${t[1]}<div class="kv" style="margin-top:10px"><dt>Carta de referência</dt><dd>${CI.brl(ad.linha[0])}</dd><dt>Aporte integral</dt><dd>${CI.brl2(ad.linha[1])}</dd><dt>Meio aporte</dt><dd>${CI.brl2(ad.linha[2])}</dd><dt>Prazo</dt><dd>${ad.linha[3]} meses</dd></div>`;
+  }
+  $('#rail-st').textContent = fim ? 'completo' : 'rascunho';
+  $('#rail-bt').textContent = fim ? 'Validar com o João' : 'Continuar o plano';
+}
+
+// Simulador com dois cenários
+const cen = [{ tipo: 'imovel', i: 6, m: 36 }, { tipo: 'imovel', i: 3, m: 36 }];
+function renderSim() {
+  $('#cen').innerHTML = cen.map((c, k) => { const tab = CI.TABELA[c.tipo]; c.i = Math.min(c.i, tab.length - 1); return `<div class="cart"><header><h3>Cenário ${k ? 'B' : 'A'}</h3><div class="seg">${['imovel', 'veiculo'].map((t) => `<button data-k="${k}" data-t="${t}" aria-pressed="${c.tipo === t}">${t === 'imovel' ? 'Imóvel' : 'Veículo'}</button>`).join('')}</div></header>
+    <div><span class="rot">Crédito</span><div class="big" data-o="cred"></div><input type="range" aria-label="Crédito do cenário ${k ? 'B' : 'A'}" data-k="${k}" data-c="i" min="0" max="${tab.length - 1}" value="${c.i}"></div>
+    <div><span class="rot" data-o="mes"></span><input type="range" aria-label="Mês ilustrativo de contemplação" data-k="${k}" data-c="m" min="1" value="${c.m}"></div>
+    <div class="fig"><svg data-fig="${k}" aria-hidden="true"></svg></div>
+    <dl class="kv" data-o="kv"></dl>
+    <a class="bt sec" data-o="wa" target="_blank" rel="noopener">Levar o cenário ${k ? 'B' : 'A'} para o diagnóstico</a></div>`; }).join('');
+  document.querySelectorAll('#cen .seg button').forEach((b) => b.addEventListener('click', () => { const c = cen[b.dataset.k]; c.tipo = b.dataset.t; c.i = c.tipo === 'imovel' ? 6 : 4; renderSim(); }));
+  document.querySelectorAll('#cen input').forEach((r) => r.addEventListener('input', () => { cen[r.dataset.k][r.dataset.c] = +r.value; updSim(+r.dataset.k); }));
+  cen.forEach((c, k) => updSim(k));
+  $('#prem').innerHTML = `<b style="color:var(--ink)">Premissas abertas.</b> ${CI.TABELA_REF}. Linha dourada: aportes acumulados no meio aporte até o mês escolhido. Linha tracejada: total do plano no aporte integral. O mês de contemplação é um cenário para visualizar, não uma previsão. Depois da contemplação, a diferença do meio aporte é diluída nos aportes restantes ou abatida do crédito, como definirmos no diagnóstico. Valores sem reajuste.`;
+}
+function updSim(k) {
+  const card = document.querySelectorAll('#cen .cart')[k], c = cen[k], l = CI.TABELA[c.tipo][c.i];
+  const rm = card.querySelector('input[data-c="m"]'); rm.max = l[3]; if (c.m > l[3]) { c.m = l[3]; } rm.value = c.m;
+  card.querySelector('[data-o="cred"]').textContent = CI.brl(l[0]);
+  card.querySelector('[data-o="mes"]').textContent = `Cenário de contemplação: mês ${c.m} de ${l[3]}`;
+  card.querySelector('[data-o="kv"]').innerHTML = `<dt>Prazo</dt><dd>${l[3]} meses</dd><dt>Aporte integral</dt><dd>${CI.brl2(l[1])}</dd><dt>Meio aporte até a contemplação</dt><dd>${CI.brl2(l[2])}</dd><dt>Aportado até o mês ${c.m} (meio aporte × ${c.m})</dt><dd>${CI.brl2(l[2] * c.m)}</dd><dt>Total do plano (aporte integral × ${l[3]})</dt><dd>${CI.brl(l[1] * l[3])}</dd><dt>Custo além do crédito</dt><dd>${CI.brl(l[1] * l[3] - l[0])}</dd>`;
+  card.querySelector('[data-o="wa"]').href = CI.waLink(CI.msgSim(c.tipo, l));
+  const s = card.querySelector('[data-fig]'), W = s.clientWidth || 300, H = s.clientHeight || 200, x = (m) => 8 + (W - 16) * m / l[3], y = (v) => H - 20 - (H - 40) * v / (l[1] * l[3]); const xm = x(c.m), ym = y(l[2] * c.m);
+  s.innerHTML = `<line x1="8" y1="${H - 20}" x2="${W - 8}" y2="${H - 20}" stroke="var(--ln)"/><polyline points="8,${H - 20} ${x(l[3])},${y(l[1] * l[3])}" fill="none" stroke="#3A4352" stroke-dasharray="4 4"/><polyline points="8,${H - 20} ${xm},${ym}" fill="none" stroke="var(--gold)" stroke-width="2"/><line x1="${xm}" y1="12" x2="${xm}" y2="${H - 20}" stroke="var(--data)" stroke-dasharray="3 3"/><text x="${Math.min(xm + 6, W - 120)}" y="22" fill="var(--data)" font-family="Geist Mono" font-size="11">cenário mês ${c.m}</text><text x="8" y="${H - 4}" fill="var(--mut)" font-family="Geist Mono" font-size="11">mês 1</text><text x="${W - 8}" y="${H - 4}" text-anchor="end" fill="var(--mut)" font-family="Geist Mono" font-size="11">mês ${l[3]}</text>`;
+}
+
+// Método SPA como pipeline que reage ao plano
+function renderSpa() {
+  const ad = MOTOR.aderencia(plano);
+  const S = [['Segurança', 'O plano respeita o seu fluxo e a sua reserva.', ['Aporte cabe com folga no mês', 'Reserva preservada'], ad ? (ad.nivel === 'integral' ? 'verificado no seu plano' : ad.nivel === 'meio' ? 'atenção: cabe só no meio aporte' : 'não passou: ajustar o crédito') : 'aguardando o diagnóstico'],
+    ['Patrimônio', 'Cada aporte vira patrimônio que fica com você.', ['Objetivo com valor definido', 'Carta escolhida pelo objetivo, não pela parcela'], plano.credito ? 'objetivo com valor definido' : 'aguardando o diagnóstico'],
+    ['Alavancagem', 'Estratégia de contemplação para acelerar o próximo ativo.', ['Recursos que podem virar lance', 'Próxima aquisição no horizonte'], plano.recursos ? (plano.recursos === 'nenhum' ? 'sem recursos para lance hoje' : 'recursos disponíveis para estratégia') : 'aguardando o diagnóstico']];
+  $('#pipe').innerHTML = S.map(([t, d, li, st], i) => `<div class="no${st.startsWith('aguardando') ? '' : ' on'}"><span class="mono">${t}</span><p>${d}</p><ul>${li.map((x) => `<li>${x}</li>`).join('')}</ul><span class="rot">Seu plano: ${st}</span></div>`).join('');
+}
+
+// Cartas
+{ const o = MOTOR.FX_CRED.map(([v, t]) => `<option>${t}</option>`).join(''); $('#cc-cred').innerHTML = o; }
+CI.contato($('#ct-compra'), { rotulo: 'Pedir cotação de compra', msg: (n) => `Olá, João! Sou ${n}. Quero comprar uma carta contemplada de ${$('#cc-bem').value.toLowerCase()}, crédito ${$('#cc-cred').value}, entrada ${$('#cc-ent').value.toLowerCase()}.` });
+CI.contato($('#ct-venda'), { rotulo: 'Pedir avaliação da minha carta', msg: (n) => `Olá, João! Sou ${n}. Quero vender a minha carta: ${$('#cv-sit').value.toLowerCase()}, administradora ${$('#cv-adm').value}.` });
+
+// Painel da equipe: regras editáveis
+const R = JSON.parse(JSON.stringify(MOTOR.REGRAS));
+const NOMES = { aderencia: 'Aderência à tabela HS', credito: 'Valor de crédito', momento: 'Momento de decisão', recursos: 'Recursos disponíveis', experiencia: 'Experiência', objetivo: 'Objetivo' };
+const FILA = [
+  { nome: 'Plano 0142', r: { objetivo: 'imovel', credito: '300a600', aporte: '2a4', recursos: '10a30', prazo: '12m', experiencia: 'ja', momento: 'decidir' } },
+  { nome: 'Plano 0143', r: { objetivo: 'veiculo', credito: 'ate100', aporte: 'ate1', recursos: 'nenhum', prazo: '1a3', experiencia: 'nunca', momento: 'pesquisando' } },
+  { nome: 'Plano 0144', r: { objetivo: 'expansao', credito: '600a1mi', aporte: '4a8', recursos: 'mais30', prazo: 'sempressa', experiencia: 'ativa', momento: 'comparando' } },
+  { nome: 'Plano 0145', r: { objetivo: 'carta_venda', carta_status: 'contemplada', momento: 'decidir' } },
+  { nome: 'Plano 0146', r: { objetivo: 'imovel', credito: 'mais1mi', aporte: '1a2', recursos: 'nenhum', prazo: '12m', experiencia: 'nunca', momento: 'comparando' } },
+];
+function renderEquipe() {
+  $('#regras').innerHTML = Object.entries(NOMES).map(([g, n]) => `<p class="rot" style="margin-top:12px">${n}</p>` + Object.entries(R[g]).map(([k, v]) => `<div class="regra"><span>${MOTOR.rotulo(g, k) === k ? ({ integral: 'Cabe com folga', meio: 'Cabe no meio aporte', nao: 'Não cabe' }[k] || k) : MOTOR.rotulo(g, k)}</span><input type="range" min="0" max="40" value="${v}" data-g="${g}" data-k="${k}" aria-label="${n}: pontos"><b class="num">${v}</b></div>`).join('')).join('') + `<p class="rot" style="margin-top:12px">Classes: A a partir de ${R.classes[0][0]}, B a partir de ${R.classes[1][0]}, C a partir de ${R.classes[2][0]}, D abaixo.</p>`;
+  document.querySelectorAll('#regras input').forEach((i) => i.addEventListener('input', () => { R[i.dataset.g][i.dataset.k] = +i.value; i.nextElementSibling.textContent = i.value; renderEquipeDados(); }));
+  renderEquipeDados();
+}
+function renderEquipeDados() {
+  if (MOTOR.proxima(plano)) $('#eq-atual').innerHTML = '<p class="rot">Complete o diagnóstico para ver a classificação do seu plano.</p>';
+  else { const c = MOTOR.classificar(plano, R); $('#eq-atual').innerHTML = `<p><span class="cl c${c.classe}">${c.classe}</span> <b>${c.nomeClasse}</b> · <span class="num">${c.pontos} pontos</span> · jornada: ${c.jornada.nome}</p><dl class="kv" style="margin-top:10px">${c.partes.map(([n, p]) => `<dt>${n}</dt><dd>+${p}</dd>`).join('')}</dl>`; }
+  const linhas = FILA.map((f) => ({ ...f, c: MOTOR.classificar(f.r, R) })).sort((a, b) => b.c.pontos - a.c.pontos);
+  $('#fila').innerHTML = '<tr><th>Plano</th><th>Classe</th><th>Pontos</th><th>Jornada</th></tr>' + linhas.map((f) => `<tr><td>${f.nome}</td><td><span class="cl c${f.c.classe}">${f.c.classe}</span></td><td class="num">${f.c.pontos}</td><td>${f.c.jornada.nome}</td></tr>`).join('');
+}
+
+function tudo() { renderDiag(); renderRail(); renderSpa(); renderEquipeDados(); }
+renderSim(); renderEquipe(); tudo(); rota();
+addEventListener('resize', () => { if (location.hash === '#simulador') cen.forEach((c, k) => updSim(k)); });
+addEventListener('hashchange', () => { if (location.hash === '#simulador') cen.forEach((c, k) => updSim(k)); });
+}
+</script>
+</body>
+</html>
