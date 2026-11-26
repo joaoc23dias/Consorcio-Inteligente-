@@ -101,7 +101,7 @@ export default function Simulador() {
             Estimativa para você se situar. O valor final, o aporte após a contemplação e a estratégia de contemplação vêm no diagnóstico patrimonial.
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            <a href="#diagnostico" className="btn btn-pri btn-block">Levar esta conta para o meu diagnóstico</a>
+            <a href="/#diagnostico" className="btn btn-pri btn-block">Levar esta conta para o meu diagnóstico</a>
             <a
               href={linkWhats}
               target="_blank"

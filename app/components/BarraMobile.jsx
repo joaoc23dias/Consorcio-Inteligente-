@@ -13,7 +13,7 @@ export default function BarraMobile() {
     const atualizar = () => setVisivel(passouHero && !noDiag);
     const io1 = new IntersectionObserver(([e]) => { passouHero = !e.isIntersecting && e.boundingClientRect.top < 0; atualizar(); });
     const io2 = new IntersectionObserver(([e]) => { noDiag = e.isIntersecting; atualizar(); });
-    if (hero) io1.observe(hero);
+    if (hero) io1.observe(hero); else { passouHero = true; atualizar(); }
     if (diag) io2.observe(diag);
     return () => { io1.disconnect(); io2.disconnect(); };
   }, []);
@@ -21,7 +21,7 @@ export default function BarraMobile() {
   const msg = 'Olá, João! Vi o seu site e quero conversar sobre um diagnóstico patrimonial.';
   return (
     <div className={`barra-mobile${visivel ? ' on' : ''}`} aria-hidden={!visivel}>
-      <a href="#diagnostico" className="btn btn-pri" tabIndex={visivel ? 0 : -1} onClick={() => track('barra_mobile', { acao: 'diagnostico' })}>Agendar diagnóstico</a>
+      <a href="/#diagnostico" className="btn btn-pri" tabIndex={visivel ? 0 : -1} onClick={() => track('barra_mobile', { acao: 'diagnostico' })}>Agendar diagnóstico</a>
       <a href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`} target="_blank" rel="noopener noreferrer" className="btn barra-wa" aria-label="Conversar no WhatsApp" tabIndex={visivel ? 0 : -1} onClick={() => track('barra_mobile', { acao: 'whatsapp' })}>
         <IconeWhats size={24} />
       </a>

@@ -4,7 +4,7 @@ import '@fontsource-variable/archivo/wdth.css';
 import '@fontsource-variable/schibsted-grotesk/wght-italic.css';
 import { Analytics } from '@vercel/analytics/react';
 import Melhorias from './components/Melhorias';
-import { ESCRITORIOS, FAQ, CARTAS_FAQ, WHATSAPP, GAIA } from './content';
+import { ESCRITORIOS, WHATSAPP, GAIA } from './content';
 
 const SITE_URL = 'https://www.consorciointeligente.com.br';
 
@@ -29,7 +29,6 @@ export const viewport = {
   themeColor: '#F7F7F3',
 };
 
-const texto = (f) => f.a || (f.lista ? f.lista.join('. ') + '.' : f.passos.map((p, i) => `${i + 1}. ${p.t}: ${p.d}`).join(' '));
 const TELEFONE = `+${WHATSAPP}`;
 const REGIAO = ['Ribeirão Preto', 'São José do Rio Pardo', 'Mococa', 'Guaxupé', 'Monte Santo de Minas', 'Tambaú', 'Casa Branca'];
 
@@ -74,16 +73,7 @@ const jsonLd = {
         telephone: TELEFONE,
         address: { '@type': 'PostalAddress', streetAddress: e.endereco, addressLocality: e.cidade, addressRegion: 'SP', addressCountry: 'BR' },
       })),
-    },
-    {
-      '@type': 'FAQPage',
-      '@id': `${SITE_URL}/#faq`,
-      mainEntity: [...FAQ, ...CARTAS_FAQ].map((f) => ({
-        '@type': 'Question',
-        name: f.q,
-        acceptedAnswer: { '@type': 'Answer', text: texto(f) },
-      })),
-    },
+    }
   ],
 };
 

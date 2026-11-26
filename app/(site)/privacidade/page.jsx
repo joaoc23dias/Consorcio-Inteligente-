@@ -1,6 +1,4 @@
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import { GAIA, WHATSAPP } from '../content';
+import { GAIA, WHATSAPP } from '../../content';
 
 export const metadata = {
   title: 'Política de Privacidade | João Dias · Consórcio Inteligente',
@@ -14,10 +12,6 @@ export default function Privacidade() {
   const temDados = !GAIA.cnpj.startsWith('[');
   const temEmail = !GAIA.email.startsWith('[');
   return (
-    <>
-      <a href="#conteudo" className="skip">Pular para o conteúdo</a>
-      <Header />
-      <main id="conteudo">
         <section className="sec">
           <div className="wrap texto">
             <p className="eyebrow">Transparência</p>
@@ -60,8 +54,5 @@ export default function Privacidade() {
             <p style={{ marginTop: 40, fontSize: 13 }}>Última atualização: [data de publicação].</p>
           </div>
         </section>
-      </main>
-      <Footer />
-    </>
   );
 }

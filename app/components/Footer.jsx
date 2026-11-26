@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { GAIA, BC_URL } from '../content';
+import { PAGINAS } from './Paginas';
 
 export default function Footer() {
   return (
@@ -9,6 +10,9 @@ export default function Footer() {
           <Image src="/logo-gaia-vermelho.png" alt="Gaia Group Investimentos & Consórcios" width={78} height={62} />
           <Image src="/logo-hs.png" alt="HS Consórcios, uma empresa do Grupo Herval" width={135} height={36} />
         </div>
+        <nav aria-label="Páginas" className="rodape-nav">
+          {[...PAGINAS, { href: '/duvidas', t: 'Dúvidas' }].map((p) => <a key={p.href} href={p.href}>{p.t}</a>)}
+        </nav>
         <div style={{ maxWidth: 640, fontSize: 12, color: 'var(--ink-muted)', lineHeight: 1.7 }}>
           <p style={{ margin: 0 }}>
             João Dias atua pela Gaia Group, que tem a HS Consórcios (Grupo Herval) como administradora exclusiva, autorizada pelo Banco Central. Consórcio não é investimento financeiro; a contemplação depende de sorteio ou lance.

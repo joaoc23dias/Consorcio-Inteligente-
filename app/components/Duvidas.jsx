@@ -15,7 +15,7 @@ export default function Duvidas() {
             <p className="cp" style={{ marginBottom: 18 }}>
               Seu cliente não aprovou o crédito? Ele não precisa ir embora. O Programa Parceiro Estratégico devolve a compra para você.
             </p>
-            <a href="#diagnostico" className="btn btn-pri btn-sm">Quero ser parceiro</a>
+            <a href="/#diagnostico" className="btn btn-pri btn-sm">Quero ser parceiro</a>
           </div>
         </div>
         <div className="col" style={{ flex: '1 1 520px', borderTop: '1px solid var(--rule)' }}>

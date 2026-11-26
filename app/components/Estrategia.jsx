@@ -64,7 +64,7 @@ function caminho({ objetivo, entrada, prazo }) {
       titulo: 'O seu primeiro passo é desenhar o objetivo.',
       texto: 'Antes de escolher crédito ou prazo, estruturamos o que você quer conquistar e quanto cabe no seu mês. É assim que o Método SPA® começa.',
       itens: ['Objetivo definido com números', 'Aporte que cabe com folga', 'Comparativo entre os caminhos possíveis'],
-      link: { href: '#metodo', t: 'Conhecer o Método SPA®' },
+      link: { href: '/#metodo', t: 'Conhecer o Método SPA®' },
     };
   }
   if (prazo === 'agora' && entrada !== 'nao') {
@@ -73,7 +73,7 @@ function caminho({ objetivo, entrada, prazo }) {
       titulo: 'Para você, o caminho é a carta contemplada.',
       texto: 'Com entrada e pressa, você compra uma carta com o crédito já liberado e negocia como comprador à vista. O restante segue em aportes mensais no grupo.',
       itens: ['Crédito já liberado, sem esperar contemplação', 'Saldo devedor e custo total analisados antes', 'Transferência formal, aprovada pela HS'],
-      link: { href: '#cartas', t: 'Ver como funciona a carta contemplada' },
+      link: { href: '/cartas-contempladas', t: 'Ver como funciona a carta contemplada' },
     };
   }
   if (prazo === 'agora' && entrada === 'nao') {
@@ -82,7 +82,7 @@ function caminho({ objetivo, entrada, prazo }) {
       titulo: 'Para usar o crédito agora, sem entrada, o consórcio não é o caminho mais rápido.',
       texto: 'Prefiro dizer isso agora. Na conversa vemos se faz sentido começar um plano hoje, com estratégia de contemplação, ou se existe uma alternativa melhor para o seu momento.',
       itens: ['Sem promessa de data de contemplação', 'Plano só se o aporte couber com folga', 'Comparativo honesto com o financiamento'],
-      link: { href: '#conta', t: 'Fazer a conta do consórcio estratégico' },
+      link: { href: '/simulador', t: 'Fazer a conta do consórcio estratégico' },
     };
   }
   const invest = objetivo === 'investimento';
@@ -95,7 +95,7 @@ function caminho({ objetivo, entrada, prazo }) {
     itens: entrada === 'nao'
       ? ['Aporte reduzido até a contemplação', 'Estratégia de contemplação com dados reais do grupo', 'Acompanhamento mês a mês']
       : ['O valor que você tem pode virar lance', 'Estratégia de contemplação com dados reais do grupo', 'Acompanhamento mês a mês'],
-    link: { href: '#conta', t: 'Fazer a conta agora' },
+    link: { href: '/simulador', t: 'Fazer a conta agora' },
   };
 }
 
