@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Consórcio Inteligente · Plataforma de Inteligência Patrimonial (protótipo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400..700&family=Schibsted+Grotesk:wght@400..700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#0B1220;--s1:#121C2E;--s2:#18243A;--ln:#22314A;--ln2:#33476A;--ink:#EEF2F6;--soft:#A8B4C4;--mut:#7D8AA0;--gold:#D6AF61;--ice:#BFD6EE;--ok:#7CC6A4;--warn:#E3B76B;--bad:#E58F7E;--serif:"Source Serif 4",Georgia,serif;--sans:"Schibsted Grotesk",system-ui,sans-serif}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--sans);overflow-x:clip;
+ background-image:linear-gradient(var(--bg),var(--bg)),linear-gradient(90deg,rgba(191,214,238,.035) 1px,transparent 1px),linear-gradient(rgba(191,214,238,.035) 1px,transparent 1px);background-size:auto,32px 32px,32px 32px;background-blend-mode:normal}
+a{color:inherit}button,input,select{font:inherit;color:inherit}
+.n{font-variant-numeric:tabular-nums}
+.aviso-proto{background:#2A2312;color:#F1DDB0;font-size:13px;padding:7px 16px;text-align:center}
+.bar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:18px;min-height:62px;padding:0 20px;border-bottom:1px solid var(--ln);background:rgba(11,18,32,.94);backdrop-filter:blur(10px)}
+.marca{line-height:1.15;text-decoration:none;flex:none}.marca b{display:block;font:600 17px var(--serif)}.marca span{font-size:12px;color:var(--gold)}
+nav.mods{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav.mods button{flex:none;white-space:nowrap;background:none;border:0;color:var(--soft);padding:8px 11px;border-radius:8px;font-size:14px;cursor:pointer}
+nav.mods button[aria-current=page]{background:var(--s2);color:var(--ink)}
+nav.mods button.eq{color:var(--mut);border:1px dashed var(--ln2);margin-left:6px}
+.bt{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;border-radius:10px;border:0;background:var(--gold);color:#141A24;font-weight:600;text-decoration:none;cursor:pointer;transition:filter .18s,transform .18s}
+.bt:hover{filter:brightness(1.07)}.bt:active{transform:translateY(1px)}
+.bt.sec{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--ln2)}
+.bt.pq{min-height:38px;padding:0 14px;font-size:14px}
+:focus-visible{outline:2px solid var(--ice);outline-offset:2px}
+.corpo{display:grid;grid-template-columns:minmax(0,1fr) 350px}
+main{padding:44px clamp(18px,4vw,60px) 110px}
+aside.rail{border-left:1px solid var(--ln);background:var(--s1);padding:24px 20px 40px;position:sticky;top:62px;height:calc(100dvh - 62px);overflow:auto}
+h1,h2,h3{margin:0;font-family:var(--serif);font-weight:600;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:clamp(36px,4.6vw,62px);line-height:1.04}
+h2{font-size:clamp(28px,3vw,40px);line-height:1.1}
+h3{font-size:20px;line-height:1.25}
+p{margin:0}.lead{color:var(--soft);font-size:18.5px;max-width:60ch;margin-top:16px;text-wrap:pretty}
+.rot{font-size:13px;color:var(--mut)}
+.vista[hidden]{display:none}
+.topo{display:flex;justify-content:space-between;gap:24px;align-items:end;flex-wrap:wrap}
+/* Explorar */
+.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:32px;align-items:center}
+.maq{width:100%;max-width:420px;justify-self:center}
+.objs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:36px}
+.obj{display:grid;grid-template-columns:34px 1fr;gap:4px 12px;align-content:start;padding:16px;border-radius:12px;border:1px solid var(--ln);background:var(--s1);text-align:left;cursor:pointer;transition:border-color .18s,background .18s}
+.obj:hover,.obj[aria-pressed=true]{border-color:var(--gold);background:var(--s2)}
+.obj svg{grid-row:span 2;width:32px;height:32px;stroke:var(--ice);fill:none;stroke-width:1.4;stroke-linejoin:round}
+.obj b{font-weight:600}.obj small{color:var(--mut);font-size:13.5px;line-height:1.45}
+.faixa{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--ln);border:1px solid var(--ln);border-radius:12px;overflow:hidden;margin-top:28px}
+.faixa div{background:var(--bg);padding:18px 20px}.faixa p{color:var(--soft);font-size:14.5px;margin-top:4px}
+.cartas-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center}
+/* Diagnóstico */
+.diag{max-width:760px;margin-top:28px;display:grid;gap:12px}
+.feita{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:11px 16px;border-radius:10px;background:var(--s1);border:1px solid var(--ln);font-size:14.5px}
+.feita span{color:var(--soft)}.feita button{background:none;border:0;color:var(--mut);text-decoration:underline;cursor:pointer;font-size:13px;flex:none}
+.atual{padding:22px;border-radius:14px;border:1px solid var(--ln2);background:var(--s2)}
+.atual h3{font-size:24px;margin:6px 0 14px}
+.ops{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.op{display:flex;align-items:center;gap:12px;min-height:50px;padding:8px 14px;border-radius:10px;border:1px solid var(--ln);background:var(--bg);text-align:left;cursor:pointer}
+.op:hover{border-color:var(--gold)}
+.kbd{flex:none;font-size:12px;color:var(--mut);border:1px solid var(--ln2);border-radius:5px;min-width:22px;text-align:center;padding:1px 5px}
+details.pq{margin-top:14px;font-size:14px;color:var(--soft)}details.pq summary{cursor:pointer;color:var(--ice)}details.pq p{margin-top:6px;max-width:62ch}
+.prog{display:flex;align-items:center;gap:14px;max-width:760px;margin-top:22px;font-size:13px;color:var(--mut)}
+.prog .t{flex:1;height:3px;background:var(--ln);border-radius:2px}.prog i{display:block;height:100%;background:var(--gold);border-radius:2px;transition:width .3s}
+.res{max-width:760px;padding:24px;border-radius:14px;background:var(--s1);border:1px solid var(--ln)}
+.res h3{font-size:26px;margin:6px 0 10px}.res p{color:var(--soft)}.res ul{color:var(--soft);padding-left:18px;margin:14px 0 20px}
+.acoes{display:flex;gap:10px;flex-wrap:wrap}
+/* Plano */
+.etapas{display:grid;gap:0;margin-top:30px;max-width:820px;border-left:1px solid var(--ln2)}
+.etapa{position:relative;padding:4px 0 26px 28px}
+.etapa::before{content:"";position:absolute;left:-6px;top:8px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--ln2)}
+.etapa.ok::before{background:var(--ok);border-color:var(--ok)}.etapa.agora::before{border-color:var(--gold);background:var(--gold)}
+.etapa p{color:var(--soft);font-size:15px;margin:4px 0 10px;max-width:62ch}
+.estado{font-size:12.5px;padding:2px 8px;border-radius:20px;border:1px solid var(--ln2);color:var(--soft);margin-left:8px;vertical-align:2px;font-family:var(--sans);font-weight:500}
+.estado.ok{color:var(--ok);border-color:rgba(124,198,164,.4)}.estado.pend{color:var(--warn);border-color:rgba(227,183,107,.4)}
+/* Simulador */
+.sim{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;margin-top:28px}
+.painel{padding:22px;border-radius:14px;background:var(--s1);border:1px solid var(--ln);display:grid;gap:18px;align-content:start}
+.campo{display:grid;gap:6px}.campo label,.campo .l{font-size:14px;color:var(--soft);display:flex;justify-content:space-between;gap:10px}
+.campo output{color:var(--ink);font-weight:600}
+input[type=range]{width:100%;accent-color:var(--gold);height:28px}
+select,input[type=text],input[type=tel],input[type=email],input[type=number]{min-height:46px;border-radius:10px;border:1px solid var(--ln2);background:var(--bg);padding:0 12px;font-size:16px;width:100%}
+.seg{display:inline-flex;background:var(--bg);border:1px solid var(--ln2);border-radius:10px;padding:3px;width:max-content;max-width:100%}
+.seg button{min-height:36px;padding:0 13px;border-radius:7px;border:0;background:none;color:var(--soft);cursor:pointer;font-size:14px}.seg button[aria-pressed=true]{background:var(--s2);color:var(--ink);box-shadow:inset 0 0 0 1px var(--ln2)}
+.big{font:600 clamp(30px,3.2vw,42px)/1.05 var(--sans);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.cota{display:grid;grid-template-columns:1fr auto;gap:8px 14px;font-size:14.5px;margin:0}.cota dt{color:var(--soft)}.cota dd{margin:0;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cota .sep{grid-column:1/-1;border-top:1px solid var(--ln);margin:4px 0}
+.premissa{font-size:13px;color:var(--mut);line-height:1.5}
+.tag{display:inline-block;font-size:12px;color:var(--warn);border:1px solid rgba(227,183,107,.45);border-radius:20px;padding:1px 8px;margin-left:6px;font-weight:500}
+table.pr{width:100%;border-collapse:collapse;font-size:14px}table.pr td,table.pr th{padding:8px 6px;border-bottom:1px solid var(--ln);text-align:left}table.pr th{color:var(--mut);font-weight:500}
+table.pr input{min-height:34px;width:90px;font-size:14px}
+.alerta{padding:12px 14px;border-radius:10px;border:1px solid rgba(227,183,107,.4);background:rgba(227,183,107,.07);font-size:14px;color:#EBD3A2}
+.erro{color:var(--bad);font-size:14px}.erro:empty{display:none}
+/* Mapa */
+.mapa{margin-top:28px;padding:24px;border-radius:14px;background:var(--s1);border:1px solid var(--ln)}
+.mapa svg{width:100%;height:auto;display:block}
+.leg{display:flex;gap:20px;flex-wrap:wrap;font-size:13.5px;color:var(--soft);margin-top:12px}.leg i{display:inline-block;width:12px;height:3px;vertical-align:middle;margin-right:6px}
+/* SPA */
+.pilares{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:28px}
+.pilar{padding:20px;border-radius:14px;background:var(--s1);border:1px solid var(--ln);display:grid;gap:10px;align-content:start}
+.pilar svg{width:100%;height:90px}
+.check{display:flex;gap:10px;font-size:14.5px;color:var(--soft)}.check i{flex:none;width:18px;height:18px;border-radius:50%;margin-top:3px;border:1.5px solid var(--ln2)}
+.check.ok i{background:var(--ok);border-color:var(--ok)}.check.pend i{border-color:var(--warn)}
+/* Cartas */
+.duas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:28px}
+/* Captura */
+.cap{display:grid;gap:12px;max-width:560px}
+.cap .dup{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cap label{display:grid;gap:6px;font-size:14px;color:var(--soft)}
+.cap .ok-l{display:grid;grid-template-columns:20px 1fr;gap:10px;align-items:start}.cap .ok-l input{width:18px;height:18px;accent-color:var(--gold);margin:3px 0 0}
+.protocolo{font-variant-numeric:tabular-nums;color:var(--ice)}
+/* Rail */
+.rail h3{font-size:19px}
+.rail .bloco{border-top:1px solid var(--ln);padding:14px 0}
+.rail .vazio{color:var(--mut);font-size:14px}
+.rail dl{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;margin:10px 0 0;font-size:14px}.rail dt{color:var(--mut)}.rail dd{margin:0;text-align:right}
+.ader{display:flex;gap:8px;align-items:center;font-size:14px;margin-top:8px}.ader i{width:10px;height:10px;border-radius:50%}
+.pend-l{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:6px;font-size:14px}.pend-l li{display:flex;gap:8px;color:var(--soft)}.pend-l li::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;margin-top:8px;background:var(--warn)}.pend-l li.ok::before{background:var(--ok)}.pend-l li.ok{color:var(--mut);text-decoration:line-through}
+/* Equipe */
+.eq-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;margin-top:28px}
+.camadas{display:grid;gap:8px}
+.camada{display:grid;grid-template-columns:110px 1fr auto;gap:12px;align-items:center;padding:10px 12px;border-radius:10px;background:var(--bg);border:1px solid var(--ln);font-size:14px}
+.camada b{font-weight:600}.camada span{color:var(--soft)}
+.nivel{font-size:12.5px;padding:2px 8px;border-radius:20px;border:1px solid var(--ln2)}
+.nivel.alta,.nivel.P1{color:var(--ok);border-color:rgba(124,198,164,.45)}.nivel.media,.nivel.P2{color:var(--ice)}.nivel.baixa,.nivel.P3{color:var(--warn);border-color:rgba(227,183,107,.45)}.nivel.insuficiente{color:var(--bad);border-color:rgba(229,143,126,.45)}
+pre.json{margin:0;max-height:460px;overflow:auto;padding:14px;border-radius:10px;background:#070C16;border:1px solid var(--ln);font:12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:#C9D6E6;white-space:pre}
+.evs{font-size:13px;color:var(--soft);display:grid;gap:4px;max-height:220px;overflow:auto}
+.legal{margin-top:46px;padding-top:18px;border-top:1px solid var(--ln);font-size:13px;color:var(--mut);max-width:80ch}
+@media (max-width:1060px){.corpo{grid-template-columns:1fr}aside.rail{position:static;height:auto;border-left:0;border-top:1px solid var(--ln)}}
+@media (max-width:820px){.bar{flex-wrap:wrap;padding:8px 12px;gap:6px}nav.mods{width:100%}aside.rail{top:auto}.hero,.sim,.duas,.eq-grid{grid-template-columns:1fr}.objs{grid-template-columns:1fr 1fr}.pilares,.faixa{grid-template-columns:1fr}.ops{grid-template-columns:1fr}.cap .dup{grid-template-columns:1fr}.maq{max-width:300px}.camada{grid-template-columns:1fr auto}.camada span{grid-column:1/-1;order:3}}
+@media (max-width:520px){.objs{grid-template-columns:1fr}.bar{gap:10px;padding:0 12px}.marca span{display:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+.maq rect,.maq path{transition:all .42s cubic-bezier(.2,.7,.2,1)}
+</style>
+</head>
+<body>
+<div class="aviso-proto">Protótipo isolado para aprovação. Não está no site publicado, não envia dados e usa parâmetros a validar com a HS Consórcios.</div>
+<header class="bar">
+  <a class="marca" href="#" data-ir="explorar"><b>Consórcio Inteligente</b><span>João Dias · Gaia Group · HS Consórcios</span></a>
+  <nav class="mods" aria-label="Módulos">
+    <button data-ir="explorar">Explorar</button>
+    <button data-ir="diagnostico">Diagnóstico</button>
+    <button data-ir="plano">Seu plano</button>
+    <button data-ir="simulador">Simulador</button>
+    <button data-ir="mapa">Mapa do Tempo</button>
+    <button data-ir="spa">Método SPA®</button>
+    <button data-ir="cartas">Cartas contempladas</button>
+    <button data-ir="equipe" class="eq">Visão da equipe</button>
+  </nav>
+</header>
+<div class="corpo">
+<main id="main">
+
+<!-- EXPLORAR -->
+<section class="vista" id="v-explorar">
+  <div class="hero">
+    <div>
+      <p class="rot">Plataforma de inteligência patrimonial</p>
+      <h1>Monte o plano do seu próximo patrimônio antes de assinar qualquer coisa.</h1>
+      <p class="lead">Escolha o que você quer conquistar. Em cerca de dois minutos você vê quanto cabe no seu mês, os cenários possíveis e o caminho que faz sentido para você, com as regras reais da HS Consórcios.</p>
+    </div>
+    <svg class="maq" id="maq-hero" viewBox="0 0 400 320" role="img" aria-label="Maquete ilustrativa que cresce conforme o crédito do plano"></svg>
+  </div>
+  <div class="objs" id="objs"></div>
+  <div class="cartas-cta"><span class="rot">Já tem uma carta ou quer comprar uma contemplada?</span><button class="bt sec pq" data-ir="cartas">Ver cartas contempladas</button></div>
+  <div class="faixa">
+    <div><b>Sem promessa de data</b><p>Contemplação acontece por sorteio ou lance. Mostramos cenários, nunca garantias.</p></div>
+    <div><b>Regras reais</b><p>Tabela, taxas e lances da HS Consórcios, com cada premissa visível.</p></div>
+    <div><b>Conversa só se você quiser</b><p>O plano fica salvo neste aparelho. O contato é pedido no fim, com consentimento.</p></div>
+  </div>
+</section>
+
+<!-- DIAGNÓSTICO -->
+<section class="vista" id="v-diagnostico" hidden>
+  <p class="rot">Diagnóstico</p>
+  <h2>Algumas perguntas para o plano ficar com a sua cara.</h2>
+  <p class="lead">Cada pergunta mostra por que ela existe. Você pode voltar e mudar qualquer resposta.</p>
+  <div class="prog"><span id="prog-txt"></span><div class="t"><i id="prog-bar"></i></div></div>
+  <div class="diag" id="diag"></div>
+</section>
+
+<!-- PLANO -->
+<section class="vista" id="v-plano" hidden>
+  <div class="topo"><div><p class="rot">Seu plano</p><h2 id="plano-tit">O seu plano começa pelo objetivo.</h2></div><div class="acoes"><button class="bt sec pq" data-recomecar>Recomeçar</button></div></div>
+  <p class="lead" id="plano-lead"></p>
+  <div class="etapas" id="etapas"></div>
+</section>
+
+<!-- SIMULADOR -->
+<section class="vista" id="v-simulador" hidden>
+  <p class="rot">Simulador</p>
+  <h2>Veja o plano em números, com cada premissa à mostra.</h2>
+  <p class="lead">Mude o crédito, o tipo de aporte e os lances. O resultado é uma simulação, não uma proposta: a condição final é confirmada no atendimento.</p>
+  <div class="sim">
+    <div class="painel">
+      <div class="campo"><span class="l">Tipo de crédito</span><div class="seg" id="sim-tipo"><button data-v="imovel">Imóvel</button><button data-v="veiculo">Veículo</button></div></div>
+      <div class="campo"><label for="sim-cred">Crédito da carta <output id="o-cred" class="n"></output></label><input type="range" id="sim-cred" min="0" step="1"></div>
+      <div class="campo"><span class="l">Aporte até a contemplação</span><div class="seg" id="sim-plano"><button data-v="integral">Integral</button><button data-v="meio">Meio aporte</button></div></div>
+      <div class="campo"><label for="sim-livre">Lance livre, com recursos próprios <output id="o-livre" class="n"></output></label><input type="range" id="sim-livre" min="0" max="50" step="1"></div>
+      <div class="campo"><label for="sim-emb">Lance embutido, usando parte da carta <output id="o-emb" class="n"></output></label><input type="range" id="sim-emb" min="0" max="30" step="1"></div>
+      <div class="campo"><label for="sim-mes">Hipótese: contemplação no mês <output id="o-mes" class="n"></output></label><input type="range" id="sim-mes" min="1" step="1"><p class="premissa">Esse mês é só uma hipótese para você enxergar o antes e o depois. Ninguém consegue prometer quando a contemplação acontece.</p></div>
+    </div>
+    <div class="painel" aria-live="polite">
+      <div><p class="rot">Aporte mensal até a contemplação</p><p class="big" id="r-aporte"></p><p class="premissa" id="r-aporte-nota"></p></div>
+      <dl class="cota" id="r-cota"></dl>
+      <div class="alerta" id="r-alerta" hidden></div>
+      <div class="acoes"><button class="bt" data-ir="mapa">Ver no Mapa do Tempo</button><button class="bt sec" data-ir="plano">Voltar ao plano</button></div>
+    </div>
+  </div>
+  <details class="pq" style="margin-top:22px;max-width:820px" open>
+    <summary>Premissas usadas nesta simulação <span class="tag">a validar com a HS</span></summary>
+    <table class="pr" style="margin-top:10px"><thead><tr><th>Premissa</th><th>Valor</th><th>Origem</th></tr></thead><tbody id="premissas"></tbody></table>
+    <p class="premissa" style="margin-top:10px">Fórmulas: custo total = crédito × (1 + taxa de administração + fundo de reserva). Aporte integral = custo total ÷ prazo. No meio aporte, a metade não paga até a contemplação é diluída nos aportes restantes. Lances calculados sobre o crédito. Seguro a partir da contemplação, sobre o saldo devedor.</p>
+  </details>
+</section>
+
+<!-- MAPA -->
+<section class="vista" id="v-mapa" hidden>
+  <p class="rot">Mapa do Tempo</p>
+  <h2>O seu plano ao longo dos meses.</h2>
+  <p class="lead">Cada marca é um ponto do prazo, não uma data prometida. Mova a hipótese de contemplação no simulador e veja o mapa mudar.</p>
+  <div class="mapa"><svg id="mapa-svg" viewBox="0 40 1000 250" role="img" aria-label="Linha do tempo do plano"></svg>
+    <div class="leg"><span><i style="background:var(--gold)"></i>Aportes até a hipótese de contemplação</span><span><i style="background:var(--ice)"></i>Aportes depois, já com o crédito em uso</span><span><i style="background:var(--mut)"></i>Reajuste anual previsto</span></div>
+  </div>
+  <div class="faixa" id="mapa-fatos"></div>
+</section>
+
+<!-- SPA -->
+<section class="vista" id="v-spa" hidden>
+  <p class="rot">Método SPA® · Gaia Group</p>
+  <h2>Segurança, Patrimônio e Alavancagem: onde o seu plano está hoje.</h2>
+  <p class="lead">O Método SPA® é a forma como a Gaia Group estrutura cada plano. Os três pilares abaixo se atualizam com as suas respostas.</p>
+  <div class="pilares" id="pilares"></div>
+</section>
+
+<!-- CARTAS -->
+<section class="vista" id="v-cartas" hidden>
+  <p class="rot">Cartas contempladas</p>
+  <h2>Comprar ou vender uma carta, com cotação individual.</h2>
+  <p class="lead">Não publicamos ofertas prontas. Cada carta tem crédito, saldo devedor e aportes restantes próprios, e toda transferência é formal e aprovada pela HS Consórcios.</p>
+  <div class="duas">
+    <div class="painel" id="carta-compra">
+      <h3>Quero comprar uma carta contemplada</h3>
+      <p class="premissa">Para quem precisa do crédito liberado e tem recursos para a entrada.</p>
+      <div class="campo"><label for="cc-cred">Crédito que você procura</label><select id="cc-cred"></select></div>
+      <div class="campo"><label for="cc-ent">Recursos para a entrada</label><select id="cc-ent"><option value="">Escolha</option><option value="ate50">Até R$ 50 mil</option><option value="50a150">R$ 50 mil a R$ 150 mil</option><option value="150a300">R$ 150 mil a R$ 300 mil</option><option value="mais300">Acima de R$ 300 mil</option></select></div>
+      <div class="campo"><label for="cc-uso">Uso do crédito</label><select id="cc-uso"><option value="">Escolha</option><option value="imovel">Imóvel pronto</option><option value="terreno">Terreno</option><option value="construcao">Construção ou reforma</option><option value="veiculo">Veículo</option></select></div>
+      <button class="bt" data-carta="compra">Pedir cotação de compra</button>
+    </div>
+    <div class="painel" id="carta-venda">
+      <h3>Tenho uma carta e quero vender</h3>
+      <p class="premissa">Para quem não vai usar o crédito e quer avaliar a venda.</p>
+      <div class="campo"><label for="cv-status">Situação da carta</label><select id="cv-status"><option value="">Escolha</option><option value="contemplada">Contemplada, crédito ainda não usado</option><option value="ativa">Ainda não contemplada</option><option value="nao_sei">Não sei dizer</option></select></div>
+      <div class="campo"><label for="cv-adm">Administradora</label><select id="cv-adm"><option value="">Escolha</option><option value="hs">HS Consórcios</option><option value="outra">Outra administradora</option></select></div>
+      <div class="campo"><label for="cv-cred">Crédito aproximado da carta</label><select id="cv-cred"></select></div>
+      <button class="bt" data-carta="venda">Pedir avaliação da carta</button>
+    </div>
+  </div>
+  <div id="carta-res" style="margin-top:16px"></div>
+</section>
+
+<!-- CAPTURA -->
+<section class="vista" id="v-captura" hidden>
+  <p class="rot">Falar com a equipe</p>
+  <h2 id="cap-tit">Quer que a gente revise este plano com você?</h2>
+  <p class="lead" id="cap-lead">O plano que você montou vai junto. Na conversa fazemos o diagnóstico completo, conferimos as condições com a HS Consórcios e definimos a estratégia de contemplação.</p>
+  <form class="cap" id="cap" novalidate style="margin-top:26px">
+    <div class="dup"><label>Seu nome<input type="text" name="nome" autocomplete="name" required></label><label>WhatsApp com DDD<input type="tel" name="whats" autocomplete="tel" inputmode="tel" required placeholder="(19) 99999-9999"></label></div>
+    <label>E-mail <span class="rot">(opcional, para receber o resumo do plano)</span><input type="email" name="email" autocomplete="email"></label>
+    <label class="ok-l"><input type="checkbox" name="ok" required><span>Autorizo a Gaia Group a usar estes dados para falar comigo sobre este plano, conforme a política de privacidade. Posso pedir a exclusão a qualquer momento.</span></label>
+    <p class="erro" id="cap-erro" role="alert"></p>
+    <div class="acoes"><button class="bt" type="submit">Enviar meu plano</button><button class="bt sec" type="button" data-ir="plano">Agora não</button></div>
+  </form>
+  <div id="cap-fim" hidden class="res" style="margin-top:26px"></div>
+</section>
+
+<!-- EQUIPE -->
+<section class="vista" id="v-equipe" hidden>
+  <p class="rot">Visão da equipe · só no painel interno</p>
+  <h2>Como este lead chegaria ao CRM.</h2>
+  <p class="lead">Perfil, intenção, capacidade, potencial e prioridade são avaliados em separado. A pontuação é só um dos sinais: a prioridade sai da combinação, com regras de exceção e revisão humana.</p>
+  <div class="eq-grid">
+    <div class="painel"><h3>Qualificação sugerida</h3><div class="camadas" id="camadas"></div><div id="revisao"></div></div>
+    <div class="painel"><h3>Pesos editáveis <span class="tag">exemplo</span></h3><p class="premissa">No produto real esta tabela fica no painel da equipe, com histórico de versões. Mude um peso e veja a qualificação ao lado.</p><table class="pr"><tbody id="pesos"></tbody></table></div>
+    <div class="painel"><h3>Payload enviado ao CRM próprio</h3><p class="premissa">POST /api/v1/leads com assinatura HMAC e Idempotency-Key. O navegador nunca fala com o banco do CRM: este JSON sai da API do site.</p><pre class="json" id="payload"></pre></div>
+    <div class="painel"><h3>Eventos de analytics desta sessão</h3><p class="premissa">Sem dados pessoais. Ligados ao lead pelo lead_id só depois da captura.</p><div class="evs" id="evs"></div></div>
+  </div>
+</section>
+
+<p class="legal">Consórcio é uma modalidade de compra planejada, não um investimento, e não há garantia de data de contemplação. Valores ilustrativos com base na tabela de referência da HS Consórcios; taxas, prazos e condições são confirmados no atendimento e no contrato. Gaia Group Investimentos & Consórcios, representante da HS Consórcios. CNPJ: pendente.</p>
+</main>
+
+<aside class="rail" aria-label="Resumo do seu plano">
+  <h3>Seu plano</h3>
+  <div id="rail"></div>
+</aside>
+</div>
+
+<script>
+(() => {
+/* ===== Parâmetros (no produto: arquivo versionado / painel da equipe) ===== */
+const PARAM = {
+  versao: 'param-2026-11-proto',
+  taxaAdm: 0.22, fundo: 0.01, reajuste: 0.05, embMax: 0.30, seguro: 0.00055, rendaMult: 3,
+  fonte: 'Regulamento e tabela HS de referência (out/2026), a validar'
+};
+const TABELA = {
+  imovel: [[100000,180],[150000,180],[200000,200],[250000,200],[300000,200],[350000,200],[400000,200],[500000,220],[600000,220],[700000,220],[800000,220],[1000000,220],[1200000,220],[1500000,220]],
+  veiculo: [[40000,100],[50000,100],[60000,100],[80000,100],[100000,120],[120000,120],[150000,120],[200000,120],[250000,120],[300000,120],[400000,140],[500000,140]]
+};
+const brl = v => v.toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0});
+const brl2 = v => v.toLocaleString('pt-BR',{style:'currency',currency:'BRL',minimumFractionDigits:2,maximumFractionDigits:2});
+const pct = v => (v*100).toLocaleString('pt-BR',{maximumFractionDigits:3})+'%';
+const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const $ = s => document.querySelector(s);
+
+/* ===== Objetivos (9) ===== */
+const ICO = {
+  imovel:'<path d="M4 15 16 5l12 10M7 13v14h18V13M13 27v-8h6v8"/>',
+  veiculo:'<path d="M4 20l3-7h18l3 7v5H4zM8 25v2M24 25v2M4 20h24"/><circle cx="10" cy="21" r="1.5"/><circle cx="22" cy="21" r="1.5"/>',
+  terreno:'<path d="M3 24 16 18l13 6M3 24l13 5 13-5"/><path d="M8 22V12M24 22V12M16 19V8"/><path d="M8 12h2M24 12h2M16 8h2"/>',
+  construcao:'<path d="M6 28V12h20v16M6 18h20M6 24h20M12 12v16M20 12v16M16 4v8"/>',
+  reforma:'<path d="M5 15 16 6l11 9v12H5z"/><path d="M19 27V18h8" stroke-dasharray="2 2"/>',
+  empresa:'<path d="M3 28V14l8-5v19M11 28V9l9 5v14M20 28V16h9v12M3 28h26"/>',
+  patrimonio:'<path d="M4 28h6v-6H4zM13 28h6V16h-6zM22 28h6V8h-6z"/>',
+  futuro:'<path d="M4 16h24M4 16l4-4M4 16l4 4"/><circle cx="12" cy="16" r="2"/><circle cx="20" cy="16" r="2"/><circle cx="27" cy="16" r="2"/>',
+  outros:'<circle cx="16" cy="16" r="11"/><path d="M16 10v7M16 21v1"/>'
+};
+const OBJ = [
+  ['imovel','Imóvel pronto','Casa ou apartamento para morar ou alugar'],
+  ['veiculo','Veículo','Carro, utilitário ou frota'],
+  ['terreno','Terreno','Lote urbano, em condomínio ou rural'],
+  ['construcao','Construção','Construir no terreno que você já tem'],
+  ['reforma','Reforma ou ampliação','Valorizar o imóvel que já é seu'],
+  ['empresa','Expansão empresarial','Sede, galpão, máquinas ou frota da empresa'],
+  ['patrimonio','Crescimento patrimonial','Somar ativos ao longo dos anos'],
+  ['futuro','Aquisições futuras','Planejar com calma o que vem depois'],
+  ['outros','Outro objetivo','Conte na conversa, a gente estrutura']
+];
+const objNome = id => (OBJ.find(o=>o[0]===id)||[,'Objetivo'])[1];
+const tipoDe = obj => obj==='veiculo' ? 'veiculo' : 'imovel';
+
+/* ===== Diagnóstico condicional ===== */
+const FX_CRED = [['ate100','Até R$ 100 mil',90000],['100a300','R$ 100 mil a R$ 300 mil',200000],['300a600','R$ 300 mil a R$ 600 mil',450000],['600a1mi','R$ 600 mil a R$ 1 milhão',800000],['mais1mi','Acima de R$ 1 milhão',1200000]];
+const FX_APORTE = [['ate1','Até R$ 1 mil',1000],['1a2','R$ 1 mil a R$ 2 mil',2000],['2a4','R$ 2 mil a R$ 4 mil',4000],['4a8','R$ 4 mil a R$ 8 mil',8000],['mais8','Acima de R$ 8 mil',12000]];
+const FX_RENDA = [['ate5','Até R$ 5 mil',5000],['5a10','R$ 5 mil a R$ 10 mil',10000],['10a20','R$ 10 mil a R$ 20 mil',20000],['20a40','R$ 20 mil a R$ 40 mil',40000],['mais40','Acima de R$ 40 mil',60000],['nao','Prefiro não informar agora',null]];
+const PERG = [
+  {id:'objetivo',t:'O que você quer conquistar?',pq:'Cada objetivo tem regras próprias de uso do crédito e documentação. É o ponto de partida do plano.',op:OBJ.map(o=>[o[0],o[1]])},
+  {id:'imovel_base',t:'Você já tem o terreno ou o imóvel?',se:r=>r.objetivo==='construcao'||r.objetivo==='reforma',pq:'O regulamento da HS permite usar o crédito em terreno, construção e reforma, mas a documentação e a liberação mudam conforme a situação do imóvel.',op:[['quitado','Sim, quitado e no meu nome'],['financiado','Sim, ainda financiado'],['nao','Ainda não']]},
+  {id:'pj',t:'A aquisição será em nome da empresa?',se:r=>r.objetivo==='empresa',pq:'Cartas em nome de pessoa jurídica passam por análise de crédito diferente da pessoa física.',op:[['pj','Sim, em nome da empresa'],['pf','Não, no meu nome'],['avaliar','Quero avaliar as duas opções']]},
+  {id:'credito',t:'Qual valor de crédito você imagina?',pq:'Define quais cartas da tabela HS fazem sentido e o prazo de cada uma.',op:FX_CRED.map(f=>[f[0],f[1]])},
+  {id:'aporte',t:'Quanto cabe no seu mês, com folga, para aportar?',pq:'Um plano só vale se o aporte couber com folga. É o que mais protege você de desistir no meio.',op:FX_APORTE.map(f=>[f[0],f[1]])},
+  {id:'renda',t:'Qual é a sua renda líquida mensal?',opcional:true,pq:'Para liberar o crédito, a HS pede renda líquida de pelo menos 3 vezes o aporte. Saber agora evita surpresa depois. Se preferir, deixe para a conversa.',op:FX_RENDA.map(f=>[f[0],f[1]])},
+  {id:'recursos',t:'Você tem recursos guardados para entrada ou lance?',pq:'Recursos guardados podem virar lance e aumentar a chance de contemplação, sem garantia de data.',op:[['nenhum','Ainda não'],['ate10','Até 10% do crédito'],['10a30','Entre 10% e 30% do crédito'],['mais30','Mais de 30% do crédito']]},
+  {id:'prazo',t:'Quando você quer usar o crédito?',pq:'Se o prazo é curto, uma carta contemplada pode servir melhor do que uma carta nova. Mostramos as duas opções.',op:[['agora','O quanto antes'],['12m','Nos próximos 12 meses'],['1a3','Entre 1 e 3 anos'],['sempressa','Sem pressa, quero planejar']]},
+  {id:'experiencia',t:'Você já teve consórcio?',pq:'Ajuda a equipe a explicar só o que você ainda não conhece.',op:[['nunca','Nunca tive'],['ja','Já tive'],['ativa','Tenho uma carta ativa hoje']]},
+  {id:'momento',t:'Em que momento da decisão você está?',pq:'Assim a equipe respeita o seu tempo: quem está pesquisando recebe conteúdo, quem quer decidir recebe atendimento.',op:[['pesquisando','Estou pesquisando'],['comparando','Estou comparando opções'],['decidir','Quero decidir este mês']]}
+];
+const ativas = r => PERG.filter(q=>!q.se||q.se(r));
+const proxima = r => ativas(r).find(q=>!(q.id in r));
+const rot = (id,v) => ((PERG.find(q=>q.id===id)||{op:[]}).op.find(o=>o[0]===v)||[,v])[1];
+const val = (fx,k) => (fx.find(f=>f[0]===k)||[])[2];
+
+/* ===== Estado ===== */
+const S = { r:{}, sim:{tipo:'imovel',idx:6,plano:'integral',livre:0,emb:0,mes:24,feita:false}, lead:null, carta:null, regras:null, evs:[] };
+const REGRAS0 = {
+  aderencia:{integral:20,meio:12,nao:0},
+  credito:{ate100:5,'100a300':10,'300a600':15,'600a1mi':20,mais1mi:25},
+  momento:{decidir:20,comparando:12,pesquisando:4},
+  recursos:{mais30:15,'10a30':10,ate10:5,nenhum:0},
+  experiencia:{ativa:8,ja:5,nunca:2}
+};
+S.regras = JSON.parse(JSON.stringify(REGRAS0));
+try { const s = JSON.parse(localStorage.getItem('ci-plano-proto')||'null'); if (s && s.r) { S.r = s.r; Object.assign(S.sim, s.sim||{}); } } catch(e) {}
+const salvar = () => { try { localStorage.setItem('ci-plano-proto', JSON.stringify({r:S.r,sim:S.sim})); } catch(e) {} };
+const ev = (nome, dados) => { S.evs.push([new Date().toLocaleTimeString('pt-BR'), nome, dados||'']); if (vista==='equipe') renderEquipe(true); };
+
+/* ===== Cálculos ===== */
+function aderencia(r) {
+  if (!r.credito || !r.aporte) return null;
+  const tab = TABELA[tipoDe(r.objetivo)];
+  const alvo = val(FX_CRED,r.credito), cap = val(FX_APORTE,r.aporte);
+  const linha = tab.reduce((a,b)=>Math.abs(b[0]-alvo)<Math.abs(a[0]-alvo)?b:a);
+  const ap = aporteIntegral(linha[0],linha[1]);
+  const nivel = cap >= ap ? 'integral' : cap >= ap/2 ? 'meio' : 'nao';
+  const cabe = [...tab].reverse().find(l=>aporteIntegral(l[0],l[1])<=cap) || null;
+  const renda = val(FX_RENDA,r.renda);
+  const rendaOk = renda==null ? null : renda >= PARAM.rendaMult*ap;
+  return { credito:linha[0], prazo:linha[1], aporte:ap, cap, nivel, cabe, rendaOk };
+}
+function aporteIntegral(c,p){ return c*(1+PARAM.taxaAdm+PARAM.fundo)/p; }
+function simular() {
+  const tab = TABELA[S.sim.tipo]; S.sim.idx = Math.min(S.sim.idx, tab.length-1);
+  const [c,p] = tab[S.sim.idx];
+  const total = c*(1+PARAM.taxaAdm+PARAM.fundo);
+  const integral = total/p;
+  const antes = S.sim.plano==='meio' ? integral/2 : integral;
+  const m = Math.min(S.sim.mes, p-1);
+  const livre = c*S.sim.livre/100, emb = c*S.sim.emb/100;
+  const pago = antes*m;
+  const saldo = Math.max(total - pago - livre - emb, 0);
+  const depois = saldo/(p-m);
+  const seguro = saldo*PARAM.seguro;
+  const liquido = c - emb;
+  return { c,p,total,integral,antes,m,livre,emb,pago,saldo,depois,seguro,liquido,
+    reaj:{ cred: c*(1+PARAM.reajuste), aporte: antes*(1+PARAM.reajuste) } };
+}
+
+/* ===== Qualificação em 5 camadas ===== */
+function qualificar(r) {
+  const ad = aderencia(r);
+  const R = S.regras, partes = [];
+  const add = (n,mapa,k) => { if (k!=null && mapa && k in mapa) partes.push([n,mapa[k]]); };
+  if (ad) partes.push(['Aderência à tabela', R.aderencia[ad.nivel]]);
+  add('Crédito',R.credito,r.credito); add('Momento',R.momento,r.momento); add('Recursos',R.recursos,r.recursos); add('Experiência',R.experiencia,r.experiencia);
+  const pontos = partes.reduce((a,p)=>a+p[1],0);
+  const perfil = [objNome(r.objetivo), r.credito?rot('credito',r.credito):null, r.experiencia?rot('experiencia',r.experiencia).toLowerCase():null, r.pj==='pj'?'pessoa jurídica':null].filter(Boolean).join(' · ') || 'Incompleto';
+  let intencao = r.momento==='decidir' ? 'alta' : r.momento==='comparando' ? 'media' : r.momento ? 'baixa' : null;
+  if (intencao==='media' && (r.prazo==='agora'||r.prazo==='12m')) intencao='alta';
+  let capacidade = !ad ? null : ad.nivel==='integral' ? 'alta' : ad.nivel==='meio' ? 'media' : 'insuficiente';
+  if (ad && ad.rendaOk===false && capacidade!=='insuficiente') capacidade='baixa';
+  const potencial = !r.credito ? null : (['600a1mi','mais1mi'].includes(r.credito) || ['patrimonio','empresa'].includes(r.objetivo) || r.recursos==='mais30') ? 'alta' : ['300a600'].includes(r.credito)||r.recursos==='10a30' ? 'media' : 'baixa';
+  const motivos = []; let prior = null;
+  if (intencao && capacidade) {
+    if (capacidade==='insuficiente') { prior='P3'; motivos.push('Exceção: o aporte não comporta o crédito desejado. Vai para reajuste de plano e nutrição, nunca para descarte.'); }
+    else if (intencao==='alta' && (capacidade==='alta'||capacidade==='media')) { prior='P1'; motivos.push('Intenção alta e capacidade compatível.'); }
+    else if (intencao==='alta') { prior='P2'; motivos.push('Intenção alta, mas a renda informada pede revisão do aporte.'); }
+    else if (intencao==='media') { prior = potencial==='alta' ? 'P1' : 'P2'; motivos.push(potencial==='alta' ? 'Intenção média com potencial alto: sobe para P1.' : 'Comparando opções: atendimento consultivo.'); }
+    else { prior = potencial==='alta' ? 'P2' : 'P3'; motivos.push(potencial==='alta' ? 'Pesquisando, mas com potencial alto: atendimento consultivo.' : 'Pesquisando: conteúdo e nutrição.'); }
+  }
+  const revisao = [];
+  if (r.renda==='nao' && ['600a1mi','mais1mi'].includes(r.credito)) revisao.push('Crédito alto sem renda informada: confirmar capacidade antes de propor.');
+  if (r.pj==='pj') revisao.push('Aquisição em nome de empresa: análise de crédito PJ.');
+  if (r.imovel_base==='financiado') revisao.push('Imóvel base ainda financiado: checar documentação para construção ou reforma.');
+  if (r.experiencia==='ativa') revisao.push('Já tem carta ativa: verificar se o melhor caminho é lance, nova carta ou venda.');
+  if (S.carta && S.carta.tipo==='venda' && S.carta.status==='contemplada') { prior='P1'; motivos.unshift('Exceção: carta contemplada à venda é atendida no mesmo dia.'); }
+  return { pontos, partes, perfil, intencao, capacidade, potencial, prior, motivos, revisao, ad };
+}
+const NOME_NIVEL = {alta:'Alta',media:'Média',baixa:'Baixa',insuficiente:'Insuficiente',P1:'P1 · atender hoje',P2:'P2 · consultivo',P3:'P3 · nutrição'};
+
+function caminho(r, ad) {
+  if (!r.objetivo) return null;
+  if ((r.prazo==='agora'||r.prazo==='12m') && (r.recursos==='10a30'||r.recursos==='mais30')) return {nome:'Carta contemplada',txt:'Com recursos para a entrada e prazo curto, uma carta já contemplada pode servir melhor do que esperar uma contemplação.'};
+  if (ad && ad.nivel==='nao') return {nome:'Reajuste de plano',txt: ad.cabe ? `Com o aporte informado, a tabela comporta uma carta de até ${brl(ad.cabe[0])} com folga. Começar por ela ou combinar estratégias é o que vemos na conversa.` : 'O aporte informado ainda não comporta uma carta da tabela com folga. Prefiro dizer isso agora e desenhar o caminho com você.'};
+  if (r.prazo==='agora' && r.recursos==='nenhum') return {nome:'Orientação honesta',txt:'Para usar o crédito agora, sem recursos, o consórcio não é o caminho mais rápido. Na conversa comparamos com as outras alternativas.'};
+  if (r.objetivo==='patrimonio'||r.objetivo==='futuro') return {nome:'Planejamento patrimonial',txt:'Uma sequência de aquisições ao longo do tempo, com aporte que cabe no mês e estratégia definida antes de assinar.'};
+  return {nome:'Consórcio estratégico',txt:'Aquisição planejada, aporte com folga e estratégia de contemplação definida antes de assinar.'};
+}
+
+/* ===== Maquete ===== */
+function maquete(svg, credito, tipo) {
+  const max = tipo==='veiculo' ? 500000 : 1500000;
+  const k = Math.max(0.15, Math.min(1, (credito||300000)/max));
+  const andares = Math.max(1, Math.round(k*6));
+  const w = 90+k*90, x0 = 200-w/2, base = 268, ah = 30;
+  let s = `<defs><pattern id="gr" width="16" height="16" patternUnits="userSpaceOnUse"><path d="M16 0H0V16" fill="none" stroke="rgba(191,214,238,.07)"/></pattern></defs><rect width="400" height="320" fill="url(#gr)"/>`;
+  s += `<path d="M40 ${base+14} L200 ${base+40} L360 ${base+14} L200 ${base-12}Z" fill="#121C2E" stroke="#33476A"/>`;
+  for (let i=0;i<andares;i++){ const y = base - (i+1)*ah; s += `<rect x="${x0}" y="${y}" width="${w}" height="${ah}" fill="${i===andares-1?'#18243A':'#14203A'}" stroke="#EEF2F6" stroke-opacity=".75" stroke-width="1"/>`; for(let j=0;j<Math.floor(w/26);j++) s+=`<rect x="${x0+10+j*26}" y="${y+9}" width="12" height="12" fill="none" stroke="#BFD6EE" stroke-opacity=".5"/>`; }
+  const topo = base - andares*ah;
+  s += `<path d="M${x0-8} ${topo} L200 ${topo-26} L${x0+w+8} ${topo}" fill="none" stroke="#D6AF61" stroke-width="1.5"/>`;
+  s += `<line x1="${x0+w+26}" y1="${base}" x2="${x0+w+26}" y2="${topo}" stroke="#D6AF61"/><line x1="${x0+w+20}" y1="${base}" x2="${x0+w+32}" y2="${base}" stroke="#D6AF61"/><line x1="${x0+w+20}" y1="${topo}" x2="${x0+w+32}" y2="${topo}" stroke="#D6AF61"/>`;
+  s += `<text x="${x0+w+36}" y="${(base+topo)/2+4}" fill="#D6AF61" font-size="13" font-family="Schibsted Grotesk,sans-serif">${credito?brl(credito):'seu crédito'}</text>`;
+  svg.innerHTML = s;
+}
+
+/* ===== Navegação ===== */
+let vista = 'explorar';
+function ir(v) {
+  vista = v;
+  document.querySelectorAll('.vista').forEach(s=>s.hidden = s.id!=='v-'+v);
+  document.querySelectorAll('nav.mods button').forEach(b=>{ if(b.dataset.ir===v) b.setAttribute('aria-current','page'); else b.removeAttribute('aria-current'); });
+  ({explorar:renderExplorar,diagnostico:renderDiag,plano:renderPlano,simulador:renderSim,mapa:renderMapa,spa:renderSpa,cartas:renderCartas,captura:renderCaptura,equipe:renderEquipe}[v]||(()=>{}))();
+  ev('vista_'+v);
+  window.scrollTo({top:0,behavior:'instant'});
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-ir]'); if (b) { e.preventDefault(); ir(b.dataset.ir); }
+  if (e.target.closest('[data-recomecar]')) { S.r = {}; S.sim.feita=false; S.carta=null; S.lead=null; salvar(); ir('explorar'); }
+});
+
+/* ===== Explorar ===== */
+function renderExplorar() {
+  $('#objs').innerHTML = OBJ.map(([id,t,d])=>`<button class="obj" data-obj="${id}" aria-pressed="${S.r.objetivo===id}"><svg viewBox="0 0 32 32">${ICO[id]}</svg><b>${t}</b><small>${d}</small></button>`).join('');
+  const ad = aderencia(S.r);
+  maquete($('#maq-hero'), ad ? ad.credito : null, tipoDe(S.r.objetivo));
+}
+$('#objs').addEventListener('click', e => {
+  const b = e.target.closest('[data-obj]'); if (!b) return;
+  const novo = b.dataset.obj;
+  if (S.r.objetivo !== novo) { S.r = { objetivo: novo }; S.sim.tipo = tipoDe(novo); }
+  salvar(); ev('objetivo_escolhido', novo); ir('diagnostico');
+});
+
+/* ===== Diagnóstico ===== */
+function renderDiag() {
+  const r = S.r, at = ativas(r), q = proxima(r);
+  const feitas = at.filter(p=>p.id in r);
+  const faltam = at.length - feitas.length;
+  $('#prog-txt').textContent = faltam ? `${feitas.length} de ${at.length} · cerca de ${Math.max(1,Math.ceil(faltam*12/60))} min` : 'Diagnóstico completo';
+  $('#prog-bar').style.width = (feitas.length/at.length*100)+'%';
+  let h = feitas.map(p=>`<div class="feita"><div><span>${esc(p.t)}</span> <b>${esc(rot(p.id,r[p.id]))}</b></div><button data-mudar="${p.id}">Mudar</button></div>`).join('');
+  if (q) {
+    h += `<div class="atual"><p class="rot">Pergunta ${feitas.length+1}${q.opcional?' · opcional':''}</p><h3>${esc(q.t)}</h3><div class="ops">${q.op.map((o,i)=>`<button class="op" data-resp="${o[0]}"><span class="kbd">${i+1}</span>${esc(o[1])}</button>`).join('')}</div>
+      <details class="pq"><summary>Por que perguntamos isso?</summary><p>${esc(q.pq)}</p></details></div>`;
+  } else {
+    const ad = aderencia(r), c = caminho(r, ad);
+    h += `<div class="res"><p class="rot">Caminho indicado</p><h3>${esc(c.nome)}</h3><p>${esc(c.txt)}</p>
+      <ul>${ad?`<li>Carta de referência: ${brl(ad.credito)} em ${ad.prazo} meses, aporte integral de ${brl2(ad.aporte)}.</li>`:''}
+      ${ad?`<li>Aderência ao seu mês: ${ad.nivel==='integral'?'cabe com o aporte integral':ad.nivel==='meio'?'cabe com meio aporte até a contemplação':'o aporte informado não comporta este crédito'}.</li>`:''}
+      ${ad&&ad.rendaOk===false?'<li>Atenção: a renda informada fica abaixo de 3 vezes o aporte, exigência da HS para liberar o crédito.</li>':''}
+      <li>Nenhuma data de contemplação é prometida.</li></ul>
+      <div class="acoes"><button class="bt" data-ir="plano">Ver o meu plano</button><button class="bt sec" data-ir="simulador">Abrir o simulador</button></div></div>`;
+    if (!S._diagFim) { S._diagFim = 1; ev('diagnostico_fim'); }
+  }
+  $('#diag').innerHTML = h;
+}
+$('#diag').addEventListener('click', e => {
+  const a = e.target.closest('[data-resp]'), m = e.target.closest('[data-mudar]');
+  if (a) { const q = proxima(S.r); if (!Object.keys(S.r).length) ev('diagnostico_inicio'); S.r[q.id] = a.dataset.resp; ev('pergunta_respondida', q.id);
+    if (q.id==='objetivo') S.sim.tipo = tipoDe(a.dataset.resp);
+    if (q.id==='credito'||q.id==='objetivo') { const ad = aderencia(S.r); if (ad) S.sim.idx = TABELA[S.sim.tipo].findIndex(l=>l[0]===ad.credito); }
+    if (q.id==='aporte') { const ad = aderencia(S.r); if (ad) { S.sim.idx = TABELA[S.sim.tipo].findIndex(l=>l[0]===ad.credito); S.sim.plano = ad.nivel==='meio'?'meio':'integral'; } }
+    // limpa respostas que deixaram de valer
+    Object.keys(S.r).forEach(k=>{ const p = PERG.find(x=>x.id===k); if (p && p.se && !p.se(S.r)) delete S.r[k]; });
+    salvar(); renderDiag(); renderRail(); }
+  if (m) { const ids = ativas(S.r).map(p=>p.id), i = ids.indexOf(m.dataset.mudar); ids.slice(i).forEach(k=>delete S.r[k]); S._diagFim=0; salvar(); renderDiag(); renderRail(); }
+});
+document.addEventListener('keydown', e => {
+  if (vista!=='diagnostico' || e.target.matches('input,select,textarea')) return;
+  const n = parseInt(e.key,10); if (!n) return;
+  const bs = document.querySelectorAll('#diag [data-resp]'); if (bs[n-1]) bs[n-1].click();
+});
+
+/* ===== Plano Vivo ===== */
+function pendencias() {
+  const r = S.r, done = !proxima(r) && r.objetivo;
+  return [
+    ['Escolher o objetivo', !!r.objetivo, 'explorar'],
+    ['Concluir o diagnóstico', !!done, 'diagnostico'],
+    ['Fazer uma simulação', S.sim.feita, 'simulador'],
+    ['Conferir os pilares do Método SPA®', !!S._spaVisto, 'spa'],
+    ['Falar com a equipe', !!S.lead, 'captura']
+  ];
+}
+function renderPlano() {
+  const r = S.r, ad = aderencia(r), c = caminho(r, ad), sm = simular();
+  $('#plano-tit').textContent = r.objetivo ? `Plano: ${objNome(r.objetivo).toLowerCase()}${ad?' de '+brl(ad.credito):''}.` : 'O seu plano começa pelo objetivo.';
+  $('#plano-lead').textContent = c ? `${c.nome}. ${c.txt}` : 'Escolha o que você quer conquistar e o plano vai se montando aqui, etapa por etapa.';
+  const p = pendencias(); const iAgora = p.findIndex(x=>!x[1]);
+  const desc = [
+    r.objetivo ? `${objNome(r.objetivo)}. ${r.imovel_base?'Imóvel base: '+rot('imovel_base',r.imovel_base).toLowerCase()+'.':''}` : 'Nove objetivos possíveis, de imóvel a expansão empresarial.',
+    ad ? `Carta de referência de ${brl(ad.credito)} em ${ad.prazo} meses. ${ad.nivel==='integral'?'O aporte cabe integral.':ad.nivel==='meio'?'Cabe com meio aporte até a contemplação.':'O aporte informado não comporta este crédito com folga.'}` : 'Perguntas condicionais, cada uma com o motivo à mostra.',
+    S.sim.feita ? `Simulado: ${brl(sm.c)}, aporte de ${brl2(sm.antes)} até a contemplação${sm.livre||sm.emb?`, lances de ${brl(sm.livre+sm.emb)}`:''}.` : 'Ajuste crédito, meio aporte, lance livre e lance embutido.',
+    'Segurança, Patrimônio e Alavancagem, conferidos com as suas respostas.',
+    S.lead ? `Plano enviado. Protocolo ${S.lead.protocolo}.` : 'Diagnóstico completo e condições confirmadas com a HS Consórcios, na conversa.'
+  ];
+  $('#etapas').innerHTML = p.map(([t,ok,dest],i)=>`<div class="etapa ${ok?'ok':i===iAgora?'agora':''}"><h3>${t}<span class="estado ${ok?'ok':'pend'}">${ok?'Feito':i===iAgora?'Próximo passo':'Pendente'}</span></h3><p>${esc(desc[i])}</p>${!ok&&i===iAgora?`<button class="bt pq" data-ir="${dest}">${['Escolher objetivo','Continuar diagnóstico','Simular agora','Ver os pilares','Falar com a equipe'][i]}</button>`:''}</div>`).join('');
+  ev('plano_visto');
+}
+
+/* ===== Simulador ===== */
+function renderSim() {
+  const tab = TABELA[S.sim.tipo];
+  const cr = $('#sim-cred'); cr.max = tab.length-1; cr.value = Math.min(S.sim.idx, tab.length-1);
+  $('#sim-livre').value = S.sim.livre; $('#sim-emb').value = S.sim.emb; $('#sim-emb').max = PARAM.embMax*100;
+  document.querySelectorAll('#sim-tipo button').forEach(b=>b.setAttribute('aria-pressed', b.dataset.v===S.sim.tipo));
+  document.querySelectorAll('#sim-plano button').forEach(b=>b.setAttribute('aria-pressed', b.dataset.v===S.sim.plano));
+  $('#premissas').innerHTML = [
+    ['Taxa de administração', pct(PARAM.taxaAdm)+' sobre o crédito, diluída no prazo','Tabela HS'],
+    ['Fundo de reserva', pct(PARAM.fundo),'Tabela HS'],
+    ['Taxa de adesão','Não há','Tabela HS'],
+    ['Reajuste', pct(PARAM.reajuste)+' a cada 12 meses, no crédito e no aporte','Regulamento HS (índice a confirmar)'],
+    ['Lance embutido','Até '+pct(PARAM.embMax)+' do crédito','Regulamento HS'],
+    ['Seguro','~'+pct(PARAM.seguro)+' ao mês sobre o saldo, após a contemplação','Regulamento HS'],
+    ['Renda para liberar o crédito','Pelo menos '+PARAM.rendaMult+' vezes o aporte','Regulamento HS, item 60.1'],
+    ['Prazos','180 a 220 meses (imóvel) e 100 a 140 meses (veículo)','Tabela HS']
+  ].map(l=>`<tr><td>${l[0]}</td><td>${l[1]}</td><td class="rot">${l[2]}</td></tr>`).join('');
+  updSim();
+}
+function updSim(user) {
+  const s = simular(); $('#sim-mes').max = s.p-1; $('#sim-mes').value = s.m;
+  $('#o-cred').textContent = brl(s.c)+' · '+s.p+' meses';
+  $('#o-livre').textContent = S.sim.livre+'% · '+brl(s.livre);
+  $('#o-emb').textContent = S.sim.emb+'% · '+brl(s.emb);
+  $('#o-mes').textContent = s.m;
+  $('#r-aporte').textContent = brl2(s.antes);
+  $('#r-aporte-nota').textContent = S.sim.plano==='meio' ? 'Meio aporte: a outra metade é diluída nos aportes depois da contemplação.' : 'Aporte integral, já com taxa de administração e fundo de reserva.';
+  $('#r-cota').innerHTML = `
+    <dt>Crédito da carta</dt><dd>${brl(s.c)}</dd>
+    <dt>Crédito disponível após lance embutido</dt><dd>${brl(s.liquido)}</dd>
+    <dt>Custo total do plano</dt><dd>${brl(s.total)}</dd>
+    <div class="sep"></div>
+    <dt>Aportes pagos até o mês ${s.m}</dt><dd>${brl(s.pago)}</dd>
+    <dt>Lance livre com recursos próprios</dt><dd>${brl(s.livre)}</dd>
+    <dt>Saldo após a contemplação</dt><dd>${brl(s.saldo)}</dd>
+    <dt>Aporte depois da contemplação</dt><dd>${brl2(s.depois)}</dd>
+    <dt>Seguro estimado no primeiro mês depois</dt><dd>${brl2(s.seguro)}</dd>
+    <div class="sep"></div>
+    <dt>Após o 1º reajuste (mês 13): crédito</dt><dd>${brl(s.reaj.cred)}</dd>
+    <dt>Após o 1º reajuste (mês 13): aporte</dt><dd>${brl2(s.reaj.aporte)}</dd>`;
+  const al = []; const ad = aderencia(S.r);
+  if (ad && s.antes > ad.cap) al.push(`Este aporte passa do que você disse caber no mês (${rot('aporte',S.r.aporte)}).`);
+  if (S.sim.livre+S.sim.emb >= 50) al.push('Lance alto não garante contemplação: ele concorre com os lances do grupo naquela assembleia.');
+  if (S.sim.emb>0) al.push(`Com lance embutido, o crédito que você recebe cai para ${brl(s.liquido)}. Confira se ainda atende o objetivo.`);
+  $('#r-alerta').hidden = !al.length; $('#r-alerta').innerHTML = al.map(esc).join('<br>');
+  if (user && !S.sim.feita) { S.sim.feita = true; ev('simulacao_feita'); }
+  salvar(); renderRail();
+}
+$('#sim-cred').addEventListener('input', e=>{ S.sim.idx = +e.target.value; updSim(true); });
+$('#sim-livre').addEventListener('input', e=>{ S.sim.livre = +e.target.value; updSim(true); });
+$('#sim-emb').addEventListener('input', e=>{ S.sim.emb = +e.target.value; updSim(true); });
+$('#sim-mes').addEventListener('input', e=>{ S.sim.mes = +e.target.value; updSim(true); });
+$('#sim-tipo').addEventListener('click', e=>{ const b=e.target.closest('button'); if(!b) return; S.sim.tipo=b.dataset.v; S.sim.idx=Math.min(S.sim.idx,TABELA[S.sim.tipo].length-1); renderSim(); updSim(true); ev('cenario_comparado','tipo'); });
+$('#sim-plano').addEventListener('click', e=>{ const b=e.target.closest('button'); if(!b) return; S.sim.plano=b.dataset.v; renderSim(); updSim(true); ev('cenario_comparado','plano'); });
+
+/* ===== Mapa do Tempo ===== */
+function renderMapa() {
+  const s = simular(), W = 1000, x0 = 40, x1 = 960, xs = m => x0 + (x1-x0)*m/s.p;
+  let h = `<line x1="${x0}" y1="190" x2="${x1}" y2="190" stroke="#22314A" stroke-width="10" stroke-linecap="round"/>`;
+  h += `<line x1="${x0}" y1="190" x2="${xs(s.m)}" y2="190" stroke="#D6AF61" stroke-width="10" stroke-linecap="round"/>`;
+  h += `<line x1="${xs(s.m)}" y1="190" x2="${x1}" y2="190" stroke="#BFD6EE" stroke-width="4" stroke-dasharray="2 6" stroke-linecap="round"/>`;
+  for (let m=12; m<s.p; m+=12) h += `<line x1="${xs(m)}" y1="200" x2="${xs(m)}" y2="214" stroke="#7D8AA0"/>${m%48===0&&m<=s.p-30?`<text x="${xs(m)}" y="232" fill="#7D8AA0" font-size="13" text-anchor="middle">mês ${m}</text>`:''}`;
+  h += `<text x="${x0}" y="232" fill="#A8B4C4" font-size="13">início</text><text x="${x1}" y="232" fill="#A8B4C4" font-size="13" text-anchor="end">mês ${s.p}</text>`;
+  const cx = xs(s.m);
+  const casas = Math.max(1, Math.round(Math.min(1,s.c/(S.sim.tipo==='veiculo'?500000:1500000))*4));
+  let mq = ''; for (let i=0;i<casas;i++) mq += `<rect x="${cx-22}" y="${150-i*22}" width="44" height="22" fill="#18243A" stroke="#EEF2F6" stroke-opacity=".8"/>`;
+  mq += `<path d="M${cx-28} ${150-(casas-1)*22} L${cx} ${150-(casas-1)*22-18} L${cx+28} ${150-(casas-1)*22}" fill="none" stroke="#D6AF61" stroke-width="1.5"/>`;
+  h += `<line x1="${cx}" y1="172" x2="${cx}" y2="186" stroke="#D6AF61"/>${mq}`;
+  h += `<text x="${Math.min(Math.max(cx,150),850)}" y="${120-(casas-1)*22-20}" fill="#D6AF61" font-size="14" text-anchor="middle">hipótese: contemplação no mês ${s.m}</text>`;
+  h += `<text x="${(x0+cx)/2}" y="268" fill="#D6AF61" font-size="14" text-anchor="middle">${brl2(s.antes)} / mês</text>`;
+  h += `<text x="${(cx+x1)/2}" y="268" fill="#BFD6EE" font-size="14" text-anchor="middle">${brl2(s.depois)} / mês, crédito em uso</text>`;
+  $('#mapa-svg').innerHTML = h;
+  $('#mapa-fatos').innerHTML = `<div><b>${s.p} meses de prazo</b><p>Carta de ${brl(s.c)} na tabela de referência.</p></div><div><b>${Math.floor((s.p-1)/12)} reajustes previstos</b><p>${pct(PARAM.reajuste)} a cada 12 meses, no crédito e no aporte, índice a confirmar.</p></div><div><b>A contemplação não tem data</b><p>O mês ${s.m} é a hipótese do simulador. Sorteio ou lance decidem, a cada assembleia.</p></div>`;
+}
+
+/* ===== SPA ===== */
+function renderSpa() {
+  S._spaVisto = 1;
+  const r = S.r, ad = aderencia(r), sm = simular();
+  const st = v => v===true?'ok':v===false?'pend':'';
+  const P = [
+    ['Segurança','O plano não pode apertar o seu mês.', '<rect x="10" y="60" width="180" height="22" fill="#18243A" stroke="#EEF2F6" stroke-opacity=".7"/><path d="M10 82h180" stroke="#D6AF61"/>', [
+      ['O aporte cabe com folga', ad ? ad.nivel!=='nao' : null],
+      ['Renda de pelo menos 3 vezes o aporte', ad && ad.rendaOk!=null ? ad.rendaOk : null],
+      ['Sem contar com data de contemplação', true]]],
+    ['Patrimônio','O crédito vira um ativo, não um gasto.', '<rect x="60" y="22" width="80" height="60" fill="#18243A" stroke="#EEF2F6" stroke-opacity=".7"/><path d="M52 22 100 4l48 18" fill="none" stroke="#D6AF61"/>', [
+      ['Objetivo definido', r.objetivo ? r.objetivo!=='outros' : null],
+      ['Uso do crédito dentro das regras da HS', r.objetivo ? !(r.imovel_base==='nao' && r.objetivo==='construcao') : null],
+      ['Custo total conhecido antes de assinar', S.sim.feita || null]]],
+    ['Alavancagem','O próximo passo já pensado.', '<rect x="20" y="52" width="50" height="30" fill="#18243A" stroke="#EEF2F6" stroke-opacity=".7"/><rect x="78" y="36" width="50" height="46" fill="#18243A" stroke="#EEF2F6" stroke-opacity=".7"/><rect x="136" y="16" width="50" height="66" fill="none" stroke="#D6AF61" stroke-dasharray="3 3"/>', [
+      ['Recursos para lance estratégico', r.recursos ? r.recursos!=='nenhum' : null],
+      ['Simulação com lance feita', S.sim.feita ? (S.sim.livre+S.sim.emb>0) : null],
+      ['Sequência de aquisições desenhada', r.objetivo ? ['patrimonio','futuro','empresa'].includes(r.objetivo) : null]]]
+  ];
+  $('#pilares').innerHTML = P.map(([t,d,svg,its])=>`<div class="pilar"><svg viewBox="0 0 200 90">${svg}</svg><h3>${t}</h3><p class="premissa">${d}</p>${its.map(([n,v])=>`<div class="check ${st(v)}"><i></i><span>${n}${v===null?' <span class="rot">(responda o diagnóstico)</span>':''}</span></div>`).join('')}</div>`).join('')
+    + `<div class="acoes" style="grid-column:1/-1"><button class="bt" data-ir="captura">Revisar os pilares com a equipe</button></div>`;
+  ev('spa_visto');
+}
+
+/* ===== Cartas ===== */
+function renderCartas() {
+  const ops = TABELA.imovel.map(l=>`<option value="${l[0]}">${brl(l[0])}</option>`).join('');
+  if (!$('#cc-cred').options.length) { $('#cc-cred').innerHTML = '<option value="">Escolha</option>'+ops; $('#cv-cred').innerHTML = '<option value="">Escolha</option>'+ops+'<option value="outro">Outro valor</option>'; }
+}
+document.querySelectorAll('[data-carta]').forEach(b=>b.addEventListener('click',()=>{
+  const t = b.dataset.carta;
+  const f = t==='compra' ? {cred:$('#cc-cred').value, ent:$('#cc-ent').value, uso:$('#cc-uso').value} : {status:$('#cv-status').value, adm:$('#cv-adm').value, cred:$('#cv-cred').value};
+  if (Object.values(f).some(v=>!v)) { $('#carta-res').innerHTML = '<p class="erro">Preencha os três campos para a equipe preparar a cotação.</p>'; return; }
+  S.carta = {tipo:t, ...f}; ev(t==='compra'?'carta_compra_inicio':'carta_venda_inicio');
+  let txt;
+  if (t==='venda' && f.adm==='outra') txt = 'A Gaia Group negocia cartas da HS Consórcios. Para outra administradora, a equipe confirma na conversa se consegue ajudar, sem compromisso.';
+  else if (t==='venda') txt = f.status==='contemplada' ? 'Carta contemplada com crédito livre tem prioridade de atendimento. A cotação depende do crédito, do saldo devedor e dos aportes restantes.' : 'Carta ainda não contemplada também pode ser transferida. A equipe avalia o valor já pago e as condições do grupo.';
+  else txt = 'A equipe busca cartas disponíveis que combinem com o crédito e a entrada que você informou e apresenta cada uma com saldo devedor e custo total. Nenhuma oferta é publicada antes dessa análise.';
+  $('#carta-res').innerHTML = `<div class="res"><p class="rot">${t==='compra'?'Compra de carta':'Venda de carta'}</p><h3>${t==='compra'?'Cotação individual de compra':'Avaliação individual da sua carta'}</h3><p>${txt}</p><div class="acoes" style="margin-top:16px"><button class="bt" data-ir="captura">Enviar para a equipe</button></div></div>`;
+}));
+
+/* ===== Captura ===== */
+function renderCaptura() {
+  const venda = S.carta && S.carta.tipo==='venda';
+  $('#cap-tit').textContent = venda ? 'Para quem a equipe envia a avaliação da carta?' : S.carta ? 'Para quem a equipe envia a cotação?' : 'Quer que a gente revise este plano com você?';
+  $('#cap-fim').hidden = !S.lead; $('#cap').hidden = !!S.lead;
+  if (S.lead) mostrarFim();
+  ev('captura_inicio');
+}
+const soDig = s => s.replace(/\D/g,'');
+$('#cap').addEventListener('submit', e => {
+  e.preventDefault(); const f = e.target, er = $('#cap-erro');
+  const nome = f.nome.value.trim(), w = soDig(f.whats.value), em = f.email.value.trim();
+  if (nome.length < 2) return er.textContent = 'Escreva o seu nome para a equipe saber com quem fala.';
+  if (w.length < 10 || w.length > 11) return er.textContent = 'Confira o WhatsApp: DDD e número, 10 ou 11 dígitos.';
+  if (em && !/^\S+@\S+\.\S+$/.test(em)) return er.textContent = 'O e-mail parece incompleto. Corrija ou deixe em branco.';
+  if (!f.ok.checked) return er.textContent = 'Para enviar, marque a autorização de contato.';
+  er.textContent = '';
+  const q = qualificar(S.r);
+  S.lead = { nome, whats:'55'+w, email:em||null, protocolo:'CI-'+Date.now().toString(36).toUpperCase().slice(-6), lead_id: (crypto.randomUUID?crypto.randomUUID():String(Date.now())), em:new Date().toISOString(), prior:q.prior };
+  ev('captura_fim', 'prioridade '+(q.prior||'pendente'));
+  mostrarFim(); $('#cap').hidden = true; renderRail();
+});
+function mostrarFim() {
+  const ad = aderencia(S.r), c = caminho(S.r, ad);
+  const msg = `Olá, João! Sou ${S.lead.nome}. Enviei meu plano pelo Consórcio Inteligente (protocolo ${S.lead.protocolo}).` + (S.carta ? ` Assunto: ${S.carta.tipo==='venda'?'venda':'compra'} de carta contemplada.` : c ? ` Caminho indicado: ${c.nome}.` : '');
+  $('#cap-fim').hidden = false;
+  $('#cap-fim').innerHTML = `<p class="rot">Plano enviado</p><h3>Recebemos, ${esc(S.lead.nome.split(' ')[0])}.</h3><p>Protocolo <span class="protocolo">${S.lead.protocolo}</span>. O seu plano já está com a equipe da Gaia Group. Se quiser adiantar, continue a conversa pelo WhatsApp: a mensagem já leva o protocolo.</p>
+   <div class="acoes" style="margin-top:16px"><a class="bt" target="_blank" rel="noopener" href="https://wa.me/5519998187567?text=${encodeURIComponent(msg)}" data-wa>Continuar no WhatsApp</a><button class="bt sec" data-ir="plano">Voltar ao plano</button></div>
+   <p class="premissa" style="margin-top:14px">No protótipo nada é enviado. No produto, o envio vai primeiro ao CRM e só depois o WhatsApp é oferecido.</p>`;
+}
+document.addEventListener('click', e=>{ if (e.target.closest('[data-wa]')) ev('whatsapp_aberto'); });
+
+/* ===== Rail (Plano Vivo resumido) ===== */
+function renderRail() {
+  const r = S.r, ad = aderencia(r), c = caminho(r, ad), sm = simular();
+  if (!r.objetivo && !S.carta) { $('#rail').innerHTML = `<p class="vazio" style="margin-top:10px">Escolha um objetivo e o plano começa a se montar aqui, enquanto você responde.</p><div class="bloco"><button class="bt pq" data-ir="explorar">Escolher objetivo</button></div>`; return; }
+  const cor = {integral:'var(--ok)',meio:'var(--ice)',nao:'var(--bad)'};
+  let h = `<div class="bloco"><p class="rot">Objetivo</p><b>${r.objetivo?objNome(r.objetivo):'Carta contemplada'}</b>${c?`<p class="rot" style="margin-top:6px">Caminho: <span style="color:var(--gold)">${c.nome}</span></p>`:''}</div>`;
+  h += `<div class="bloco"><dl>
+    ${r.credito?`<dt>Crédito</dt><dd>${rot('credito',r.credito)}</dd>`:''}
+    ${r.aporte?`<dt>Aporte com folga</dt><dd>${rot('aporte',r.aporte)}</dd>`:''}
+    ${r.prazo?`<dt>Quando usar</dt><dd>${rot('prazo',r.prazo)}</dd>`:''}
+    ${r.recursos?`<dt>Recursos</dt><dd>${rot('recursos',r.recursos)}</dd>`:''}
+  </dl>${ad?`<div class="ader"><i style="background:${cor[ad.nivel]}"></i>${ad.nivel==='integral'?'Aporte integral cabe':ad.nivel==='meio'?'Cabe com meio aporte':'Aporte não comporta'} · ${brl(ad.credito)}</div>`:''}</div>`;
+  if (S.sim.feita) h += `<div class="bloco"><p class="rot">Simulação</p><dl><dt>Carta</dt><dd>${brl(sm.c)}</dd><dt>Até a contemplação</dt><dd>${brl2(sm.antes)}</dd><dt>Depois</dt><dd>${brl2(sm.depois)}</dd></dl></div>`;
+  h += `<div class="bloco"><p class="rot">Pendências</p><ul class="pend-l">${pendencias().map(([t,ok])=>`<li class="${ok?'ok':''}">${t}</li>`).join('')}</ul></div>`;
+  h += `<div class="bloco">${S.lead?`<p class="rot">Enviado · protocolo <span class="protocolo">${S.lead.protocolo}</span></p>`:`<button class="bt" data-ir="captura" style="width:100%">Revisar com a equipe</button>`}</div>`;
+  $('#rail').innerHTML = h;
+}
+
+/* ===== Equipe ===== */
+function renderEquipe(semPesos) {
+  const q = qualificar(S.r), sm = simular();
+  const lin = (n,v,d) => `<div class="camada"><b>${n}</b><span>${d}</span>${v?`<span class="nivel ${v}">${NOME_NIVEL[v]||v}</span>`:'<span class="nivel">pendente</span>'}</div>`;
+  $('#camadas').innerHTML = `<div class="camada"><b>Perfil</b><span>${esc(q.perfil)}</span><span class="nivel">descritivo</span></div>`
+    + lin('Intenção', q.intencao, S.r.momento?`${rot('momento',S.r.momento)}; ${S.r.prazo?rot('prazo',S.r.prazo).toLowerCase():'prazo não informado'}`:'Momento e prazo')
+    + lin('Capacidade', q.capacidade, q.ad?`Aporte ${rot('aporte',S.r.aporte)} contra ${brl2(q.ad.aporte)} da carta de ${brl(q.ad.credito)}${q.ad.rendaOk===false?'; renda abaixo de 3x':q.ad.rendaOk?'; renda ok':''}`:'Aderência à tabela e renda')
+    + lin('Potencial', q.potencial, `${q.pontos} pontos (${q.partes.map(p=>p[0]+' '+p[1]).join(', ')||'sem dados'})`)
+    + lin('Prioridade', q.prior, q.motivos.join(' ')||'Depende de intenção e capacidade');
+  $('#revisao').innerHTML = q.revisao.length ? `<div class="alerta" style="margin-top:12px"><b>Revisão humana</b><br>${q.revisao.map(esc).join('<br>')}</div>` : '<p class="premissa" style="margin-top:12px">Sem sinal para revisão humana. A equipe confirma ou corrige a prioridade no CRM, e essa correção alimenta o ajuste dos pesos.</p>';
+  const R = S.regras;
+  if (!semPesos) $('#pesos').innerHTML = Object.entries(R).map(([g,m])=>Object.entries(m).map(([k,v])=>`<tr><td>${({aderencia:'Aderência',credito:'Crédito',momento:'Momento',recursos:'Recursos',experiencia:'Experiência'})[g]}</td><td>${esc(g==='aderencia'?({integral:'Cabe integral',meio:'Cabe com meio aporte',nao:'Não cabe'})[k]:rot(g,k))}</td><td><input type="number" min="0" max="50" value="${v}" data-g="${g}" data-k="${k}" aria-label="Peso"></td></tr>`).join('')).join('');
+  const payload = {
+    lead_id: S.lead ? S.lead.lead_id : 'gerado na captura',
+    idempotency_key: S.lead ? 'sha256(whatsapp + plano + dia)' : null,
+    origem: { canal:'site', pagina:'/plataforma', utm:{ source:null, medium:null, campaign:null } },
+    consentimento: S.lead ? { aceito:true, texto_versao:'lgpd-2026-11', em:S.lead.em } : null,
+    contato: S.lead ? { nome:S.lead.nome, whatsapp:S.lead.whats, email:S.lead.email } : null,
+    jornada: S.carta ? (S.carta.tipo==='venda'?'carta_venda':'carta_compra') : (caminho(S.r, aderencia(S.r))||{}).nome || null,
+    diagnostico: S.r,
+    carta: S.carta,
+    plano: S.sim.feita ? { tipo:S.sim.tipo, credito:sm.c, prazo:sm.p, aporte_ate_contemplacao:+sm.antes.toFixed(2), modalidade:S.sim.plano, lance_livre_pct:S.sim.livre, lance_embutido_pct:S.sim.emb, hipotese_mes:sm.m } : null,
+    qualificacao: { perfil:q.perfil, intencao:q.intencao, capacidade:q.capacidade, potencial:q.potencial, pontos:q.pontos, prioridade_sugerida:q.prior, motivos:q.motivos, revisao_humana:q.revisao, regras_versao:'pesos-proto-1', parametros_versao:PARAM.versao },
+    protocolo: S.lead ? S.lead.protocolo : null
+  };
+  $('#payload').textContent = JSON.stringify(payload, null, 2);
+  $('#evs').innerHTML = S.evs.slice(-40).reverse().map(([t,n,d])=>`<div><span class="rot">${t}</span> ${esc(n)}${d?` <span class="rot">${esc(d)}</span>`:''}</div>`).join('') || '<span class="rot">Nenhum evento ainda.</span>';
+}
+$('#pesos').addEventListener('input', e=>{ const i=e.target; if(!i.dataset.g) return; S.regras[i.dataset.g][i.dataset.k] = Math.max(0, +i.value||0); renderEquipe(true); });
+
+/* ===== Início ===== */
+renderRail(); ir(S.r.objetivo && proxima(S.r) ? 'diagnostico' : 'explorar');
+})();
+</script>
+</body>
+</html>
