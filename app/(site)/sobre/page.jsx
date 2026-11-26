@@ -1,7 +1,6 @@
 import TopoPagina from '../../components/TopoPagina';
 import Credenciais from '../../components/Credenciais';
 import Metodo from '../../components/Metodo';
-import HS from '../../components/HS';
 import { BC_URL } from '../../content';
 
 export const metadata = {
@@ -22,7 +21,6 @@ export default function PaginaSobre() {
       <TopoPagina titulo="Sobre" texto="João Dias, a Gaia Group, a HS Consórcios e o Método SPA® da Gaia Group." />
       <Credenciais />
       <Metodo />
-      <HS />
       <section className="sec" aria-labelledby="docs-titulo" style={{ paddingTop: 0 }}>
         <div className="wrap">
           <h2 id="docs-titulo" className="h3" style={{ fontSize: 30, margin: 0 }}>Documentos oficiais</h2>

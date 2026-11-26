@@ -1,7 +1,16 @@
 'use client';
 import { useState } from 'react';
 import { track } from '@vercel/analytics';
-import { WHATSAPP, AVALIACOES_GOOGLE } from '../content';
+import { WHATSAPP, AVALIACOES_GOOGLE, FAQ } from '../content';
+
+// As 5 perguntas do início (as demais ficam em /duvidas).
+const PERGUNTAS_INICIO = [
+  'Quando o consórcio não faz sentido?',
+  'Em quanto tempo sou contemplado?',
+  'Consórcio tem juros?',
+  'Qual a relação entre João Dias, a Gaia Group e a HS?',
+  'Quanto custa o diagnóstico patrimonial?',
+];
 
 const LEVA = [
   'Um plano por escrito com crédito, aporte e prazo',
@@ -41,8 +50,12 @@ export default function Agendar() {
     <section id="diagnostico" className="sec painel" aria-labelledby="agendar-titulo">
       <div className="wrap row" style={{ gap: 72, alignItems: 'center' }}>
         <div className="col" style={{ flex: '1 1 420px' }}>
-          <h2 id="agendar-titulo" className="h2">Agende o seu diagnóstico patrimonial.</h2>
+          <h2 id="agendar-titulo" className="h2">O seu lugar nessa mesa está reservado.</h2>
           <p className="lead">
+            No diagnóstico você sai com o seu cenário claro, os números na mesa e o caminho que faz sentido para o seu patrimônio.
+          </p>
+          <h3 className="h3 agendar-sub">Agende o seu diagnóstico patrimonial.</h3>
+          <p className="cp">
             Deixe seu contato e escolha o horário. Eu te ligo por 5 minutos para entender o seu objetivo e marcar o diagnóstico patrimonial.
           </p>
           <p className="quem-papel" style={{ margin: '36px 0 12px' }}>O que você leva do diagnóstico</p>
@@ -97,6 +110,22 @@ export default function Agendar() {
             Seus dados ficam com a Gaia Group e são usados só para o seu atendimento (LGPD).
           </p>
         </form>
+      </div>
+      <div className="wrap duvidas-inicio">
+        <h3 className="h3">Dúvidas frequentes</h3>
+        <div>
+          {PERGUNTAS_INICIO.map((q) => FAQ.find((f) => f.q === q)).filter(Boolean).map((f) => (
+            <details key={f.q}>
+              <summary>{f.q}</summary>
+              {f.lista ? (
+                <ul className="cp" style={{ margin: '0 0 24px', paddingLeft: 20 }}>
+                  {f.lista.map((i) => <li key={i} style={{ marginBottom: 8 }}>{i}</li>)}
+                </ul>
+              ) : <p className="cp">{f.a}</p>}
+            </details>
+          ))}
+          <a href="/duvidas" className="mesa-link duvidas-todas">Ver todas as dúvidas</a>
+        </div>
       </div>
     </section>
   );

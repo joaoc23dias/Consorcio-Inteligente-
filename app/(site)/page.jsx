@@ -1,26 +1,20 @@
 import Hero from '../components/Hero';
 import Estrategia from '../components/Estrategia';
-import Credenciais from '../components/Credenciais';
-import HS from '../components/HS';
 import Metodo from '../components/Metodo';
+import Credenciais from '../components/Credenciais';
 import Depoimentos from '../components/Depoimentos';
-import Duvidas from '../components/Duvidas';
-import Guia from '../components/Guia';
-import Pausa from '../components/Pausa';
 import Agendar from '../components/Agendar';
 
+// Início em blocos: topo, diagnóstico, Método SPA®, quem te atende, provas e agendamento.
+// A Carta do João entra entre provas e agendamento quando o texto for aprovado.
 export default function Home() {
   return (
     <>
       <Hero />
       <Estrategia />
-      <Credenciais />
-      <HS />
       <Metodo />
+      <Credenciais linkSobre />
       <Depoimentos />
-      <Duvidas />
-      <Guia />
-      <Pausa />
       <Agendar />
     </>
   );

@@ -119,10 +119,8 @@ details .cp { padding: 0 0 24px; }
 /* Entrada suave das seções: cada bloco sobe e aparece em cascata */
 .reveal-on main section > .wrap > * { opacity: 0; transform: translateY(28px); transition: opacity 1s var(--ease), transform 1.1s var(--ease); transition-delay: calc(var(--i, 0) * 90ms); }
 .reveal-on main section > .wrap.in > * { opacity: 1; transform: none; }
-.reveal-on .pausa-foto img { transform: scale(1.06); transition: transform 2.4s var(--ease); }
-.reveal-on .pausa.in .pausa-foto img { transform: scale(1); }
 @media (prefers-reduced-motion: reduce) {
-  .reveal-on main section > .wrap > *, .reveal-on .pausa-foto img { opacity: 1; transform: none; transition: none; }
+  .reveal-on main section > .wrap > * { opacity: 1; transform: none; transition: none; }
 }
 /* Passagem suave entre fundos: as seções alternadas fundem nas bordas */
 .sec.alt { background: linear-gradient(180deg, var(--bg) 0, var(--bg-alt) 140px, var(--bg-alt) calc(100% - 140px), var(--bg) 100%); }
@@ -180,17 +178,6 @@ main > section.sec:not(.alt) + section.sec:not(.alt) { box-shadow: inset 0 1px 0
 }
 input[type="range"] { accent-color: var(--green); }
 /* Pausa com foto antes do diagnóstico */
-.pausa { position: relative; min-height: 460px; display: flex; align-items: center; overflow: hidden; }
-.pausa-foto { position: absolute; inset: 0; }
-.pausa-foto::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(247,247,243,.55) 0%, rgba(250,247,241,0) 45%); }
-.pausa-wrap { position: relative; width: 100%; }
-.pausa-card { max-width: 440px; background: var(--surface); border: 1px solid var(--rule); padding: 40px; }
-@media (max-width: 760px) {
-  .pausa { display: block; min-height: 0; }
-  .pausa-foto { position: relative; height: 220px; }
-  .pausa-foto::after { display: none; }
-  .pausa-card { max-width: none; border: 0; padding: 32px 0 56px; background: transparent; }
-}
 /* Acabamento editorial (auditoria impeccable) */
 p, li, dd, figcaption { text-wrap: pretty; }
 .h2, .h3, h4 { text-wrap: balance; }
@@ -289,8 +276,6 @@ main > section.painel + section, main > section + section.painel { box-shadow: n
 @media (prefers-reduced-motion: no-preference) {
   @keyframes sobe { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
   @keyframes cortina { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
-  .reveal-on .pausa-foto { clip-path: inset(6% 5% round 28px); transition: clip-path 1.8s var(--ease); }
-  .reveal-on .pausa.in .pausa-foto { clip-path: inset(0 0 round 0); }
 }
 .painel .scrub { color: var(--ink); }
 /* Formas coerentes com os botões em pílula */
@@ -465,7 +450,7 @@ summary { font-weight: 550; }
 .brand-tag { letter-spacing: .04em !important; text-transform: none !important; font-size: 12px !important; }
 .num, .cred-numeros dd { font-variant-numeric: tabular-nums lining-nums; }
 /* ============ BORDAS: mesmo raio em todos os blocos ============ */
-.bezel, .bezel-core, .nota, .pad-box, .guia, .av-card, .garantias, .pausa-card, .caso-grid, .dep-video, .dep-video video, .caso-video, video, .cartas-capa, .painel .pad-box, .prova { border-radius: var(--raio); }
+.bezel, .bezel-core, .nota, .pad-box, .guia, .av-card, .garantias, .caso-grid, .dep-video, .dep-video video, .caso-video, video, .cartas-capa, .painel .pad-box, .prova { border-radius: var(--raio); }
 .bezel { overflow: hidden; }
 .bezel-core { border-radius: calc(var(--raio) - 1px); }
 .input, .garantias-rodape { border-radius: var(--raio-sm); }
@@ -483,16 +468,6 @@ summary { font-weight: 550; }
   .cartas-capa-texto { padding: 220px 24px 28px; }
 }
 /* ============ FECHAMENTO: a mesa como convite ============ */
-.pausa { background: #0B1524; color: #F4F1EA; min-height: 480px; }
-.pausa-foto::after { background: linear-gradient(90deg, rgba(11,21,36,.95) 0%, rgba(11,21,36,.75) 40%, rgba(11,21,36,.05) 75%) !important; display: block !important; }
-.pausa-card { background: transparent !important; border: 0 !important; padding: 0 !important; max-width: 480px; }
-.pausa .h2 { color: #F8F5EE; }
-.pausa .cp { color: rgba(244,241,234,.8); }
-@media (max-width: 760px) {
-  .pausa-foto { height: 260px; }
-  .pausa-foto::after { background: linear-gradient(180deg, rgba(11,21,36,0) 40%, rgba(11,21,36,1) 100%) !important; }
-  .pausa-card { padding: 8px 0 48px !important; }
-}
 /* ============ WHATSAPP em verde ============ */
 .whats-flutuante { isolation: isolate; position: fixed; right: 24px; bottom: 24px; z-index: 45; display: inline-flex; align-items: center; gap: 0; height: 60px; padding: 0 17px; border-radius: 999px; background: #25D366; color: #fff; text-decoration: none; box-shadow: 0 14px 30px -10px rgba(37,211,102,.6), 0 4px 10px rgba(0,0,0,.12); transition: gap .5s var(--ease), padding .5s var(--ease), transform .3s var(--ease), background-color .3s; }
 .whats-flutuante:hover { color: #fff; background: #1EBE5A; gap: 10px; padding: 0 22px 0 18px; }
@@ -792,3 +767,28 @@ body { font-feature-settings: normal; }
 .rodape-nav { display: flex; flex-direction: column; gap: 12px; font-size: 14px; }
 .rodape-nav a { color: var(--ink-soft); text-decoration: none; }
 .rodape-nav a:hover { color: var(--green); text-decoration: underline; }
+
+/* Fase 3: página inicial em blocos */
+.sec { padding: 112px 0; }
+.cred { padding: 112px 0; }
+@media (max-width: 760px) { .sec, .cred { padding: 64px 0; } }
+.painel .av-card { --ink: #141B26; --ink-soft: #4A5361; --ink-muted: #5D6573; --rule: #E2E1DB; color: var(--ink); }
+.cred-escritorios { margin-top: 72px; padding-top: 40px; border-top: 1px solid var(--rule-strong); }
+.cred-escritorios .h3 { margin: 0 0 24px; }
+.cred-escritorios ul { list-style: none; margin: 0 0 20px; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px 40px; }
+.cred-cidade { display: block; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+.cred-escritorios address { font-style: normal; font-size: 15px; line-height: 1.6; color: var(--ink-soft); }
+@media (max-width: 760px) { .cred-escritorios ul { grid-template-columns: 1fr; } .cred-escritorios { margin-top: 48px; } }
+.cred-sobre, .duvidas-todas { display: inline-block; margin-top: 24px; color: var(--ink); }
+.cred-sobre:hover, .duvidas-todas:hover { color: var(--green); }
+.painel .duvidas-todas:hover { color: #fff; }
+.provas { background: #0B1524; }
+.agendar-sub { margin: 40px 0 8px; }
+.duvidas-inicio { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 72px; margin-top: 72px; padding-top: 48px; border-top: 1px solid var(--rule); }
+.duvidas-inicio > .h3 { margin: 0; }
+.duvidas-inicio details { border-bottom: 1px solid var(--rule); }
+.duvidas-inicio summary { font-size: 20px; }
+@media (max-width: 760px) { .duvidas-inicio { grid-template-columns: 1fr; gap: 16px; margin-top: 64px; padding-top: 40px; } .duvidas-inicio summary { font-size: 18px; } }
+.whats-flutuante { transition: gap .5s var(--ease), padding .5s var(--ease), transform .4s var(--ease), opacity .4s var(--ease), background-color .3s; }
+.whats-flutuante.oculto { opacity: 0; transform: translateY(16px); pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .whats-flutuante { transition: none; } }

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { BC_URL } from '../content';
+import { BC_URL, ESCRITORIOS } from '../content';
 import SeloRA from './SeloRA';
 
 const Numeros = ({ itens }) => (
@@ -15,7 +15,7 @@ const Numeros = ({ itens }) => (
 
 // Gaia e HS apresentadas como um texto, não como painel de números:
 // cada empresa com a sua logo em tamanho natural e os fatos escritos em frase.
-export default function Credenciais() {
+export default function Credenciais({ linkSobre = false }) {
   return (
     <section id="cred" className="cred" aria-labelledby="cred-titulo">
       <div className="wrap">
@@ -41,6 +41,21 @@ export default function Credenciais() {
               <a href={BC_URL} target="_blank" rel="noopener noreferrer">Consultar no Banco Central</a>
             </p>
           </article>
+        </div>
+        <div className="cred-escritorios" id="escritorios">
+          <h3 className="h3">Atendimento presencial em três cidades.</h3>
+          <ul>
+            {ESCRITORIOS.map((e) => (
+              <li key={e.cidade}>
+                <span className="cred-cidade">{e.cidade}</span>
+                <address>{e.endereco}</address>
+              </li>
+            ))}
+          </ul>
+          <p className="cp small">
+            E em toda a região: Guaxupé, Monte Santo de Minas, Tambaú e Casa Branca. Em outras cidades, o diagnóstico é feito por videochamada.
+          </p>
+          {linkSobre && <a href="/sobre" className="mesa-link cred-sobre">Conhecer a Gaia Group e a HS Consórcios</a>}
         </div>
       </div>
     </section>

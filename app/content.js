@@ -59,7 +59,7 @@ export const FAQ = [
   { q: 'Qual a relação entre João Dias, a Gaia Group e a HS?', a: 'João atende pela Gaia Group, que tem a HS Consórcios (Grupo Herval) como administradora exclusiva. A HS é autorizada pelo Banco Central e administra os grupos, as assembleias e as contemplações.' },
   { q: 'Em quanto tempo sou contemplado?', a: 'Ninguém pode garantir uma data. No diagnóstico, definimos a estratégia de contemplação com os dados reais do grupo.' },
   { q: 'Consórcio tem juros?', a: 'No lugar dos juros do financiamento, o consórcio tem a estrutura operacional do grupo e o fundo de reserva, apresentados antes da assinatura.' },
-  { q: 'Vocês trabalham com carta contemplada?', a: 'Sim. Para quem já tem entrada e quer o crédito agora, ou para quem contemplou e quer vender. A cotação é individual, direto no WhatsApp, na seção Cartas contempladas.' },
+  { q: 'Vocês trabalham com carta contemplada?', a: 'Sim. Para quem já tem entrada e quer o crédito agora, ou para quem contemplou e quer vender. A cotação é individual, direto no WhatsApp, na página Cartas contempladas.' },
   { q: 'Quanto custa o diagnóstico patrimonial?', a: 'Nada. É personalizado e você só segue se fizer sentido.' },
   { q: 'Já sou cliente. Com quem falo?', a: 'Com o seu consultor, direto no WhatsApp.' },
 ];

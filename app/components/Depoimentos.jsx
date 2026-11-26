@@ -6,7 +6,7 @@ export default function Depoimentos() {
   if (!reais.length) return null;
   const unico = reais.length === 1;
   return (
-    <section className="sec" aria-labelledby="dep-titulo">
+    <section id="provas" className="sec painel provas" aria-labelledby="dep-titulo">
       <div className="wrap">
         <h2 id="dep-titulo" className="h2">Quem já conquistou conta como foi.</h2>
         <div className={unico ? 'dep-unico' : 'dep-grade'}>

@@ -1,4 +1,5 @@
 'use client';
+import { useEffect, useState } from 'react';
 import { track } from '@vercel/analytics';
 import { WHATSAPP } from '../content';
 
@@ -11,8 +12,17 @@ export const IconeWhats = ({ size = 26 }) => (
 );
 
 export default function WhatsFlutuante() {
+  const [visivel, setVisivel] = useState(false);
+  useEffect(() => {
+    const topo = document.querySelector('.mesa');
+    if (!topo) { setVisivel(true); return; }
+    const io = new IntersectionObserver(([e]) => setVisivel(!e.isIntersecting));
+    io.observe(topo);
+    return () => io.disconnect();
+  }, []);
   return (
-    <a className="whats-flutuante" href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(MSG)}`} target="_blank" rel="noopener noreferrer"
+    <a className={`whats-flutuante${visivel ? '' : ' oculto'}`} tabIndex={visivel ? undefined : -1} aria-hidden={visivel ? undefined : true}
+      href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(MSG)}`} target="_blank" rel="noopener noreferrer"
       aria-label="Conversar com João no WhatsApp" onClick={() => track('whats_flutuante')}>
       <IconeWhats />
       <span className="whats-texto">Fale comigo no WhatsApp</span>
