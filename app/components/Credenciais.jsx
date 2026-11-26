@@ -1,13 +1,12 @@
 import Image from 'next/image';
 import { BC_URL } from '../content';
-import Contador from './Contador';
 import SeloRA from './SeloRA';
 
 const Numeros = ({ itens }) => (
   <dl className="cred-numeros">
     {itens.map(([v, r], i) => (
       <div key={r} style={{ '--d': `${i * 140}ms` }}>
-        <dd className="num"><Contador texto={v} duracao={1800} /></dd>
+        <dd className="num">{v}</dd>
         <dt>{r}</dt>
       </div>
     ))}

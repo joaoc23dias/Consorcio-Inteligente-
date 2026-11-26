@@ -1,23 +1,17 @@
 import Image from 'next/image';
-import MesaFx from './MesaFx';
 
 const TITULO = 'Consórcio inteligente é patrimônio com estratégia.';
-const POEIRA = Array.from({ length: 16 }, (_, i) => i);
+
 
 // Topo: a mesa de estratégia. Imóvel, torre, carro e terreno ligados por um
-// caminho dourado até a chave, a imagem do consórcio usado com inteligência.
-// João entra recortado, em primeiro plano, como quem conduz o plano.
+// caminho dourado até a chave. João em primeiro plano, como quem conduz o plano.
 const FUNDO = '/mesa-estrategia.webp';
 
 export default function Hero() {
   return (
     <section className="mesa" aria-labelledby="hero-titulo">
-      <MesaFx />
       <div className="mesa-fundo" aria-hidden="true">
         <Image src={FUNDO} alt="" fill priority sizes="100vw" style={{ objectFit: 'cover', objectPosition: '70% 60%' }} />
-      </div>
-      <div className="poeira" aria-hidden="true">
-        {POEIRA.map((i) => <i key={i} style={{ '--p': i, left: `${44 + ((i * 37) % 54)}%` }} />)}
       </div>
       <div className="wrap mesa-grade">
         <div className="mesa-texto">
