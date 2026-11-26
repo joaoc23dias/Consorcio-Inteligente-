@@ -792,3 +792,14 @@ body { font-feature-settings: normal; }
 .whats-flutuante { transition: gap .5s var(--ease), padding .5s var(--ease), transform .4s var(--ease), opacity .4s var(--ease), background-color .3s; }
 .whats-flutuante.oculto { opacity: 0; transform: translateY(16px); pointer-events: none; }
 @media (prefers-reduced-motion: reduce) { .whats-flutuante { transition: none; } }
+
+/* Fase 4: captura de lead */
+.campo-robo { position: absolute !important; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.consentimento { display: grid; grid-template-columns: 20px 1fr; gap: 10px; align-items: start; font-size: 13px; line-height: 1.5; color: var(--ink-soft); }
+.consentimento input { width: 18px; height: 18px; margin: 1px 0 0; accent-color: var(--green); cursor: pointer; }
+.consentimento input[aria-invalid="true"] { outline: 2px solid #A3261B; outline-offset: 1px; }
+.consentimento a { color: inherit; text-underline-offset: 3px; }
+.contato { display: flex; flex-direction: column; gap: 14px; margin-top: 8px; }
+.contato-campos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.contato .btn { align-self: flex-start; }
+@media (max-width: 560px) { .contato-campos { grid-template-columns: 1fr; } .contato .btn { align-self: stretch; } }

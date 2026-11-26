@@ -2,6 +2,8 @@
 import { useState } from 'react';
 import { track } from '@vercel/analytics';
 import { WHATSAPP, AVALIACOES_GOOGLE, FAQ } from '../content';
+import { enviaLead, whatsValido } from './lead';
+import { CampoRobo, Consentimento } from './Contato';
 
 // As 5 perguntas do início (as demais ficam em /duvidas).
 const PERGUNTAS_INICIO = [
@@ -31,17 +33,19 @@ export default function Agendar() {
     e.preventDefault();
     const form = e.currentTarget;
     const nome = form.nome.value.trim();
-    const whatsapp = form.whatsapp.value.replace(/\D/g, '');
+    const whatsapp = form.whatsapp.value.replace(/\D/g, '').replace(/^55(?=\d{10,11}$)/, '');
     const cidade = form.cidade.value.trim();
     const novos = {};
     if (!nome) novos.nome = 'Escreva seu nome para eu saber com quem vou falar.';
-    if (whatsapp.length < 10) novos.whatsapp = 'Confira o número com DDD, por exemplo (16) 99999-9999.';
+    if (!whatsValido(whatsapp)) novos.whatsapp = 'Confira o número com DDD, por exemplo (16) 99999-9999.';
+    if (!form.consentimento.checked) novos.consentimento = 'Marque a autorização para eu poder falar com você.';
     setErros(novos);
     if (Object.keys(novos).length) {
       form[Object.keys(novos)[0]].focus();
       return;
     }
     const texto = `Olá, João! Sou ${nome}${cidade ? `, de ${cidade}` : ''}. Quero conquistar: ${objetivo}. Melhor horário para a ligação: ${horario.toLowerCase()}. Meu WhatsApp: ${whatsapp}.`;
+    enviaLead({ origem: 'agendamento', nome, whatsapp, cidade, respostas: { Objetivo: objetivo, Horário: horario }, consentimento: true, site: form.site.value });
     track('formulario_enviado', { objetivo });
     window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`, '_blank', 'noopener');
   }
@@ -105,10 +109,10 @@ export default function Agendar() {
               ))}
             </div>
           </fieldset>
+          <Consentimento id="agendar" erro={erros.consentimento} />
+          {erros.consentimento && <p id="agendar-erro-consentimento" className="error" role="alert">{erros.consentimento}</p>}
+          <CampoRobo id="agendar" />
           <button type="submit" className="btn btn-pri" style={{ marginTop: 8 }}>Agendar pelo WhatsApp</button>
-          <p style={{ fontSize: 12, color: 'var(--ink-muted)', margin: 0 }}>
-            Seus dados ficam com a Gaia Group e são usados só para o seu atendimento (LGPD).
-          </p>
         </form>
       </div>
       <div className="wrap duvidas-inicio">

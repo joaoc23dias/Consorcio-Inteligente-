@@ -1,11 +1,13 @@
 'use client';
 import { useEffect } from 'react';
 import { track } from '@vercel/analytics';
+import { guardaUtm } from './lead';
 
 // Animações de entrada ao rolar (desligadas para quem prefere menos movimento)
 // e registro de cliques nos botões de agendamento.
 export default function Melhorias() {
   useEffect(() => {
+    guardaUtm();
     const reduz = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let observer;
     if (!reduz && 'IntersectionObserver' in window) {

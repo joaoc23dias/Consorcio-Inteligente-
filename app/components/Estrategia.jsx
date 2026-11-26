@@ -2,6 +2,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { track } from '@vercel/analytics';
 import { WHATSAPP } from '../content';
+import Contato from './Contato';
+
+const GUIA = 'Olá, João! Ainda estou pesquisando e quero receber o guia "5 perguntas antes de assinar um consórcio".';
 
 // "Qual é a sua estratégia?": três respostas, uma análise e o caminho indicado.
 // O perfil vai sendo montado ao lado, a análise roda em etapas e o mapa de
@@ -169,7 +172,7 @@ export default function Estrategia() {
   });
 
   const refazer = () => { setResp({}); setPasso(0); setFase('perguntas'); setEtapa(0); };
-  const msg = r ? `Olá, João! Fiz o diagnóstico rápido no site.\n\nObjetivo: ${ROTULO[resp.objetivo]}\nEntrada: ${ROTULO[resp.entrada]}\nPrazo: ${ROTULO[resp.prazo]}\n\nResultado: ${r.titulo}\nQuero conversar sobre a minha estratégia.` : '';
+  const msg = (nome) => `Olá, João! Sou ${nome}. Fiz o diagnóstico rápido no site.\n\nObjetivo: ${ROTULO[resp.objetivo]}\nEntrada: ${ROTULO[resp.entrada]}\nPrazo: ${ROTULO[resp.prazo]}\n\nResultado: ${r.titulo}\nQuero conversar sobre a minha estratégia.`;
   const q = PERGUNTAS[passo];
 
   return (
@@ -247,12 +250,16 @@ export default function Estrategia() {
                 <ul>
                   {r.itens.map((i, k) => <li key={i} className="estr-surge" style={{ '--d': `${0.7 + k * 0.12}s` }}>{i}</li>)}
                 </ul>
-                <div className="estr-acoes estr-surge" style={{ '--d': '1.1s' }}>
-                  <a className="btn btn-pri" href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`} target="_blank" rel="noopener noreferrer"
-                    onClick={() => track('estrategia_whatsapp', { caminho: r.chave })}>
-                    Conversar sobre a minha estratégia
-                  </a>
-                  <a className="estr-link" href={r.link.href}>{r.link.t}</a>
+                <div className="estr-surge" style={{ '--d': '1.1s' }}>
+                  <Contato id="diag" origem="diagnostico" rotulo="Conversar sobre a minha estratégia"
+                    respostas={{ Objetivo: ROTULO[resp.objetivo], Entrada: ROTULO[resp.entrada], Prazo: ROTULO[resp.prazo], Resultado: r.titulo }}
+                    link={(nome) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg(nome))}`}
+                    aoEnviar={() => track('estrategia_whatsapp', { caminho: r.chave })} />
+                  <div className="estr-acoes" style={{ marginTop: 18 }}>
+                    <a className="estr-link" href={r.link.href}>{r.link.t}</a>
+                    <a className="estr-link" href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(GUIA)}`} target="_blank" rel="noopener noreferrer"
+                      onClick={() => track('guia_whatsapp', { origem: 'diagnostico' })}>Ainda pesquisando? Receba o guia "5 perguntas antes de assinar"</a>
+                  </div>
                 </div>
                 <button type="button" className="estr-voltar" onClick={refazer}>Refazer as respostas</button>
               </div>

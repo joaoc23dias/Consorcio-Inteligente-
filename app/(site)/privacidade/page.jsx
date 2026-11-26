@@ -25,7 +25,9 @@ export default function Privacidade() {
 
             <h2>Quais dados coletamos</h2>
             <ul>
-              <li>Os que você informa no formulário: nome, WhatsApp, cidade, objetivo e horário preferido para contato.</li>
+              <li>Os que você informa nos formulários: nome, WhatsApp, cidade, objetivo e horário preferido para contato.</li>
+              <li>As respostas do diagnóstico rápido (objetivo, entrada e prazo) e o caminho indicado, quando você envia o seu contato.</li>
+              <li>A página de onde o contato foi enviado e, se houver, a campanha de origem (parâmetros UTM).</li>
               <li>Os valores que você escolhe no simulador, quando decide enviá-los pelo WhatsApp.</li>
               <li>Dados de navegação anônimos e agregados, para medir o uso do site (páginas vistas e cliques), sem cookies de publicidade.</li>
             </ul>
@@ -41,6 +43,9 @@ export default function Privacidade() {
             <h2>Com quem compartilhamos</h2>
             <p>
               Com a HS Consórcios, apenas quando você decide seguir com uma proposta, e com fornecedores que operam o site e o atendimento (hospedagem e mensagens), sempre limitados ao necessário. Não vendemos seus dados.
+            </p>
+            <p>
+              Quando você envia um formulário, o contato é registrado no servidor do site (Vercel) e encaminhado ao WhatsApp de atendimento do João Dias por um serviço de envio de mensagens, e pode ser registrado no sistema de gestão de clientes usado pela Gaia Group. O envio só acontece depois que você marca a autorização no formulário.
             </p>
 
             <h2>Por quanto tempo guardamos</h2>
