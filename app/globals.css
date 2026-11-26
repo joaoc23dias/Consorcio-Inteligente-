@@ -818,3 +818,13 @@ summary { font-size: 19px; }
 .cred-numeros dd { font-family: var(--sans); font-weight: 600; font-size: clamp(28px, 2.8vw, 38px); letter-spacing: -.02em; }
 @media (max-width: 760px) { .cred-numeros dd { font-size: 28px; } }
 .cred-papel { font-family: var(--sans); font-weight: 600; letter-spacing: -.01em; }
+
+/* Carta do João */
+.carta { background: #F3F1EA; }
+.carta-papel { max-width: 680px; margin: 0 auto; }
+.carta-papel .h2 { margin: 0 0 32px; }
+.carta-papel p { font-family: var(--serif); font-size: 20px; line-height: 1.7; color: var(--ink); margin: 0 0 22px; text-wrap: pretty; }
+.carta-assinatura { display: flex; flex-direction: column; gap: 6px; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--rule-strong); }
+.carta-assinatura .marca-nome { color: var(--green); font-size: 20px; }
+.carta-cargo, .carta-assinatura time { font-size: 14px; color: var(--ink-muted); }
+@media (max-width: 760px) { .carta-papel p { font-size: 18px; } }

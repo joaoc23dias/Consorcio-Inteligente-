@@ -3,10 +3,10 @@ import Estrategia from '../components/Estrategia';
 import Metodo from '../components/Metodo';
 import Credenciais from '../components/Credenciais';
 import Depoimentos from '../components/Depoimentos';
+import CartaJoao from '../components/CartaJoao';
 import Agendar from '../components/Agendar';
 
-// Início em blocos: topo, diagnóstico, Método SPA®, quem te atende, provas e agendamento.
-// A Carta do João entra entre provas e agendamento quando o texto for aprovado.
+// Início em 7 blocos: topo, diagnóstico, Método SPA®, quem te atende, provas, Carta do João e agendamento.
 export default function Home() {
   return (
     <>
@@ -15,6 +15,7 @@ export default function Home() {
       <Metodo />
       <Credenciais linkSobre />
       <Depoimentos />
+      <CartaJoao />
       <Agendar />
     </>
   );
