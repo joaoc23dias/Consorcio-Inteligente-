@@ -1,5 +1,5 @@
 import Hero from '../components/Hero';
-import Estrategia from '../components/Estrategia';
+import EstrategiaPresente from '../components/EstrategiaPresente';
 import Metodo from '../components/Metodo';
 import Credenciais from '../components/Credenciais';
 import Depoimentos from '../components/Depoimentos';
@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Estrategia />
+      <EstrategiaPresente />
       <Metodo />
       <Credenciais linkSobre />
       <Depoimentos />

@@ -26,12 +26,13 @@ function textoAviso(l) {
   const linhas = [
     `Novo lead do site (${l.origem})`,
     `Nome: ${l.nome}`,
-    `WhatsApp: ${l.whatsapp}`,
+    l.whatsapp && `WhatsApp: ${l.whatsapp}`,
+    l.email && `E-mail: ${l.email}`,
     l.cidade && `Cidade: ${l.cidade}`,
     ...Object.entries(l.respostas).map(([k, v]) => `${k}: ${v}`),
     l.pagina && `Página: ${l.pagina}`,
     Object.keys(l.utm).length ? `Campanha: ${Object.entries(l.utm).map(([k, v]) => `${k}=${v}`).join(', ')}` : null,
-    `Abrir conversa: https://wa.me/${l.whatsapp}`,
+    l.whatsapp && `Abrir conversa: https://wa.me/${l.whatsapp}`,
   ];
   return linhas.filter(Boolean).join('\n');
 }
@@ -71,6 +72,7 @@ export async function POST(req) {
     nome: limpa(d.nome, 80),
     whatsapp: whatsapp.length >= 10 && whatsapp.length <= 11 ? `55${whatsapp}` : whatsapp,
     cidade: limpa(d.cidade, 80),
+    email: limpa(d.email, 120).toLowerCase(),
     origem: limpa(d.origem, 40) || 'site',
     respostas: Object.fromEntries(Object.entries(d.respostas || {}).slice(0, 10).map(([k, v]) => [limpa(k, 40), limpa(v, 200)])),
     pagina: limpa(d.pagina, 200),
@@ -79,7 +81,9 @@ export async function POST(req) {
     recebidoEm: new Date().toISOString(),
   };
 
-  if (!lead.nome || lead.whatsapp.length < 12 || lead.whatsapp.length > 13 || !lead.consentimento) {
+  const zapOk = lead.whatsapp.length >= 12 && lead.whatsapp.length <= 13;
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email);
+  if (!lead.nome || !(zapOk || emailOk) || !lead.consentimento) {
     return Response.json({ ok: false, erro: 'dados' }, { status: 422 });
   }
 
