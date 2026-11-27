@@ -84,9 +84,9 @@ export default function Simulador() {
           <p className="cp small" style={{ marginTop: 20 }}>{TABELA_REF}. Valores sujeitos ao reajuste anual do grupo.</p>
         </div>
 
-        <div className="col pad-box" style={{ flex: '1 1 380px', background: 'var(--surface)', border: '1px solid var(--rule)', padding: 40, alignSelf: 'flex-start' }} aria-live="polite">
+        <div className="col pad-box sim-resultado" style={{ flex: '1 1 380px', background: 'var(--surface)', border: '1px solid var(--rule)', padding: 40, alignSelf: 'flex-start' }} aria-live="polite">
           <div className="label">Aporte reduzido até a contemplação</div>
-          <div className="num" style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(40px, 11vw, 60px)', fontWeight: 600, letterSpacing: '-.03em', whiteSpace: 'nowrap', color: 'var(--green)', margin: '8px 0 28px', lineHeight: 1.1 }}>
+          <div className="num sim-valor" style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(40px, 11vw, 60px)', fontWeight: 600, letterSpacing: '-.03em', whiteSpace: 'nowrap', color: 'var(--green)', margin: '8px 0 28px', lineHeight: 1.1 }}>
             {brl2.format(meio)}
           </div>
           <dl className="num" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 20, fontSize: 14, margin: 0, paddingTop: 24, borderTop: '1px solid var(--rule)' }}>

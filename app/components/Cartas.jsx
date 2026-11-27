@@ -119,7 +119,7 @@ export default function Cartas() {
                   <ul style={{ listStyle: 'none', margin: '0 0 32px', padding: 0, flex: 1 }}>
                     {l.itens.map((i) => (
                       <li key={i} style={{ display: 'flex', gap: 12, padding: '11px 0', borderTop: '1px solid var(--rule)', fontSize: 15, color: escuro ? undefined : 'var(--ink)' }}>
-                        <span style={{ color: escuro ? 'var(--gold-light)' : 'var(--gold)' }}><Check /></span>
+                        <span style={{ color: escuro ? 'var(--ice)' : 'var(--green)' }}><Check /></span>
                         {i}
                       </li>
                     ))}
@@ -159,7 +159,7 @@ export default function Cartas() {
                 <p className="quem-nome">{g.nome}</p>
                 <ul className="garantia-itens">
                   {g.itens.map((i) => (
-                    <li key={i}><span style={{ color: 'var(--gold)' }}><Check /></span>{i}</li>
+                    <li key={i}><span style={{ color: 'var(--green)' }}><Check /></span>{i}</li>
                   ))}
                 </ul>
                 {g.numeros && (

@@ -13,6 +13,11 @@
   --green-hover: #1D3352;
   --gold: #8A6A2F;
   --gold-light: #D6AF61;
+  /* Azul-gelo: cor de confiança (dados, simulação, progresso). Ver pesquisa de cores e neuromarketing, nov/2026 */
+  --ice: #BFD6EE;
+  --ice-bg: #EEF4FA;
+  --ice-line: #C9DAEC;
+  --ice-ink: #2B4A6F;
   --rule: #E2E1DB;
   --rule-strong: #CFCEC6;
   --on-green: #F4EFE6;
@@ -828,3 +833,45 @@ summary { font-size: 19px; }
 .carta-assinatura .marca-nome { color: var(--green); font-size: 20px; }
 .carta-cargo, .carta-assinatura time { font-size: 14px; color: var(--ink-muted); }
 @media (max-width: 760px) { .carta-papel p { font-size: 18px; } }
+
+/* ============================================
+   Disciplina de cores (pesquisa de cores e neuromarketing, nov/2026)
+   1. Dourado só no momento de agir (botões) e no valor principal.
+   2. Azul-gelo nas áreas de confiança: números, simulação, progresso.
+   3. Fundo claro para ler e decidir (já é a base desta versão).
+   4. Sem vermelho perto de números; verde só para confirmação.
+   ============================================ */
+/* 1. Rótulos, marcadores e listas deixam o dourado */
+.eyebrow { color: var(--ink-muted); }
+.on-green .eyebrow { color: var(--on-green-soft); }
+.ph { color: var(--ink-muted); }
+summary::after { color: var(--green); }
+.nota { border-left-color: var(--ice-line); }
+.quem-papel { color: var(--ink-muted); }
+.leva li::before { border-color: var(--green); }
+.tag-pill { background: var(--ice-bg); color: var(--ice-ink); }
+.garantia-eu { border-color: var(--ice-line); }
+.estr-contagem { color: var(--ink-muted); }
+.estr-resultado li::before { border-color: var(--green); }
+.passo-n { color: var(--ink-muted); }
+/* Partes escuras (estratégia): progresso e leitura em azul-gelo, dourado só no botão */
+.estr-progresso .atual { background: var(--ice); }
+.perfil-titulo { color: var(--ice); }
+.perfil-linha.atual span { color: var(--ice); }
+.cursor { background: var(--ice); }
+.perfil-barra span { background: linear-gradient(90deg, #8FB3D9, var(--ice)); }
+.estr-opcao.escolhida kbd { background: var(--ice); border-color: var(--ice); }
+.estr-check { stroke: var(--ice); }
+.scan span { background: linear-gradient(90deg, transparent, rgba(191,214,238,.35), transparent); }
+.estr-analise li.rodando .estr-status { border-color: var(--ice); border-right-color: transparent; }
+.mapa-ramos::before { background: var(--ice); }
+.mapa-no.aceso { border-color: var(--ice-ink); background: var(--ice-bg); box-shadow: 0 0 0 4px rgba(191,214,238,.35); }
+/* Navegação não é ação: marcador da página atual em azul-gelo */
+.topo .nav a[aria-current="page"] { box-shadow: inset 0 -1px 0 var(--ice); }
+.menu-movel li a[aria-current="page"] { color: var(--ice); }
+/* 2. Áreas de confiança: simulação e comparação sobre azul-gelo */
+.sim-resultado { background: var(--ice-bg) !important; border-color: var(--ice-line) !important; }
+.sim-valor { color: var(--gold) !important; }
+.comp-table { background: var(--ice-bg); }
+.timeline li::before { border-color: var(--ice-ink); }
+.timeline li:nth-child(2)::before { background: var(--ice-ink); }
