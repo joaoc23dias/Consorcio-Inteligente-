@@ -1,6 +1,6 @@
-import Cartas, { CartasTopo, CartasFim } from '../../components/Cartas';
+import Cartas, { CartasTopo, CartasAntes, CartasFim } from '../../components/Cartas';
 import FaqSchema from '../../components/FaqSchema';
-import { CARTAS_FAQ } from '../../content';
+import { CARTAS_FAQ_COMPLETA } from '../../content';
 
 export const metadata = {
   title: 'Cartas contempladas HS: compra e venda | João Dias · Consórcio Inteligente',
@@ -11,8 +11,9 @@ export const metadata = {
 export default function PaginaCartas() {
   return (
     <>
-      <FaqSchema perguntas={CARTAS_FAQ} />
+      <FaqSchema perguntas={CARTAS_FAQ_COMPLETA} />
       <CartasTopo />
+      <CartasAntes />
       <Cartas />
       <CartasFim />
     </>

@@ -3,15 +3,15 @@ import { useEffect, useRef } from 'react';
 import { track } from '@vercel/analytics';
 import Image from 'next/image';
 import CenaViva from './CenaViva';
-import { WHATSAPP, CARTAS_DEPOIMENTOS, CARTAS_CASOS, LOGO_HS, CARTAS_FAQ, BC_URL } from '../content';
+import { WHATSAPP, CARTAS_DEPOIMENTOS, CARTAS_CASOS, LOGO_HS, CARTAS_FAQ, BC_URL, CARTAS_PARA_QUEM } from '../content';
 
 const CAPA = '/cartas-chave.webp';
 
 // Coordenadas na imagem original (1376 x 676).
 const CAPA_CAMINHOS = [{ id: 'linha', d: 'M60 684 L726 551 L760 545', dur: 3.4 }];
 const CAPA_PONTOS = [
-  { x: 925, y: 300, rotulo: 'Crédito já liberado', sub: 'A carta contemplada', caminhos: ['linha'], halo: { y: 300, rx: 150, ry: 130 } },
-  { x: 850, y: 500, rotulo: 'Compra à vista', sub: 'Imóvel ou veículo', caminhos: ['linha'], halo: { y: 515, rx: 230, ry: 80 }, lado: 'esq' },
+  { x: 925, y: 300, rotulo: 'O que saber antes de comprar', sub: 'Entrada, saldo e análise', caminhos: ['linha'], halo: { y: 300, rx: 150, ry: 130 }, href: '#antes' },
+  { x: 850, y: 500, rotulo: 'A carta contemplada é para mim?', sub: 'Veja em 30 segundos', caminhos: ['linha'], halo: { y: 515, rx: 230, ry: 80 }, lado: 'dir', href: '#para-mim' },
 ];
 const CAPA_BRILHOS = [{ x: 925, y: 272, ponto: 0 }, { x: 928, y: 345 }];
 
@@ -35,8 +35,68 @@ export function CartasTopo() {
             Uma carta contemplada é um ativo com valor de mercado. Você compra uma carta já liberada ou vende a sua com segurança jurídica: a Gaia Group intermedeia a negociação e a HS Consórcios aprova a transferência.
           </p>
           <div className="mesa-ctas">
-            <a href="#comprar" className="btn btn-pri" onClick={() => track('cartas_topo', { lado: 'comprar' })}>Quero comprar</a>
-            <a href="#vender" className="mesa-link" onClick={() => track('cartas_topo', { lado: 'vender' })}>Quero vender a minha carta</a>
+            <a href="#para-mim" className="btn btn-pri" onClick={() => track('cartas_topo', { lado: 'para-mim' })}>A carta contemplada é para mim?</a>
+            <a href="#antes" className="mesa-link" onClick={() => track('cartas_topo', { lado: 'antes' })}>O que saber antes de comprar</a>
+          </div>
+          <p className="cartas-atalho">Já decidiu? <a href="#comprar" onClick={() => track('cartas_topo', { lado: 'comprar' })}>Quero comprar</a> <span aria-hidden="true">·</span> <a href="#vender" onClick={() => track('cartas_topo', { lado: 'vender' })}>Quero vender a minha carta</a></p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+// Antes de comprar: o que a pessoa precisa saber e se a carta é para ela, antes de pedir cotação.
+const ANTES = [
+  { t: 'Entrada obrigatória', d: 'A entrada é o valor pago a quem está vendendo a carta. Sem ela, a compra não acontece.' },
+  { t: 'Saldo e aportes restantes', d: 'Você assume o saldo devedor e segue com os aportes até o fim do grupo. Mostramos o custo total antes de decidir.' },
+  { t: 'Análise da HS Consórcios', d: 'A administradora analisa o crédito de quem assume a carta. A transferência só sai com a aprovação dela.' },
+  { t: 'Contrato e cessão', d: 'Tudo formalizado, com contrato revisado pelo jurídico da Gaia Group. Com a aprovação, o crédito vai para a compra do bem.' },
+];
+const E_PARA = [...CARTAS_PARA_QUEM.e.slice(0, 3), 'Quer negociar o bem como comprador à vista, com o crédito já liberado'];
+
+export function CartasAntes() {
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return undefined;
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { el.classList.add('aceso'); io.disconnect(); } }, { threshold: 0.3 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return (
+    <section className="sec ca-sec" aria-labelledby="antes-titulo">
+      <div className="wrap">
+        <div id="antes" className="ca-bloco">
+          <h2 id="antes-titulo" className="cartas-h2">O que saber antes de comprar uma carta contemplada.</h2>
+          <ol ref={ref} className="ca-passos">
+            <span className="ca-friso" aria-hidden="true" />
+            {ANTES.map((p, i) => (
+              <li key={p.t} style={{ '--n': i }}>
+                <span className="ca-n">{String(i + 1).padStart(2, '0')}</span>
+                <h3>{p.t}</h3>
+                <p>{p.d}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        <div id="para-mim" className="ca-bloco ca-para">
+          <h2 className="cartas-h2">A carta contemplada é para você?</h2>
+          <div className="ca-lados">
+            <div className="ca-lado ca-sim">
+              <p className="ca-rot">É para você se</p>
+              <ul>{E_PARA.map((t) => <li key={t}>{t}</li>)}</ul>
+            </div>
+            <div className="ca-lado ca-nao">
+              <p className="ca-rot">Não é para você se</p>
+              <ul>{CARTAS_PARA_QUEM.nao.map((t) => <li key={t}>{t}</li>)}</ul>
+              <a href="/simulador" className="ca-link">Ver o consórcio estratégico no Simulador</a>
+            </div>
+          </div>
+          <div className="mesa-ctas ca-ctas">
+            <a href="#comprar" className="btn btn-pri" onClick={() => track('cartas_antes', { lado: 'comprar' })}>Faz sentido, quero comprar</a>
+            <a href="#vender" className="ca-vender" onClick={() => track('cartas_antes', { lado: 'vender' })}>Tenho uma carta e quero vender</a>
           </div>
         </div>
       </div>

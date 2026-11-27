@@ -280,11 +280,19 @@ export default function CenaViva({
       <div className="cena-luz" />
       <div className="cena-palco cena-camada">
         {pontos.map((p, i) => (
+          p.href ? (
+            <a key={`r${i}`} href={p.href} tabIndex={-1} className={`cena-rotulo cena-pergunta${ativo === i ? ' on' : ''}${p.lado ? ` ${p.lado}` : ''}`}
+              style={{ left: `${(p.x / w) * 100}%`, top: `${(p.y / h) * 100}%` }}>
+              <b>{p.rotulo}</b>
+              {p.sub && <small>{p.sub}</small>}
+            </a>
+          ) : (
           <span key={`r${i}`} className={`cena-rotulo${ativo === i ? ' on' : ''}${p.lado ? ` ${p.lado}` : ''}`}
             style={{ left: `${(p.x / w) * 100}%`, top: `${(p.y / h) * 100}%` }}>
             <b>{p.rotulo}</b>
             {p.sub && <small>{p.sub}</small>}
           </span>
+          )
         ))}
       </div>
     </div>

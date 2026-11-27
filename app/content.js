@@ -166,7 +166,7 @@ export const CARTAS_PASSOS = [
   { t: 'Compre o bem', d: 'Com a aprovação, o crédito é usado na compra do imóvel ou veículo, e você segue com os aportes.' },
 ];
 
-export const CARTAS_FAQ = [
+export const CARTAS_FAQ_COMPLETA = [
   { q: 'Preciso ter entrada para comprar uma carta contemplada?', a: 'Sim, a entrada é obrigatória. Ela é o valor pago a quem está vendendo a carta; o restante segue em aportes mensais no grupo. Sem entrada, a compra não acontece, e o caminho certo para você é o consórcio estratégico desde o início.' },
   { q: 'Para quem é a carta contemplada?', lista: CARTAS_PARA_QUEM.e },
   { q: 'Por que usar uma carta contemplada?', lista: CARTAS_PARA_QUEM.porque },
@@ -187,3 +187,8 @@ export const AVALIACOES_GOOGLE = [
   { nome: 'Moacyr Petrocelli', data: 'agosto de 2025', texto: 'Excelentes serviços! Atendimento personalizado e assertivo para cada necessidade! Parabéns!' },
   { nome: 'André Luiz Abbiati', data: 'agosto de 2025', texto: 'Excelente empresa, recomendo!' },
 ];
+
+// Na página, entrada, para quem é, como usar e para quem não é ficam no bloco "Antes de comprar";
+// as dúvidas mostram só o que complementa. O schema de FAQ continua com todas.
+const MOVIDAS = new Set(['Preciso ter entrada para comprar uma carta contemplada?', 'Para quem é a carta contemplada?', 'Como usar uma carta contemplada?', 'Para quem a carta contemplada não é?']);
+export const CARTAS_FAQ = CARTAS_FAQ_COMPLETA.filter((f) => !MOVIDAS.has(f.q));
