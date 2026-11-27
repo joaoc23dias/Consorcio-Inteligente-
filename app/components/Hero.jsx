@@ -24,10 +24,10 @@ const PONTOS = [
 const BRILHOS = [{ x: 1850, y: 1125 }];
 // ordem do pouso: casa, carro, galpão e prédio (o prédio fica na frente)
 const POUSO = [
-  { obj: '/pouso2/casa.webp', sombra: '/pouso2/casa-sombra.webp', reflexo: '/pouso2/casa-reflexo.webp', x: 1180, y: 711, w: 334, h: 253, ponto: 0 },
-  { obj: '/pouso2/carro.webp', sombra: '/pouso2/carro-sombra.webp', reflexo: '/pouso2/carro-reflexo.webp', x: 1567, y: 814, w: 341, h: 191, ponto: 2 },
-  { obj: '/pouso2/galpao.webp', sombra: '/pouso2/galpao-sombra.webp', reflexo: '/pouso2/galpao-reflexo.webp', x: 1891, y: 840, w: 419, h: 278, ponto: 3 },
-  { obj: '/pouso2/predio.webp', sombra: '/pouso2/predio-sombra.webp', reflexo: '/pouso2/predio-reflexo.webp', x: 1383, y: 833, w: 281, h: 342, ponto: 1 },
+  { obj: '/pouso2/casa.webp', sombra: '/pouso2/casa-sombra.webp', reflexo: '/pouso2/casa-reflexo.webp', x: 1180, y: 711, w: 334, h: 289, ponto: 0 },
+  { obj: '/pouso2/carro.webp', sombra: '/pouso2/carro-sombra.webp', reflexo: '/pouso2/carro-reflexo.webp', x: 1567, y: 814, w: 341, h: 214, ponto: 2 },
+  { obj: '/pouso2/galpao.webp', sombra: '/pouso2/galpao-sombra.webp', reflexo: '/pouso2/galpao-reflexo.webp', x: 1891, y: 840, w: 419, h: 319, ponto: 3 },
+  { obj: '/pouso2/predio.webp', sombra: '/pouso2/predio-sombra.webp', reflexo: '/pouso2/predio-reflexo.webp', x: 1383, y: 833, w: 281, h: 391, ponto: 1 },
 ];
 
 // Antes de a página aparecer: os bens viram peças soltas sobre a mesa (ci-bens) e o pouso roda na primeira visita.
