@@ -1233,3 +1233,5 @@ summary::after { color: var(--green); }
   .mesa .cena { --ox: .85 !important; --oy: .3 !important; }
   .mesa .cena-veu { background: linear-gradient(180deg, #0B1524 0%, rgba(11,21,36,0) 18%, rgba(11,21,36,0) 82%, rgba(11,21,36,.55) 100%); }
 }
+/* telas largas: o topo ganha altura para caber o rosto e o prédio da frente */
+@media (min-width: 1500px) { .mesa { min-height: min(calc(100dvh - 72px), 54vw); } }
