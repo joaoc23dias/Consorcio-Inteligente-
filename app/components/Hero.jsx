@@ -16,18 +16,18 @@ const CAMINHOS = [
   { id: 'galpao', d: 'M1860 1100 L2018 1028', dur: 3 },
 ];
 const PONTOS = [
-  { x: 1340, y: 720, rotulo: 'Imóvel', sub: 'Casa ou apartamento', caminhos: ['chave', 'base', 'casa'], halo: { y: 800, rx: 240, ry: 110 }, lado: 'esq' },
-  { x: 1421, y: 920, rotulo: 'Investimento imobiliário', sub: 'Comercial ou para locação', caminhos: ['chave', 'base'], halo: { y: 1050, rx: 150, ry: 170 }, lado: 'dir' },
-  { x: 1740, y: 840, rotulo: 'Veículo', sub: 'Carro, moto ou frota', caminhos: ['chave', 'base'], halo: { y: 870, rx: 210, ry: 80 }, lado: 'dir' },
-  { x: 2100, y: 880, rotulo: 'Para a empresa', sub: 'Cresça sem tirar dinheiro do caixa', caminhos: ['chave', 'galpao'], halo: { y: 930, rx: 280, ry: 130 }, lado: 'esq' },
+  { x: 1346, y: 700, rotulo: 'Imóvel', sub: 'Casa ou apartamento', caminhos: ['chave', 'base', 'casa'], halo: { y: 780, rx: 190, ry: 90 }, lado: 'esq' },
+  { x: 1411, y: 890, rotulo: 'Investimento imobiliário', sub: 'Comercial ou para locação', caminhos: ['chave', 'base'], halo: { y: 1020, rx: 120, ry: 140 }, lado: 'dir' },
+  { x: 1743, y: 800, rotulo: 'Veículo', sub: 'Carro, moto ou frota', caminhos: ['chave', 'base'], halo: { y: 880, rx: 170, ry: 65 }, lado: 'dir' },
+  { x: 2111, y: 840, rotulo: 'Para a empresa', sub: 'Cresça sem tirar dinheiro do caixa', caminhos: ['chave', 'galpao'], halo: { y: 955, rx: 220, ry: 105 }, lado: 'esq' },
 ];
 const BRILHOS = [{ x: 1850, y: 1125 }];
 // ordem do pouso: casa, carro, galpão e prédio (o prédio fica na frente)
 const POUSO = [
-  { obj: '/pouso2/casa.webp', sombra: '/pouso2/casa-sombra.webp', x: 1138, y: 662, w: 415, h: 243, ponto: 0 },
-  { obj: '/pouso2/carro.webp', sombra: '/pouso2/carro-sombra.webp', x: 1531, y: 776, w: 419, h: 185, ponto: 2 },
-  { obj: '/pouso2/galpao.webp', sombra: '/pouso2/galpao-sombra.webp', x: 1844, y: 785, w: 516, h: 287, ponto: 3 },
-  { obj: '/pouso2/predio.webp', sombra: '/pouso2/predio-sombra.webp', x: 1240, y: 861, w: 362, h: 342, ponto: 1 },
+  { obj: '/pouso2/casa.webp', sombra: '/pouso2/casa-sombra.webp', x: 1180, y: 712, w: 334, h: 191, ponto: 0 },
+  { obj: '/pouso2/carro.webp', sombra: '/pouso2/carro-sombra.webp', x: 1567, y: 815, w: 341, h: 150, ponto: 2 },
+  { obj: '/pouso2/galpao.webp', sombra: '/pouso2/galpao-sombra.webp', x: 1891, y: 840, w: 419, h: 228, ponto: 3 },
+  { obj: '/pouso2/predio.webp', sombra: '/pouso2/predio-sombra.webp', x: 1281, y: 896, w: 264, h: 258, ponto: 1 },
 ];
 
 // Decide antes de a página aparecer se o pouso roda (primeira visita, sem movimento reduzido).
