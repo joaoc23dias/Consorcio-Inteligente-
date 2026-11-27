@@ -1239,3 +1239,18 @@ summary::after { color: var(--green); }
 /* telas largas: o topo ganha altura para caber o rosto e o prédio da frente */
 @media (min-width: 1500px) { .mesa { min-height: min(calc(100dvh - 72px), 54vw); } }
 .ci-pouso.ci-pouso-curto .cena-final { transition: opacity .35s var(--ease); }
+/* bens como peças soltas sobre a mesa: com JS, a imagem montada sai e os recortes ficam,
+   para cada bem poder subir quando o cursor passa ou quando a mesa se apresenta sozinha */
+.ci-bens .cena-bem img { display: block; }
+.ci-bens .cena-final { opacity: 0 !important; transition: none !important; }
+.cena-bem .cena-bem-obj, .cena-bem .cena-bem-sombra { transition: transform .5s cubic-bezier(.2, .8, .2, 1), opacity .5s cubic-bezier(.2, .8, .2, 1); }
+.cena-bem .cena-bem-sombra { transform-origin: 50% 85%; }
+.cena-bem.erguido .cena-bem-obj { transform: translateY(-7%); }
+.cena-bem.erguido .cena-bem-sombra { transform: scale(1.05); opacity: .62; }
+.ci-pouso .cena-bem.erguido .cena-bem-obj, .ci-pouso .cena-bem.erguido .cena-bem-sombra { transform: none; opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .cena-bem.erguido .cena-bem-obj, .cena-bem.erguido .cena-bem-sombra { transform: none; opacity: 1; } }
+/* celular: a legenda aparece compacta, só com o nome do bem */
+@media (max-width: 960px) {
+  .mesa .cena-rotulo { display: flex; padding: 6px 10px; }
+  .mesa .cena-rotulo b { font-size: 12px; }
+}

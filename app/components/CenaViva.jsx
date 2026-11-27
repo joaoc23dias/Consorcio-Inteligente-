@@ -78,7 +78,8 @@ export default function CenaViva({
     let visivel = true;
     let raf = 0;
     let atual = -1;
-    let ciclo = 0;
+    let ciclo = -2;
+    let paradoDesde = 0;
 
     const mudaAtivo = (i) => { if (i !== atual) { atual = i; setAtivo(i); } };
 
@@ -96,9 +97,17 @@ export default function CenaViva({
       t.lx = (e.clientX - rc.left) / rc.width;
       t.ly = (e.clientY - rc.top) / rc.height;
       ultimoMouse = performance.now();
-      // o ponto mais próximo do cursor acende
+      // o bem sob o cursor sobe; fora deles, acende o ponto mais próximo
       let melhor = -1, dist = raio;
-      pontos.forEach((p, i) => {
+      if (pouso) {
+        const r = palco.current.getBoundingClientRect();
+        pouso.forEach((c) => {
+          const x0 = r.left + (c.x / w) * r.width, y0 = r.top + (c.y / h) * r.height;
+          const x1 = x0 + (c.w / w) * r.width, y1 = y0 + (c.h / h) * r.height;
+          if (e.clientX >= x0 && e.clientX <= x1 && e.clientY >= y0 && e.clientY <= y1) { melhor = c.ponto; dist = -1; }
+        });
+      }
+      if (dist >= 0) pontos.forEach((p, i) => {
         const [px, py] = posPonto(p);
         const d = Math.hypot(e.clientX - px, e.clientY - py);
         if (d < dist) { dist = d; melhor = i; }
@@ -135,18 +144,23 @@ export default function CenaViva({
     }, { threshold: 0.02 });
     io.observe(el);
 
-    const inicio = performance.now();
     function quadro(now) {
       raf = 0;
       if (!visivel) return;
       const parado = now - ultimoMouse > 2600 && now > introAte.current;
+      if (parado && !paradoDesde) paradoDesde = now;
+      if (!parado) paradoDesde = 0;
       if (parado && pontos.length) {
-        // apresentação automática: a luz visita cada ponto
-        const k = Math.floor((now - inicio) / 3200) % pontos.length;
-        if (k !== ciclo || atual === -1) { ciclo = k; mudaAtivo(k); }
-        const r = el.getBoundingClientRect();
-        const [px, py] = posPonto(pontos[k]);
-        t.lx = (px - r.left) / r.width; t.ly = (py - r.top) / r.height;
+        // apresentação automática: cada bem sobe, mostra a legenda e desce; depois a mesa descansa
+        const n = pontos.length, VEZ = 3200, ERGUIDO = 2600, PAUSA = 10000;
+        const tt = (now - paradoDesde) % (n * VEZ + PAUSA);
+        const k = tt < n * VEZ && tt % VEZ < ERGUIDO ? Math.floor(tt / VEZ) : -1;
+        if (k !== ciclo) { ciclo = k; mudaAtivo(k); }
+        if (k >= 0) {
+          const r = el.getBoundingClientRect();
+          const [px, py] = posPonto(pontos[k]);
+          t.lx = (px - r.left) / r.width; t.ly = (py - r.top) / r.height;
+        }
         t.x = Math.sin(now / 5200) * 0.35; t.y = Math.cos(now / 6100) * 0.25;
       }
       const e = 0.06;
@@ -183,7 +197,7 @@ export default function CenaViva({
       sec.removeEventListener('pointerleave', sair);
       ro.disconnect(); io.disconnect();
     };
-  }, [alvo, pontos, w, h, raio]);
+  }, [alvo, pontos, pouso, w, h, raio]);
 
   // vídeo em loop por cima da imagem: entra só quando já pode tocar,
   // escolhe o arquivo leve no celular e fica parado com movimento reduzido ou economia de dados
@@ -212,7 +226,7 @@ export default function CenaViva({
         {pouso && pouso.map((c, i) => {
           const pos = { left: `${(c.x / w) * 100}%`, top: `${(c.y / h) * 100}%`, width: `${(c.w / w) * 100}%`, height: `${(c.h / h) * 100}%`, '--i': i };
           return (
-            <span key={c.obj} className="cena-bem">
+            <span key={c.obj} className={`cena-bem${ativo === c.ponto ? ' erguido' : ''}`}>
               <img className="cena-bem-sombra" src={c.sombra} alt="" style={pos} />
               <img className="cena-bem-obj" src={c.obj} alt="" style={pos} />
             </span>
