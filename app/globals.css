@@ -1543,3 +1543,26 @@ summary::after { color: var(--green); }
   .sb-topo-texto { padding-bottom: 96px; }
   .sb-retrato { max-height: none; }
 }
+
+/* "Responda 5 perguntas": progresso no friso dourado, como no resto do site */
+.pres-camadas { position: relative; display: flex; justify-content: space-between; align-items: center; gap: 0; padding: 0; margin: 4px 24px 0; height: 18px; }
+.pres-camadas .pres-friso { position: absolute; left: 5px; right: 5px; top: 50%; height: 1px; background: rgba(214,175,97,.22); overflow: hidden; }
+.pres-camadas .pres-friso::before { content: ''; position: absolute; inset: 0; transform-origin: left; transform: scaleX(var(--feito)); background: linear-gradient(90deg, rgba(214,175,97,.55), var(--gold-light)); transition: transform .8s cubic-bezier(.2, .8, .2, 1); }
+.pres-friso-luz { position: absolute; top: -1px; bottom: -1px; width: 26%; left: -26%; background: linear-gradient(90deg, transparent, #F3D9A0, transparent); filter: drop-shadow(0 0 6px rgba(243,217,160,.9)); animation: friso-corre 1.3s cubic-bezier(.45, .05, .35, 1) both; }
+.pres:not(.pres-iniciado) .pres-friso-luz { animation-delay: 1.2s; animation-iteration-count: infinite; animation-duration: 4.5s; }
+.pres-camadas i { position: relative; flex: none; width: 9px; height: 9px; border-radius: 50%; background: #0B1524; border: 1px solid rgba(214,175,97,.55); transition: background .5s var(--ease), box-shadow .5s var(--ease), transform .5s var(--ease); }
+.pres-camadas i.on { background: var(--gold-light); border-color: var(--gold-light); box-shadow: 0 0 0 4px rgba(214,175,97,.16), 0 0 12px rgba(214,175,97,.55); transform: scale(1.1); }
+.pres-camadas.lacrada i { background: var(--gold-light); box-shadow: 0 0 0 5px rgba(214,175,97,.2), 0 0 16px rgba(214,175,97,.7); }
+.pres-peca .pe { padding-top: 14px; }
+.pres-peca header b { font-weight: 600; }
+.pres-peca .n { margin-left: 6px; color: var(--gold-light); }
+.pres { padding-bottom: 0; }
+@media (prefers-reduced-motion: reduce) { .pres-friso-luz { animation: none; display: none; } .pres-camadas .pres-friso::before { transition: none; } }
+.pres-seg { background: radial-gradient(circle at 50% 40%, #FBF6EA, #F1E6CC); color: #6B5122; box-shadow: 0 0 0 6px rgba(214,175,97,.12), 0 10px 30px rgba(138,106,47,.18); }
+.pres-seg .tr { stroke: rgba(214,175,97,.45); }
+@media (prefers-reduced-motion: no-preference) { .pres-segurar .pres-seg { animation: seg-pulsa 2.4s ease-in-out infinite; } @keyframes seg-pulsa { 50% { box-shadow: 0 0 0 12px rgba(214,175,97,.08), 0 10px 30px rgba(138,106,47,.18); } } }
+.pres + .sec { padding-top: 80px; }
+@media (max-width: 960px) {
+  .pres-peca .pres-prep { display: none; }
+  .pres + .sec { padding-top: 56px; }
+}

@@ -12,6 +12,7 @@ import { PERGUNTAS, codifica } from '../raiox';
 const PREVIA = true;
 
 const SIM = '0123456789ABCDEF#%&▒░';
+const HEX = '0123456789ABCDEF';
 const OBJ = { imovel: 'o imóvel para morar', renda: 'o imóvel para gerar renda', terreno: 'o terreno', veiculo: 'o veículo', empresa: 'o que você quer para a empresa', decidir: 'o que você ainda está decidindo' };
 const TEMPO = { ja: 'a sua vontade de ter o crédito logo', '12m': 'o prazo de 12 meses que você quer', '3a': 'o seu horizonte de 1 a 3 anos', plano: 'a sua disposição de planejar sem pressa' };
 const analise = (r) => `Analisei as suas cinco respostas. Para ${OBJ[r.obj]}, o que mais chamou atenção foi ${TEMPO[r.tempo]} combinado com o que cabe no seu mês. Essa combinação muda a ordem certa das decisões, e é exatamente aqui que a maioria erra quando`;
@@ -48,7 +49,7 @@ function criaPeca(cv, palco, calmo) {
   [0.42, 0.34, 0.26, 0.18, 0.1].forEach((y, i) => { const L = [0.95, 0.7, 0.85, 0.55, 0.75][i]; aresta([-X + 0.14, y, FZ], [-X + 0.14 + L, y, FZ], Math.round(L * 40), i + 1); });
   const nomeIni = P.length;
 
-  const st = { ang: -0.55, angAlvo: null, incl: 0.12, arrasto: false, ux: 0, brilho: 0, envio: 0, lacrado: false, pairar: 0 };
+  const st = { ang: -0.55, angAlvo: null, incl: 0.12, arrasto: false, ux: 0, brilho: 0, envio: 0, lacrado: false, pairar: 0, fantasma: 1 };
   const onDown = (e) => { st.arrasto = true; st.ux = e.clientX; palco.setPointerCapture(e.pointerId); };
   const onMove = (e) => {
     const r = palco.getBoundingClientRect(); st.incl = 0.12 + ((e.clientY - r.top) / r.height - 0.5) * 0.35; st.pairar = 1;
@@ -80,6 +81,28 @@ function criaPeca(cv, palco, calmo) {
       ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
     }
     ctx.globalCompositeOperation = 'lighter';
+    // antes de começar: o contorno do documento lacrado aparece em partículas, respirando devagar
+    if (st.fantasma > 0.01) {
+      const resp = calmo ? 1 : 0.75 + 0.25 * Math.sin(tt * 1.3);
+      for (let i = 0; i < nomeIni; i++) {
+        const p = P[i];
+        if (p.t0 < Infinity) continue;
+        const [px, py, rz] = proj(p.t[0], p.t[1] + (calmo ? 0 : Math.sin(tt * 0.9 + p.t[0] * 2) * 0.012), p.t[2]);
+        const ouro = p.cor === 'ouro';
+        const [r, g, b] = ouro ? COR.ouro : COR.ice;
+        let a = (ouro ? 0.85 : p.camada === 0 ? 0.7 : 0.38) * resp * st.fantasma;
+        if (ouro && !calmo) a *= 0.8 + 0.35 * Math.sin(tt * 2 - p.t[1] * 6);
+        a *= Math.max(0.4, Math.min(1, 1.1 + rz * 0.45));
+        ctx.fillStyle = `rgba(${r},${g},${b},${a})`;
+        const sz = (ouro ? 1.9 : 1.6) * DPR; ctx.fillRect(px - sz / 2, py - sz / 2, sz, sz);
+      }
+      if (st.fantasma === 1) {
+        const g2 = ctx.createRadialGradient(sx0, sy0, 0, sx0, sy0, esc * 0.6);
+        g2.addColorStop(0, `rgba(214,175,97,${0.1 * resp})`); g2.addColorStop(1, 'rgba(214,175,97,0)');
+        ctx.fillStyle = g2; ctx.fillRect(0, 0, W, H);
+      }
+    }
+    if (st.fantasma < 1) st.fantasma *= 0.985;
     for (const p of P) {
       const k = calmo ? (p.t0 < Infinity ? 1 : 0) : Math.max(0, Math.min(1, (t - p.t0) / 1100)), e = eas(k);
       const ca = tt * 0.12 + p.c[1];
@@ -89,7 +112,7 @@ function criaPeca(cv, palco, calmo) {
       if (st.envio > 0) { const s = st.envio * (0.6 + (((p.c[0] * 997) % 1) + 1) % 1 * 1.4); y += s * s * 1.6; }
       const [px, py, rz] = proj(x, y, z);
       const [r, g, b] = e > 0.5 ? COR[p.cor] : COR.ice;
-      let a = e > 0 ? 0.25 + 0.75 * e : 0.16 + st.pairar * 0.06;
+      let a = e > 0 ? 0.25 + 0.75 * e : (0.16 + st.pairar * 0.06) * (st.fantasma === 1 ? 0.45 : 1);
       if (p.cor === 'ouro' && e > 0.5) a = Math.min(1, a * (0.85 + st.brilho * 0.6 + (st.lacrado ? 0.15 * Math.sin(tt * 2.2 + p.t[0] * 9) : 0)));
       if (st.envio > 0) a *= Math.max(0, 1 - st.envio * 1.1);
       a *= Math.max(0.35, Math.min(1, 1.1 + rz * 0.45));
@@ -102,7 +125,7 @@ function criaPeca(cv, palco, calmo) {
   raf = requestAnimationFrame(quadro);
 
   return {
-    camada(c) { const agora = performance.now(); P.forEach((p) => { if (p.camada === c && p.t0 === Infinity) p.t0 = agora + Math.random() * (calmo ? 0 : 700); }); st.brilho = Math.max(st.brilho, 0.6); },
+    camada(c) { if (st.fantasma === 1) st.fantasma = 0.98; const agora = performance.now(); P.forEach((p) => { if (p.camada === c && p.t0 === Infinity) p.t0 = agora + Math.random() * (calmo ? 0 : 700); }); st.brilho = Math.max(st.brilho, 0.6); },
     brilho(v) { st.brilho = Math.max(st.brilho, v); },
     lacra() { st.lacrado = true; st.brilho = 1; },
     nome(nome) {
@@ -131,7 +154,7 @@ export default function EstrategiaPresente() {
   const [fase, setFase] = useState('abertura');
   const [passo, setPasso] = useState(0);
   const [resp, setResp] = useState({});
-  const [serie, setSerie] = useState('▒▒▒▒');
+  const [serie, setSerie] = useState('0000');
   const [estado, setEstado] = useState('aguardando as suas respostas');
   const [nome, setNome] = useState('');
   const [erro, setErro] = useState('');
@@ -149,7 +172,7 @@ export default function EstrategiaPresente() {
   // número de série embaralhado até o lacre
   useEffect(() => {
     if (fase !== 'abertura' && fase !== 'pergunta' && fase !== 'segurar') return;
-    const it = setInterval(() => setSerie(Array.from({ length: 4 }, () => SIM[(Math.random() * SIM.length) | 0]).join('')), 120);
+    const it = setInterval(() => setSerie(Array.from({ length: 4 }, () => HEX[(Math.random() * HEX.length) | 0]).join('')), 120);
     return () => clearInterval(it);
   }, [fase]);
 
@@ -298,9 +321,12 @@ export default function EstrategiaPresente() {
             )}
           </div>
           <aside className="pres-peca" aria-label="A peça sendo montada com as suas respostas">
-            <header><b>Peça nº <span className="n">{serie}</span></b><span className="est-l">{estado}</span><span className="est-c" aria-hidden="true">{curto(estado)}</span></header>
+            <header><b><span className="pres-prep">Preparado para você</span> <span className="n">nº {serie}</span></b><span className="est-l">{estado}</span><span className="est-c" aria-hidden="true">{curto(estado)}</span></header>
             <div className="pres-palco" ref={palcoRef}><canvas ref={cvRef} role="img" aria-label="Uma peça lacrada que ganha uma camada a cada resposta. Arraste para girar." /></div>
-            <div className="pres-camadas" aria-hidden="true">{[1, 2, 3, 4, 5].map((n) => <i key={n} className={`${Object.keys(resp).length >= n ? 'on' : ''}${fase !== 'abertura' && fase !== 'pergunta' && fase !== 'segurar' ? ' ouro' : ''}`} />)}</div>
+            <div className={`pres-camadas${fase !== 'abertura' && fase !== 'pergunta' && fase !== 'segurar' ? ' lacrada' : ''}`} aria-hidden="true" style={{ '--feito': Object.keys(resp).length / 5 }}>
+              <span className="pres-friso"><span key={Object.keys(resp).length} className="pres-friso-luz" /></span>
+              {[1, 2, 3, 4, 5].map((n) => <i key={n} className={Object.keys(resp).length >= n ? 'on' : ''} />)}
+            </div>
             <p className="pe">O conteúdo só existe depois das suas respostas e só abre no seu e-mail.</p>
           </aside>
         </div>
