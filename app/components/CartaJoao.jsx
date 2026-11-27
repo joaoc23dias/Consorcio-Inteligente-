@@ -1,3 +1,4 @@
+import Image from 'next/image';
 // Bloco 6 do início: carta curta do João, em primeira pessoa.
 // Texto em aprovação: alterar aqui quando o João revisar.
 const PARAGRAFOS = [
@@ -11,6 +12,10 @@ export default function CartaJoao() {
   return (
     <section id="carta" className="sec carta" aria-labelledby="carta-titulo">
       <div className="wrap">
+        <div className="carta-grade">
+        <figure className="carta-foto">
+          <Image src="/joao-dias-escritorio.webp" alt="João Dias no escritório" width={900} height={1125} sizes="(max-width: 900px) 90vw, 420px" />
+        </figure>
         <article className="carta-papel">
           <h2 id="carta-titulo" className="h2">Antes da nossa conversa.</h2>
           {PARAGRAFOS.map((p) => <p key={p.slice(0, 24)}>{p}</p>)}
@@ -20,6 +25,7 @@ export default function CartaJoao() {
             <time dateTime="2026-11">Novembro de 2026</time>
           </footer>
         </article>
+        </div>
       </div>
     </section>
   );

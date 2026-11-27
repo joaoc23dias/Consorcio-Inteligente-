@@ -1212,3 +1212,15 @@ summary::after { color: var(--green); }
   -webkit-mask: url(/joao-dias-recorte.webp) center / 100% 100% no-repeat; mask: url(/joao-dias-recorte.webp) center / 100% 100% no-repeat;
   mix-blend-mode: soft-light;
 }
+/* topo: nova foto, já com luz quente; só a sombra sobre a mesa */
+.mesa-joao img { filter: brightness(.97) contrast(1.02) drop-shadow(22px 26px 34px rgba(4,8,16,.5)); }
+.mesa-joao::after { display: none; }
+/* Carta do João com a foto do escritório */
+.carta-grade { display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 680px); gap: 64px; justify-content: center; align-items: start; }
+.carta-grade .carta-papel { margin: 0; }
+.carta-foto { position: sticky; top: 110px; margin: 0; overflow: hidden; border-radius: var(--raio); box-shadow: 0 30px 60px -30px rgba(11,21,36,.45); }
+.carta-foto img { display: block; width: 100%; height: auto; }
+@media (max-width: 900px) {
+  .carta-grade { grid-template-columns: 1fr; gap: 32px; }
+  .carta-foto { position: relative; top: 0; max-width: 420px; }
+}

@@ -59,7 +59,7 @@ export default function Hero() {
           </div>
         </div>
         <figure className="mesa-joao">
-          <Image src="/joao-dias-recorte.webp" alt="João Dias, especialista em planejamento patrimonial" width={912} height={912} priority sizes="(max-width: 960px) 80vw, 340px" />
+          <Image src="/joao-dias-topo.webp" alt="João Dias, especialista em planejamento patrimonial" width={1024} height={1024} priority sizes="(max-width: 960px) 80vw, 340px" />
         </figure>
       </div>
     </section>
