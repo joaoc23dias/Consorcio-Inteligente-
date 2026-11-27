@@ -11,6 +11,7 @@ import Image from 'next/image';
 export default function CenaViva({
   src, alt = '', w, h, origem = [0.5, 0.5], alvo = 'section',
   caminhos = [], pontos = [], brilhos = [], prioridade = false, sizes = '100vw', raio = 150, video = null,
+  final = null, pouso = null,
 }) {
   const raiz = useRef(null);
   const palco = useRef(null);
@@ -19,6 +20,26 @@ export default function CenaViva({
   const filme = useRef(null);
   const [rodando, setRodando] = useState(false);
   const uid = useId().replace(/:/g, '');
+  // pouso: os bens descem um a um sobre a mesa vazia, só na primeira visita da sessão
+  const [fasePouso, setFasePouso] = useState('feito');
+  const introAte = useRef(0);
+
+  useEffect(() => {
+    if (!pouso || !final) return;
+    const calmo = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let visto = false;
+    try { visto = sessionStorage.getItem('ci_pouso') === '1'; } catch { /* armazenamento bloqueado */ }
+    if (calmo || visto) return;
+    try { sessionStorage.setItem('ci_pouso', '1'); } catch { /* segue sem lembrar */ }
+    const INI = 450, PASSO = 620, DUR = 950;
+    const total = INI + PASSO * (pouso.length - 1) + DUR + 500;
+    introAte.current = performance.now() + total + 900;
+    setFasePouso('rodando');
+    const ts = pouso.map((c, i) => setTimeout(() => setAtivo(c.ponto), INI + PASSO * i + DUR * 0.75));
+    ts.push(setTimeout(() => { setAtivo(-1); setFasePouso('fechando'); }, total));
+    ts.push(setTimeout(() => setFasePouso('feito'), total + 900));
+    return () => ts.forEach(clearTimeout);
+  }, [pouso, final]);
 
   useEffect(() => {
     const el = raiz.current;
@@ -95,7 +116,7 @@ export default function CenaViva({
     function quadro(now) {
       raf = 0;
       if (!visivel) return;
-      const parado = now - ultimoMouse > 2600;
+      const parado = now - ultimoMouse > 2600 && now > introAte.current;
       if (parado && pontos.length) {
         // apresentação automática: a luz visita cada ponto
         const k = Math.floor((now - inicio) / 3200) % pontos.length;
@@ -165,6 +186,18 @@ export default function CenaViva({
       style={{ '--ar': w / h, '--ox': origem[0], '--oy': origem[1] }}>
       <div ref={palco} className="cena-palco">
         <Image src={src} alt={alt} fill priority={prioridade} sizes={sizes} style={{ objectFit: 'cover' }} />
+        {pouso && fasePouso !== 'feito' && pouso.map((c, i) => {
+          const pos = { left: `${(c.x / w) * 100}%`, top: `${(c.y / h) * 100}%`, width: `${(c.w / w) * 100}%`, height: `${(c.h / h) * 100}%`, animationDelay: `${450 + 620 * i}ms` };
+          return (
+            <span key={c.obj} className="cena-bem">
+              <img className="cena-bem-sombra" src={c.sombra} alt="" style={pos} />
+              <img className="cena-bem-obj" src={c.obj} alt="" style={pos} />
+            </span>
+          );
+        })}
+        {final && (
+          <Image src={final} alt="" fill priority={prioridade} sizes={sizes} className={`cena-final${fasePouso === 'rodando' ? ' oculta' : ''}`} style={{ objectFit: 'cover' }} />
+        )}
         {video && (
           <video ref={filme} className="cena-video" muted loop playsInline preload="none" tabIndex={-1}
             style={{ top: `${video.topo}%`, height: `${video.altura}%` }} />
