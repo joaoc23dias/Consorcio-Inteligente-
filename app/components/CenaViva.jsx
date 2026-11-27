@@ -28,14 +28,40 @@ export default function CenaViva({
 
   useEffect(() => {
     const raizHtml = document.documentElement;
-    if (!pouso || !final || !raizHtml.classList.contains('ci-pouso')) return;
-    const INI = 450, PASSO = 620, DUR = 950;
-    const total = INI + PASSO * (pouso.length - 1) + DUR + 450;
-    introAte.current = performance.now() + total + 1200;
-    const ts = pouso.map((c, i) => setTimeout(() => setLuz(c.ponto), INI + PASSO * i + DUR * 0.7));
-    ts.push(setTimeout(() => { setLuz(-1); raizHtml.classList.add('ci-pouso-fim'); }, total));
-    ts.push(setTimeout(() => raizHtml.classList.remove('ci-pouso', 'ci-pouso-fim'), total + 950));
-    return () => { ts.forEach(clearTimeout); raizHtml.classList.remove('ci-pouso', 'ci-pouso-fim'); };
+    if (!pouso || !final) return;
+    // completo: primeira visita da sessão. curto: volta ao topo depois de ler o site por um tempo.
+    const TEMPOS = { completo: [450, 1100, 1400], curto: [100, 380, 900] };
+    let ts = [];
+    const limpa = () => { ts.forEach(clearTimeout); ts = []; };
+    const roda = (modo) => {
+      limpa();
+      const [INI, PASSO, DUR] = TEMPOS[modo];
+      const total = INI + PASSO * (pouso.length - 1) + DUR + 300;
+      introAte.current = performance.now() + total + 1200;
+      ts = pouso.map((c, i) => setTimeout(() => setLuz(c.ponto), INI + PASSO * i + DUR * 0.75));
+      ts.push(setTimeout(() => { setLuz(-1); raizHtml.classList.add('ci-pouso-fim'); }, total));
+      ts.push(setTimeout(() => raizHtml.classList.remove('ci-pouso', 'ci-pouso-curto', 'ci-pouso-fim'), total + 950));
+    };
+    if (raizHtml.classList.contains('ci-pouso')) roda('completo');
+
+    // repetição: só se a pessoa saiu do topo por pelo menos 30 s e voltou
+    const calmo = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const sec = raiz.current?.closest('section');
+    let saiu = 0;
+    let io;
+    if (!calmo && sec) {
+      io = new IntersectionObserver(([en]) => {
+        if (!en.isIntersecting) { saiu = performance.now(); return; }
+        if (en.intersectionRatio < 0.5 || !saiu) return;
+        const fora = performance.now() - saiu;
+        saiu = 0;
+        if (fora < 30000 || raizHtml.classList.contains('ci-pouso')) return;
+        raizHtml.classList.add('ci-pouso', 'ci-pouso-curto');
+        roda('curto');
+      }, { threshold: [0, 0.5] });
+      io.observe(sec);
+    }
+    return () => { limpa(); io?.disconnect(); raizHtml.classList.remove('ci-pouso', 'ci-pouso-curto', 'ci-pouso-fim'); };
   }, [pouso, final]);
 
   useEffect(() => {
@@ -184,7 +210,7 @@ export default function CenaViva({
       <div ref={palco} className="cena-palco">
         <Image src={src} alt={alt} fill priority={prioridade} sizes={sizes} style={{ objectFit: 'cover' }} />
         {pouso && pouso.map((c, i) => {
-          const pos = { left: `${(c.x / w) * 100}%`, top: `${(c.y / h) * 100}%`, width: `${(c.w / w) * 100}%`, height: `${(c.h / h) * 100}%`, animationDelay: `${450 + 620 * i}ms` };
+          const pos = { left: `${(c.x / w) * 100}%`, top: `${(c.y / h) * 100}%`, width: `${(c.w / w) * 100}%`, height: `${(c.h / h) * 100}%`, '--i': i };
           return (
             <span key={c.obj} className="cena-bem">
               <img className="cena-bem-sombra" src={c.sombra} alt="" style={pos} />

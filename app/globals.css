@@ -1166,9 +1166,12 @@ summary::after { color: var(--green); }
 .ci-pouso .cena-final { opacity: 0; }
 .ci-pouso.ci-pouso-fim .cena-final { opacity: 1; transition: opacity .9s var(--ease); }
 @media (prefers-reduced-motion: no-preference) {
-  .ci-pouso .cena-bem .cena-bem-obj { animation: bem-pousa .95s cubic-bezier(.2, .9, .25, 1.06) both; }
-  .ci-pouso .cena-bem .cena-bem-sombra { animation: bem-sombra .95s cubic-bezier(.3, .7, .3, 1) both; }
-  @keyframes bem-pousa { 0% { opacity: 0; transform: translateY(-42%) scale(1.04); } 35% { opacity: 1; } 100% { opacity: 1; transform: none; } }
+  .ci-pouso { --p-ini: 450ms; --p-passo: 1100ms; --p-dur: 1400ms; --p-alt: -38%; }
+  .ci-pouso.ci-pouso-curto { --p-ini: 100ms; --p-passo: 380ms; --p-dur: 900ms; --p-alt: -16%; }
+  .ci-pouso .cena-bem img { animation-duration: var(--p-dur); animation-delay: calc(var(--p-ini) + var(--p-passo) * var(--i, 0)); animation-fill-mode: both; }
+  .ci-pouso .cena-bem .cena-bem-obj { animation-name: bem-pousa; animation-timing-function: cubic-bezier(.16, .84, .3, 1); }
+  .ci-pouso .cena-bem .cena-bem-sombra { animation-name: bem-sombra; animation-timing-function: cubic-bezier(.3, .7, .3, 1); }
+  @keyframes bem-pousa { 0% { opacity: 0; transform: translateY(var(--p-alt)) scale(1.03); } 30% { opacity: 1; } 100% { opacity: 1; transform: none; } }
   @keyframes bem-sombra { 0% { opacity: 0; transform: scale(.55); } 100% { opacity: 1; transform: none; } }
 }
 /* topo: o patrimônio protagoniza; João assina o texto com um retrato junto à apresentação.
@@ -1235,3 +1238,4 @@ summary::after { color: var(--green); }
 }
 /* telas largas: o topo ganha altura para caber o rosto e o prédio da frente */
 @media (min-width: 1500px) { .mesa { min-height: min(calc(100dvh - 72px), 54vw); } }
+.ci-pouso.ci-pouso-curto .cena-final { transition: opacity .35s var(--ease); }
