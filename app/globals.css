@@ -1171,8 +1171,21 @@ summary::after { color: var(--green); }
   @keyframes bem-pousa { 0% { opacity: 0; transform: translateY(-42%) scale(1.04); } 35% { opacity: 1; } 100% { opacity: 1; transform: none; } }
   @keyframes bem-sombra { 0% { opacity: 0; transform: scale(.55); } 100% { opacity: 1; transform: none; } }
 }
-/* topo no computador: cena deslocada e foto menor à direita, para os quatro bens aparecerem */
+/* topo: o patrimônio protagoniza; João assina o texto com um retrato junto à apresentação.
+   Sem deslize contínuo: só a reação suave ao cursor. */
+.mesa .cena-palco { animation: none !important; translate: none; transform: translate3d(calc(var(--cx, 0) * -14px), calc(var(--cy, 0) * -6px), 0) scale(1.05); }
+.mesa-autor { display: flex; align-items: flex-start; gap: 20px; margin: 0 0 40px; }
+.mesa-autor .mesa-lead { margin: 0; }
+.mesa-retrato { flex: none; width: 96px; height: 96px; margin-top: 4px; border-radius: 50%; overflow: hidden; background: #0E1A2B; border: 1px solid rgba(214,175,97,.75); box-shadow: 0 0 0 5px rgba(11,21,36,.55), 0 18px 40px -16px rgba(0,0,0,.6); }
+.mesa-retrato img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; transform: scale(1.12); transform-origin: 50% 20%; }
+@media (min-width: 961px) { .mesa .cena { --ox: 1 !important; } .mesa-autor .mesa-lead { max-width: 44ch; } }
+@media (max-width: 960px) {
+  .mesa-autor { gap: 14px; margin-bottom: 28px; }
+  .mesa-retrato { width: 72px; height: 72px; }
+}
 @media (min-width: 961px) {
-  .mesa .cena { --ox: 1 !important; }
-  .mesa-joao { justify-self: end; width: min(100%, 350px); margin-right: -40px; }
+  .mesa-autor .mesa-lead { max-width: 40ch; }
+  .mesa .cena-veu { background:
+    linear-gradient(90deg, rgba(11,21,36,.95) 0%, rgba(11,21,36,.9) 34%, rgba(11,21,36,.55) 46%, rgba(11,21,36,.12) 66%, rgba(11,21,36,0) 80%),
+    linear-gradient(0deg, rgba(11,21,36,.8) 0%, rgba(11,21,36,0) 28%); }
 }
