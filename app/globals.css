@@ -1194,3 +1194,6 @@ summary::after { color: var(--green); }
   .mesa-joao { justify-self: start; width: clamp(260px, 22vw, 340px); margin-left: -24px; }
   .mesa-lead { max-width: 46ch; }
 }
+@media (min-width: 961px) {
+  .mesa-joao { margin-left: clamp(-150px, -8vw, -80px); }
+}
