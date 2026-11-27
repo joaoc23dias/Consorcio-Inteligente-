@@ -1224,3 +1224,12 @@ summary::after { color: var(--green); }
   .carta-grade { grid-template-columns: 1fr; gap: 32px; }
   .carta-foto { position: relative; top: 0; max-width: 420px; }
 }
+
+/* Topo com João sentado à mesa: no celular a cena vem inteira abaixo do texto, sem véu escuro por cima */
+@media (max-width: 960px) {
+  .mesa { flex-direction: column; }
+  .mesa-grade { order: 1; }
+  .mesa-fundo { position: relative; inset: auto; order: 2; width: 100%; aspect-ratio: 16 / 11; margin-top: 8px; }
+  .mesa .cena { --ox: .85 !important; --oy: .3 !important; }
+  .mesa .cena-veu { background: linear-gradient(180deg, #0B1524 0%, rgba(11,21,36,0) 18%, rgba(11,21,36,0) 82%, rgba(11,21,36,.55) 100%); }
+}
