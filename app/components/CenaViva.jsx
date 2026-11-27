@@ -281,10 +281,10 @@ export default function CenaViva({
       <div className="cena-palco cena-camada">
         {pontos.map((p, i) => (
           p.href ? (
-            <a key={`r${i}`} href={p.href} tabIndex={-1} className={`cena-rotulo cena-pergunta${ativo === i ? ' on' : ''}${p.lado ? ` ${p.lado}` : ''}`}
+            <a key={`r${i}`} href={p.href} tabIndex={-1} className={`cena-pergunta${ativo === i ? ' on' : ''}`}
               style={{ left: `${(p.x / w) * 100}%`, top: `${(p.y / h) * 100}%` }}>
-              <b>{p.rotulo}</b>
-              {p.sub && <small>{p.sub}</small>}
+              <i className="cp-ponto" aria-hidden="true" />
+              <span className="cp-caixa">{p.rotulo}<span className="cp-seta" aria-hidden="true">→</span></span>
             </a>
           ) : (
           <span key={`r${i}`} className={`cena-rotulo${ativo === i ? ' on' : ''}${p.lado ? ` ${p.lado}` : ''}`}

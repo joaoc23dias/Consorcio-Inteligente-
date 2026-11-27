@@ -10,8 +10,8 @@ const CAPA = '/cartas-chave.webp';
 // Coordenadas na imagem original (1376 x 676).
 const CAPA_CAMINHOS = [{ id: 'linha', d: 'M60 684 L726 551 L760 545', dur: 3.4 }];
 const CAPA_PONTOS = [
-  { x: 925, y: 300, rotulo: 'O que saber antes de comprar', sub: 'Entrada, saldo e análise', caminhos: ['linha'], halo: { y: 300, rx: 150, ry: 130 }, href: '#antes' },
-  { x: 850, y: 500, rotulo: 'A carta contemplada é para mim?', sub: 'Veja em 30 segundos', caminhos: ['linha'], halo: { y: 515, rx: 230, ry: 80 }, lado: 'dir', href: '#para-mim' },
+  { x: 944, y: 274, rotulo: 'O que saber antes de comprar', caminhos: ['linha'], halo: { y: 300, rx: 150, ry: 130 }, href: '#antes' },
+  { x: 935, y: 488, rotulo: 'A carta contemplada é para mim?', caminhos: ['linha'], halo: { y: 515, rx: 230, ry: 80 }, href: '#para-mim' },
 ];
 const CAPA_BRILHOS = [{ x: 925, y: 272, ponto: 0 }, { x: 928, y: 345 }];
 
@@ -36,7 +36,7 @@ export function CartasTopo() {
           </p>
           <div className="mesa-ctas">
             <a href="#para-mim" className="btn btn-pri" onClick={() => track('cartas_topo', { lado: 'para-mim' })}>A carta contemplada é para mim?</a>
-            <a href="#antes" className="mesa-link" onClick={() => track('cartas_topo', { lado: 'antes' })}>O que saber antes de comprar</a>
+            <a href="#antes" className="mesa-link cartas-so-movel" onClick={() => track('cartas_topo', { lado: 'antes' })}>O que saber antes de comprar</a>
           </div>
           <p className="cartas-atalho">Já decidiu? <a href="#comprar" onClick={() => track('cartas_topo', { lado: 'comprar' })}>Quero comprar</a> <span aria-hidden="true">·</span> <a href="#vender" onClick={() => track('cartas_topo', { lado: 'vender' })}>Quero vender a minha carta</a></p>
         </div>

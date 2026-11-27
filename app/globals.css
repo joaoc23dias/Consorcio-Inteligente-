@@ -1660,3 +1660,18 @@ html { scroll-behavior: smooth; }
 .cartas-topo .mesa-grade { pointer-events: none; }
 .cartas-topo .mesa-texto { pointer-events: auto; }
 .ca-lado { display: flex; flex-direction: column; } .ca-nao .ca-link { align-self: flex-start; margin-top: auto; padding-top: 18px; }
+/* perguntas da cena: ponto pulsando sobre o objeto, filete e caixa ao lado, sem cobrir nada */
+.cena-pergunta { position: absolute; z-index: 3; display: block; width: 0; height: 0; pointer-events: auto; cursor: pointer; text-decoration: none; opacity: 1; transform: none; background: none; border: 0; box-shadow: none; padding: 0; }
+.cena-pergunta::after { content: ''; position: absolute; left: 0; top: 0; width: 34px; height: 1px; background: linear-gradient(90deg, var(--gold-light), rgba(214,175,97,.35)); }
+.cp-ponto { position: absolute; left: -5px; top: -5px; width: 10px; height: 10px; border-radius: 50%; background: var(--gold-light); box-shadow: 0 0 0 4px rgba(214,175,97,.2), 0 0 14px rgba(243,217,160,.9); }
+.cp-caixa { position: absolute; left: 34px; top: 0; transform: translateY(-50%); display: inline-flex; align-items: center; gap: 10px; white-space: nowrap; padding: 9px 14px 9px 16px; border-radius: 999px; background: rgba(11,21,36,.78); border: 1px solid rgba(214,175,97,.55); color: #F8F5EE; font-size: 14px; font-weight: 600; letter-spacing: -.01em; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: background .4s var(--ease), border-color .4s var(--ease), box-shadow .4s var(--ease); }
+.cp-seta { color: var(--gold-light); transition: transform .4s var(--ease); }
+.cena-pergunta:hover .cp-caixa, .cena-pergunta.on .cp-caixa { background: rgba(11,21,36,.92); border-color: var(--gold-light); box-shadow: 0 0 0 4px rgba(214,175,97,.12), 0 10px 30px rgba(0,0,0,.35); }
+.cena-pergunta:hover .cp-seta { transform: translateX(4px); }
+@media (prefers-reduced-motion: no-preference) {
+  .cp-ponto::after { content: ''; position: absolute; inset: -6px; border-radius: 50%; border: 1px solid rgba(243,217,160,.8); animation: cp-pulso 2.6s ease-out infinite; }
+  .cena-pergunta + .cena-pergunta .cp-ponto::after { animation-delay: 1.3s; }
+  @keyframes cp-pulso { 0% { transform: scale(.6); opacity: .9; } 100% { transform: scale(2.2); opacity: 0; } }
+}
+@media (min-width: 961px) { .cartas-so-movel { display: none; } }
+@media (max-width: 960px) { .cartas-topo .cena-pergunta { display: none; } }
