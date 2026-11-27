@@ -16,11 +16,11 @@ const LINHAS = [
 export default function Comparativo() {
   const diferenca = C.financiamento.total - C.consorcio.total;
   return (
-    <section className="sec" aria-labelledby="comp-titulo">
+    <section className="sec comp-sec" aria-labelledby="comp-titulo">
       <div className="wrap">
         <div className="row" style={{ gap: 48, alignItems: 'flex-end', justifyContent: 'space-between' }}>
           <div className="col" style={{ flex: '1 1 560px' }}>
-            <h2 id="comp-titulo" className="h2" style={{ margin: 0 }}>
+            <h2 id="comp-titulo" className="cartas-h2 comp-h2" style={{ margin: 0 }}>
               O mesmo imóvel. <span className="num">{brl.format(diferenca)}</span> de diferença.
             </h2>
           </div>
@@ -34,38 +34,33 @@ export default function Comparativo() {
             <caption className="sr-only">Comparativo para crédito de {brl.format(C.credito)}</caption>
             <thead>
               <tr>
-                <th scope="col" style={{ textAlign: 'left', padding: '0 0 16px', width: '28%' }} />
-                <th scope="col" style={{ textAlign: 'left', padding: '0 16px 16px', fontFamily: 'var(--sans)', fontWeight: 600, fontSize: 20, color: 'var(--green)' }}>Consórcio estratégico HS</th>
-                <th scope="col" style={{ textAlign: 'left', padding: '0 16px 16px', fontFamily: 'var(--sans)', fontWeight: 600, fontSize: 20, color: 'var(--ink-soft)' }}>Financiamento bancário</th>
+                <th scope="col" style={{ textAlign: 'left', padding: '22px 0 16px', width: '28%' }} />
+                <th scope="col" className="comp-a comp-a-topo" style={{ textAlign: 'left', padding: '22px 20px 16px', fontFamily: 'var(--sans)', fontWeight: 600, fontSize: 20, color: 'var(--green)' }}>Consórcio estratégico HS</th>
+                <th scope="col" style={{ textAlign: 'left', padding: '22px 20px 16px', fontFamily: 'var(--sans)', fontWeight: 600, fontSize: 20, color: 'var(--ink-soft)' }}>Financiamento bancário</th>
               </tr>
             </thead>
             <tbody>
               {LINHAS.map((l) => (
-                <tr key={l.rotulo} style={{ borderTop: '1px solid var(--rule)', background: l.destaque ? 'var(--bg-alt)' : 'transparent' }}>
+                <tr key={l.rotulo} className={l.destaque ? 'comp-destaque' : undefined}>
                   <th scope="row" className="label" style={{ textAlign: 'left', padding: '18px 0 18px 12px', fontWeight: 600 }}>{l.rotulo}</th>
-                  <td style={{ padding: '18px 16px', fontWeight: l.destaque ? 600 : 400, color: 'var(--ink)', fontSize: l.destaque ? 20 : 15 }}>{l.a}</td>
-                  <td style={{ padding: '18px 16px', fontWeight: l.destaque ? 600 : 400, color: 'var(--ink-soft)', fontSize: l.destaque ? 20 : 15 }}>{l.b}</td>
+                  <td className="comp-a" style={{ padding: '18px 20px', fontWeight: l.destaque ? 600 : 400, color: 'var(--ink)', fontSize: l.destaque ? 22 : 15 }}>{l.a}</td>
+                  <td className="comp-b" style={{ padding: '18px 20px', fontWeight: l.destaque ? 600 : 400, color: 'var(--ink-soft)', fontSize: l.destaque ? 20 : 15 }}>{l.b}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
 
-        <div className="comp-cards" style={{ marginTop: 36 }}>
-          {[
-            { nome: 'Consórcio estratégico HS', cor: 'var(--green)', k: 'a' },
-            { nome: 'Financiamento bancário', cor: 'var(--ink-soft)', k: 'b' },
-          ].map((col) => (
-            <div key={col.k} style={{ background: col.k === 'a' ? 'var(--bg-alt)' : 'transparent', border: '1px solid var(--rule)', padding: 22, marginBottom: 14 }}>
-              <div style={{ fontFamily: 'var(--sans)', fontWeight: 600, fontSize: 20, color: col.cor, marginBottom: 10 }}>{col.nome}</div>
-              <dl className="num" style={{ margin: 0 }}>
-                {LINHAS.map((l) => (
-                  <div key={l.rotulo} style={{ display: 'flex', justifyContent: 'space-between', gap: 16, padding: '10px 0', borderTop: '1px solid var(--rule)' }}>
-                    <dt className="label" style={{ paddingTop: 2 }}>{l.rotulo}</dt>
-                    <dd style={{ margin: 0, textAlign: 'right', fontWeight: l.destaque ? 600 : 400, fontSize: l.destaque ? 18 : 14 }}>{l[col.k]}</dd>
-                  </div>
-                ))}
-              </dl>
+        <div className="comp-cards" style={{ marginTop: 32 }}>
+          <div className="comp-m-topo">
+            <span className="comp-m-a">Consórcio estratégico HS</span>
+            <span className="comp-m-b">Financiamento bancário</span>
+          </div>
+          {LINHAS.map((l) => (
+            <div key={l.rotulo} className={`comp-m-linha${l.destaque ? ' comp-destaque' : ''}`}>
+              <span className="comp-m-rot">{l.rotulo}</span>
+              <span className="comp-m-a num">{l.a}</span>
+              <span className="comp-m-b num">{l.b}</span>
             </div>
           ))}
         </div>

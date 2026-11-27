@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { track } from '@vercel/analytics';
 import { TABELA_HS, TABELA_REF, WHATSAPP } from '../content';
 
@@ -11,9 +11,38 @@ const TIPOS = [
   { id: 'veiculo', label: 'Veículo', inicial: 4 },
 ];
 
+// As mesmas peças da mesa da home: o bem escolhido pousa sobre o tampo de vidro do resultado.
+const BENS = {
+  imovel: { nome: 'casa', w: 334, h: 289 },
+  veiculo: { nome: 'carro', w: 341, h: 214 },
+};
+
+// Número que corre até o valor novo, em vez de saltar.
+function useValorCorrendo(alvo) {
+  const [v, setV] = useState(alvo);
+  const atual = useRef(alvo);
+  useEffect(() => {
+    const calmo = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const de = atual.current;
+    if (calmo || de === alvo) { atual.current = alvo; setV(alvo); return; }
+    let raf; const t0 = performance.now(); const DUR = 520;
+    const passo = (t) => {
+      const k = Math.min(1, (t - t0) / DUR);
+      const e = 1 - Math.pow(1 - k, 3);
+      const n = de + (alvo - de) * e;
+      atual.current = n; setV(n);
+      if (k < 1) raf = requestAnimationFrame(passo);
+    };
+    raf = requestAnimationFrame(passo);
+    return () => cancelAnimationFrame(raf);
+  }, [alvo]);
+  return v;
+}
+
 export default function Simulador() {
   const [tipo, setTipo] = useState('imovel');
   const [idx, setIdx] = useState(6);
+  const [pulso, setPulso] = useState(0);
   useEffect(() => {
     const ouvir = (e) => { setTipo(e.detail.tipo); setIdx(e.detail.idx); };
     window.addEventListener('sim:set', ouvir);
@@ -23,6 +52,11 @@ export default function Simulador() {
   const i = Math.min(idx, tabela.length - 1);
   const [credito, integral, meio, prazo] = tabela[i];
   const nomeTipo = tipo === 'imovel' ? 'imóvel' : 'veículo';
+  const meioVisivel = useValorCorrendo(meio);
+  const bem = BENS[tipo];
+
+  // a luz percorre o friso a cada mudança da conta
+  useEffect(() => { setPulso((p) => p + 1); }, [tipo, i]);
 
   const escolherTipo = (t) => {
     setTipo(t.id);
@@ -31,6 +65,7 @@ export default function Simulador() {
 
   const texto = `Olá, João! Fiz a conta no seu site: carta de ${brl.format(credito)} para ${nomeTipo}, ${prazo} meses, meio aporte de ${brl2.format(meio)} até a contemplação. Quero entender a melhor estratégia para o meu caso.`;
   const linkWhats = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`;
+  const p = (i / (tabela.length - 1)) * 100;
 
   const etapas = [
     { t: 'Até a contemplação', v: `${brl2.format(meio)}/mês`, d: 'Meio aporte, que respeita o seu fluxo.' },
@@ -39,27 +74,30 @@ export default function Simulador() {
   ];
 
   return (
-    <section id="conta" className="sec alt" aria-labelledby="conta-titulo">
-      <div className="wrap row" style={{ gap: 64 }}>
-        <div className="col" style={{ flex: '1 1 420px' }}>
-          <h2 id="conta-titulo" className="h2">A conta da sua próxima conquista.</h2>
+    <section id="conta" className="sim-topo" aria-labelledby="conta-titulo">
+      <div className="wrap sim-grade">
+        <div className="sim-ctrl">
+          <nav aria-label="Você está em" className="trilha trilha-clara">
+            <a href="/">Início</a> <span aria-hidden="true">/</span> <span aria-current="page">Simulador</span>
+          </nav>
+          <h1 id="conta-titulo" className="mesa-h1 sim-h1">A conta da sua próxima conquista.</h1>
+          <p className="sim-lead">Escolha o bem e o valor do crédito. O aporte vem das tabelas da HS Consórcios.</p>
 
-          <div role="group" aria-label="Tipo de bem" className="row" style={{ gap: 8, margin: '28px 0 36px' }}>
+          <div role="group" aria-label="Tipo de bem" className="sim-chips">
             {TIPOS.map((t) => (
-              <button key={t.id} type="button" className="chip" aria-pressed={tipo === t.id} onClick={() => escolherTipo(t)}>
+              <button key={t.id} type="button" className="chip sim-chip" aria-pressed={tipo === t.id} onClick={() => escolherTipo(t)}>
                 {t.label}
               </button>
             ))}
           </div>
 
-          <label htmlFor="credito" className="label" style={{ display: 'block', marginBottom: 6 }}>Valor do crédito</label>
-          <output htmlFor="credito" className="num" style={{ display: 'block', fontFamily: 'var(--sans)', fontWeight: 600, fontSize: 40, fontVariantNumeric: 'tabular-nums', color: 'var(--ink)', marginBottom: 6 }}>
-            {brl.format(credito)}
-          </output>
+          <label htmlFor="credito" className="sim-label">Valor do crédito</label>
+          <output htmlFor="credito" className="num sim-credito">{brl.format(credito)}</output>
           <input
             id="credito"
             type="range"
-            className="range"
+            className="range sim-range"
+            style={{ '--p': `${p}%` }}
             min={0}
             max={tabela.length - 1}
             step={1}
@@ -67,50 +105,66 @@ export default function Simulador() {
             onChange={(e) => setIdx(Number(e.target.value))}
             aria-valuetext={brl.format(credito)}
           />
-          <div className="row num small" style={{ justifyContent: 'space-between', color: 'var(--ink-muted)' }}>
+          <div className="sim-limites num">
             <span>{brl.format(tabela[0][0])}</span>
             <span>{brl.format(tabela[tabela.length - 1][0])}</span>
           </div>
+        </div>
 
-          <ol className="timeline" aria-label="Como o plano anda">
-            {etapas.map((e) => (
-              <li key={e.t}>
-                <div className="label">{e.t}</div>
-                <div className="num" style={{ fontFamily: 'var(--sans)', fontWeight: 600, fontSize: 22, margin: '2px 0' }}>{e.v}</div>
-                <p className="cp small">{e.d}</p>
+        <div className="sim-res" aria-live="polite">
+          <div className="sim-palco" aria-hidden="true">
+            <div key={tipo} className="sim-bem" style={{ aspectRatio: `${bem.w} / ${bem.h}`, width: tipo === 'imovel' ? '58%' : '62%' }}>
+              <img src={`/pouso2/${bem.nome}-reflexo.webp`} alt="" />
+              <img src={`/pouso2/${bem.nome}.webp`} alt="" />
+            </div>
+            <span key={`f${pulso}`} className="sim-friso" />
+          </div>
+          <div className="sim-res-corpo">
+            <div className="sim-label">Aporte reduzido até a contemplação</div>
+            <div className="num sim-valor" aria-hidden="true">{brl2.format(meioVisivel)}</div>
+            <span className="sr-only">{brl2.format(meio)} por mês até a contemplação</span>
+            <dl className="num sim-dados">
+              <div><dt>Crédito</dt><dd>{brl.format(credito)}</dd></div>
+              <div><dt>Prazo</dt><dd>{prazo} meses</dd></div>
+              <div><dt>Aporte integral de referência</dt><dd>{brl2.format(integral)}</dd></div>
+              {tipo === 'imovel' && <div><dt>Estrutura operacional</dt><dd>22% no prazo</dd></div>}
+            </dl>
+            <p className="sim-nota">Estimativa para você se situar. O valor final, o aporte após a contemplação e a estratégia de contemplação vêm no diagnóstico patrimonial.</p>
+            <div className="mesa-ctas sim-ctas">
+              <a href="/#diagnostico" className="btn btn-pri" onClick={() => track('simulacao_diagnostico', { tipo, credito })}>Levar esta conta para o diagnóstico</a>
+              <a href={linkWhats} target="_blank" rel="noopener noreferrer" className="mesa-link" onClick={() => track('simulacao_whatsapp', { tipo, credito })}>Conversar no WhatsApp</a>
+            </div>
+          </div>
+        </div>
+
+        <div className="sim-tl">
+          <ol key={`t${pulso}`} className="sim-linha" aria-label="Como o plano anda">
+            {etapas.map((e, n) => (
+              <li key={e.t} style={{ '--n': n }}>
+                <div className="sim-label">{e.t}</div>
+                <div className="num sim-etapa-v">{e.v}</div>
+                <p className="sim-etapa-d">{e.d}</p>
               </li>
             ))}
           </ol>
-          <p className="cp small" style={{ marginTop: 20 }}>{TABELA_REF}. Valores sujeitos ao reajuste anual do grupo.</p>
+          <p className="sim-ref">{TABELA_REF}. Valores sujeitos ao reajuste anual do grupo.</p>
         </div>
+      </div>
+    </section>
+  );
+}
 
-        <div className="col pad-box sim-resultado" style={{ flex: '1 1 380px', background: 'var(--surface)', border: '1px solid var(--rule)', padding: 40, alignSelf: 'flex-start' }} aria-live="polite">
-          <div className="label">Aporte reduzido até a contemplação</div>
-          <div className="num sim-valor" style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(40px, 11vw, 60px)', fontWeight: 600, letterSpacing: '-.03em', whiteSpace: 'nowrap', color: 'var(--green)', margin: '8px 0 28px', lineHeight: 1.1 }}>
-            {brl2.format(meio)}
-          </div>
-          <dl className="num" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 20, fontSize: 14, margin: 0, paddingTop: 24, borderTop: '1px solid var(--rule)' }}>
-            <div><dt style={{ color: 'var(--ink-muted)' }}>Crédito</dt><dd style={{ margin: '4px 0 0', fontWeight: 600 }}>{brl.format(credito)}</dd></div>
-            <div><dt style={{ color: 'var(--ink-muted)' }}>Prazo</dt><dd style={{ margin: '4px 0 0', fontWeight: 600 }}>{prazo} meses</dd></div>
-            <div><dt style={{ color: 'var(--ink-muted)' }}>Aporte integral de referência</dt><dd style={{ margin: '4px 0 0', fontWeight: 600 }}>{brl2.format(integral)}</dd></div>
-            {tipo === 'imovel' && (
-              <div><dt style={{ color: 'var(--ink-muted)' }}>Estrutura operacional</dt><dd style={{ margin: '4px 0 0', fontWeight: 600 }}>22% no prazo</dd></div>
-            )}
-          </dl>
-          <p className="cp" style={{ fontSize: 12, margin: '24px 0' }}>
-            Estimativa para você se situar. O valor final, o aporte após a contemplação e a estratégia de contemplação vêm no diagnóstico patrimonial.
-          </p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            <a href="/#diagnostico" className="btn btn-pri btn-block">Levar esta conta para o meu diagnóstico</a>
-            <a
-              href={linkWhats}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-sec btn-block"
-              onClick={() => track('simulacao_whatsapp', { tipo, credito })}
-            >
-              Conversar sobre esta conta no WhatsApp
-            </a>
+// Fechamento: a conta rápida vira plano no diagnóstico.
+export function SimFim() {
+  return (
+    <section className="cartas-fim" aria-labelledby="sim-fim-titulo">
+      <div className="wrap cartas-fim-grade">
+        <h2 id="sim-fim-titulo" className="cartas-fim-h">Essa foi a conta rápida. No diagnóstico, ela vira o seu plano.</h2>
+        <div>
+          <p className="cartas-fim-texto">Aporte que cabe no seu fluxo, prazo, estratégia de contemplação e o comparativo com o financiamento, com os seus números.</p>
+          <div className="mesa-ctas">
+            <a href="/#diagnostico" className="btn btn-pri" onClick={() => track('simulacao_fim', {})}>Agendar meu diagnóstico</a>
+            <a href="/#metodo" className="mesa-link">Conhecer o Método SPA®</a>
           </div>
         </div>
       </div>

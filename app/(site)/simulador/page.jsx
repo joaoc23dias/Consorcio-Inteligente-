@@ -1,5 +1,4 @@
-import TopoPagina from '../../components/TopoPagina';
-import Simulador from '../../components/Simulador';
+import Simulador, { SimFim } from '../../components/Simulador';
 import Comparativo from '../../components/Comparativo';
 
 export const metadata = {
@@ -11,9 +10,9 @@ export const metadata = {
 export default function PaginaSimulador() {
   return (
     <>
-      <TopoPagina titulo="Simulador" texto="Escolha o bem e o valor do crédito, veja o aporte mensal pelas tabelas da HS Consórcios e compare com o financiamento." />
       <Simulador />
       <Comparativo />
+      <SimFim />
     </>
   );
 }
