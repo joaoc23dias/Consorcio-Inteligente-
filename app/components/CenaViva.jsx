@@ -223,16 +223,6 @@ export default function CenaViva({
       style={{ '--ar': w / h, '--ox': origem[0], '--oy': origem[1] }}>
       <div ref={palco} className="cena-palco">
         <Image src={src} alt={alt} fill priority={prioridade} sizes={sizes} style={{ objectFit: 'cover' }} />
-        {pouso && pouso.map((c, i) => {
-          const pos = { left: `${(c.x / w) * 100}%`, top: `${(c.y / h) * 100}%`, width: `${(c.w / w) * 100}%`, height: `${(c.h / h) * 100}%`, '--i': i };
-          return (
-            <span key={c.obj} className={`cena-bem${ativo === c.ponto ? ' erguido' : ''}`}>
-              {c.reflexo && <img className="cena-bem-reflexo" src={c.reflexo} alt="" style={pos} />}
-              <img className="cena-bem-sombra" src={c.sombra} alt="" style={pos} />
-              <img className="cena-bem-obj" src={c.obj} alt="" style={pos} />
-            </span>
-          );
-        })}
         {final && (
           <Image src={final} alt="" fill priority={prioridade} sizes={sizes} className="cena-final" style={{ objectFit: 'cover' }} />
         )}
@@ -273,6 +263,17 @@ export default function CenaViva({
             </g>
           ))}
         </svg>
+        {/* bens por cima dos frisos acesos: a luz corre na mesa, por baixo das peças */}
+        {pouso && pouso.map((c, i) => {
+          const pos = { left: `${(c.x / w) * 100}%`, top: `${(c.y / h) * 100}%`, width: `${(c.w / w) * 100}%`, height: `${(c.h / h) * 100}%`, '--i': i };
+          return (
+            <span key={c.obj} className={`cena-bem${ativo === c.ponto ? ' erguido' : ''}`}>
+              {c.reflexo && <img className="cena-bem-reflexo" src={c.reflexo} alt="" style={pos} />}
+              <img className="cena-bem-sombra" src={c.sombra} alt="" style={pos} />
+              <img className="cena-bem-obj" src={c.obj} alt="" style={pos} />
+            </span>
+          );
+        })}
       </div>
       <div className="cena-veu" />
       <canvas ref={tela} className="cena-poeira" />

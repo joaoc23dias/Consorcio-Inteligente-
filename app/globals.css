@@ -1243,10 +1243,10 @@ summary::after { color: var(--green); }
    para cada bem poder subir quando o cursor passa ou quando a mesa se apresenta sozinha */
 .ci-bens .cena-bem img { display: block; }
 .ci-bens .cena-final { opacity: 0 !important; transition: none !important; }
-.cena-bem .cena-bem-obj, .cena-bem .cena-bem-sombra { transition: transform .5s cubic-bezier(.2, .8, .2, 1), opacity .5s cubic-bezier(.2, .8, .2, 1); }
+.cena-bem .cena-bem-obj, .cena-bem .cena-bem-sombra { transition: transform .6s cubic-bezier(.2, .8, .2, 1), opacity .6s cubic-bezier(.2, .8, .2, 1); }
 .cena-bem .cena-bem-sombra { transform-origin: 50% 85%; }
-.cena-bem.erguido .cena-bem-obj { transform: translateY(-7%); }
-.cena-bem.erguido .cena-bem-sombra { transform: scale(1.05); opacity: .62; }
+.cena-bem.erguido .cena-bem-obj { transform: translateY(calc(-1 * clamp(6px, 1.15cqw, 19px))); }
+.cena-bem.erguido .cena-bem-sombra { transform: scale(1.07); opacity: .5; }
 .ci-pouso .cena-bem.erguido .cena-bem-obj, .ci-pouso .cena-bem.erguido .cena-bem-sombra { transform: none; opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .cena-bem.erguido .cena-bem-obj, .cena-bem.erguido .cena-bem-sombra { transform: none; opacity: 1; } }
 /* celular: a legenda aparece compacta, só com o nome do bem */
@@ -1255,8 +1255,8 @@ summary::after { color: var(--green); }
   .mesa .cena-rotulo b { font-size: 12px; }
 }
 /* reflexo no tampo de vidro: ao subir, o bem se afasta do próprio reflexo */
-.cena-bem .cena-bem-reflexo { transition: transform .5s cubic-bezier(.2, .8, .2, 1), opacity .5s cubic-bezier(.2, .8, .2, 1); }
-.cena-bem.erguido .cena-bem-reflexo { transform: translateY(5%); opacity: .55; }
+.cena-bem .cena-bem-reflexo { transition: transform .6s cubic-bezier(.2, .8, .2, 1), opacity .6s cubic-bezier(.2, .8, .2, 1); }
+.cena-bem.erguido .cena-bem-reflexo { transform: translateY(clamp(4px, .75cqw, 12px)); opacity: .45; }
 .ci-pouso .cena-bem .cena-bem-reflexo { animation-name: bem-sombra; animation-timing-function: cubic-bezier(.3, .7, .3, 1); }
 .ci-pouso .cena-bem.erguido .cena-bem-reflexo { transform: none; opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .cena-bem.erguido .cena-bem-reflexo { transform: none; opacity: 1; } }
