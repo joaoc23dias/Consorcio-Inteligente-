@@ -1110,3 +1110,32 @@ summary::after { color: var(--green); }
   .rx-pag { margin: 0; box-shadow: none; page-break-after: always; }
   .rx-pag:last-child { page-break-after: auto; }
 }
+/* presente lacrado, versão clara: o cartão segue o site; só a peça fica escura, como uma vitrine */
+.pres-caixa { color: var(--ink); background: var(--surface); border-color: var(--rule); box-shadow: 0 40px 80px -50px rgba(11,21,36,.45); }
+.pres-rot { color: var(--ink-muted); }
+.pres-okk { color: #2F7A57; }
+.pres-h, .pres-h3 { color: var(--green); }
+.pres-lead { color: var(--ink-soft); }
+.pres-lead b { color: var(--ink); }
+.pres-meta, .pres-lgpd { color: var(--ink-muted); }
+.pres-op { color: var(--ink); background: var(--bg); border-color: var(--rule-strong); }
+.pres-op:hover { background: #fff; border-color: var(--green); }
+.pres-op .k { color: var(--ink-muted); border-color: var(--rule-strong); }
+.pres-op:focus-visible, .pres-seg:focus-visible, .pres input:focus-visible { outline-color: var(--green); }
+.pres-provoca { color: var(--ice-ink); background: var(--ice-bg); border-left-color: var(--ice-ink); border-radius: 0 var(--raio-sm) var(--raio-sm) 0; }
+.pres-segurar p, .pres-sub { color: var(--ink-soft); }
+.pres-seg { color: var(--green); background: var(--bg-alt); }
+.pres-seg .tr { stroke: var(--rule-strong); }
+.pres-ia { background: var(--ice-bg); border-color: var(--ice-line); }
+.pres-ia .tag { color: var(--ice-ink); }
+.pres-ia .tag i { background: var(--ice-ink); }
+.pres-ia p { color: var(--ink); }
+.pres-ia .cf { color: #9AA6B8; }
+.pres-ia small { color: var(--ink-muted); }
+.pres-campo input { color: var(--ink); background: #fff; border-color: var(--rule-strong); }
+.pres-ok { color: var(--ink-soft); }
+.pres-erro { color: #B4412F; }
+.pres-previa { color: var(--ink-soft); border-color: var(--rule-strong); }
+.pres-previa a { color: var(--green); }
+.pres-capa { border: 1px solid var(--rule); }
+.pres-peca { border-color: #1F2E47; background: radial-gradient(120% 90% at 50% 42%, #15233A 0%, #0B1524 62%, #09111D 100%); }
