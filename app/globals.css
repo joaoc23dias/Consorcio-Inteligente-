@@ -1150,3 +1150,12 @@ summary::after { color: var(--green); }
 }
 /* cartão do presente: borda dourada discreta */
 .pres-caixa { border: 1px solid rgba(214,175,97,.75); box-shadow: 0 40px 80px -50px rgba(11,21,36,.45); }
+/* peça no celular: estado curto no topo e peça baixa até a pessoa começar */
+.pres-peca header { white-space: nowrap; }
+.pres-peca .est-c { display: none; }
+.pres-palco { transition: height .6s var(--ease); }
+@media (max-width: 900px) {
+  .pres-peca .est-l { display: none; }
+  .pres-peca .est-c { display: inline; }
+  .pres:not(.pres-iniciado) .pres-palco { height: 150px; }
+}

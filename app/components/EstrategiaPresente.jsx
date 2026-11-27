@@ -17,6 +17,9 @@ const TEMPO = { ja: 'a sua vontade de ter o crédito logo', '12m': 'o prazo de 1
 const analise = (r) => `Analisei as suas cinco respostas. Para ${OBJ[r.obj]}, o que mais chamou atenção foi ${TEMPO[r.tempo]} combinado com o que cabe no seu mês. Essa combinação muda a ordem certa das decisões, e é exatamente aqui que a maioria erra quando`;
 const cifra = () => ' ' + Array.from({ length: 22 }, (_, i) => (i % 6 === 5 ? ' ' : SIM[(Math.random() * SIM.length) | 0])).join('');
 
+// no celular o topo da peça usa a versão curta do estado
+const curto = (e) => (e.startsWith('aguardando') ? 'aguardando' : e.endsWith('camadas') ? e.replace(' de ', '/').replace(' camadas', '') : e.startsWith('a caminho') ? 'enviando' : e);
+
 const Cadeado = () => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.3" /><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" strokeWidth="1.3" /></svg>
 );
@@ -209,7 +212,7 @@ export default function EstrategiaPresente() {
   const q = PERGUNTAS[passo];
 
   return (
-    <section id="estrategia" className="pres" aria-labelledby="pres-titulo" ref={secRef}>
+    <section id="estrategia" className={`pres${fase !== 'abertura' ? ' pres-iniciado' : ''}`} aria-labelledby="pres-titulo" ref={secRef}>
       <div className="wrap">
         <div className="pres-caixa">
           <div className="pres-esq" aria-live="polite">
@@ -295,7 +298,7 @@ export default function EstrategiaPresente() {
             )}
           </div>
           <aside className="pres-peca" aria-label="A peça sendo montada com as suas respostas">
-            <header><b>Peça nº <span className="n">{serie}</span></b><span>{estado}</span></header>
+            <header><b>Peça nº <span className="n">{serie}</span></b><span className="est-l">{estado}</span><span className="est-c" aria-hidden="true">{curto(estado)}</span></header>
             <div className="pres-palco" ref={palcoRef}><canvas ref={cvRef} role="img" aria-label="Uma peça lacrada que ganha uma camada a cada resposta. Arraste para girar." /></div>
             <div className="pres-camadas" aria-hidden="true">{[1, 2, 3, 4, 5].map((n) => <i key={n} className={`${Object.keys(resp).length >= n ? 'on' : ''}${fase !== 'abertura' && fase !== 'pergunta' && fase !== 'segurar' ? ' ouro' : ''}`} />)}</div>
             <p className="pe">O conteúdo só existe depois das suas respostas e só abre no seu e-mail.</p>
