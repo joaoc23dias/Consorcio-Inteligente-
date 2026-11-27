@@ -20,25 +20,22 @@ export default function CenaViva({
   const filme = useRef(null);
   const [rodando, setRodando] = useState(false);
   const uid = useId().replace(/:/g, '');
-  // pouso: os bens descem um a um sobre a mesa vazia, só na primeira visita da sessão
-  const [fasePouso, setFasePouso] = useState('feito');
+  // pouso: os bens descem um a um sobre a mesa vazia, só na primeira visita da sessão.
+  // Quem decide é um script no HTML (classe ci-pouso no <html>), antes da página aparecer,
+  // para a cena completa nunca piscar antes da hora. Aqui só acendemos as linhas e fechamos.
+  const [luz, setLuz] = useState(-1);
   const introAte = useRef(0);
 
   useEffect(() => {
-    if (!pouso || !final) return;
-    const calmo = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let visto = false;
-    try { visto = sessionStorage.getItem('ci_pouso') === '1'; } catch { /* armazenamento bloqueado */ }
-    if (calmo || visto) return;
-    try { sessionStorage.setItem('ci_pouso', '1'); } catch { /* segue sem lembrar */ }
+    const raizHtml = document.documentElement;
+    if (!pouso || !final || !raizHtml.classList.contains('ci-pouso')) return;
     const INI = 450, PASSO = 620, DUR = 950;
-    const total = INI + PASSO * (pouso.length - 1) + DUR + 500;
-    introAte.current = performance.now() + total + 900;
-    setFasePouso('rodando');
-    const ts = pouso.map((c, i) => setTimeout(() => setAtivo(c.ponto), INI + PASSO * i + DUR * 0.75));
-    ts.push(setTimeout(() => { setAtivo(-1); setFasePouso('fechando'); }, total));
-    ts.push(setTimeout(() => setFasePouso('feito'), total + 900));
-    return () => ts.forEach(clearTimeout);
+    const total = INI + PASSO * (pouso.length - 1) + DUR + 450;
+    introAte.current = performance.now() + total + 1200;
+    const ts = pouso.map((c, i) => setTimeout(() => setLuz(c.ponto), INI + PASSO * i + DUR * 0.7));
+    ts.push(setTimeout(() => { setLuz(-1); raizHtml.classList.add('ci-pouso-fim'); }, total));
+    ts.push(setTimeout(() => raizHtml.classList.remove('ci-pouso', 'ci-pouso-fim'), total + 950));
+    return () => { ts.forEach(clearTimeout); raizHtml.classList.remove('ci-pouso', 'ci-pouso-fim'); };
   }, [pouso, final]);
 
   useEffect(() => {
@@ -179,14 +176,14 @@ export default function CenaViva({
     return () => { io.disconnect(); v.removeEventListener('canplaythrough', pronto); };
   }, [video]);
 
-  const ligado = (c) => ativo >= 0 && (pontos[ativo]?.caminhos || []).includes(c.id);
+  const ligado = (c) => [ativo, luz].some((k) => k >= 0 && (pontos[k]?.caminhos || []).includes(c.id));
 
   return (
     <div ref={raiz} className={`cena${ativo >= 0 ? ' cena-ativa' : ''}${rodando ? ' com-video' : ''}`} aria-hidden="true"
       style={{ '--ar': w / h, '--ox': origem[0], '--oy': origem[1] }}>
       <div ref={palco} className="cena-palco">
         <Image src={src} alt={alt} fill priority={prioridade} sizes={sizes} style={{ objectFit: 'cover' }} />
-        {pouso && fasePouso !== 'feito' && pouso.map((c, i) => {
+        {pouso && pouso.map((c, i) => {
           const pos = { left: `${(c.x / w) * 100}%`, top: `${(c.y / h) * 100}%`, width: `${(c.w / w) * 100}%`, height: `${(c.h / h) * 100}%`, animationDelay: `${450 + 620 * i}ms` };
           return (
             <span key={c.obj} className="cena-bem">
@@ -196,7 +193,7 @@ export default function CenaViva({
           );
         })}
         {final && (
-          <Image src={final} alt="" fill priority={prioridade} sizes={sizes} className={`cena-final${fasePouso === 'rodando' ? ' oculta' : ''}`} style={{ objectFit: 'cover' }} />
+          <Image src={final} alt="" fill priority={prioridade} sizes={sizes} className="cena-final" style={{ objectFit: 'cover' }} />
         )}
         {video && (
           <video ref={filme} className="cena-video" muted loop playsInline preload="none" tabIndex={-1}
@@ -215,7 +212,7 @@ export default function CenaViva({
             </radialGradient>
           </defs>
           {pontos.map((p, i) => (
-            <ellipse key={`h${i}`} className={`cena-halo${ativo === i ? ' on' : ''}`} cx={p.x} cy={p.halo?.y ?? p.y}
+            <ellipse key={`h${i}`} className={`cena-halo${ativo === i || luz === i ? ' on' : ''}`} cx={p.x} cy={p.halo?.y ?? p.y}
               rx={p.halo?.rx ?? 120} ry={p.halo?.ry ?? 70} fill={`url(#halo-${uid})`} />
           ))}
           <g filter={`url(#brilho-${uid})`}>

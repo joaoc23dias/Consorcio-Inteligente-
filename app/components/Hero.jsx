@@ -33,9 +33,13 @@ const POUSO = [
   { obj: '/pouso/galpao.webp', sombra: '/pouso/galpao-sombra.webp', x: 1375, y: 505, w: 390, h: 200, ponto: 3 },
 ];
 
+// Decide antes de a página aparecer se o pouso roda (primeira visita, sem movimento reduzido).
+const DECIDE_POUSO = "(function(){try{if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;if(sessionStorage.getItem('ci_pouso')==='1')return;sessionStorage.setItem('ci_pouso','1');document.documentElement.classList.add('ci-pouso')}catch(e){}})();";
+
 export default function Hero() {
   return (
     <section className="mesa" aria-labelledby="hero-titulo">
+      <script dangerouslySetInnerHTML={{ __html: DECIDE_POUSO }} />
       <div className="mesa-fundo" aria-hidden="true">
         <CenaViva src="/mesa-vazia.webp" final={FINAL} pouso={POUSO} alt="" w={W} h={H} origem={[0.7, 0.6]} alvo=".mesa" caminhos={CAMINHOS} pontos={PONTOS} brilhos={BRILHOS} prioridade />
       </div>
