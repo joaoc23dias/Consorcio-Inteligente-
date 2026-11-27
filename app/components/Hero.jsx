@@ -17,17 +17,17 @@ const CAMINHOS = [
 ];
 const PONTOS = [
   { x: 1346, y: 700, rotulo: 'Imóvel', sub: 'Casa ou apartamento', caminhos: ['chave', 'base', 'casa'], halo: { y: 780, rx: 190, ry: 90 }, lado: 'esq' },
-  { x: 1491, y: 860, rotulo: 'Investimento imobiliário', sub: 'Comercial ou para locação', caminhos: ['chave', 'base'], halo: { y: 990, rx: 115, ry: 130 }, lado: 'dir' },
+  { x: 1415, y: 985, rotulo: 'Investimento imobiliário', sub: 'Comercial ou para locação', caminhos: ['chave', 'base'], halo: { y: 990, rx: 115, ry: 130 }, lado: 'esq' },
   { x: 1743, y: 800, rotulo: 'Veículo', sub: 'Carro, moto ou frota', caminhos: ['chave', 'base'], halo: { y: 880, rx: 170, ry: 65 }, lado: 'dir' },
   { x: 2111, y: 840, rotulo: 'Para a empresa', sub: 'Cresça sem tirar dinheiro do caixa', caminhos: ['chave', 'galpao'], halo: { y: 955, rx: 220, ry: 105 }, lado: 'esq' },
 ];
 const BRILHOS = [{ x: 1850, y: 1125 }];
 // ordem do pouso: casa, carro, galpão e prédio (o prédio fica na frente)
 const POUSO = [
-  { obj: '/pouso2/casa.webp', sombra: '/pouso2/casa-sombra.webp', x: 1180, y: 712, w: 334, h: 191, ponto: 0 },
-  { obj: '/pouso2/carro.webp', sombra: '/pouso2/carro-sombra.webp', x: 1567, y: 815, w: 341, h: 150, ponto: 2 },
-  { obj: '/pouso2/galpao.webp', sombra: '/pouso2/galpao-sombra.webp', x: 1891, y: 840, w: 419, h: 228, ponto: 3 },
-  { obj: '/pouso2/predio.webp', sombra: '/pouso2/predio-sombra.webp', x: 1370, y: 866, w: 245, h: 237, ponto: 1 },
+  { obj: '/pouso2/casa.webp', sombra: '/pouso2/casa-sombra.webp', reflexo: '/pouso2/casa-reflexo.webp', x: 1180, y: 711, w: 334, h: 253, ponto: 0 },
+  { obj: '/pouso2/carro.webp', sombra: '/pouso2/carro-sombra.webp', reflexo: '/pouso2/carro-reflexo.webp', x: 1567, y: 814, w: 341, h: 191, ponto: 2 },
+  { obj: '/pouso2/galpao.webp', sombra: '/pouso2/galpao-sombra.webp', reflexo: '/pouso2/galpao-reflexo.webp', x: 1891, y: 840, w: 419, h: 278, ponto: 3 },
+  { obj: '/pouso2/predio.webp', sombra: '/pouso2/predio-sombra.webp', reflexo: '/pouso2/predio-reflexo.webp', x: 1368, y: 865, w: 251, h: 296, ponto: 1 },
 ];
 
 // Antes de a página aparecer: os bens viram peças soltas sobre a mesa (ci-bens) e o pouso roda na primeira visita.

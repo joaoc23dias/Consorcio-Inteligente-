@@ -227,6 +227,7 @@ export default function CenaViva({
           const pos = { left: `${(c.x / w) * 100}%`, top: `${(c.y / h) * 100}%`, width: `${(c.w / w) * 100}%`, height: `${(c.h / h) * 100}%`, '--i': i };
           return (
             <span key={c.obj} className={`cena-bem${ativo === c.ponto ? ' erguido' : ''}`}>
+              {c.reflexo && <img className="cena-bem-reflexo" src={c.reflexo} alt="" style={pos} />}
               <img className="cena-bem-sombra" src={c.sombra} alt="" style={pos} />
               <img className="cena-bem-obj" src={c.obj} alt="" style={pos} />
             </span>

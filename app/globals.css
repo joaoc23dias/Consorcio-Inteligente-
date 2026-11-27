@@ -1254,3 +1254,9 @@ summary::after { color: var(--green); }
   .mesa .cena-rotulo { display: flex; padding: 6px 10px; }
   .mesa .cena-rotulo b { font-size: 12px; }
 }
+/* reflexo no tampo de vidro: ao subir, o bem se afasta do próprio reflexo */
+.cena-bem .cena-bem-reflexo { transition: transform .5s cubic-bezier(.2, .8, .2, 1), opacity .5s cubic-bezier(.2, .8, .2, 1); }
+.cena-bem.erguido .cena-bem-reflexo { transform: translateY(5%); opacity: .55; }
+.ci-pouso .cena-bem .cena-bem-reflexo { animation-name: bem-sombra; animation-timing-function: cubic-bezier(.3, .7, .3, 1); }
+.ci-pouso .cena-bem.erguido .cena-bem-reflexo { transform: none; opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .cena-bem.erguido .cena-bem-reflexo { transform: none; opacity: 1; } }
