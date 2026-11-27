@@ -63,7 +63,7 @@ export function SobreTopo() {
           </nav>
           <h1 id="sobre-titulo" className="mesa-h1 sb-h1">Sou João Dias. Cuido do patrimônio de quem confia em mim como cuido do meu.</h1>
           <p className="mesa-lead">
-            Sou de São José do Rio Pardo e há uma década trabalho nos mercados financeiro e imobiliário. Hoje sou especialista em planejamento patrimonial pela Gaia Group, que tem a HS Consórcios como administradora exclusiva, e atendo com o Método SPA® da Gaia Group.
+            Sou de Mococa e há uma década trabalho nos mercados financeiro e imobiliário. Hoje sou especialista em planejamento patrimonial pela Gaia Group, que tem a HS Consórcios como administradora exclusiva, e atendo com o Método SPA® da Gaia Group.
           </p>
           <div className="mesa-ctas">
             <a href="/#diagnostico" className="btn btn-pri" onClick={() => track('sobre_cta', { onde: 'topo' })}>Agendar meu diagnóstico</a>

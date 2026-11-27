@@ -1566,3 +1566,29 @@ summary::after { color: var(--green); }
   .pres-peca .pres-prep { display: none; }
   .pres + .sec { padding-top: 56px; }
 }
+
+/* ===== Carta do João no padrão da home ===== */
+.carta2 { position: relative; overflow: hidden; background: #0B1524; color: #F4F1EA; padding: 112px 0; }
+.carta2::before { content: ''; position: absolute; inset: 0; background: radial-gradient(45% 70% at 18% 45%, rgba(214,175,97,.11), transparent 70%); pointer-events: none; }
+.carta2-grade { position: relative; display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 48px 88px; align-items: center; }
+.carta2-foto { margin: 0; border-radius: var(--raio); overflow: hidden; border: 1px solid rgba(214,175,97,.3); box-shadow: 0 40px 90px rgba(0,0,0,.45); }
+.carta2-foto img { display: block; width: 100%; height: auto; }
+.carta2-papel { max-width: 58ch; }
+.carta2-h { font-family: var(--serif); font-weight: 500; font-size: clamp(36px, 4vw, 56px); line-height: 1.05; letter-spacing: -.025em; color: #F8F5EE; margin: 0 0 32px; }
+.carta2-papel p { font-family: var(--serif); font-size: 19px; line-height: 1.75; color: rgba(244,241,234,.8); margin: 0 0 20px; text-wrap: pretty; }
+.carta2-papel .carta2-destaque { position: relative; font-size: clamp(22px, 2vw, 27px); line-height: 1.4; color: var(--gold-light); padding: 6px 0 6px 24px; margin: 30px 0; }
+.carta2-destaque::before { content: ''; position: absolute; left: 0; top: 6px; bottom: 6px; width: 1px; background: linear-gradient(180deg, var(--gold-light), rgba(214,175,97,.2)); }
+.carta2-assinatura { display: flex; flex-direction: column; gap: 6px; margin-top: 36px; padding-top: 24px; border-top: 1px solid rgba(244,241,234,.14); }
+.carta2-nome { font-family: var(--serif); font-style: italic; font-size: 34px; line-height: 1; color: #F8F5EE; letter-spacing: -.01em; }
+.carta2-cargo { font-size: 13px; letter-spacing: .02em; color: rgba(214,175,97,.9); }
+@media (prefers-reduced-motion: no-preference) {
+  .carta2 .carta2-l { opacity: 0; transform: translateY(12px); transition: opacity .9s var(--ease), transform .9s var(--ease); transition-delay: calc(.15s + var(--n) * .32s); }
+  .carta2.aberta .carta2-l { opacity: 1; transform: none; }
+}
+@media (max-width: 960px) {
+  .carta2 { padding: 72px 0; }
+  .carta2-grade { grid-template-columns: 1fr; gap: 36px; }
+  .carta2-foto { max-width: 420px; }
+  .carta2-papel p { font-size: 17px; }
+}
+@media (min-width: 961px) { .carta2-grade { align-items: start; } .carta2-foto { position: sticky; top: 110px; } }

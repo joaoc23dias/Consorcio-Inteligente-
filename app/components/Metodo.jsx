@@ -1,6 +1,6 @@
 import { PILARES, PASSOS } from '../content';
 
-const TEXTO = 'Sou de São José do Rio Pardo e há uma década trabalho nos mercados financeiro e imobiliário. Atendo pela Gaia Group, que tem a HS Consórcios como administradora exclusiva, com o Método SPA® da Gaia Group, que transforma o consórcio em ferramenta de crescimento patrimonial. Todo consultor que atende comigo segue o mesmo método.';
+const TEXTO = 'Sou de Mococa e há uma década trabalho nos mercados financeiro e imobiliário. Atendo pela Gaia Group, que tem a HS Consórcios como administradora exclusiva, com o Método SPA® da Gaia Group, que transforma o consórcio em ferramenta de crescimento patrimonial. Todo consultor que atende comigo segue o mesmo método.';
 const MARCAS = new Set(['Gaia', 'Group,', 'Group', 'HS', 'Consórcios']);
 
 export default function Metodo() {
