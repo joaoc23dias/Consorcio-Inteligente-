@@ -946,3 +946,10 @@ summary::after { color: var(--green); }
   .cena-pulso, .cena-faisca, .cena-poeira, .cena-luz, .cena-rotulo, .cena-halo { display: none; }
   .cena-palco, .mesa-joao, .mesa-texto { transform: none; }
 }
+/* vídeo da mesa: entra suave quando já pode tocar; com ele, os pulsos fixos
+   saem de cena (o vídeo já tem a luz) e ficam só os que respondem ao cursor */
+.cena-video { position: absolute; left: 0; width: 100%; object-fit: cover; opacity: 0; transition: opacity 1.2s var(--ease); pointer-events: none; }
+.com-video .cena-video { opacity: 1; }
+.com-video .cena-via:not(.on) .cena-pulso { opacity: 0; }
+.com-video .cena-faisca:not(.on) > g { animation-play-state: paused; opacity: 0; }
+@media (prefers-reduced-motion: reduce) { .cena-video { display: none; } }

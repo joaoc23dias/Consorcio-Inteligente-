@@ -10,12 +10,14 @@ import Image from 'next/image';
 
 export default function CenaViva({
   src, alt = '', w, h, origem = [0.5, 0.5], alvo = 'section',
-  caminhos = [], pontos = [], brilhos = [], prioridade = false, sizes = '100vw', raio = 150,
+  caminhos = [], pontos = [], brilhos = [], prioridade = false, sizes = '100vw', raio = 150, video = null,
 }) {
   const raiz = useRef(null);
   const palco = useRef(null);
   const tela = useRef(null);
   const [ativo, setAtivo] = useState(-1);
+  const filme = useRef(null);
+  const [rodando, setRodando] = useState(false);
   const uid = useId().replace(/:/g, '');
 
   useEffect(() => {
@@ -139,13 +141,34 @@ export default function CenaViva({
     };
   }, [alvo, pontos, w, h, raio]);
 
+  // vídeo em loop por cima da imagem: entra só quando já pode tocar,
+  // escolhe o arquivo leve no celular e fica parado com movimento reduzido ou economia de dados
+  useEffect(() => {
+    const v = filme.current;
+    if (!v || !video) return;
+    const calmo = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const economia = navigator.connection && navigator.connection.saveData;
+    if (calmo || economia) return;
+    v.src = window.innerWidth < 900 && video.leve ? video.leve : video.src;
+    const pronto = () => { setRodando(true); v.play().catch(() => {}); };
+    v.addEventListener('canplaythrough', pronto, { once: true });
+    v.load();
+    const io = new IntersectionObserver(([en]) => { if (en.isIntersecting) v.play().catch(() => {}); else v.pause(); });
+    io.observe(v);
+    return () => { io.disconnect(); v.removeEventListener('canplaythrough', pronto); };
+  }, [video]);
+
   const ligado = (c) => ativo >= 0 && (pontos[ativo]?.caminhos || []).includes(c.id);
 
   return (
-    <div ref={raiz} className={`cena${ativo >= 0 ? ' cena-ativa' : ''}`} aria-hidden="true"
+    <div ref={raiz} className={`cena${ativo >= 0 ? ' cena-ativa' : ''}${rodando ? ' com-video' : ''}`} aria-hidden="true"
       style={{ '--ar': w / h, '--ox': origem[0], '--oy': origem[1] }}>
       <div ref={palco} className="cena-palco">
         <Image src={src} alt={alt} fill priority={prioridade} sizes={sizes} style={{ objectFit: 'cover' }} />
+        {video && (
+          <video ref={filme} className="cena-video" muted loop playsInline preload="none" tabIndex={-1}
+            style={{ top: `${video.topo}%`, height: `${video.altura}%` }} />
+        )}
         <svg className="cena-svg" viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none">
           <defs>
             <filter id={`brilho-${uid}`} x="-20%" y="-20%" width="140%" height="140%">

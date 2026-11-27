@@ -23,12 +23,15 @@ const PONTOS = [
   { x: 1200, y: 450, rotulo: 'Terreno', sub: 'Construção ou reserva', caminhos: ['chave', 'terreno'], halo: { y: 450, rx: 160, ry: 80 } },
 ];
 const BRILHOS = [{ x: 1047, y: 586 }];
+// O vídeo é a mesma cena em 16:9 (1920 x 1080): a imagem ocupa 943 px de altura,
+// começando 72 px abaixo do topo. Assim ele encaixa exatamente sobre a imagem.
+const VIDEO = { src: '/mesa-estrategia.mp4', leve: '/mesa-estrategia-1280.mp4', topo: -72 / 943 * 100, altura: 1080 / 943 * 100 };
 
 export default function Hero() {
   return (
     <section className="mesa" aria-labelledby="hero-titulo">
       <div className="mesa-fundo" aria-hidden="true">
-        <CenaViva src={FUNDO} alt="" w={1376} h={676} origem={[0.7, 0.6]} alvo=".mesa" caminhos={CAMINHOS} pontos={PONTOS} brilhos={BRILHOS} prioridade />
+        <CenaViva src={FUNDO} alt="" w={1376} h={676} origem={[0.7, 0.6]} alvo=".mesa" caminhos={CAMINHOS} pontos={PONTOS} brilhos={BRILHOS} video={VIDEO} prioridade />
       </div>
       <div className="wrap mesa-grade">
         <div className="mesa-texto">
