@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import CenaViva from './CenaViva';
 
 const TITULO = 'Consórcio inteligente é patrimônio com estratégia.';
 
@@ -7,11 +8,27 @@ const TITULO = 'Consórcio inteligente é patrimônio com estratégia.';
 // caminho dourado até a chave. João em primeiro plano, como quem conduz o plano.
 const FUNDO = '/mesa-estrategia.webp';
 
+// Coordenadas na imagem original (1376 x 676): as linhas douradas da mesa.
+const CAMINHOS = [
+  { id: 'chave', d: 'M955 600 L1060 558 L1148 578 L1023 628 Z', dur: 5 },
+  { id: 'base', d: 'M1046 588 L1060 558 L862 493 L952 472' },
+  { id: 'casa', d: 'M908 450 L850 436' , dur: 2.6 },
+  { id: 'terreno', d: 'M1046 588 L1080 555 L1168 525', dur: 3.2 },
+  { id: 'torre', d: 'M1080 404 L1122 415 L1182 379 L1045 367', dur: 3.6 },
+];
+const PONTOS = [
+  { x: 760, y: 380, rotulo: 'Imóvel', sub: 'Casa ou apartamento', caminhos: ['chave', 'base', 'casa'], halo: { y: 400, rx: 170, ry: 90 }, lado: 'esq' },
+  { x: 985, y: 250, rotulo: 'Investimento imobiliário', sub: 'Comercial ou para locação', caminhos: ['chave', 'torre'], halo: { y: 300, rx: 120, ry: 150 } },
+  { x: 1035, y: 425, rotulo: 'Veículo', sub: 'Carro, moto ou frota', caminhos: ['chave', 'base'], halo: { y: 435, rx: 130, ry: 60 }, lado: 'dir' },
+  { x: 1200, y: 450, rotulo: 'Terreno', sub: 'Construção ou reserva', caminhos: ['chave', 'terreno'], halo: { y: 450, rx: 160, ry: 80 } },
+];
+const BRILHOS = [{ x: 1047, y: 586 }];
+
 export default function Hero() {
   return (
     <section className="mesa" aria-labelledby="hero-titulo">
       <div className="mesa-fundo" aria-hidden="true">
-        <Image src={FUNDO} alt="" fill priority sizes="100vw" style={{ objectFit: 'cover', objectPosition: '70% 60%' }} />
+        <CenaViva src={FUNDO} alt="" w={1376} h={676} origem={[0.7, 0.6]} alvo=".mesa" caminhos={CAMINHOS} pontos={PONTOS} brilhos={BRILHOS} prioridade />
       </div>
       <div className="wrap mesa-grade">
         <div className="mesa-texto">

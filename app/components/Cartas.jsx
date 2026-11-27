@@ -1,9 +1,18 @@
 'use client';
 import { track } from '@vercel/analytics';
 import Image from 'next/image';
+import CenaViva from './CenaViva';
 import { WHATSAPP, CARTAS_DEPOIMENTOS, CARTAS_CASOS, LOGO_HS, CARTAS_FAQ, BC_URL } from '../content';
 
 const CAPA = '/cartas-chave.webp';
+
+// Coordenadas na imagem original (1376 x 676).
+const CAPA_CAMINHOS = [{ id: 'linha', d: 'M60 684 L726 551 L760 545', dur: 3.4 }];
+const CAPA_PONTOS = [
+  { x: 925, y: 300, rotulo: 'Crédito já liberado', sub: 'A carta contemplada', caminhos: ['linha'], halo: { y: 300, rx: 150, ry: 130 } },
+  { x: 850, y: 500, rotulo: 'Compra à vista', sub: 'Imóvel ou veículo', caminhos: ['linha'], halo: { y: 515, rx: 230, ry: 80 }, lado: 'esq' },
+];
+const CAPA_BRILHOS = [{ x: 925, y: 272, ponto: 0 }, { x: 928, y: 345 }];
 
 const wa = (texto) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`;
 
@@ -93,7 +102,7 @@ export default function Cartas() {
     <section id="cartas" className="sec alt" aria-labelledby="cartas-titulo">
       <div className="wrap">
         <div className="cartas-capa">
-          <Image src={CAPA} alt="Chave sendo entregue sobre a maquete de uma casa, na mesa de estratégia" fill sizes="(max-width: 1240px) 100vw, 1160px" style={{ objectFit: 'cover', objectPosition: '70% 50%' }} />
+          <CenaViva src={CAPA} alt="Chave sendo entregue sobre a maquete de uma casa, na mesa de estratégia" w={1376} h={676} origem={[0.7, 0.5]} alvo=".cartas-capa" caminhos={CAPA_CAMINHOS} pontos={CAPA_PONTOS} brilhos={CAPA_BRILHOS} sizes="(max-width: 1240px) 100vw, 1160px" raio={200} />
           <div className="cartas-capa-texto">
             <h2 id="cartas-titulo" className="h2" style={{ margin: '0 0 16px' }}>
               Carta contemplada: compre crédito liberado ou venda a sua.

@@ -875,3 +875,74 @@ summary::after { color: var(--green); }
 .comp-table { background: var(--ice-bg); }
 .timeline li::before { border-color: var(--ice-ink); }
 .timeline li:nth-child(2)::before { background: var(--ice-ink); }
+/* ============ CENA VIVA: imagem com profundidade, luz e cursor ============ */
+.cena { position: absolute; inset: 0; overflow: hidden; container-type: size; }
+.cena-palco {
+  --pw: max(100cqw, calc(100cqh * var(--ar)));
+  --ph: max(100cqh, calc(100cqw / var(--ar)));
+  position: absolute; width: var(--pw); height: var(--ph);
+  left: calc((100cqw - var(--pw)) * var(--ox)); top: calc((100cqh - var(--ph)) * var(--oy));
+  transform: translate3d(calc(var(--cx, 0) * -16px), calc(var(--cy, 0) * -10px), 0) scale(1.05);
+  will-change: transform;
+}
+.cena-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.cena-trilho, .cena-pulso { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.cena-trilho { stroke: #E9C98A; stroke-width: 3.5; opacity: 0; transition: opacity .7s var(--ease); }
+.cena-pulso { stroke: #FFE7B5; stroke-width: 4; stroke-dasharray: 90 910; stroke-dashoffset: 1000; opacity: .55; animation: cena-corre 4.2s linear infinite; }
+.cena-via.on .cena-trilho { opacity: .5; }
+.cena-via.on .cena-pulso { opacity: 1; stroke-width: 5; }
+@keyframes cena-corre { to { stroke-dashoffset: 0; } }
+.cena-halo { opacity: 0; transform-box: fill-box; transform-origin: center; transform: scale(.6); transition: opacity .8s var(--ease), transform .9s var(--ease); mix-blend-mode: screen; }
+.cena-halo.on { opacity: 1; transform: scale(1); }
+.cena-faisca > g { transform-box: fill-box; transform-origin: center; opacity: 0; animation: cena-faisca 3.8s var(--ease) infinite; }
+.cena-faisca.on > g { animation-duration: 1.6s; }
+@keyframes cena-faisca { 0%, 70%, 100% { opacity: 0; transform: scale(.2) rotate(0deg); } 80% { opacity: .95; transform: scale(1) rotate(45deg); } 90% { opacity: 0; transform: scale(.4) rotate(90deg); } }
+.cena-rotulo {
+  position: absolute; z-index: 2; transform: translate(-50%, calc(-100% - 18px)) translateY(8px); opacity: 0; pointer-events: none;
+  display: flex; flex-direction: column; gap: 2px; padding: 9px 14px; border-radius: 10px; white-space: nowrap;
+  background: rgba(11,21,36,.78); border: 1px solid rgba(191,214,238,.35); color: #F4F1EA;
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  transition: opacity .5s var(--ease), transform .6s var(--ease);
+}
+.cena-rotulo b { font-size: 14px; font-weight: 650; letter-spacing: -.01em; }
+.cena-rotulo small { font-size: 11.5px; color: rgba(244,241,234,.72); }
+.cena-rotulo::after { content: ''; position: absolute; left: 50%; bottom: -14px; width: 1px; height: 14px; background: linear-gradient(rgba(191,214,238,.6), transparent); }
+.cena-rotulo.on { opacity: 1; transform: translate(-50%, calc(-100% - 18px)); }
+.cena-rotulo.esq { --rx: -80%; } .cena-rotulo.dir { --rx: -18%; }
+.cena-rotulo.esq, .cena-rotulo.dir { transform: translate(var(--rx), calc(-100% - 18px)) translateY(8px); }
+.cena-rotulo.esq.on, .cena-rotulo.dir.on { transform: translate(var(--rx), calc(-100% - 18px)); }
+.cena-rotulo.esq::after { left: 80%; } .cena-rotulo.dir::after { left: 18%; }
+.cena-poeira { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; mix-blend-mode: screen; }
+.cena-luz { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: soft-light;
+  background: radial-gradient(circle 420px at var(--lx, 68%) var(--ly, 55%), rgba(255,226,170,.55), rgba(255,226,170,.12) 45%, transparent 70%); }
+.mesa-fundo::after, .cartas-capa::after { display: none; }
+.cena-veu { position: absolute; inset: 0; pointer-events: none; transition: opacity .9s var(--ease); }
+.mesa .cena-veu { background:
+  linear-gradient(90deg, rgba(11,21,36,.96) 0%, rgba(11,21,36,.88) 30%, rgba(11,21,36,.35) 58%, rgba(11,21,36,.05) 80%),
+  linear-gradient(0deg, rgba(11,21,36,.85) 0%, rgba(11,21,36,0) 30%); }
+.cartas-capa .cena-veu { background: linear-gradient(90deg, rgba(11,21,36,.95) 0%, rgba(11,21,36,.8) 38%, rgba(11,21,36,.1) 70%); }
+@media (max-width: 960px) { .mesa .cena-veu { background: linear-gradient(180deg, rgba(11,21,36,.92) 0%, rgba(11,21,36,.8) 50%, rgba(11,21,36,.35) 80%, rgba(11,21,36,.6) 100%); } }
+@media (max-width: 760px) { .cartas-capa .cena-veu { background: linear-gradient(180deg, rgba(11,21,36,.1) 0%, rgba(11,21,36,.85) 45%, rgba(11,21,36,.97) 100%); } }
+.cena-camada { pointer-events: none; }
+.mesa-fundo img, .cartas-capa .cena img { animation: none; }
+/* João acompanha o cursor no sentido contrário do fundo: dá a profundidade */
+.mesa-joao { transform: translate3d(calc(var(--cx, 0) * 10px), calc(var(--cy, 0) * 5px), 0); }
+.mesa-texto { transform: translate3d(calc(var(--cx, 0) * 3px), 0, 0); }
+/* entrada: a cena se acende uma vez ao carregar */
+@media (prefers-reduced-motion: no-preference) {
+  .mesa .cena { animation: cena-acende 2.4s var(--ease) both; }
+  @keyframes cena-acende { from { opacity: .35; transform: scale(1.06); } to { opacity: 1; transform: none; } }
+}
+/* cartas: ao entrar com o cursor, o véu escuro recua e a cena aproxima */
+.cartas-capa:hover .cena-veu { opacity: .8; }
+.cartas-capa .cena-palco { transition: scale 1.2s var(--ease); }
+.cartas-capa:hover .cena-palco { scale: 1.03; }
+@media (max-width: 960px) {
+  .mesa .cena-rotulo { display: none; }
+  .cena-rotulo b { font-size: 13px; }
+  .cena-rotulo small { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cena-pulso, .cena-faisca, .cena-poeira, .cena-luz, .cena-rotulo, .cena-halo { display: none; }
+  .cena-palco, .mesa-joao, .mesa-texto { transform: none; }
+}
