@@ -1212,3 +1212,6 @@ summary::after { color: var(--green); }
   -webkit-mask: url(/joao-dias-recorte.webp) center / 100% 100% no-repeat; mask: url(/joao-dias-recorte.webp) center / 100% 100% no-repeat;
   mix-blend-mode: soft-light;
 }
+/* a foto já vem reiluminada com a luz do abajur: sem correção de cor por código, só a sombra na mesa */
+.mesa-joao img { filter: drop-shadow(22px 26px 34px rgba(4,8,16,.5)); }
+.mesa-joao::after { display: none; }
