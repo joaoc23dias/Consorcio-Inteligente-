@@ -50,17 +50,17 @@ export default function Hero() {
               <span key={i}><span className="pal" aria-hidden="true"><span style={{ '--i': i }}>{w}</span></span>{' '}</span>
             ))}
           </h1>
-          <div className="mesa-autor">
-          <span className="mesa-retrato"><Image src="/joao-dias-recorte.webp" alt="João Dias, especialista em planejamento patrimonial" width={912} height={912} priority sizes="112px" /></span>
           <p className="mesa-lead">
             Sou João Dias, especialista em planejamento patrimonial pela Gaia Group. Imóvel, carro, terreno ou o próximo investimento: cada conquista entra no seu plano com crédito, aporte, prazo e estratégia de contemplação definidos antes da assinatura.
           </p>
-          </div>
           <div className="mesa-ctas">
             <a href="#diagnostico" className="btn btn-pri">Agendar meu diagnóstico patrimonial</a>
             <a href="#metodo" className="mesa-link">Conhecer o Método SPA®</a>
           </div>
         </div>
+        <figure className="mesa-joao">
+          <Image src="/joao-dias-recorte.webp" alt="João Dias, especialista em planejamento patrimonial" width={912} height={912} priority sizes="(max-width: 960px) 80vw, 340px" />
+        </figure>
       </div>
     </section>
   );

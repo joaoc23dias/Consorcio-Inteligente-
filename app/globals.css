@@ -1189,3 +1189,8 @@ summary::after { color: var(--green); }
     linear-gradient(90deg, rgba(11,21,36,.95) 0%, rgba(11,21,36,.9) 34%, rgba(11,21,36,.55) 46%, rgba(11,21,36,.12) 66%, rgba(11,21,36,0) 80%),
     linear-gradient(0deg, rgba(11,21,36,.8) 0%, rgba(11,21,36,0) 28%); }
 }
+/* topo no computador: João em pé no primeiro plano da mesa, colado ao texto, abaixo dos bens */
+@media (min-width: 961px) {
+  .mesa-joao { justify-self: start; width: clamp(260px, 22vw, 340px); margin-left: -24px; }
+  .mesa-lead { max-width: 46ch; }
+}
