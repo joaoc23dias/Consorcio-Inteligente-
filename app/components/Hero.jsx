@@ -50,10 +50,6 @@ export default function Hero() {
         </div>
         <figure className="mesa-joao">
           <Image src="/joao-dias-recorte.webp" alt="João Dias, especialista em planejamento patrimonial" width={912} height={912} priority sizes="(max-width: 960px) 80vw, 460px" />
-          <figcaption>
-            <span className="marca-nome">João Dias</span>
-            <span className="marca-tag">Consórcio Inteligente</span>
-          </figcaption>
         </figure>
       </div>
     </section>

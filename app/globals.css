@@ -1140,11 +1140,13 @@ summary::after { color: var(--green); }
 .pres-capa { border: 1px solid var(--rule); }
 .pres-peca { border-color: #1F2E47; background: radial-gradient(120% 90% at 50% 42%, #15233A 0%, #0B1524 62%, #09111D 100%); }
 /* topo: câmera deslizando devagar para a esquerda e a direita, e o cursor empurra mais no eixo horizontal */
-.mesa .cena-palco { transform: translate3d(calc(var(--cx, 0) * -30px), calc(var(--cy, 0) * -8px), 0) scale(1.08); }
+.mesa .cena-palco { transform: translate3d(calc(var(--cx, 0) * -36px), calc(var(--cy, 0) * -8px), 0) scale(1.11); }
 @media (prefers-reduced-motion: no-preference) {
-  .mesa .cena-palco { animation: mesa-desliza 26s ease-in-out infinite alternate; }
-  @keyframes mesa-desliza { from { translate: -2.2% 0; } to { translate: 2.2% 0; } }
+  .mesa .cena-palco { animation: mesa-desliza 20s ease-in-out infinite alternate; }
+  @keyframes mesa-desliza { from { translate: -3.4% 0; } to { translate: 3.4% 0; } }
 }
 @media (max-width: 960px) {
-  .mesa .cena-palco { animation-duration: 20s; }
+  .mesa .cena-palco { animation-duration: 16s; }
 }
+/* cartão do presente: borda dourada discreta */
+.pres-caixa { border: 1px solid rgba(214,175,97,.5); box-shadow: 0 0 0 4px rgba(214,175,97,.07), 0 40px 80px -50px rgba(11,21,36,.45); }
