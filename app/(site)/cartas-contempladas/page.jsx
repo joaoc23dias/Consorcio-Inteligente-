@@ -1,5 +1,4 @@
-import TopoPagina from '../../components/TopoPagina';
-import Cartas from '../../components/Cartas';
+import Cartas, { CartasTopo, CartasFim } from '../../components/Cartas';
 import FaqSchema from '../../components/FaqSchema';
 import { CARTAS_FAQ } from '../../content';
 
@@ -13,8 +12,9 @@ export default function PaginaCartas() {
   return (
     <>
       <FaqSchema perguntas={CARTAS_FAQ} />
-      <TopoPagina titulo="Cartas contempladas" texto="Compra e venda de cartas contempladas da HS Consórcios, com a intermediação da Gaia Group." />
+      <CartasTopo />
       <Cartas />
+      <CartasFim />
     </>
   );
 }

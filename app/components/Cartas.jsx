@@ -1,4 +1,5 @@
 'use client';
+import { useEffect, useRef } from 'react';
 import { track } from '@vercel/analytics';
 import Image from 'next/image';
 import CenaViva from './CenaViva';
@@ -16,6 +17,50 @@ const CAPA_BRILHOS = [{ x: 925, y: 272, ponto: 0 }, { x: 928, y: 345 }];
 
 const wa = (texto) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`;
 
+
+// Topo da página no padrão da home: cena escura e viva, um só título e os dois caminhos.
+export function CartasTopo() {
+  return (
+    <section className="mesa cartas-topo" aria-labelledby="cartas-titulo">
+      <div className="mesa-fundo" aria-hidden="true">
+        <CenaViva src={CAPA} alt="" w={1376} h={676} origem={[0.72, 0.5]} alvo=".cartas-topo" caminhos={CAPA_CAMINHOS} pontos={CAPA_PONTOS} brilhos={CAPA_BRILHOS} prioridade raio={200} />
+      </div>
+      <div className="wrap mesa-grade">
+        <div className="mesa-texto">
+          <nav aria-label="Você está em" className="trilha trilha-clara">
+            <a href="/">Início</a> <span aria-hidden="true">/</span> <span aria-current="page">Cartas contempladas</span>
+          </nav>
+          <h1 id="cartas-titulo" className="mesa-h1 cartas-h1">Carta contemplada: compre crédito liberado ou venda a sua.</h1>
+          <p className="mesa-lead">
+            Uma carta contemplada é um ativo com valor de mercado. Você compra uma carta já liberada ou vende a sua com segurança jurídica: a Gaia Group intermedeia a negociação e a HS Consórcios aprova a transferência.
+          </p>
+          <div className="mesa-ctas">
+            <a href="#comprar" className="btn btn-pri" onClick={() => track('cartas_topo', { lado: 'comprar' })}>Quero comprar</a>
+            <a href="#vender" className="mesa-link" onClick={() => track('cartas_topo', { lado: 'vender' })}>Quero vender a minha carta</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Fechamento: quem leu até aqui recebe um próximo passo claro.
+export function CartasFim() {
+  return (
+    <section className="cartas-fim" aria-labelledby="cartas-fim-titulo">
+      <div className="wrap cartas-fim-grade">
+        <h2 id="cartas-fim-titulo" className="cartas-fim-h">Comprar ou vender, a conversa começa com os números da sua carta.</h2>
+        <div>
+          <p className="cartas-fim-texto">Cotação individual pelo WhatsApp, com saldo devedor, custo total e o comparativo com o financiamento antes de qualquer decisão.</p>
+          <div className="mesa-ctas">
+            <a href={wa('Olá, João! Vi o site e quero uma cotação de carta contemplada.')} target="_blank" rel="noopener noreferrer" className="btn btn-pri" onClick={() => track('cartas_whatsapp', { lado: 'fim' })}>Pedir minha cotação</a>
+            <a href="#cartas-faq" className="mesa-link">Rever as dúvidas</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 const Check = () => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" style={{ flex: 'none', marginTop: 4 }}>
@@ -60,6 +105,16 @@ const LADOS = [
 
 const GARANTIAS = [
   {
+    id: 'voce',
+    papel: 'Decide com os números na mesa',
+    nome: 'Você',
+    itens: [
+      'Cotação individual da sua carta, sem tabela genérica',
+      'Saldo devedor, aportes restantes e custo total antes de assinar',
+      'Comparativo com o financiamento, número contra número',
+    ],
+  },
+  {
     id: 'gaia',
     papel: 'Conduz a negociação',
     nome: 'Gaia Group',
@@ -82,43 +137,31 @@ const GARANTIAS = [
     ],
     link: { href: BC_URL, txt: 'Consulte a autorização no Banco Central' },
   },
-  {
-    id: 'voce',
-    papel: 'Decide com os números na mesa',
-    nome: 'Você',
-    itens: [
-      'Cotação individual da sua carta, sem tabela genérica',
-      'Saldo devedor, aportes restantes e custo total antes de assinar',
-      'Comparativo com o financiamento, número contra número',
-    ],
-  },
 ];
 
 
 
 
 export default function Cartas() {
+  // o friso da segurança acende quando a seção entra na tela, etapa por etapa
+  const garantiasRef = useRef(null);
+  useEffect(() => {
+    const el = garantiasRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { el.classList.add('aceso'); io.disconnect(); }
+    }, { threshold: 0.35 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
   return (
-    <section id="cartas" className="sec alt" aria-labelledby="cartas-titulo">
+    <section id="cartas" className="sec alt cartas-corpo" aria-label="Comprar ou vender carta contemplada">
       <div className="wrap">
-        <div className="cartas-capa">
-          <CenaViva src={CAPA} alt="Chave sendo entregue sobre a maquete de uma casa, na mesa de estratégia" w={1376} h={676} origem={[0.7, 0.5]} alvo=".cartas-capa" caminhos={CAPA_CAMINHOS} pontos={CAPA_PONTOS} brilhos={CAPA_BRILHOS} sizes="(max-width: 1240px) 100vw, 1160px" raio={200} />
-          <div className="cartas-capa-texto">
-            <h2 id="cartas-titulo" className="h2" style={{ margin: '0 0 16px' }}>
-              Carta contemplada: compre crédito liberado ou venda a sua.
-            </h2>
-            <p className="cp" style={{ margin: 0 }}>
-              Uma carta contemplada é um ativo com valor de mercado. Você compra uma carta já liberada ou vende a sua com segurança jurídica: a Gaia Group intermedeia a negociação e a HS Consórcios aprova a transferência.
-            </p>
-          </div>
-        </div>
-
-        <div className="row" style={{ gap: 20, marginTop: 40 }}>
+        <div className="row cartas-lados" style={{ gap: 20 }}>
           {LADOS.map((l) => {
             const escuro = false;
-            const principal = l.id === 'comprar';
             return (
-              <div key={l.id} className={`col bezel${escuro ? ' bezel-dark' : ''}`} style={{ flex: '1 1 420px' }}>
+              <div key={l.id} id={l.id} className={`col bezel lado${escuro ? ' bezel-dark' : ''}`} style={{ flex: '1 1 420px' }}>
                 <div className="bezel-core pad-box" style={{ padding: 36 }}>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 16px', alignItems: 'center', justifyContent: 'space-between', margin: '0 0 10px' }}>
                     <h3 className="h3" style={{ margin: 0, fontSize: 34, color: escuro ? 'var(--bg)' : 'var(--green)' }}>{l.titulo}</h3>
@@ -137,12 +180,11 @@ export default function Cartas() {
                     href={wa(l.msg)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`btn btn-ico ${principal ? 'btn-pri' : 'btn-sec'}`}
+                    className="btn btn-pri"
                     style={{ alignSelf: 'flex-start' }}
                     onClick={() => track('cartas_whatsapp', { lado: l.id })}
                   >
                     {l.cta}
-                    <span className="ico"><Seta /></span>
                   </a>
                   <p className="cp" style={{ fontSize: 12, margin: '12px 0 0' }}>Abre direto no meu WhatsApp. Cotação individual, sem compromisso.</p>
                 </div>
@@ -151,14 +193,15 @@ export default function Cartas() {
           })}
         </div>
 
-        <div className="garantias" aria-labelledby="garantias-titulo">
+        <div className="garantias" aria-labelledby="garantias-titulo" ref={garantiasRef}>
           <div className="garantias-topo">
             <p className="eyebrow" style={{ margin: 0 }}>Segurança da negociação</p>
-            <h3 id="garantias-titulo" className="h3" style={{ margin: 0, fontSize: 'clamp(26px, 3vw, 34px)' }}>Cada etapa tem um responsável, e nada acontece sem contrato.</h3>
+            <h2 id="garantias-titulo" className="cartas-h2" style={{ margin: 0 }}>Cada etapa tem um responsável, e nada acontece sem contrato.</h2>
           </div>
           <div className="garantias-grade">
-            {GARANTIAS.map((g) => (
-              <div key={g.id} className={`garantia garantia-${g.id}`}>
+            <span className="garantias-friso" aria-hidden="true" />
+            {GARANTIAS.map((g, gi) => (
+              <div key={g.id} className={`garantia garantia-${g.id}`} style={{ '--n': gi }}>
                 <div className="garantia-marca">
                   {g.logo
                     ? <Image src={g.logo.src} alt={g.logo.alt} width={g.logo.w} height={g.logo.h} style={{ width: 'auto', height: g.logo.h }} />
@@ -188,7 +231,7 @@ export default function Cartas() {
         </div>
 
         <div style={{ marginTop: 72 }}>
-          <h3 className="h3" style={{ fontSize: 34, maxWidth: 640 }}>Quem usou a carta contemplada como investimento conta como foi.</h3>
+          <h2 className="cartas-h2" style={{ maxWidth: 640 }}>Quem usou a carta contemplada como investimento conta como foi.</h2>
           {CARTAS_CASOS.map((c) => (
             <article key={c.video} className="bezel" style={{ marginTop: 32 }}>
               <div className="bezel-core caso-grid">
@@ -222,8 +265,8 @@ export default function Cartas() {
                     ))}
                   </ol>
                   <div style={{ height: 24 }} />
-                  <a href={wa('Olá, João! Vi o caso real no site e quero entender como usar a carta contemplada na minha estratégia.')} target="_blank" rel="noopener noreferrer" className="btn btn-pri btn-ico" style={{ alignSelf: 'flex-start' }} onClick={() => track('cartas_whatsapp', { lado: 'caso' })}>
-                    Quero uma estratégia assim<span className="ico"><Seta /></span>
+                  <a href={wa('Olá, João! Vi o caso real no site e quero entender como usar a carta contemplada na minha estratégia.')} target="_blank" rel="noopener noreferrer" className="btn btn-pri" style={{ alignSelf: 'flex-start' }} onClick={() => track('cartas_whatsapp', { lado: 'caso' })}>
+                    Quero uma estratégia assim
                   </a>
                 </div>
               </div>
@@ -253,7 +296,7 @@ export default function Cartas() {
 
         <div id="cartas-faq" style={{ marginTop: 72 }}>
           <div className="faq-topo">
-            <h3 className="h3" style={{ margin: 0, fontSize: 'clamp(26px, 3vw, 34px)' }}>Antes de pedir a cotação, confira se a carta é para você.</h3>
+            <h2 className="cartas-h2" style={{ margin: 0 }}>Antes de pedir a cotação, confira se a carta é para você.</h2>
             <div>
               <p className="cp" style={{ marginBottom: 20 }}>Se a sua dúvida não estiver aqui, me mande no WhatsApp junto com o pedido de cotação. Cada carta é analisada com números reais.</p>
               <a href={wa('Olá, João! Tenho uma dúvida sobre cartas contempladas e quero uma cotação.')} target="_blank" rel="noopener noreferrer" className="btn btn-sec" onClick={() => track('cartas_whatsapp', { lado: 'duvida' })}>Falar no WhatsApp</a>
